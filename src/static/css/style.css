@@ -1,4 +1,14 @@
 /* Utilitiy classes */
+body {
+  margin: 0;
+  color: #666D92 !important;
+  font-size: 15px !important;
+  font-family: 'Poppins', 'Helvetica', 'Arial', sans-serif !important;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  background-color: #fff;
+  font-feature-settings: 'tnum';
+}
 
 .spin {
   height: 100vh;
@@ -1059,6 +1069,7 @@ ul {
   color: #404040;
 }
 
+
 .mail-props li:last-child {
   margin-bottom: 0;
 }
@@ -2050,6 +2061,7 @@ html[dir="rtl"] .ninjadash-upload-basic .ninjadash-upload-browse {
   display: block;
   margin-bottom: 8px;
 }
+
 
 .ninjadash-task-details .ninjadash-task-details-modal .ninjadash-task-details-modal__description textarea {
   padding: 10px 20px;

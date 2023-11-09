@@ -3,7 +3,6 @@ import actions from './actions';
 import { DataService } from '../../config/dataService/dataService';
 
 const { loginBegin, loginSuccess, loginErr, logoutBegin, logoutSuccess, logoutErr } = actions;
-
 const login = (values, callback) => {
   return async (dispatch) => {
     dispatch(loginBegin());

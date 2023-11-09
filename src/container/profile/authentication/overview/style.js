@@ -2,10 +2,10 @@ import Styled from 'styled-components';
 
 const AuthenticationWrap = Styled.div`
   position: relative;
-  padding: 120px 0;
+  padding: 100px 200px;
   background-position: top;
   background-repeat: no-repeat;
-  background-size: 100%;
+  // background-size: 100%;
   @media only screen and (max-width: 1399px){
     padding: 80px 0;
   }
@@ -43,33 +43,37 @@ const Content = Styled.div`
 const AuthFormWrap = Styled.div`
   border-radius: 6px;
   margin-top: 25px;
-  box-shadow: 0 5px 20px rgba(140,144,164,.08);
-  background-color: ${({ theme }) => theme[theme.mainContent]['white-background']};
+  // box-shadow: 0 5px 20px rgba(140,144,164,.08);
+  // background-color: ${({ theme }) => theme[theme.mainContent]['white-background']};
   .ninjadash-authentication-top{
-    padding: 20px;
+    // padding: 10px;
     text-align: center;
-    border-bottom: 1px solid ${({ theme }) => theme[theme.mainContent]['border-color-secondary']};
+    // border-bottom: 1px solid ${({ theme }) => theme[theme.mainContent]['border-color-secondary']};
     .ninjadash-authentication-top__title{
       font-size: 20px;
       font-weight: 600;
       line-height: 1;
-      margin-bottom: 0;
+      margin-bottom: 5px;
       color: ${({ theme }) => theme[theme.mainContent]['dark-text']};
     }
+    .ninjadash-authentication-top__title_extra{
+        font-size: 16px
+            }
   }
   .ninjadash-authentication-content{
-    padding: 30px 40px;
     @media only screen and (max-width: 1599px){
-      padding: 30px;
+      padding: 20px;
     }
     .ant-form-item-label {
       > label{
         font-size: 14px;
         color: ${({ theme }) => theme[theme.mainContent]['dark-text']};
       }
+      
     }
     .ant-form-item{
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+    
     }
     .ant-input:focus,
     .ant-input-focused{
@@ -78,11 +82,18 @@ const AuthFormWrap = Styled.div`
     .ant-input{
       &::placeholder{
         color: ${({ theme }) => theme[theme.mainContent]['extra-light-text']};
+        
       }
+      border-radius: 30px 30px 30px 30px;
+      font-size:13px
+     
+    }
+    .site-form-item-icon{
+      color:black;
     }
     .ant-form-item-explain-error{
       font-size: 13px;
-      margin-top: 2px;
+      // margin-top: 2px;
     }
     .ninjadash-auth-extra-links{
       display: flex;
@@ -110,10 +121,12 @@ const AuthFormWrap = Styled.div`
     .btn-create{
       font-size: 14px;
       font-weight: 500;
-      border-radius: 6px;
+      border-radius: 30px;
       width: 100%;
-      min-height: 48px;
-      margin-top: 25px;
+      max-height: 48px;
+      background-color:#65D4DB;
+      border:none;
+    
     }
     .btn-reset{
       margin-top: 0;
@@ -146,11 +159,19 @@ const AuthFormWrap = Styled.div`
       }
     }
     .ant-input-affix-wrapper {
+     border : 1px solid #65D4DB !important;
+       height:40px ;
+       border-radius: 30px 30px 30px 30px;
       &.ant-input-password{
+      line-height:34px
         input{
           color: ${({ theme }) => theme[theme.mainContent]['dark-text']};
+        
         }
+        
       }
+   
+      
     }
     .ninjadash-social-login{
       display: flex;

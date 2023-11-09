@@ -1,32 +1,31 @@
-import React, { useState, useCallback } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { Form, Input, Button, Row, Col } from 'antd';
+import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Form, Input, Button, Row, Col, Tooltip, notification } from 'antd';
+import { InfoCircleOutlined, UserOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { ReactSVG } from 'react-svg';
-import UilFacebook from '@iconscout/react-unicons/icons/uil-facebook-f';
-import UilTwitter from '@iconscout/react-unicons/icons/uil-twitter';
-import UilGithub from '@iconscout/react-unicons/icons/uil-github';
 import { Auth0Lock } from 'auth0-lock';
 import { AuthFormWrap } from './style';
 import { login } from '../../../../redux/authentication/actionCreator';
-import { Checkbox } from '../../../../components/checkbox/checkbox';
 import { auth0options } from '../../../../config/auth0';
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 function SignIn() {
   const history = useNavigate();
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.auth.loading);
+  const errors = useSelector((state) => state.auth.error);
   const [form] = Form.useForm();
-  const [state, setState] = useState({
-    checked: null,
-  });
-
+  // const [state, setState] = useState('');
   const lock = new Auth0Lock(clientId, domain, auth0options);
-
+  const openNotificationWithIcon = (type) => {
+    notification[type]({
+      message: 'Notification Title',
+      description: <p>{errors}</p>,
+    });
+  };
   const handleSubmit = useCallback(
     (values) => {
       dispatch(login(values, () => history('/admin')));
@@ -34,16 +33,11 @@ function SignIn() {
     [history, dispatch],
   );
 
-  const onChange = (checked) => {
-    setState({ ...state, checked });
-  };
-
   lock.on('authenticated', (authResult) => {
     lock.getUserInfo(authResult.accessToken, (error) => {
       if (error) {
         return;
       }
-
       handleSubmit();
       lock.hide();
     });
@@ -54,70 +48,51 @@ function SignIn() {
       <Col xxl={6} xl={8} md={12} sm={18} xs={24}>
         <AuthFormWrap>
           <div className="ninjadash-authentication-top">
-            <h2 className="ninjadash-authentication-top__title">Sign in HexaDash</h2>
+            <h2 className="ninjadash-authentication-top__title">TÀI KHOẢN</h2>
+            <h4 className="ninjadash-authentication-top__title_extra">Đăng nhập hệ thống tra cứu email</h4>
           </div>
           <div className="ninjadash-authentication-content">
             <Form name="login" form={form} onFinish={handleSubmit} layout="vertical">
               <Form.Item
                 name="email"
-                rules={[{ message: 'Please input your username or Email!', required: true }]}
                 initialValue="ninjadash@dm.com"
-                label="Username or Email Address"
+                rules={[{ message: 'Please input your username or Email!', required: true }]}
               >
-                <Input placeholder="name@example.com" />
+                <Input
+                  placeholder="Enter your username"
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  suffix={
+                    <Tooltip title="Extra information">
+                      <InfoCircleOutlined
+                        style={{
+                          color: 'rgba(0,0,0,.45)',
+                        }}
+                      />
+                    </Tooltip>
+                  }
+                />
               </Form.Item>
-              <Form.Item name="password" initialValue="123456" label="Password">
-                <Input.Password placeholder="Password" />
+              <Form.Item name="password" initialValue="123456">
+                <Input.Password placeholder="Nhập mật khẩu..." />
               </Form.Item>
-              <div className="ninjadash-auth-extra-links">
-                <Checkbox onChange={onChange} checked={state.checked}>
-                  Keep me logged in
-                </Checkbox>
-                <NavLink className="forgot-pass-link" to="/forgotPassword">
-                  Forgot password?
-                </NavLink>
-              </div>
               <Form.Item>
-                <Button className="btn-signin" htmlType="submit" type="primary" size="large">
-                  {isLoading ? 'Loading...' : 'Sign In'}
+                <Input value={isLoading} />
+                <Input value={errors} />
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  className="btn-signin bg-danger hover:bg-hbr-danger dark:bg-white10 dark:hover:bg-hbr-danger border-solid border-1 border-danger hover:border-hbr-danger text-white dark:text-white60 text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px]"
+                  htmlType="submit"
+                  type="primary"
+                  size="large"
+                  onClick={() => {
+                    if (!isLoading) openNotificationWithIcon('error');
+                  }}
+                >
+                  {isLoading ? 'Loading...' : 'Đăng nhập'}
                 </Button>
               </Form.Item>
-              <p className="ninjadash-form-divider">
-                <span>Or</span>
-              </p>
-              <ul className="ninjadash-social-login">
-                <li>
-                  <Link className="google-social" to="#">
-                    <ReactSVG src={require(`../../../../static/img/icon/google-plus.svg`).default} />
-                  </Link>
-                </li>
-                <li>
-                  <Link className="facebook-social" to="#">
-                    <UilFacebook />
-                  </Link>
-                </li>
-                <li>
-                  <Link className="twitter-social" to="#">
-                    <UilTwitter />
-                  </Link>
-                </li>
-                <li>
-                  <Link className="github-social" to="#">
-                    <UilGithub />
-                  </Link>
-                </li>
-              </ul>
-              <div className="auth0-login">
-                <Link to="#" onClick={() => lock.show()}>
-                  Sign In with Auth0
-                </Link>
-              </div>
             </Form>
-          </div>
-          <div className="ninjadash-authentication-bottom">
-            <p>
-              Don`t have an account?<Link to="/register">Sign up</Link>
-            </p>
           </div>
         </AuthFormWrap>
       </Col>
