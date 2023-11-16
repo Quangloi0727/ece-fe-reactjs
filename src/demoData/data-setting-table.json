@@ -1,0 +1,13 @@
+[
+  { "key": "activityId", "name": "Activity ID", "isChecked": false },
+  { "key": "assignedTo", "name": "Assigned to", "isChecked": false },
+  { "key": "createOn", "name": "Created on", "isChecked": false },
+  { "key": "subject", "name": "Subject", "isChecked": false },
+  { "key": "substatus", "name": "Substatus", "isChecked": false },
+  { "key": "caseId", "name": "Case ID", "isChecked": false },
+  { "key": "queueName", "name": "Queue name", "isChecked": false },
+  { "key": "file", "name": "File đính kèm", "isChecked": false },
+  { "key": "form", "name": "From", "isChecked": false },
+  { "key": "to", "name": "To", "isChecked": false },
+  { "key": "huongEmail", "name": "Hướng email", "isChecked": false }
+]
