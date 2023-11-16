@@ -48,12 +48,12 @@ function MenuItems({ toggleCollapsed }) {
 
   const items = [
     getItem(
-      <NavLink onClick={toggleCollapsed} to={`${path}/pages/starter`}>
-        {t('blank')} {t('page')}
+      <NavLink onClick={toggleCollapsed} to={`${path}/pages/dataTable`}>
+        {t('Table')}
       </NavLink>,
       'starter',
       !topMenu && (
-        <NavLink className="menuItem-iocn" to={`${path}/pages/starter`}>
+        <NavLink className="menuItem-iocn" to={`${path}/pages/dataTable`}>
           <UilCircle />
         </NavLink>
       ),
