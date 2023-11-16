@@ -4,9 +4,6 @@ const {
   DATA_TABLE_READ_BEGIN,
   DATA_TABLE_READ_SUCCESS,
   DATA_TABLE_READ_ERR,
-  FILTER_WITH_SUBMIT_BEGIN,
-  FILTER_WITH_SUBMIT_SUCCESS,
-  FILTER_WITH_SUBMIT_ERR,
   DATA_LIVE_FILTER_BEGIN,
   DATA_LIVE_FILTER_SUCCESS,
   DATA_LIVE_FILTER_ERR,
@@ -33,23 +30,6 @@ const dataTableReducer = (state = initialState, action) => {
         loading: false,
       };
     case DATA_TABLE_READ_ERR:
-      return {
-        ...initialState,
-        error: err,
-        loading: false,
-      };
-    case FILTER_WITH_SUBMIT_BEGIN:
-      return {
-        ...initialState,
-        loading: true,
-      };
-    case FILTER_WITH_SUBMIT_SUCCESS:
-      return {
-        ...initialState,
-        tableData: data,
-        loading: false,
-      };
-    case FILTER_WITH_SUBMIT_ERR:
       return {
         ...initialState,
         error: err,

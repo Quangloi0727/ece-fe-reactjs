@@ -8,7 +8,6 @@ import { dataSettingTable } from './configTable/reducers';
 
 const rootReducers = combineReducers({
   message: readMessageReducer,
-
   notification: readNotificationReducer,
   auth: authReducer,
   ChangeLayoutMode,

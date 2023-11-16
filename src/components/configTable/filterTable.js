@@ -101,10 +101,7 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
 
               <Col className="gutter-row" span={12}>
                 <div className="gutter-box">
-                  <Form.Item
-                    label="Activity ID"
-                    className="mb-[26px] [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  />
+                  <Form.Item label="Activity ID" />
                 </div>
               </Col>
             </Row>
@@ -113,20 +110,14 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
             <Row gutter={16}>
               <Col className="gutter-row" span={7}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="caseid"
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="caseid">
                     <Input placeholder="Nhập case id" />
                   </Form.Item>
                 </div>
               </Col>
               <Col className="gutter-row" span={5}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="checkCaseid"
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="checkCaseid">
                     <Select options={options} placeholder="Trùng khớp" />
                   </Form.Item>
                 </div>
@@ -134,20 +125,14 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
 
               <Col className="gutter-row" span={7}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="activityID"
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="activityID">
                     <Input placeholder="Nhập activity id" />
                   </Form.Item>
                 </div>
               </Col>
               <Col className="gutter-row" span={5}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="checkActivtiID"
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="checkActivtiID">
                     <Select options={options} placeholder="Trùng khớp" />
                   </Form.Item>
                 </div>
@@ -157,18 +142,12 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
           <div className="grid-style-gutter">
             <Row gutter={16}>
               <Col className="gutter-row" span={12}>
-                <Form.Item
-                  label="Subject"
-                  className="mb-[26px] [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                />
+                <Form.Item label="Subject" />
               </Col>
 
               <Col className="gutter-row" span={12}>
                 <div className="gutter-box">
-                  <Form.Item
-                    label="From"
-                    className="mb-[26px] [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  />
+                  <Form.Item label="From" />
                 </div>
               </Col>
             </Row>
@@ -177,20 +156,14 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
             <Row gutter={16}>
               <Col className="gutter-row" span={7}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="subject"
-                    className="mb-[26px] [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="subject">
                     <Input placeholder="Nhập subject" />
                   </Form.Item>
                 </div>
               </Col>
               <Col className="gutter-row" span={5}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="checkSubject"
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="checkSubject">
                     <Select options={options} placeholder="Trùng khớp" />
                   </Form.Item>
                 </div>
@@ -198,21 +171,14 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
 
               <Col className="gutter-row" span={7}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="from"
-                    rules={[{ message: 'Please input your email!', type: 'email' }]}
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="from" rules={[{ message: 'Please input your email!', type: 'email' }]}>
                     <Input placeholder="Nhập email" />
                   </Form.Item>
                 </div>
               </Col>
               <Col className="gutter-row" span={5}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="checkFrom"
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="checkFrom">
                     <Select options={options} placeholder="Trùng khớp" />
                   </Form.Item>
                 </div>
@@ -222,18 +188,12 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
           <div className="grid-style-gutter">
             <Row gutter={16}>
               <Col className="gutter-row" span={12}>
-                <Form.Item
-                  label="To"
-                  className="mb-[26px] [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                />
+                <Form.Item label="To" />
               </Col>
 
               <Col className="gutter-row" span={12}>
                 <div className="gutter-box">
-                  <Form.Item
-                    label="Assigned To"
-                    className="mb-[26px] [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  />
+                  <Form.Item label="Assigned To" />
                 </div>
               </Col>
             </Row>
@@ -242,20 +202,14 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
             <Row gutter={16}>
               <Col className="gutter-row" span={7}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="to"
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="to">
                     <Input placeholder="Nhập email" />
                   </Form.Item>
                 </div>
               </Col>
               <Col className="gutter-row" span={5}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="checkTo"
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="checkTo">
                     <Select options={options} placeholder="Trùng khớp" />
                   </Form.Item>
                 </div>
@@ -263,10 +217,7 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
 
               <Col className="gutter-row" span={12}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="assignedto"
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="assignedto">
                     <Select
                       style={{
                         width: '100%',
@@ -282,18 +233,12 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
           <div className="grid-style-gutter">
             <Row gutter={16}>
               <Col className="gutter-row" span={12}>
-                <Form.Item
-                  label="Create On"
-                  className="mb-[26px] [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                />
+                <Form.Item label="Create On" />
               </Col>
 
               <Col className="gutter-row" span={12}>
                 <div className="gutter-box">
-                  <Form.Item
-                    label="Queue name"
-                    className="mb-[26px] [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  />
+                  <Form.Item label="Queue name" />
                 </div>
               </Col>
             </Row>
@@ -302,10 +247,7 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
             <Row gutter={16}>
               <Col className="gutter-row" span={12}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="createOn"
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="createOn">
                     <DatePicker
                       size="small"
                       style={{
@@ -317,10 +259,7 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
               </Col>
               <Col className="gutter-row" span={12}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="queueName"
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="queueName">
                     <Select
                       style={{
                         width: '100%',
@@ -336,18 +275,12 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
           <div className="grid-style-gutter">
             <Row gutter={16}>
               <Col className="gutter-row" span={12}>
-                <Form.Item
-                  label="Substatus"
-                  className="mb-[26px] [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                />
+                <Form.Item label="Substatus" />
               </Col>
 
               <Col className="gutter-row" span={12}>
                 <div className="gutter-box">
-                  <Form.Item
-                    label="Priority"
-                    className="mb-[26px] [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  />
+                  <Form.Item label="Priority" />
                 </div>
               </Col>
             </Row>
@@ -356,10 +289,7 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
             <Row gutter={16}>
               <Col className="gutter-row" span={12}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="substatus"
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="substatus">
                     <Select
                       style={{
                         width: '100%',
@@ -372,10 +302,7 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
               </Col>
               <Col className="gutter-row" span={12}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="priority"
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="priority">
                     <Select
                       style={{
                         width: '100%',
@@ -391,18 +318,12 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
           <div className="grid-style-gutter">
             <Row gutter={16}>
               <Col className="gutter-row" span={12}>
-                <Form.Item
-                  label="File đính kèm"
-                  className="mb-[26px] [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                />
+                <Form.Item label="File đính kèm" />
               </Col>
 
               <Col className="gutter-row" span={12}>
                 <div className="gutter-box">
-                  <Form.Item
-                    label="Hướng email"
-                    className="mb-[26px] [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  />
+                  <Form.Item label="Hướng email" />
                 </div>
               </Col>
             </Row>
@@ -411,10 +332,7 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
             <Row gutter={16}>
               <Col className="gutter-row" span={12}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="file"
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="file">
                     <Select
                       style={{
                         width: '100%',
@@ -427,10 +345,7 @@ function FilterTable({ filterVisible, onOk, onCancel }) {
               </Col>
               <Col className="gutter-row" span={12}>
                 <div className="gutter-box">
-                  <Form.Item
-                    name="huongemail"
-                    className="mb-[0px] !important [&>.ant-form-item-row]:flex-col [&>.ant-form-item-row>div]:text-start [&>.ant-form-item-row>div>label]:text-dark dark:[&>.ant-form-item-row>div]:text-start dark:[&>.ant-form-item-row>div>label]:text-white87 [&>.ant-form-item-row>div>label]:font-semibold [&>.ant-form-item-row>div>div>div>input]:border-normal dark:[&>.ant-form-item-row>div>div>div>input]:text-white60 dark:[&>.ant-form-item-row>div>div>div>input]:border-white10 [&>.ant-form-item-row>div>div>div>input]:rounded-md"
-                  >
+                  <Form.Item name="huongemail">
                     <Select
                       style={{
                         width: '100%',
