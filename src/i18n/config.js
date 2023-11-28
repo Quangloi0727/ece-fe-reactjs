@@ -1,9 +1,10 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import { getItem } from '../utility/localStorageControl';
 
 i18n.use(initReactI18next).init({
   fallbackLng: 'vi',
-  lng: 'vi',
+  lng: getItem('lang') || 'vi',
   resources: {
     en: {
       translations: require('./localization/en/translation.json'),
