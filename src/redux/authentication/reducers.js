@@ -1,13 +1,21 @@
-import Cookies from 'js-cookie';
 import actions from './actions';
+import { getItem } from '../../utility/localStorageControl';
 
 const { LOGIN_BEGIN, LOGIN_SUCCESS, LOGIN_ERR, LOGOUT_BEGIN, LOGOUT_SUCCESS, LOGOUT_ERR } = actions;
 
 const initState = {
-  login: Cookies.get('logedIn'),
+  isLogin: false,
   loading: false,
   error: null,
 };
+
+const userData = getItem('userData');
+if (userData) {
+  const { isLogin } = userData;
+  initState.isLogin = isLogin;
+} else {
+  initState.isLogin = false;
+}
 
 /**
  *
@@ -24,7 +32,7 @@ const AuthReducer = (state = initState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        login: data,
+        isLogin: data,
         loading: false,
       };
     case LOGIN_ERR:
@@ -41,7 +49,7 @@ const AuthReducer = (state = initState, action) => {
     case LOGOUT_SUCCESS:
       return {
         ...state,
-        login: data,
+        isLogin: data,
         loading: false,
       };
     case LOGOUT_ERR:

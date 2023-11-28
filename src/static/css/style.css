@@ -1787,6 +1787,9 @@ html[dir="rtl"] .ninjadash-upload-basic .ninjadash-upload-browse {
 .ant-form-item {
    margin-bottom:2px !important;
 }
+.customizeInputLogin{
+  margin-bottom:20px !important;
+}
 .ant-input {
  padding: 6px 20px !important;
   color : rgb(64, 64, 64) !important;

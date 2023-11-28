@@ -28,7 +28,7 @@ function MenuItems({ toggleCollapsed }) {
     };
   });
 
-  const path = '/admin';
+  const path = '/list-email';
   const pathName = window.location.pathname;
   const pathArray = pathName && pathName !== '/' ? pathName.split(path) : [];
   const mainPath = pathArray.length > 1 ? pathArray[1] : '';

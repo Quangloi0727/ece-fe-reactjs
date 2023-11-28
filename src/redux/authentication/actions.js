@@ -22,7 +22,7 @@ const actions = {
 
   loginErr: (err) => {
     return {
-      type: actions.LOGOUT_ERR,
+      type: actions.LOGIN_ERR,
       err,
     };
   },

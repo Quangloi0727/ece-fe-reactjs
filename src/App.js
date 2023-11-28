@@ -4,14 +4,13 @@ import { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import store from './redux/store';
-import Admin from './routes/admin';
 import Auth from './routes/auth';
 import './static/css/style.css';
 import config from './config/config';
-import ProtectedRoute from './components/utilities/protectedRoute';
 import 'antd/dist/antd.less';
 
 const NotFound = lazy(() => import('./container/pages/404'));
+const TableEmail = lazy(() => import('./container/pages/TableEmail'));
 
 const { themeColor } = config;
 
@@ -21,11 +20,11 @@ function ProviderConfig() {
       rtl: state.ChangeLayoutMode.rtlData,
       topMenu: state.ChangeLayoutMode.topMenu,
       mainContent: state.ChangeLayoutMode.mode,
-      isLoggedIn: state.auth.login,
+      isLoggedIn: state.auth.isLogin,
     };
   });
 
-  const [path, setPath] = useState(window.location.pathname);
+  const [, setPath] = useState(window.location.pathname);
 
   useEffect(() => {
     let unmounted = false;
@@ -35,7 +34,6 @@ function ProviderConfig() {
     // eslint-disable-next-line no-return-assign
     return () => (unmounted = true);
   }, [setPath]);
-
   return (
     <ConfigProvider direction={rtl ? 'rtl' : 'ltr'}>
       <ThemeProvider theme={{ ...themeColor, rtl, topMenu, mainContent }}>
@@ -43,17 +41,14 @@ function ProviderConfig() {
           <Router basename={process.env.PUBLIC_URL}>
             {!isLoggedIn ? (
               <Routes>
-                <Route path="/*" element={<Auth />} />{' '}
+                <Route path="*" element={<Navigate to="/login" />} />
+                <Route path="/login/*" element={<Auth />} />
               </Routes>
             ) : (
               <Routes>
-                <Route path="/admin/*" element={<ProtectedRoute path="/*" Component={Admin} />} />
+                <Route path="/" element={<Navigate to="/list-email" />} />
+                <Route path="/list-email/*" element={<TableEmail />} />
                 <Route path="*" element={<NotFound />} />
-              </Routes>
-            )}
-            {isLoggedIn && (path === process.env.PUBLIC_URL || path === `${process.env.PUBLIC_URL}/`) && (
-              <Routes>
-                <Route path="/" element={<Navigate to="/admin" />} />
               </Routes>
             )}
           </Router>
