@@ -12,11 +12,12 @@ import Heading from '../../heading/heading';
 import { Dropdown } from '../../dropdown/dropdown';
 import { logOut } from '../../../redux/authentication/actionCreator';
 import { openNotificationWithIcon } from '../../notifications/notification';
+import { setItem, getItem } from '../../../utility/localStorageControl';
 
 const AuthInfo = React.memo(() => {
   const dispatch = useDispatch();
   const [state, setState] = useState({
-    flag: localStorage.getItem('lang') || 'vn',
+    flag: getItem('lang') || 'vi',
   });
   const { i18n } = useTranslation();
   const { flag } = state;
@@ -57,7 +58,7 @@ const AuthInfo = React.memo(() => {
 
   const onFlagChangeHandle = (value, e) => {
     e.preventDefault();
-    localStorage.setItem('lang', value);
+    setItem('lang', value);
     setState({
       ...state,
       flag: value,
@@ -67,8 +68,8 @@ const AuthInfo = React.memo(() => {
 
   const country = (
     <NavAuth>
-      <Link onClick={(e) => onFlagChangeHandle('vn', e)} to="#">
-        <img src={require('../../../static/img/flag/vn.png')} alt="" />
+      <Link onClick={(e) => onFlagChangeHandle('vi', e)} to="#">
+        <img src={require('../../../static/img/flag/vi.png')} alt="" />
         <span>Vietnamese</span>
       </Link>
       <Link onClick={(e) => onFlagChangeHandle('en', e)} to="#">
