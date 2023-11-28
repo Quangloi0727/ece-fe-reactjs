@@ -2,6 +2,7 @@ import UilSearch from '@iconscout/react-unicons/icons/uil-search';
 import { Form, Input, Pagination, Table } from 'antd';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FilterOutlined, SearchOutlined, SettingOutlined } from '@ant-design/icons';
 import { Button } from '../buttons/buttons';
 import ConfigTable from '../configTable/configTable';
@@ -10,6 +11,7 @@ import FilterTable from '../configTable/filterTable';
 function DataTable({ filterOption, filterOnchange, rowSelection, tableData, columns }) {
   const [formFilter] = Form.useForm();
   const [formSetting] = Form.useForm();
+  const { t } = useTranslation();
   const prefix = <UilSearch className="w-4 h-4 ltr:mr-2 rtl:ml-2 text-light dark:text-white60" />;
   const [state, setState] = useState({
     filterVisible: false,
@@ -48,12 +50,12 @@ function DataTable({ filterOption, filterOnchange, rowSelection, tableData, colu
         <div className="inline-flex items-center w-full filter ">
           <Button onClick={showModalFilter} size="default" type="primary" key="1">
             <FilterOutlined />
-            Bộ lọc
+            {t('filter')}
           </Button>
           <FilterTable filterVisible={filterVisible} onCancel={onCancel} onOk={handleOk} />
           <Button onClick={showModalSetting} size="default" type="primary" key="2">
             <SettingOutlined />
-            Tùy chỉnh bảng
+            {t('customizeTable')}
           </Button>
           <ConfigTable onCancel={onCancel} onOk={handleOk} visible={editVisible} />
         </div>

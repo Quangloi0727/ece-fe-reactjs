@@ -17,7 +17,7 @@ const CoverSection = lazy(() => import('../overview/CoverSection'));
 function Settings() {
   const PageRoutes = [
     {
-      path: '/admin',
+      path: '/list-email',
       breadcrumbName: 'Dashboard',
     },
     {

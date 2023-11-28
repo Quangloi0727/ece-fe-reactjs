@@ -9,6 +9,7 @@ import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { AuthFormWrap } from './style';
 import { auth0options } from '../../../../config/auth0';
 import { login } from '../../../../redux/authentication/actionCreator';
+import { openNotificationWithIcon } from '../../../../components/notifications/notification';
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
@@ -23,11 +24,16 @@ function SignIn() {
 
   const handleSubmit = useCallback(
     (values) => {
-      dispatch(login(values, () => history('/admin')));
+      dispatch(
+        login(
+          values,
+          () => history('/list-email'),
+          () => openNotificationWithIcon('error', 'Đăng nhập thất bại !', 'Sai thông tin tài khoản.'),
+        ),
+      );
     },
     [history, dispatch],
   );
-
   lock.on('authenticated', (authResult) => {
     lock.getUserInfo(authResult.accessToken, (error) => {
       if (error) {
@@ -49,10 +55,22 @@ function SignIn() {
           </div>
           <div className="ninjadash-authentication-content">
             <Form name="login" form={form} onFinish={handleSubmit} layout="vertical">
-              <Form.Item name="email" rules={[{ message: 'Vui lòng nhập username !', required: true }]} label="">
+              <Form.Item
+                name="username"
+                initialValue="loitest"
+                rules={[{ message: 'Vui lòng nhập username !', required: true }]}
+                label=""
+                className="customizeInputLogin"
+              >
                 <Input placeholder="Nhập username ..." prefix={<FontAwesomeIcon icon={faUser} />} />
               </Form.Item>
-              <Form.Item name="password" rules={[{ message: 'Vui lòng nhập password !', required: true }]} label="">
+              <Form.Item
+                name="password"
+                initialValue="Hanoi@2023"
+                rules={[{ message: 'Vui lòng nhập password !', required: true }]}
+                label=""
+                className="customizeInputLogin"
+              >
                 <Input.Password placeholder="Nhập mật khẩu ..." prefix={<FontAwesomeIcon icon={faLock} />} />
               </Form.Item>
               <Form.Item>

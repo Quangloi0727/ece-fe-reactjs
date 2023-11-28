@@ -8,6 +8,7 @@ import { Main, PaginationStyle } from '../styled';
 import { tableReadData } from '../../redux/data-filter/actionCreator';
 import DataTable from '../../components/table/DataTable';
 import Heading from '../../components/heading/heading';
+import withAdminLayout from '../../layout/withAdminLayout';
 
 function DataTables() {
   const dispatch = useDispatch();
@@ -190,4 +191,4 @@ function DataTables() {
   );
 }
 
-export default DataTables;
+export default withAdminLayout(DataTables);

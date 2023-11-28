@@ -1,9 +1,10 @@
 import { Spin } from 'antd';
-import React, { Suspense, useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
-import Pages from './pages';
 import withAdminLayout from '../../layout/withAdminLayout';
+
+const TableEmail = lazy(() => import('../../container/pages/TableEmail'));
 
 const Admin = React.memo(() => {
   const { pathname } = useLocation();
@@ -21,8 +22,7 @@ const Admin = React.memo(() => {
       }
     >
       <Routes>
-        <Route index path="/*" element={<Pages />} />
-        <Route path="pages/*" element={<Pages />} />
+        <Route index path="/*" element={<TableEmail />} />
       </Routes>
     </Suspense>
   );

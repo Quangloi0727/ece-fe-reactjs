@@ -1,7 +1,5 @@
-import Cookies from 'js-cookie';
-
 const getItem = (key) => {
-  const data = Cookies.get(key);
+  const data = localStorage.getItem(key);
 
   try {
     return JSON.parse(data);
@@ -12,11 +10,11 @@ const getItem = (key) => {
 
 const setItem = (key, value) => {
   const stringify = typeof value !== 'string' ? JSON.stringify(value) : value;
-  return Cookies.set(key, stringify);
+  return localStorage.setItem(key, stringify);
 };
 
 const removeItem = (key) => {
-  Cookies.remove(key);
+  localStorage.removeItem(key);
 };
 
 export { getItem, setItem, removeItem };
