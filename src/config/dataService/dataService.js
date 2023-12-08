@@ -76,6 +76,10 @@ client.interceptors.response.use(
     const { response } = error;
     const originalRequest = error.config;
     if (response) {
+      if (response.status === 401 && response.data.errors[0].message === 'Get new token fail !') {
+        localStorage.clear();
+        window.location.href = '/login';
+      }
       if (response.status === 401) {
         try {
           const refreshToken = getItem('userData')?.refreshToken;

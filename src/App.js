@@ -10,7 +10,7 @@ import config from './config/config';
 import 'antd/dist/antd.less';
 
 const NotFound = lazy(() => import('./container/pages/404'));
-const TableEmail = lazy(() => import('./container/pages/TableEmail'));
+// const TableEmail = lazy(() => import('./container/pages/TableEmail'));
 
 const { themeColor } = config;
 
@@ -47,7 +47,7 @@ function ProviderConfig() {
             ) : (
               <Routes>
                 <Route path="/" element={<Navigate to="/list-email" />} />
-                <Route path="/list-email/*" element={<TableEmail />} />
+                <Route path="/list-email/*" element={<NotFound />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             )}

@@ -45,7 +45,6 @@ const logOut = (successCallback, errorCallback) => {
     dispatch(logoutBegin());
     try {
       const response = await DataService.post('/logout');
-      console.log(33333, response);
       if (response.data.errors) {
         dispatch(logoutErr(response.data.errors));
         errorCallback(response.data.errors);
