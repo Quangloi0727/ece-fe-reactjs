@@ -1,4 +1,33 @@
 {
   "filter": "Bộ lọc",
-  "customizeTable": "Tùy chỉnh bảng"
+  "customizeTable": "Tùy chỉnh bảng",
+  "configTable": {
+    "selectAll": "Chọn tất cả",
+    "activityId": "Activity Id",
+    "subject": "Subject",
+    "assignedTo": "Assigned To",
+    "createdOn": "Created On",
+    "subStatus": "Sub Status",
+    "caseID": "Case Id",
+    "queueName": "Queue Name",
+    "file": "Attached file",
+    "priority": "Priority",
+    "from": "From",
+    "to": "To",
+    "direction": "Direction"
+  },
+  "filterAdvance":{
+    "caseId": "Case Id",
+    "activityId": "Activity Id",
+    "subject": "Subject",
+    "from": "Từ",
+    "to": "Đến",
+    "assignedTo": "Assigned To",
+    "createOn": "Create On",
+    "subStatus": "Sub Status",
+    "queueName": "Queue Name",
+    "priority": "Priority",
+    "file": "Attached File",
+    "direction": "Hướng"
+  }
 }

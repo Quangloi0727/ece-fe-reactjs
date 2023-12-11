@@ -6,11 +6,12 @@ import { ConfigProvider } from 'antd';
 import store from './redux/store';
 import Auth from './routes/auth';
 import './static/css/style.css';
+import './static/css/styleCustomize.css';
 import config from './config/config';
 import 'antd/dist/antd.less';
 
 const NotFound = lazy(() => import('./container/pages/404'));
-// const TableEmail = lazy(() => import('./container/pages/TableEmail'));
+const ListEmail = lazy(() => import('./container/manage-mail/list-mail'));
 
 const { themeColor } = config;
 
@@ -47,7 +48,7 @@ function ProviderConfig() {
             ) : (
               <Routes>
                 <Route path="/" element={<Navigate to="/list-email" />} />
-                <Route path="/list-email/*" element={<NotFound />} />
+                <Route path="/list-email/*" element={<ListEmail />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             )}

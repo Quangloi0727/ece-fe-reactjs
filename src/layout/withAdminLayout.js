@@ -46,7 +46,7 @@ const ThemeLayout = (WrappedComponent) => {
 
     render() {
       const { collapsed, hide } = this.state;
-      const { layoutMode, rtl, topMenu } = this.props;
+      const { rtl, topMenu } = this.props;
 
       const toggleCollapsed = () => {
         this.setState({
@@ -73,23 +73,6 @@ const ThemeLayout = (WrappedComponent) => {
               }}
             >
               <div className="ninjadash-header-content d-flex">
-                <div className="ninjadash-header-content__left">
-                  <div className="navbar-brand align-cener-v">
-                    <Link
-                      className={topMenu && window.innerWidth > 991 ? 'ninjadash-logo top-menu' : 'ninjadash-logo'}
-                      to="/list-email"
-                    >
-                      <img
-                        src={
-                          layoutMode === 'lightMode'
-                            ? require(`../static/img/logo_dark.svg`).default
-                            : require(`../static/img/logo_white.svg`).default
-                        }
-                        alt=""
-                      />
-                    </Link>
-                  </div>
-                </div>
                 <div className="ninjadash-header-content__right d-flex">
                   <div className="ninjadash-navbar-menu d-flex align-center-v">
                     {topMenu && window.innerWidth > 991 ? <TopMenu /> : null}
