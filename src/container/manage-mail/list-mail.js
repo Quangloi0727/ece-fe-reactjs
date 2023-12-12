@@ -1,15 +1,18 @@
 /* eslint-disable react/jsx-no-bind */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Row, Col } from 'antd';
+import { useTranslation } from 'react-i18next';
 import DataListEmail from '../../components/manage-mail/list-email';
 import Heading from '../../components/heading/heading';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { PaginationStyle, GlobalUtilityStyle } from '../styled';
 import { tableReadData } from '../../redux/manage-mail/list-mail/actionCreator';
 import withAdminLayout from '../../layout/withAdminLayout';
+import { PREFIX_CUSTOMIZE_TABLE } from '../../constants';
 
 function ListEmail() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,16 +21,34 @@ function ListEmail() {
     }
   }, [dispatch]);
 
-  const { TableData } = useSelector((states) => {
+  const { tableData, customizeTableData } = useSelector((states) => {
     return {
-      TableData: states.dataTableEmail.tableData,
+      tableData: states.dataTableEmail.tableData,
+      customizeTableData: states.customizeTable.config,
     };
   });
 
+  const [configColumn, setConfigColumn] = useState(customizeTableData);
+
+  useEffect(() => {
+    const newConfigs = [{ title: 'Activity ID', dataIndex: 'activityId', key: 'activityID', align: 'center' }];
+    customizeTableData.forEach((item) => {
+      if (item.isChecked === true) {
+        return newConfigs.push({
+          title: <span>{t(`${PREFIX_CUSTOMIZE_TABLE}${item.key}`)}</span>,
+          dataIndex: item.key,
+          key: item.key,
+          align: 'center',
+        });
+      }
+    });
+    setConfigColumn(newConfigs);
+  }, [customizeTableData]);
+
   const tableDataSource = [];
 
-  if (TableData.length > 0) {
-    TableData.map((item) => {
+  if (tableData.length > 0) {
+    tableData.map((item) => {
       const { id, name, country, company, position, status, date } = item;
       return tableDataSource.push({
         id: <span className="text-body dark:text-white60 text-[15px] font-medium" key={id}>{`#${id}`}</span>,
@@ -68,50 +89,6 @@ function ListEmail() {
     });
   }
 
-  const dataTableColumn = [
-    {
-      title: 'Id',
-      dataIndex: 'id',
-      key: 'id',
-    },
-    {
-      title: 'User',
-      dataIndex: 'user',
-      key: 'user',
-    },
-    {
-      title: 'Country',
-      dataIndex: 'country',
-      key: 'coutry',
-    },
-    {
-      title: 'Company',
-      dataIndex: 'company',
-      key: 'company',
-    },
-    {
-      title: 'Position',
-      dataIndex: 'position',
-      key: 'position',
-    },
-    {
-      title: 'Join Date',
-      dataIndex: 'date',
-      key: 'date',
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-    },
-    {
-      title: 'Actions',
-      dataIndex: 'action',
-      key: 'action',
-      width: '90px',
-    },
-  ];
-
   return (
     <>
       <PageHeader
@@ -134,7 +111,7 @@ function ListEmail() {
                       filterOption
                       filterOnchange
                       tableData={tableDataSource}
-                      columns={dataTableColumn}
+                      columns={configColumn}
                       rowSelection={false}
                     />
                   </div>

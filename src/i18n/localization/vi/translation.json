@@ -8,7 +8,7 @@
     "assignedTo": "Assigned To",
     "createdOn": "Created On",
     "subStatus": "Sub Status",
-    "caseID": "Case Id",
+    "caseId": "Case Id",
     "queueName": "Queue Name",
     "file": "Attached file",
     "priority": "Priority",

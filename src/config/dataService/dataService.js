@@ -1,16 +1,17 @@
 import axios from 'axios';
 import { getItem, setItem } from '../../utility/localStorageControl';
+import { MESSAGE_GET_TOKEN_FAIL, LOCAL_STORAGE_VARIABLE } from '../../constants/index';
 
 const API_ENDPOINT = `${process.env.REACT_APP_BE_API_ENDPOINT}/api`;
 
 const authHeader = () => ({
-  Authorization: `Bearer ${getItem('userData')?.token}`,
+  Authorization: `Bearer ${getItem(LOCAL_STORAGE_VARIABLE.USER_DATA)?.token}`,
 });
 
 const client = axios.create({
   baseURL: API_ENDPOINT,
   headers: {
-    Authorization: `Bearer ${getItem('userData')?.token}`,
+    Authorization: `Bearer ${getItem(LOCAL_STORAGE_VARIABLE.USER_DATA)?.token}`,
     'Content-Type': 'application/json',
   },
 });
@@ -19,6 +20,14 @@ class DataService {
   static get(path = '') {
     return client({
       method: 'GET',
+      url: path,
+      headers: { ...authHeader() },
+    });
+  }
+
+  static delete(path = '') {
+    return client({
+      method: 'DELETE',
       url: path,
       headers: { ...authHeader() },
     });
@@ -61,7 +70,7 @@ client.interceptors.request.use((config) => {
   // For example tag along the bearer access token to request header or set a cookie
   const requestConfig = config;
   const { headers } = config;
-  requestConfig.headers = { ...headers, Authorization: `Bearer ${getItem('userData')?.token}` };
+  requestConfig.headers = { ...headers, Authorization: `Bearer ${getItem(LOCAL_STORAGE_VARIABLE.USER_DATA)?.token}` };
 
   return requestConfig;
 });
@@ -76,27 +85,22 @@ client.interceptors.response.use(
     const { response } = error;
     const originalRequest = error.config;
     if (response) {
-      if (response.status === 401 && response.data.errors[0].message === 'Get new token fail !') {
+      if (response.status === 401 && response.data.errors[0].message === MESSAGE_GET_TOKEN_FAIL) {
         localStorage.clear();
         window.location.href = '/login';
       }
       if (response.status === 401) {
-        try {
-          const refreshToken = getItem('userData')?.refreshToken;
-          const responseRefreshToken = await DataService.post('/auth/refresh-token', { refreshToken });
-          setItem('userData', {
-            token: responseRefreshToken?.data?.data?.token,
-            refreshToken: responseRefreshToken?.data?.data?.refreshToken,
-            isLogin: true,
-          });
-          originalRequest.headers.Authorization = `Bearer ${responseRefreshToken?.data?.data?.token}`;
-          return axios(originalRequest);
-        } catch (errorRefreshToken) {
-          console.log('refresh new token error is:', errorRefreshToken);
-        }
-      } else {
-        return originalRequest;
+        const refreshToken = getItem(LOCAL_STORAGE_VARIABLE.USER_DATA)?.refreshToken;
+        const responseRefreshToken = await DataService.post('/auth/refresh-token', { refreshToken });
+        setItem(LOCAL_STORAGE_VARIABLE.USER_DATA, {
+          token: responseRefreshToken?.data?.data?.token,
+          refreshToken: responseRefreshToken?.data?.data?.refreshToken,
+          isLogin: true,
+        });
+        originalRequest.headers.Authorization = `Bearer ${responseRefreshToken?.data?.data?.token}`;
+        return axios(originalRequest);
       }
+      return response;
     }
     return Promise.reject(error);
   },

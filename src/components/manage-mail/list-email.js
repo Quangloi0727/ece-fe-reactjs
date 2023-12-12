@@ -52,14 +52,14 @@ function DataListEmail({ tableData, columns }) {
     <>
       <div className="flex items-center w-full md:flex-col">
         <div className="min-w-[120px]">
-          <Button onClick={showModalFilter} size="default" type="light" key="1" outlined>
+          <Button onClick={showModalFilter} size="default" type="light" outlined>
             <FilterOutlined />
             {t('filter')}
           </Button>
           <FilterAdvance showOrHideModalFilter={showOrHideModalFilter} hideModal={hideModal} />
         </div>
         <div className="min-w-[100px]">
-          <Button onClick={showModalCustomizeTable} size="default" type="light" key="2" outlined>
+          <Button onClick={showModalCustomizeTable} size="default" type="light" outlined>
             <SettingOutlined />
             {t('customizeTable')}
           </Button>

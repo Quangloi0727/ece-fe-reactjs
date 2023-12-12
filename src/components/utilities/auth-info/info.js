@@ -11,11 +11,12 @@ import { Dropdown } from '../../dropdown/dropdown';
 import { logOut } from '../../../redux/authentication/actionCreator';
 import { openNotificationWithIcon } from '../../notifications/notification';
 import { setItem, getItem } from '../../../utility/localStorageControl';
+import { LOCAL_STORAGE_VARIABLE } from '../../../constants/index';
 
 const AuthInfo = React.memo(() => {
   const dispatch = useDispatch();
   const [state, setState] = useState({
-    flag: getItem('lang') || 'vi',
+    flag: getItem(LOCAL_STORAGE_VARIABLE.LANGUAGE) || 'vi',
   });
   const { i18n } = useTranslation();
   const { flag } = state;
@@ -40,7 +41,7 @@ const AuthInfo = React.memo(() => {
 
   const onFlagChangeHandle = (value, e) => {
     e.preventDefault();
-    setItem('lang', value);
+    setItem(LOCAL_STORAGE_VARIABLE.LANGUAGE, value);
     setState({
       ...state,
       flag: value,
@@ -74,7 +75,9 @@ const AuthInfo = React.memo(() => {
         <Popover placement="bottomRight" content={userContent} action="click">
           <Link to="#" className="ninjadash-nav-action-link">
             <Avatar src="https://media.istockphoto.com/id/1300845620/fr/vectoriel/appartement-dic%C3%B4ne-dutilisateur-isol%C3%A9-sur-le-fond-blanc-symbole-utilisateur.jpg?s=612x612&w=0&k=20&c=BVOfS7mmvy2lnfBPghkN__k8OMsg7Nlykpgjn0YOHj0=" />
-            <span className="ninjadash-nav-actions__author--name">Md. Rafiq</span>
+            <span className="ninjadash-nav-actions__author--name">
+              {getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).displayName}
+            </span>
             <UilAngleDown />
           </Link>
         </Popover>

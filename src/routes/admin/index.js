@@ -4,7 +4,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 
 import withAdminLayout from '../../layout/withAdminLayout';
 
-const TableEmail = lazy(() => import('../../container/pages/TableEmail'));
+const TableEmail = lazy(() => import('../../components/manage-mail/list-email'));
 
 const Admin = React.memo(() => {
   const { pathname } = useLocation();

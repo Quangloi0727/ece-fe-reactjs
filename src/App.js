@@ -1,8 +1,8 @@
-import React, { useEffect, useState, lazy } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { Provider, useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, Spin } from 'antd';
 import store from './redux/store';
 import Auth from './routes/auth';
 import './static/css/style.css';
@@ -38,7 +38,13 @@ function ProviderConfig() {
   return (
     <ConfigProvider direction={rtl ? 'rtl' : 'ltr'}>
       <ThemeProvider theme={{ ...themeColor, rtl, topMenu, mainContent }}>
-        <>
+        <Suspense
+          fallback={
+            <div className="spin">
+              <Spin />
+            </div>
+          }
+        >
           <Router basename={process.env.PUBLIC_URL}>
             {!isLoggedIn ? (
               <Routes>
@@ -53,7 +59,7 @@ function ProviderConfig() {
               </Routes>
             )}
           </Router>
-        </>
+        </Suspense>
       </ThemeProvider>
     </ConfigProvider>
   );

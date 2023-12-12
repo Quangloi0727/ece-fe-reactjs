@@ -125,6 +125,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
             display: 'flex',
             justifyContent: 'space-between',
           }}
+          key="footerModalFilterAdvance"
         >
           <Button type="danger" key="resetFilter" className="px-5 text-sm font-semibold button-reset h-10">
             <DeleteOutlined /> Xóa bộ lọc
@@ -151,7 +152,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
           <Row gutter={16}>
             {configFilterAdvance.map((el, index) => (
               <Col className="gutter-row" span={12} key={index}>
-                <ElementFilterAdvance key={index} element={el} />
+                <ElementFilterAdvance element={el} key={el.key} />
               </Col>
             ))}
           </Row>
@@ -163,7 +164,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
 
 FilterAdvance.propTypes = {
   showOrHideModalFilter: propTypes.bool.isRequired,
-  hideModal: propTypes.bool.isRequired,
+  hideModal: propTypes.func.isRequired,
 };
 
 export default FilterAdvance;

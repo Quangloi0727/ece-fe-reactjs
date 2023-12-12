@@ -5,6 +5,7 @@ import authReducer from './authentication/reducers';
 import ChangeLayoutMode from './themeLayout/reducers';
 import dataTableEmail from './manage-mail/list-mail/reducers';
 import configFilterAdvance from './manage-mail/config-filter-advance/reducers';
+import customizeTable from './manage-mail/customize-table/reducers';
 
 const rootReducers = combineReducers({
   message: readMessageReducer,
@@ -13,6 +14,7 @@ const rootReducers = combineReducers({
   ChangeLayoutMode,
   dataTableEmail,
   configFilterAdvance,
+  customizeTable,
 });
 
 export default rootReducers;
