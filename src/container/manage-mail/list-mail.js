@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Row, Col } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
 import DataListEmail from '../../components/manage-mail/list-email';
 import Heading from '../../components/heading/heading';
 import { PageHeader } from '../../components/page-headers/page-headers';
@@ -10,6 +12,7 @@ import { PaginationStyle, GlobalUtilityStyle } from '../styled';
 import { tableReadData } from '../../redux/manage-mail/list-mail/actionCreator';
 import withAdminLayout from '../../layout/withAdminLayout';
 import { PREFIX_CUSTOMIZE_TABLE } from '../../constants';
+import { Button } from '../../components/buttons/buttons';
 
 function ListEmail() {
   const { t } = useTranslation();
@@ -31,14 +34,14 @@ function ListEmail() {
   const [configColumn, setConfigColumn] = useState(customizeTableData);
 
   useEffect(() => {
-    const newConfigs = [{ title: 'Activity ID', dataIndex: 'activityId', key: 'activityID', align: 'center' }];
+    const newConfigs = [{ title: 'Activity ID', dataIndex: 'activityId', key: 'activityID', align: 'left' }];
     customizeTableData.forEach((item) => {
       if (item.isChecked === true) {
         return newConfigs.push({
           title: <span>{t(`${PREFIX_CUSTOMIZE_TABLE}${item.key}`)}</span>,
           dataIndex: item.key,
           key: item.key,
-          align: 'center',
+          align: 'left',
         });
       }
     });
@@ -49,40 +52,83 @@ function ListEmail() {
 
   if (tableData.length > 0) {
     tableData.map((item) => {
-      const { id, name, country, company, position, status, date } = item;
+      const {
+        activityId,
+        subject,
+        assignedTo,
+        createdOn,
+        activitySubStatus,
+        caseId,
+        queueName,
+        file,
+        activityPriority,
+        from,
+        to,
+        direction,
+      } = item;
       return tableDataSource.push({
-        id: <span className="text-body dark:text-white60 text-[15px] font-medium" key={id}>{`#${id}`}</span>,
-        user: (
-          <span className="text-body dark:text-white60 text-[15px] font-medium" key={name}>
-            {name}
+        activityId: (
+          <Link to={`/manage-email/activity/${activityId}`} key={activityId} style={{ textDecoration: 'underline' }}>
+            {activityId}
+          </Link>
+        ),
+        subject: (
+          <span className="text-body dark:text-white60 text-[15px] font-medium" title={subject} key={subject}>
+            {subject}
           </span>
         ),
-        country: (
-          <span className="text-body dark:text-white60 text-[15px] font-medium" key={country}>
-            {country}
+        assignedTo: (
+          <span className="text-body dark:text-white60 text-[15px] font-medium" key={assignedTo}>
+            {assignedTo}
           </span>
         ),
-        company: (
-          <span className="text-body dark:text-white60 text-[15px] font-medium" key={company}>
-            {company}
+        createdOn: (
+          <span className="text-body dark:text-white60 text-[15px] font-medium" key={createdOn}>
+            {moment(createdOn).format('DD/MM/YYYY HH:mm A')}
           </span>
         ),
-        position: (
-          <span className="text-body dark:text-white60 text-[15px] font-medium" key={position}>
-            {position}
-          </span>
-        ),
-        date: (
-          <span className="text-body dark:text-white60 text-[15px] font-medium" key={date}>
-            {date}
-          </span>
-        ),
-        status: (
-          <span
-            className={`inline-flex items-center justify-center bg-${status}-transparent text-${status} min-h-[24px] px-3 text-xs font-medium rounded-[15px]`}
-            key={status}
+        subStatus: (
+          <Button
+            size="default"
+            className="bg-danger border-solid border-1 border-danger text-white dark:text-white87 text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[40px] px-[20px] h-[44px] shadow-btn gap-[8px]"
+            key={activitySubStatus}
           >
-            {status}
+            {activitySubStatus}
+          </Button>
+        ),
+        caseId: (
+          <Link to={`/list-email/caseid/${caseId}`} style={{ textDecoration: 'underline' }} key={caseId}>
+            {caseId}
+          </Link>
+        ),
+        queueName: (
+          <span className="text-body font-medium" key={queueName}>
+            {queueName}
+          </span>
+        ),
+        file: (
+          <span className="text-body font-medium" key={file}>
+            {file}
+          </span>
+        ),
+        priority: (
+          <span className="text-body font-medium" key={activityPriority}>
+            {activityPriority}
+          </span>
+        ),
+        from: (
+          <span className="text-body  font-medium" key={from}>
+            {from}
+          </span>
+        ),
+        to: (
+          <span className="text-body  font-medium" key={to}>
+            {to}
+          </span>
+        ),
+        direction: (
+          <span className="text-body font-medium" key={direction}>
+            {direction}
           </span>
         ),
       });
@@ -107,13 +153,7 @@ function ListEmail() {
                     </Heading>
                   </div>
                   <div className="p-[25px]">
-                    <DataListEmail
-                      filterOption
-                      filterOnchange
-                      tableData={tableDataSource}
-                      columns={configColumn}
-                      rowSelection={false}
-                    />
+                    <DataListEmail filterOption filterOnchange tableData={tableDataSource} columns={configColumn} />
                   </div>
                 </div>
               </PaginationStyle>

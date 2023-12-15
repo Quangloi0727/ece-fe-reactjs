@@ -1,5 +1,6 @@
 import actions from './actions';
 import initialState from '../../../demoData/data-table.json';
+import { DataService } from '../../../config/dataService/dataService';
 
 const {
   dataTableReadBegin,
@@ -17,7 +18,8 @@ const tableReadData = () => {
   return async (dispatch) => {
     try {
       dispatch(dataTableReadBegin());
-      dispatch(dataTableReadSuccess(initialState));
+      const listEmail = await DataService.get(`/manage-email/get-list`);
+      dispatch(dataTableReadSuccess(listEmail?.data?.data));
     } catch (err) {
       dispatch(dataTableReadErr(err));
     }

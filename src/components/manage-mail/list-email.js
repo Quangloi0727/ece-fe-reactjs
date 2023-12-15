@@ -80,10 +80,10 @@ function DataListEmail({ tableData, columns }) {
 
       <div className="table-responsive hover-tr-none table-th-shape-none table-last-th-text-right table-th-border-none table-head-rounded table-td-border-none ant-pagination-custom-style ltr:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:first-child]:rounded-l-4 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:first-child]:rounded-r-4 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:first-child]:rounded-none ltr:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:last-child]:rounded-r-4 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:last-child]:rounded-l-4 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:last-child]:rounded-none dark-border-row">
         <Table
-          pagination={{ pageSize: 10, showSizeChanger: true }}
+          pagination={{ pageSize: 5, showSizeChanger: true }}
           dataSource={tableData}
           columns={columns}
-          rowKey={(el) => el.id.key}
+          rowKey={(el) => el.activityId.key}
         />
       </div>
     </>

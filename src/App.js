@@ -12,6 +12,7 @@ import 'antd/dist/antd.less';
 
 const NotFound = lazy(() => import('./container/pages/404'));
 const ListEmail = lazy(() => import('./container/manage-mail/list-mail'));
+const ActivityDetail = lazy(() => import('./container/manage-mail/activity-detail'));
 
 const { themeColor } = config;
 
@@ -55,6 +56,7 @@ function ProviderConfig() {
               <Routes>
                 <Route path="/" element={<Navigate to="/list-email" />} />
                 <Route path="/list-email/*" element={<ListEmail />} />
+                <Route path="/manage-email/activity/:activityId" element={<ActivityDetail />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             )}

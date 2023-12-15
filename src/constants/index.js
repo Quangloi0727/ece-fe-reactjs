@@ -13,3 +13,6 @@ export const LOCAL_STORAGE_VARIABLE = {
   FILTER_ADVANCE: 'filterAdvance',
 };
 export const STATUS_CODE_SUCCESS = [200, 201];
+export const ACTIVITY_DETAIL_TAB = {
+  activeKey: 'generalInfo',
+};
