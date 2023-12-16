@@ -57,11 +57,11 @@ function ListEmail() {
         subject,
         assignedTo,
         createdOn,
-        activitySubStatus,
+        subStatus,
         caseId,
         queueName,
         file,
-        activityPriority,
+        priority,
         from,
         to,
         direction,
@@ -91,9 +91,9 @@ function ListEmail() {
           <Button
             size="default"
             className="bg-danger border-solid border-1 border-danger text-white dark:text-white87 text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[40px] px-[20px] h-[44px] shadow-btn gap-[8px]"
-            key={activitySubStatus}
+            key={subStatus}
           >
-            {activitySubStatus}
+            {subStatus}
           </Button>
         ),
         caseId: (
@@ -112,8 +112,8 @@ function ListEmail() {
           </span>
         ),
         priority: (
-          <span className="text-body font-medium" key={activityPriority}>
-            {activityPriority}
+          <span className="text-body font-medium" key={priority}>
+            {priority}
           </span>
         ),
         from: (

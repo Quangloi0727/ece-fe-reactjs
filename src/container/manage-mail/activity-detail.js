@@ -55,8 +55,11 @@ function ActivityDetail() {
     setActiveTab(atk);
   };
 
-  const printInvoice = useReactToPrint({
-    content: () => componentRef.current,
+  const printContentToPdf = useReactToPrint({
+    content: () => {
+      console.log(1111, componentRef);
+      console.log(2222, componentRef.current);
+    },
   });
 
   return (
@@ -82,7 +85,7 @@ function ActivityDetail() {
                     <div className="flex items-center w-full mt-5 mb-[25px] md:flex-col gap-[15px]">
                       <Resize handleWidth="3px">
                         <ResizeHorizon minWidth="30%" width="60%">
-                          <ContentActivity value={data} handlePrint={printInvoice} />
+                          <ContentActivity value={data} handlePrint={printContentToPdf} />
                           <GlobalUtilityStyle dangerouslySetInnerHTML={{ __html: data?.contentActivity }} />
                         </ResizeHorizon>
                         <ResizeHorizon minWidth="30%">Horizon 2</ResizeHorizon>

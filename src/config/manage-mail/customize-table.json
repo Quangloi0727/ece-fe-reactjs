@@ -2,11 +2,11 @@
   { "key": "subject", "isChecked": true },
   { "key": "assignedTo", "isChecked": true },
   { "key": "createdOn","isChecked": true },
-  { "key": "activitySubStatus", "isChecked": true },
+  { "key": "subStatus", "isChecked": true },
   { "key": "caseId", "isChecked": true },
   { "key": "queueName", "isChecked": true },
   { "key": "file",  "isChecked": true },
-  { "key": "activityPriority","isChecked": true },
+  { "key": "priority","isChecked": true },
   { "key": "from","isChecked": false },
   { "key": "to", "isChecked": false },
   { "key": "direction", "isChecked": false }

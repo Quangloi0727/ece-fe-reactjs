@@ -8,7 +8,6 @@ const activityDetailData = (activityId) => {
     try {
       dispatch(activityDetailBegin());
       const response = await DataService.get(`/manage-email/activity-detail/${activityId}`);
-      console.log('response', response);
       await dispatch(activityDetailSuccess(response?.data?.data));
     } catch (err) {
       dispatch(activityDetailErr(err));

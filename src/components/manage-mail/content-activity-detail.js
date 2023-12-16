@@ -7,10 +7,12 @@ import { Button } from '../buttons/buttons';
 import { GlobalUtilityStyle } from '../../container/styled';
 
 const ContentActivity = forwardRef(({ value, handlePrint }, ref) => {
-  const printInvoice = () => {
+  const printContentToPdf = () => {
     handlePrint();
   };
-  const { mailSend, to, subject, files, content } = value;
+
+  const { mailSend, to, subject, files, contentActivity } = value;
+
   return (
     <GlobalUtilityStyle ref={ref}>
       <Row gutter={15}>
@@ -25,7 +27,7 @@ const ContentActivity = forwardRef(({ value, handlePrint }, ref) => {
                   shape="round"
                   type="default"
                   className="inline-flex items-center bg-regularBG dark:bg-regularBGdark h-11 gap-x-1.5 px-[25px] text-body dark:text-white60 text-sm font-semibold border border-regular dark:border-white10"
-                  onClick={printInvoice}
+                  onClick={printContentToPdf}
                 >
                   <PrinterOutlined />
                 </Button>
@@ -37,21 +39,23 @@ const ContentActivity = forwardRef(({ value, handlePrint }, ref) => {
             </Row>
             <Row>
               <Col span={2}>Subject:</Col>
-              <Col span={15}>{subject}</Col>
-              <Col span={7} style={{ textAlign: 'center' }}>
-                Create On:17//11/2023 08:40 AM
-              </Col>
+              <Col span={13}>{subject}</Col>
+              <Col span={3}>Create On:</Col>
+              <Col span={6}>17/11/2023 08:40 AM</Col>
             </Row>
-            <Row gutter={[16, 16]} className="row-general-info">
+            <Row gutter={[16, 16]} className="row-general-info buttonFile">
               {files && files.length
                 ? files.map((file, index) => (
-                    <Col className="gutter-row" key={index}>
+                    <Col key={index}>
                       <DownLoadFile key={index} index={index} value={file} />
                     </Col>
                   ))
                 : ''}
             </Row>
           </div>
+          {/* <div style={{ paddingTop: '20px' }}>
+            <GlobalUtilityStyle dangerouslySetInnerHTML={{ __html: contentActivity }} />
+          </div> */}
         </Col>
       </Row>
     </GlobalUtilityStyle>
