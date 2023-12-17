@@ -23,3 +23,5 @@ export const CASE_DETAIL_TAB = {
   CONTENT_ACTIVITY: 'contentActivity',
   NOTE: 'note',
 };
+export const DEFAULT_PAGE = 1;
+export const DEFAULT_PAGE_SIZE = 10;

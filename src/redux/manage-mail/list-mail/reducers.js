@@ -6,10 +6,11 @@ const initialState = {
   tableData: [],
   loading: false,
   error: null,
+  totalData: 0,
 };
 
 const dataTableEmailReducer = (state = initialState, action) => {
-  const { type, data, err } = action;
+  const { type, data, totalData, err } = action;
   switch (type) {
     case DATA_TABLE_READ_BEGIN:
       return {
@@ -20,6 +21,7 @@ const dataTableEmailReducer = (state = initialState, action) => {
       return {
         ...initialState,
         tableData: data,
+        totalData,
         loading: false,
       };
     case DATA_TABLE_READ_ERR:

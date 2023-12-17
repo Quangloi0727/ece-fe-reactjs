@@ -9,10 +9,11 @@ const actions = {
     };
   },
 
-  dataTableReadSuccess: (data) => {
+  dataTableReadSuccess: (data, totalData) => {
     return {
       type: actions.DATA_TABLE_READ_SUCCESS,
       data,
+      totalData,
     };
   },
 

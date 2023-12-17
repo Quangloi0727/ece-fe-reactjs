@@ -9,8 +9,9 @@ import FilterAdvance from './modal/filter-advance';
 import CustomizeTable from './modal/customize-table';
 import { tableReadData } from '../../redux/manage-mail/list-mail/actionCreator';
 import { Button } from '../buttons/buttons';
+import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '../../constants';
 
-function DataListEmail({ tableData, columns }) {
+function DataListEmail({ tableData, columns, totalData }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -18,8 +19,8 @@ function DataListEmail({ tableData, columns }) {
     showOrHideModalFilter: false,
     showOrHideModalCustomizeTable: false,
   });
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [page, setPage] = useState(DEFAULT_PAGE);
+  const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
   const [searchMulti, setSearchMulti] = useState('');
   const { showOrHideModalFilter, showOrHideModalCustomizeTable } = state;
 
@@ -32,6 +33,8 @@ function DataListEmail({ tableData, columns }) {
   const handleSearch = (e) => {
     const { value } = e.currentTarget;
     setSearchMulti(value);
+    setPage(DEFAULT_PAGE);
+    setPageSize(DEFAULT_PAGE_SIZE);
   };
 
   const showModalFilter = () => {
@@ -96,7 +99,7 @@ function DataListEmail({ tableData, columns }) {
         <Table
           pagination={{
             showSizeChanger: true,
-            total: 20,
+            total: totalData,
             onChange: handleChangePage,
             showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
           }}
@@ -112,6 +115,7 @@ function DataListEmail({ tableData, columns }) {
 DataListEmail.propTypes = {
   tableData: PropTypes.array,
   columns: PropTypes.array,
+  totalData: PropTypes.number,
 };
 
 export default DataListEmail;

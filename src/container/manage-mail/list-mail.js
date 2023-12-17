@@ -16,9 +16,10 @@ import { Button } from '../../components/buttons/buttons';
 function ListEmail() {
   const { t } = useTranslation();
 
-  const { tableData, customizeTableData } = useSelector((states) => {
+  const { tableData, totalData, customizeTableData } = useSelector((states) => {
     return {
       tableData: states.dataTableEmail.tableData,
+      totalData: states.dataTableEmail.totalData,
       customizeTableData: states.customizeTable.config,
     };
   });
@@ -145,7 +146,7 @@ function ListEmail() {
                     </Heading>
                   </div>
                   <div className="p-[25px]">
-                    <DataListEmail tableData={tableDataSource} columns={configColumn} />
+                    <DataListEmail tableData={tableDataSource} totalData={totalData} columns={configColumn} />
                   </div>
                 </div>
               </PaginationStyle>
