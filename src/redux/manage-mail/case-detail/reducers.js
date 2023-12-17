@@ -1,21 +1,21 @@
 import actions from './actions';
 
-const { ACTIVITY_DETAIL_SUCCESS, ACTIVITY_DETAIL_ERR } = actions;
+const { CASE_DETAIL_SUCCESS, CASE_DETAIL_ERR } = actions;
 
 const initState = {
   data: {},
   error: null,
 };
 
-const dataActivityDetail = (state = initState, action) => {
+const dataCaseDetail = (state = initState, action) => {
   const { type, data, err } = action;
   switch (type) {
-    case ACTIVITY_DETAIL_SUCCESS:
+    case CASE_DETAIL_SUCCESS:
       return {
         ...initState,
         data,
       };
-    case ACTIVITY_DETAIL_ERR:
+    case CASE_DETAIL_ERR:
       return {
         ...initState,
         error: err,
@@ -25,4 +25,4 @@ const dataActivityDetail = (state = initState, action) => {
   }
 };
 
-export default dataActivityDetail;
+export default dataCaseDetail;

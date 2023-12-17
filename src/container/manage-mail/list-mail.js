@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Row, Col } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -9,20 +9,12 @@ import DataListEmail from '../../components/manage-mail/list-email';
 import Heading from '../../components/heading/heading';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { PaginationStyle, GlobalUtilityStyle } from '../styled';
-import { tableReadData } from '../../redux/manage-mail/list-mail/actionCreator';
 import withAdminLayout from '../../layout/withAdminLayout';
 import { PREFIX_CUSTOMIZE_TABLE } from '../../constants';
 import { Button } from '../../components/buttons/buttons';
 
 function ListEmail() {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (dispatch) {
-      dispatch(tableReadData());
-    }
-  }, [dispatch]);
 
   const { tableData, customizeTableData } = useSelector((states) => {
     return {
@@ -97,7 +89,7 @@ function ListEmail() {
           </Button>
         ),
         caseId: (
-          <Link to={`/list-email/caseid/${caseId}`} style={{ textDecoration: 'underline' }} key={caseId}>
+          <Link to={`/manage-email/case/${caseId}`} style={{ textDecoration: 'underline' }} key={caseId}>
             {caseId}
           </Link>
         ),
@@ -153,7 +145,7 @@ function ListEmail() {
                     </Heading>
                   </div>
                   <div className="p-[25px]">
-                    <DataListEmail filterOption filterOnchange tableData={tableDataSource} columns={configColumn} />
+                    <DataListEmail tableData={tableDataSource} columns={configColumn} />
                   </div>
                 </div>
               </PaginationStyle>

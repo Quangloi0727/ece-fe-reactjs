@@ -39,9 +39,9 @@ const ContentActivity = forwardRef(({ value, handlePrint }, ref) => {
             </Row>
             <Row>
               <Col span={2}>Subject:</Col>
-              <Col span={13}>{subject}</Col>
+              <Col span={12}>{subject}</Col>
               <Col span={3}>Create On:</Col>
-              <Col span={6}>17/11/2023 08:40 AM</Col>
+              <Col span={7}>17/11/2023 08:40 AM</Col>
             </Row>
             <Row gutter={[16, 16]} className="row-general-info buttonFile">
               {files && files.length
@@ -53,9 +53,9 @@ const ContentActivity = forwardRef(({ value, handlePrint }, ref) => {
                 : ''}
             </Row>
           </div>
-          {/* <div style={{ paddingTop: '20px' }}>
+          <div style={{ paddingTop: '20px' }}>
             <GlobalUtilityStyle dangerouslySetInnerHTML={{ __html: contentActivity }} />
-          </div> */}
+          </div>
         </Col>
       </Row>
     </GlobalUtilityStyle>

@@ -14,5 +14,12 @@ export const LOCAL_STORAGE_VARIABLE = {
 };
 export const STATUS_CODE_SUCCESS = [200, 201];
 export const ACTIVITY_DETAIL_TAB = {
-  activeKey: 'generalInfo',
+  GENERAL_INFO: 'generalInfo',
+  NOTE: 'note',
+  ACTIVITY_HISTORY: 'activityHistory',
+};
+export const CASE_DETAIL_TAB = {
+  GENERAL_INFO: 'generalInfo',
+  CONTENT_ACTIVITY: 'contentActivity',
+  NOTE: 'note',
 };

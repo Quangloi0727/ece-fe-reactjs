@@ -7,6 +7,7 @@ import dataTableEmail from './manage-mail/list-mail/reducers';
 import configFilterAdvance from './manage-mail/config-filter-advance/reducers';
 import customizeTable from './manage-mail/customize-table/reducers';
 import dataActivityDetail from './manage-mail/activity-detail/reducers';
+import dataCaseDetail from './manage-mail/case-detail/reducers';
 
 const rootReducers = combineReducers({
   message: readMessageReducer,
@@ -17,6 +18,7 @@ const rootReducers = combineReducers({
   configFilterAdvance,
   customizeTable,
   dataActivityDetail,
+  dataCaseDetail,
 });
 
 export default rootReducers;

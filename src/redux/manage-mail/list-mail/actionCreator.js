@@ -1,24 +1,15 @@
 import actions from './actions';
-import initialState from '../../../demoData/data-table.json';
 import { DataService } from '../../../config/dataService/dataService';
 
-const {
-  dataTableReadBegin,
-  dataTableReadSuccess,
-  dataTableReadErr,
-  filterWithSubmitBegin,
-  filterWithSubmitSuccess,
-  filterWithSubmitErr,
-  dataLiveFilterBegin,
-  dataLiveFilterSuccess,
-  dataLiveFilterErr,
-} = actions;
+const { dataTableReadBegin, dataTableReadSuccess, dataTableReadErr } = actions;
 
-const tableReadData = () => {
+const tableReadData = (page, pageSize, searchMulti) => {
   return async (dispatch) => {
     try {
       dispatch(dataTableReadBegin());
-      const listEmail = await DataService.get(`/manage-email/get-list`);
+      const listEmail = await DataService.get(
+        `/manage-email/get-list?page=${page}&&pageSize=${pageSize}&&searchMulti=${searchMulti}`,
+      );
       dispatch(dataTableReadSuccess(listEmail?.data?.data));
     } catch (err) {
       dispatch(dataTableReadErr(err));
@@ -26,32 +17,4 @@ const tableReadData = () => {
   };
 };
 
-const filterWithSubmit = (id, status) => {
-  return async (dispatch) => {
-    try {
-      dispatch(filterWithSubmitBegin());
-      setTimeout(() => {
-        const data = initialState.filter((item) => {
-          return item.id.indexOf(id) >= 0 && item.status.toLowerCase().indexOf(status.toLowerCase()) >= 0;
-        });
-        dispatch(filterWithSubmitSuccess(data));
-      }, 100);
-    } catch (err) {
-      dispatch(filterWithSubmitErr(err));
-    }
-  };
-};
-
-const dataLiveFilter = (value, key) => {
-  return async (dispatch) => {
-    try {
-      dispatch(dataLiveFilterBegin());
-      const data = initialState.filter((item) => item[key].toLowerCase().startsWith(value.toLowerCase()));
-      dispatch(dataLiveFilterSuccess(data));
-    } catch (err) {
-      dispatch(dataLiveFilterErr(err));
-    }
-  };
-};
-
-export { filterWithSubmit, tableReadData, dataLiveFilter };
+export { tableReadData };

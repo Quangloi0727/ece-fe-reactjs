@@ -1,13 +1,13 @@
 import UilSearch from '@iconscout/react-unicons/icons/uil-search';
 import { Input, Table } from 'antd';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { FilterOutlined, SettingOutlined } from '@ant-design/icons';
 import FilterAdvance from './modal/filter-advance';
 import CustomizeTable from './modal/customize-table';
-import { dataLiveFilter } from '../../redux/manage-mail/list-mail/actionCreator';
+import { tableReadData } from '../../redux/manage-mail/list-mail/actionCreator';
 import { Button } from '../buttons/buttons';
 
 function DataListEmail({ tableData, columns }) {
@@ -18,11 +18,20 @@ function DataListEmail({ tableData, columns }) {
     showOrHideModalFilter: false,
     showOrHideModalCustomizeTable: false,
   });
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [searchMulti, setSearchMulti] = useState('');
   const { showOrHideModalFilter, showOrHideModalCustomizeTable } = state;
 
-  const handleDataUser = (e) => {
+  useEffect(() => {
+    if (dispatch) {
+      dispatch(tableReadData(page, pageSize, searchMulti));
+    }
+  }, [page, pageSize, searchMulti]);
+
+  const handleSearch = (e) => {
     const { value } = e.currentTarget;
-    dispatch(dataLiveFilter(value, 'name'));
+    setSearchMulti(value);
   };
 
   const showModalFilter = () => {
@@ -45,6 +54,11 @@ function DataListEmail({ tableData, columns }) {
       showOrHideModalFilter: false,
       showOrHideModalCustomizeTable: false,
     });
+  };
+
+  const handleChangePage = (current, pageSizeChange) => {
+    setPage(current);
+    setPageSize(pageSizeChange);
   };
 
   const prefix = <UilSearch className="w-4 h-4 ltr:mr-2 rtl:ml-2 text-light dark:text-white60" />;
@@ -70,7 +84,7 @@ function DataListEmail({ tableData, columns }) {
       <div className="flex items-center  w-full mt-5 mb-[25px] md:flex-col gap-[15px]">
         <div className="min-w-[500px]">
           <Input
-            onChange={handleDataUser}
+            onChange={handleSearch}
             className="h-10 text-body dark:text-white60 bg-white dark:bg-white10 border-normal dark:border-white10 rounded-[6px]"
             placeholder="Tìm kiếm theo activity id,case id,from to,subject,..."
             prefix={prefix}
@@ -80,7 +94,12 @@ function DataListEmail({ tableData, columns }) {
 
       <div className="table-responsive hover-tr-none table-th-shape-none table-last-th-text-right table-th-border-none table-head-rounded table-td-border-none ant-pagination-custom-style ltr:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:first-child]:rounded-l-4 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:first-child]:rounded-r-4 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:first-child]:rounded-none ltr:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:last-child]:rounded-r-4 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:last-child]:rounded-l-4 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:last-child]:rounded-none dark-border-row">
         <Table
-          pagination={{ pageSize: 5, showSizeChanger: true }}
+          pagination={{
+            showSizeChanger: true,
+            total: 20,
+            onChange: handleChangePage,
+            showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
+          }}
           dataSource={tableData}
           columns={columns}
           rowKey={(el) => el.activityId.key}

@@ -1,5 +1,5 @@
 import { Col, Row, Tabs } from 'antd';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { LeftOutlined } from '@ant-design/icons';
 import TabPane from 'antd/es/tabs/TabPane';
@@ -9,57 +9,57 @@ import { useReactToPrint } from 'react-to-print';
 import Heading from '../../components/heading/heading';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { PaginationStyle, GlobalUtilityStyle } from '../styled';
-import { activityDetailData } from '../../redux/manage-mail/activity-detail/actionCreator';
+import { caseDetailData } from '../../redux/manage-mail/case-detail/actionCreator';
 import withAdminLayout from '../../layout/withAdminLayout';
-import ContentActivity from '../../components/manage-mail/content-activity-detail';
+import ContentCase from '../../components/manage-mail/content-case-detail';
 import GeneralInfo from '../../components/manage-mail/tabs/general-info';
 import Note from '../../components/manage-mail/tabs/note';
-import HistoryActivity from '../../components/manage-mail/tabs/interactive-history';
-import { ACTIVITY_DETAIL_TAB } from '../../constants';
+import ContentActivity from '../../components/manage-mail/content-activity-detail';
+import { CASE_DETAIL_TAB } from '../../constants';
 
-function ActivityDetail() {
-  const { activityId } = useParams();
+function CaseDetail() {
+  const { caseId } = useParams();
   const componentRef = useRef(null);
-  const [activeTab, setActiveTab] = useState(ACTIVITY_DETAIL_TAB.GENERAL_INFO);
+  const [activeTab, setActiveTab] = useState(CASE_DETAIL_TAB.GENERAL_INFO);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(activityDetailData(activityId));
-  }, [activityId]);
+    dispatch(caseDetailData(caseId));
+  }, [caseId]);
 
   const { data } = useSelector((states) => {
     return {
-      data: states.dataActivityDetail.data,
+      data: states.dataCaseDetail.data,
     };
   });
 
-  const { activityInfo, activityNote, interactionHistory } = data;
+  const printContentToPdf = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
+  const { activityInfo, activityNote } = data;
 
   const items = [
     {
-      key: ACTIVITY_DETAIL_TAB.GENERAL_INFO,
+      key: CASE_DETAIL_TAB.GENERAL_INFO,
       label: 'Thông tin chung',
       children: <GeneralInfo dataInfo={activityInfo} />,
     },
     {
-      key: ACTIVITY_DETAIL_TAB.NOTE,
-      label: 'Ghi chú',
-      children: <Note dataNote={activityNote} />,
+      key: CASE_DETAIL_TAB.CONTENT_ACTIVITY,
+      label: 'Nội dung Activity',
+      children: <ContentActivity value={data} handlePrint={printContentToPdf} ref={componentRef} />,
     },
     {
-      key: ACTIVITY_DETAIL_TAB.ACTIVITY_HISTORY,
-      label: 'Lịch sử tương tác',
-      children: <HistoryActivity dataHistory={interactionHistory} />,
+      key: CASE_DETAIL_TAB.NOTE,
+      label: 'Ghi chú',
+      children: <Note dataNote={activityNote} />,
     },
   ];
 
   const handleTabChange = (atk) => {
     setActiveTab(atk);
   };
-
-  const printContentToPdf = useReactToPrint({
-    content: () => componentRef.current,
-  });
 
   return (
     <>
@@ -83,12 +83,12 @@ function ActivityDetail() {
                   <div className="p-[25px]" style={{ minHeight: '600px' }}>
                     <div className="flex items-center w-full mt-5 mb-[25px] md:flex-col gap-[15px]">
                       <Resize handleWidth="3px">
-                        <ResizeHorizon width="60%">
-                          <ContentActivity value={data} handlePrint={printContentToPdf} ref={componentRef} />
+                        <ResizeHorizon width="45%">
+                          <ContentCase value={data} />
                         </ResizeHorizon>
                         <ResizeHorizon>
                           <Tabs
-                            defaultActiveKey={ACTIVITY_DETAIL_TAB.GENERAL_INFO}
+                            defaultActiveKey={CASE_DETAIL_TAB.GENERAL_INFO}
                             activeKey={activeTab}
                             items={items}
                             onChange={handleTabChange}
@@ -111,4 +111,4 @@ function ActivityDetail() {
   );
 }
 
-export default withAdminLayout(ActivityDetail);
+export default withAdminLayout(CaseDetail);
