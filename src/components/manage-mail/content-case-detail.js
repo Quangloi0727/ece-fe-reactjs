@@ -1,20 +1,16 @@
-import React, { forwardRef } from 'react';
-import { Col, Row, Upload } from 'antd';
+import React from 'react';
+import { Col, Row } from 'antd';
 import PropTypes from 'prop-types';
-import { LinkOutlined, MailOutlined } from '@ant-design/icons';
+import { MailOutlined } from '@ant-design/icons';
 import FontAwesome from 'react-fontawesome';
-import UilCamera from '@iconscout/react-unicons/icons/uil-camera';
-import UilSetting from '@iconscout/react-unicons/icons/uil-setting';
-import UilBell from '@iconscout/react-unicons/icons/uil-bell';
-import UilUser from '@iconscout/react-unicons/icons/uil-user';
-import UilUsersAlt from '@iconscout/react-unicons/icons/uil-users-alt';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { GlobalUtilityStyle } from '../../container/styled';
-import Heading from '../heading/heading';
 
-function ContentCase({ value }) {
-  const { mailSend, to, subject, files, contentActivity } = value;
-
+function ContentCase({ value, changeContentCase }) {
+  const { mailSend, to, subject, activityId, queueName, key } = value;
+  const handleChangeContentCaseKey = (keyCase) => {
+    changeContentCase(keyCase);
+  };
   return (
     <GlobalUtilityStyle>
       <Row gutter={15}>
@@ -27,9 +23,16 @@ function ContentCase({ value }) {
                     <Row>
                       <Col span={2}>
                         <MailOutlined style={{ fontSize: '25px' }} />
-                        <FontAwesome name="mail-reply" style={{ position: 'relative', bottom: '15px', right: '6px' }} />
+                        <FontAwesome
+                          name="mail-reply"
+                          style={{
+                            position: 'relative',
+                            bottom: '15px',
+                            right: '6px',
+                          }}
+                        />
                       </Col>
-                      <Col span={22}>
+                      <Col span={22} onClick={() => handleChangeContentCaseKey(key)}>
                         <p>
                           <Link to="/manage-email/case/990" style={{ textDecoration: 'underline' }}>
                             999
@@ -77,5 +80,6 @@ function ContentCase({ value }) {
 
 ContentCase.propTypes = {
   value: PropTypes.any,
+  changeContentCase: PropTypes.func,
 };
 export default ContentCase;

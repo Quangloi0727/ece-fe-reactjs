@@ -11,7 +11,7 @@ const ContentActivity = forwardRef(({ value, handlePrint }, ref) => {
     handlePrint();
   };
 
-  const { mailSend, to, subject, files, contentActivity } = value;
+  const { mailSend, to, subject, files, content } = value;
 
   return (
     <GlobalUtilityStyle ref={ref}>
@@ -54,7 +54,7 @@ const ContentActivity = forwardRef(({ value, handlePrint }, ref) => {
             </Row>
           </div>
           <div style={{ paddingTop: '20px' }}>
-            <GlobalUtilityStyle dangerouslySetInnerHTML={{ __html: contentActivity }} />
+            <GlobalUtilityStyle dangerouslySetInnerHTML={{ __html: content }} />
           </div>
         </Col>
       </Row>
