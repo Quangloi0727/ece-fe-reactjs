@@ -1,4 +1,33 @@
 {
   "filter": "Filter",
-  "customizeTable": "Customize the table"
+  "customizeTable": "Customize the table",
+  "configTable": {
+    "selectAll": "Select All",
+    "activityId": "Activity Id",
+    "subject": "Subject",
+    "assignedTo": "Assigned To",
+    "createdOn": "Created On",
+    "subStatus": "Sub Status",
+    "caseId": "Case Id",
+    "queueName": "Queue Name",
+    "file": "Attached File",
+    "priority": "Priority",
+     "from": "From",
+    "to": "To",
+    "direction": "Direction"
+  },
+  "filterAdvance":{
+    "caseId": "Case Id",
+    "activityId": "Activity Id",
+    "subject": "Subject",
+    "from": "From",
+    "to": "To",
+    "assignedTo": "Assigned To",
+    "createOn": "Create On",
+    "subStatus": "Sub Status",
+    "queueName": "Queue Name",
+    "priority": "Priority",
+    "file": "Attached File",
+    "direction": "Direction"
+  }
 }

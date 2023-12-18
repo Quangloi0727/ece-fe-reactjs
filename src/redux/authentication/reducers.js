@@ -1,5 +1,6 @@
 import actions from './actions';
 import { getItem } from '../../utility/localStorageControl';
+import { LOCAL_STORAGE_VARIABLE } from '../../constants';
 
 const { LOGIN_BEGIN, LOGIN_SUCCESS, LOGIN_ERR, LOGOUT_BEGIN, LOGOUT_SUCCESS, LOGOUT_ERR } = actions;
 
@@ -9,7 +10,7 @@ const initState = {
   error: null,
 };
 
-const userData = getItem('userData');
+const userData = getItem(LOCAL_STORAGE_VARIABLE.USER_DATA);
 if (userData) {
   const { isLogin } = userData;
   initState.isLogin = isLogin;

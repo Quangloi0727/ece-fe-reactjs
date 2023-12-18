@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Spin } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { ErrorWrapper } from './style';
-import { Main } from '../styled';
+import { GlobalUtilityStyle } from '../styled';
 import Heading from '../../components/heading/heading';
 import { Button } from '../../components/buttons/buttons';
 
@@ -16,7 +16,7 @@ function NotFound() {
     }, 1500);
   }, []);
   return (
-    <Main>
+    <GlobalUtilityStyle>
       {state.isLoading ? (
         <div className="spin">
           <Spin />
@@ -35,7 +35,7 @@ function NotFound() {
           </NavLink>
         </ErrorWrapper>
       )}
-    </Main>
+    </GlobalUtilityStyle>
   );
 }
 export default NotFound;

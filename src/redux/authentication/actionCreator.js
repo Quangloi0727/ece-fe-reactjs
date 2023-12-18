@@ -1,6 +1,7 @@
 import actions from './actions';
 import { DataService } from '../../config/dataService/dataService';
 import { setItem, removeItem } from '../../utility/localStorageControl';
+import { LOCAL_STORAGE_VARIABLE } from '../../constants';
 
 const { loginBegin, loginSuccess, loginErr, logoutBegin, logoutSuccess, logoutErr } = actions;
 const login = (values, successCallback, errorCallback) => {
@@ -9,8 +10,11 @@ const login = (values, successCallback, errorCallback) => {
     try {
       const response = await DataService.post('/login', values);
       if (response.data.code === 200 && response.data.data) {
-        const { token, refreshToken } = response.data.data;
-        setItem('userData', { token, refreshToken, isLogin: true });
+        const { token, refreshToken, displayName, configColumn } = response.data.data;
+        if (configColumn) {
+          setItem(LOCAL_STORAGE_VARIABLE.CUSTOMIZE_TABLE, JSON.parse(configColumn));
+        }
+        setItem(LOCAL_STORAGE_VARIABLE.USER_DATA, { token, refreshToken, displayName, isLogin: true });
         dispatch(loginSuccess(true));
         successCallback(); // Execute success callback for redirection
       } else {
@@ -45,12 +49,11 @@ const logOut = (successCallback, errorCallback) => {
     dispatch(logoutBegin());
     try {
       const response = await DataService.post('/logout');
-      console.log(33333, response);
       if (response.data.errors) {
         dispatch(logoutErr(response.data.errors));
         errorCallback(response.data.errors);
       } else {
-        removeItem('userData');
+        removeItem(LOCAL_STORAGE_VARIABLE.USER_DATA);
         dispatch(logoutSuccess(false));
         successCallback();
       }
