@@ -35,17 +35,36 @@ function ContentCase({ value, onContentCase }) {
                       <Col span={22} onClick={() => handleChangeContentCaseKey(key)}>
                         <p>
                           <Link to="/manage-email/case/990" style={{ textDecoration: 'underline' }}>
-                            {activityId}
+                            999
                           </Link>{' '}
-                          {mailSend}
+                          Hải yến (chamsockhachhang@vpbank.comv.n)
                         </p>
-                        <p>To : {to}</p>
-                        <p>Re : {subject}</p>
-                        <Row>
-                          <Col span={10}>{queueName}</Col>
-                          <Col span={5}>Create On:</Col>
-                          <Col span={9}>17/11/2023 08:40 AM</Col>
-                        </Row>
+                        <p>To : chamsockhachhang@vpbank.com</p>
+                        <p>RE : v/v: Hỗ trợ app</p>
+                        <p>queueName</p>
+                      </Col>
+                    </Row>
+                  </div>
+                </div>
+              </Col>
+              <Col sm={22} xs={24}>
+                <div className="bg-white dark:bg-white10 m-0 p-0 text-theme-gray dark:text-white60 text-[15px] mb-[25px] dark:border-white10 border-1 rounded-6 relative">
+                  <div className="p-[25px]">
+                    <Row>
+                      <Col span={2}>
+                        <MailOutlined style={{ fontSize: '25px' }} />
+                        <FontAwesome name="download" style={{ position: 'relative', top: '10px' }} />
+                      </Col>
+                      <Col span={22}>
+                        <p>
+                          <Link to="/manage-email/case/990" style={{ textDecoration: 'underline' }}>
+                            999
+                          </Link>{' '}
+                          Hải yến (chamsockhachhang@vpbank.comv.n)
+                        </p>
+                        <p>To : chamsockhachhang@vpbank.com</p>
+                        <p>RE : v/v: Hỗ trợ app</p>
+                        <p>queueName</p>
                       </Col>
                     </Row>
                   </div>
