@@ -6,10 +6,10 @@ import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router-dom';
 import { GlobalUtilityStyle } from '../../container/styled';
 
-function ContentCase({ value, onContentCase }) {
+function ContentCase({ value, changeContentCase }) {
   const { mailSend, to, subject, activityId, queueName, key } = value;
   const handleChangeContentCaseKey = (keyCase) => {
-    onContentCase(keyCase);
+    changeContentCase(keyCase);
   };
   return (
     <GlobalUtilityStyle>
@@ -80,6 +80,6 @@ function ContentCase({ value, onContentCase }) {
 
 ContentCase.propTypes = {
   value: PropTypes.any,
-  onContentCase: PropTypes.func,
+  changeContentCase: PropTypes.func,
 };
 export default ContentCase;

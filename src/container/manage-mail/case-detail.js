@@ -92,7 +92,7 @@ function CaseDetail() {
                       <Resize handleWidth="3px">
                         <ResizeHorizon width="45%">
                           {caseActivity?.map((value, index) => (
-                            <ContentCase value={value} key={index} onContentCase={handleChangeContentCase} />
+                            <ContentCase value={value} key={index} changeContentCase={handleChangeContentCase} />
                           ))}
                         </ResizeHorizon>
                         <ResizeHorizon>
