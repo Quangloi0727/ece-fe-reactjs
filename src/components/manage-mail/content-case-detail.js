@@ -1,20 +1,16 @@
-import React, { forwardRef } from 'react';
-import { Col, Row, Upload } from 'antd';
+import React from 'react';
+import { Col, Row } from 'antd';
 import PropTypes from 'prop-types';
-import { LinkOutlined, MailOutlined } from '@ant-design/icons';
+import { MailOutlined } from '@ant-design/icons';
 import FontAwesome from 'react-fontawesome';
-import UilCamera from '@iconscout/react-unicons/icons/uil-camera';
-import UilSetting from '@iconscout/react-unicons/icons/uil-setting';
-import UilBell from '@iconscout/react-unicons/icons/uil-bell';
-import UilUser from '@iconscout/react-unicons/icons/uil-user';
-import UilUsersAlt from '@iconscout/react-unicons/icons/uil-users-alt';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { GlobalUtilityStyle } from '../../container/styled';
-import Heading from '../heading/heading';
 
-function ContentCase({ value }) {
-  const { mailSend, to, subject, files, contentActivity } = value;
-
+function ContentCase({ value, onContentCase }) {
+  const { mailSend, to, subject, activityId, queueName, key } = value;
+  const handleChangeContentCaseKey = (keyCase) => {
+    onContentCase(keyCase);
+  };
   return (
     <GlobalUtilityStyle>
       <Row gutter={15}>
@@ -27,41 +23,29 @@ function ContentCase({ value }) {
                     <Row>
                       <Col span={2}>
                         <MailOutlined style={{ fontSize: '25px' }} />
-                        <FontAwesome name="mail-reply" style={{ position: 'relative', bottom: '15px', right: '6px' }} />
+                        <FontAwesome
+                          name="mail-reply"
+                          style={{
+                            position: 'relative',
+                            bottom: '15px',
+                            right: '6px',
+                          }}
+                        />
                       </Col>
-                      <Col span={22}>
+                      <Col span={22} onClick={() => handleChangeContentCaseKey(key)}>
                         <p>
                           <Link to="/manage-email/case/990" style={{ textDecoration: 'underline' }}>
-                            999
+                            {activityId}
                           </Link>{' '}
-                          Hải yến (chamsockhachhang@vpbank.comv.n)
+                          {mailSend}
                         </p>
-                        <p>To : chamsockhachhang@vpbank.com</p>
-                        <p>RE : v/v: Hỗ trợ app</p>
-                        <p>queueName</p>
-                      </Col>
-                    </Row>
-                  </div>
-                </div>
-              </Col>
-              <Col sm={22} xs={24}>
-                <div className="bg-white dark:bg-white10 m-0 p-0 text-theme-gray dark:text-white60 text-[15px] mb-[25px] dark:border-white10 border-1 rounded-6 relative">
-                  <div className="p-[25px]">
-                    <Row>
-                      <Col span={2}>
-                        <MailOutlined style={{ fontSize: '25px' }} />
-                        <FontAwesome name="download" style={{ position: 'relative', top: '10px' }} />
-                      </Col>
-                      <Col span={22}>
-                        <p>
-                          <Link to="/manage-email/case/990" style={{ textDecoration: 'underline' }}>
-                            999
-                          </Link>{' '}
-                          Hải yến (chamsockhachhang@vpbank.comv.n)
-                        </p>
-                        <p>To : chamsockhachhang@vpbank.com</p>
-                        <p>RE : v/v: Hỗ trợ app</p>
-                        <p>queueName</p>
+                        <p>To : {to}</p>
+                        <p>Re : {subject}</p>
+                        <Row>
+                          <Col span={10}>{queueName}</Col>
+                          <Col span={5}>Create On:</Col>
+                          <Col span={9}>17/11/2023 08:40 AM</Col>
+                        </Row>
                       </Col>
                     </Row>
                   </div>
@@ -77,5 +61,6 @@ function ContentCase({ value }) {
 
 ContentCase.propTypes = {
   value: PropTypes.any,
+  onContentCase: PropTypes.func,
 };
 export default ContentCase;

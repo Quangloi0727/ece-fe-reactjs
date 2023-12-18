@@ -21,6 +21,7 @@ function CaseDetail() {
   const { caseId } = useParams();
   const componentRef = useRef(null);
   const [activeTab, setActiveTab] = useState(CASE_DETAIL_TAB.GENERAL_INFO);
+  const [contentCase, setContentCase] = useState(CASE_DETAIL_TAB.CONTENT_CASE_DEFAULT_KEY);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,28 +33,34 @@ function CaseDetail() {
       data: states.dataCaseDetail.data,
     };
   });
-
   const printContentToPdf = useReactToPrint({
     content: () => componentRef.current,
   });
 
-  const { activityInfo, activityNote } = data;
+  const handleChangeContentCase = (key) => {
+    setActiveTab(CASE_DETAIL_TAB.CONTENT_ACTIVITY);
+    setContentCase(key);
+  };
+
+  const { caseInfo, caseActivity, caseNote } = data;
 
   const items = [
     {
       key: CASE_DETAIL_TAB.GENERAL_INFO,
       label: 'Thông tin chung',
-      children: <GeneralInfo dataInfo={activityInfo} />,
+      children: <GeneralInfo dataInfo={caseInfo} />,
     },
     {
       key: CASE_DETAIL_TAB.CONTENT_ACTIVITY,
       label: 'Nội dung Activity',
-      children: <ContentActivity value={data} handlePrint={printContentToPdf} ref={componentRef} />,
+      children: (
+        <ContentActivity value={caseActivity?.[contentCase]} handlePrint={printContentToPdf} ref={componentRef} />
+      ),
     },
     {
       key: CASE_DETAIL_TAB.NOTE,
       label: 'Ghi chú',
-      children: <Note dataNote={activityNote} />,
+      children: <Note dataNote={caseNote} />,
     },
   ];
 
@@ -84,7 +91,9 @@ function CaseDetail() {
                     <div className="flex items-center w-full mt-5 mb-[25px] md:flex-col gap-[15px]">
                       <Resize handleWidth="3px">
                         <ResizeHorizon width="45%">
-                          <ContentCase value={data} />
+                          {caseActivity?.map((value, index) => (
+                            <ContentCase value={value} key={index} onContentCase={handleChangeContentCase} />
+                          ))}
                         </ResizeHorizon>
                         <ResizeHorizon>
                           <Tabs
