@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { GlobalUtilityStyle } from '../../container/styled';
 
 function ContentCase({ value, changeContentCase }) {
-  const { mailSend, to, subject, activityId, queueName, key } = value;
+  const { key } = value;
   const handleChangeContentCaseKey = (keyCase) => {
     changeContentCase(keyCase);
   };

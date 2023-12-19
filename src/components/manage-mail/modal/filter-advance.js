@@ -1,12 +1,13 @@
 import { Col, DatePicker, Form, Input, Modal, Row, Select, Space } from 'antd';
 import { CloseOutlined, DeleteOutlined, SearchOutlined } from '@ant-design/icons';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import moment from 'moment';
 import propTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../../buttons/buttons';
-import { FIELD_TYPE, PREFIX_FILTER_ADVANCE } from '../../../constants/index';
+import { FIELD_TYPE, PREFIX_FILTER_ADVANCE, LOCAL_STORAGE_VARIABLE } from '../../../constants/index';
+import { setItem } from '../../../utility/localStorageControl';
 
 function FilterAdvance({ showOrHideModalFilter, hideModal }) {
   const { RangePicker } = DatePicker;
@@ -16,6 +17,22 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
       configFilterAdvance: states.configFilterAdvance.config,
     };
   });
+
+  const formRef = useRef(null);
+
+  const handleFilterAdvance = () => {
+    const formData = formRef.current.getFieldsValue();
+    const { createOn } = formData;
+    if (createOn) {
+      const formattedDateRange = createOn.map((date) => moment(date).format('DD/MM/YYYY HH:mm'));
+      formData.createOn = formattedDateRange;
+    }
+    setItem(LOCAL_STORAGE_VARIABLE.FILTER_ADVANCE);
+  };
+
+  const handleResetForm = () => {
+    formRef.current.resetFields();
+  };
 
   const rangePresets = {
     'Hôm nay': [moment(), moment()],
@@ -30,8 +47,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
 
   function ElementFilterAdvance(listElement) {
     const { element } = listElement;
-    const { fieldType, key, value, option, placeholder, conditionValue, placeholderCondition, conditionOption } =
-      element;
+    const { fieldType, key, option, placeholder, placeholderCondition, conditionOption, conditionValue } = element;
     const renderCurrentSelection = () => {
       switch (fieldType) {
         case FIELD_TYPE.TEXT:
@@ -41,7 +57,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
               <Row className="mt-[-20px]">
                 <Col className="gutter-row" span={14}>
                   <div className="gutter-box">
-                    <Form.Item name={key} key={key} initialValue={value}>
+                    <Form.Item name={key} key={key}>
                       <Input placeholder={placeholder} />
                     </Form.Item>
                   </div>
@@ -64,7 +80,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
               <Row className="mt-[-20px]">
                 <Col className="gutter-row" span={24}>
                   <div className="gutter-box">
-                    <Form.Item key={key} name={key} initialValue={value}>
+                    <Form.Item key={key} name={key}>
                       <Select
                         style={{
                           width: '100%',
@@ -85,14 +101,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
               <Row className="mt-[-20px]">
                 <Col className="gutter-row" span={24}>
                   <div className="gutter-box">
-                    <Form.Item
-                      name={key}
-                      key={key}
-                      initialValue={[
-                        value ? moment(value[0]) : moment(new Date()),
-                        value ? moment(value[1]) : moment(new Date()),
-                      ]}
-                    >
+                    <Form.Item name={key} key={key}>
                       <RangePicker
                         size="small"
                         style={{
@@ -127,7 +136,12 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
           }}
           key="footerModalFilterAdvance"
         >
-          <Button type="danger" key="resetFilter" className="px-5 text-sm font-semibold button-reset h-10">
+          <Button
+            type="danger"
+            key="resetFilter"
+            className="px-5 text-sm font-semibold button-reset h-10"
+            onClick={handleResetForm}
+          >
             <DeleteOutlined /> Xóa bộ lọc
           </Button>
           <Space size="small">
@@ -139,7 +153,12 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
             >
               <CloseOutlined /> Hủy
             </Button>
-            <Button type="info" key="submitFilter" className="px-5 text-sm font-semibold h-10 button-filter-search">
+            <Button
+              type="info"
+              key="submitFilter"
+              className="px-5 text-sm font-semibold h-10 button-filter-search"
+              onClick={handleFilterAdvance}
+            >
               <SearchOutlined /> Tìm kiếm
             </Button>
           </Space>
@@ -148,7 +167,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
       width={800}
     >
       <div>
-        <Form name="contact">
+        <Form name="filterAdvance" ref={formRef}>
           <Row gutter={16}>
             {configFilterAdvance.map((el, index) => (
               <Col className="gutter-row" span={12} key={index}>

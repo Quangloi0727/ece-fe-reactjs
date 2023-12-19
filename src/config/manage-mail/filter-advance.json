@@ -126,10 +126,15 @@
   {
     "key": "file",
     "fieldType": "SELECT",
-    "placeholder": "Chọn có/không",
+    "placeholder": "Chọn có / không",
     "option": [
       {
-        "label": "Chọn có/không"
+        "value": "true",
+        "label": "Có"
+      },
+      {
+        "value": "false",
+        "label": "Không"
       }
     ]
   },
