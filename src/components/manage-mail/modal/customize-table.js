@@ -6,22 +6,17 @@ import { CSS } from '@dnd-kit/utilities';
 import { Col, Form, Modal, Row, Space } from 'antd';
 import propTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../../buttons/buttons';
 import { PREFIX_CUSTOMIZE_TABLE } from '../../../constants/index';
 import { Checkbox } from '../../checkbox/checkbox';
 import { openNotificationWithIcon } from '../../notifications/notification';
-import {
-  submitCustomizeTable,
-  submitDefaultCustomizeTable,
-} from '../../../redux/manage-mail/customize-table/actionCreator';
+import { submitCustomizeTable } from '../../../redux/manage-mail/customize-table/actionCreator';
 import customizeTableOrigin from '../../../config/manage-mail/customize-table.json';
 
 function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const history = useNavigate();
   const { customizeTableData } = useSelector((states) => {
     return {
       customizeTableData: states.customizeTable.config,
@@ -52,39 +47,23 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
     setState({ ...state, customizeTableDragDrop: [...customizeTableDragDrop] });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (flag) => {
+    const dataSet = flag === true ? [...customizeTableDragDrop] : [...customizeTableOrigin];
     setStateCheckBoxAll(false);
     dispatch(
       submitCustomizeTable(
-        [...customizeTableDragDrop],
+        dataSet,
         () => {
           hideModal();
           openNotificationWithIcon('success', 'Lưu thành công !');
-          history('/list-email');
+          window.location.href = '/list-email';
         },
         (err) => {
           openNotificationWithIcon('error', 'Lưu thất bại !', err.message);
         },
       ),
     );
-    setState({ ...state, customizeTableDragDrop: [...customizeTableDragDrop] });
-  };
-
-  const handleResetDefault = () => {
-    setStateCheckBoxAll(false);
-    dispatch(
-      submitDefaultCustomizeTable(
-        () => {
-          hideModal();
-          openNotificationWithIcon('success', 'Phục hồi mặc định thành công !');
-          history('/list-email');
-        },
-        (err) => {
-          openNotificationWithIcon('error', 'Phục hồi mặc định thất bại !', err.message);
-        },
-      ),
-    );
-    setState({ ...state, customizeTableDragDrop: customizeTableOrigin });
+    setState({ ...state, customizeTableDragDrop: dataSet });
   };
 
   function SortRowItem(listElement) {
@@ -149,7 +128,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
             outlined
             key="setDefault"
             className="px-5 text-sm font-semibold button-reset h-10"
-            onClick={handleResetDefault}
+            onClick={() => handleSubmit(false)}
           >
             Phục hồi mặc định
           </Button>
@@ -168,7 +147,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
               htmlType="submit"
               key="submitFilter"
               className="px-5 text-sm font-semibold button-reset h-10"
-              onClick={handleSubmit}
+              onClick={() => handleSubmit(true)}
             >
               Lưu
             </Button>
