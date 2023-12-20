@@ -3,6 +3,10 @@ export const FIELD_TYPE = {
   SELECT: 'SELECT',
   DATE: 'DATE',
 };
+export const CONDITION_VALUE = {
+  MATCH: 'match',
+  INCLUDE: 'include',
+};
 export const PREFIX_FILTER_ADVANCE = 'filterAdvance.';
 export const PREFIX_CUSTOMIZE_TABLE = 'configTable.';
 export const MESSAGE_GET_TOKEN_FAIL = 'Get new token fail !';

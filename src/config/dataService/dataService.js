@@ -17,10 +17,11 @@ const client = axios.create({
 });
 
 class DataService {
-  static get(path = '') {
+  static get(path = '', params = {}) {
     return client({
       method: 'GET',
       url: path,
+      params,
       headers: { ...authHeader() },
     });
   }

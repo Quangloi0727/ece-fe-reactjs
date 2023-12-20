@@ -1,22 +1,57 @@
 import { Col, DatePicker, Form, Input, Modal, Row, Select, Space } from 'antd';
 import { CloseOutlined, DeleteOutlined, SearchOutlined } from '@ant-design/icons';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import moment from 'moment';
 import propTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../../buttons/buttons';
-import { FIELD_TYPE, PREFIX_FILTER_ADVANCE, LOCAL_STORAGE_VARIABLE } from '../../../constants/index';
-import { setItem } from '../../../utility/localStorageControl';
+import { FIELD_TYPE, PREFIX_FILTER_ADVANCE } from '../../../constants/index';
+import { getListUser } from '../../../redux/manage-user/list-user/actionCreator';
+import { getListQueue } from '../../../redux/manage-queue/list-queue/actionCreator';
 
-function FilterAdvance({ showOrHideModalFilter, hideModal }) {
+function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance }) {
   const { RangePicker } = DatePicker;
   const { t } = useTranslation();
-  const { configFilterAdvance } = useSelector((states) => {
+  const dispatch = useDispatch();
+  const { configFilterAdvance, listUser, listQueue } = useSelector((states) => {
     return {
       configFilterAdvance: states.configFilterAdvance.config,
+      listUser: states.dataListUser.data,
+      listQueue: states.dataListQueue.data,
     };
   });
+
+  useEffect(() => {
+    dispatch(getListUser());
+    dispatch(getListQueue());
+  }, []);
+
+  const addOptionToSelect = (data, keyCompare, label, value, optionDefault) => {
+    const changeKeyValue = data.map((el) => {
+      return {
+        label: el[label],
+        value: el[value],
+      };
+    });
+    configFilterAdvance.map((cf) => {
+      if (cf.key === keyCompare) {
+        if (optionDefault) {
+          cf.option = [optionDefault, ...changeKeyValue];
+        } else {
+          cf.option = [...changeKeyValue];
+        }
+      }
+      return cf;
+    });
+  };
+
+  if (listUser.length) {
+    addOptionToSelect(listUser, 'assignedTo', 'userName', 'userId', { label: 'System', value: 'system' });
+  }
+  if (listQueue.length) {
+    addOptionToSelect(listQueue, 'queueName', 'queueName', 'queueId');
+  }
 
   const formRef = useRef(null);
 
@@ -27,7 +62,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
       const formattedDateRange = createOn.map((date) => moment(date).format('DD/MM/YYYY HH:mm'));
       formData.createOn = formattedDateRange;
     }
-    setItem(LOCAL_STORAGE_VARIABLE.FILTER_ADVANCE);
+    formDataFilterAdvance(formData);
   };
 
   const handleResetForm = () => {
@@ -47,7 +82,17 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
 
   function ElementFilterAdvance(listElement) {
     const { element } = listElement;
-    const { fieldType, key, option, placeholder, placeholderCondition, conditionOption, conditionValue } = element;
+    const {
+      fieldType,
+      key,
+      option,
+      placeholder,
+      placeholderCondition,
+      conditionOption,
+      conditionValue,
+      mode,
+      conditionKey,
+    } = element;
     const renderCurrentSelection = () => {
       switch (fieldType) {
         case FIELD_TYPE.TEXT:
@@ -65,8 +110,12 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
                 <Col className="gutter-row" span={1} />
                 <Col className="gutter-row" span={9}>
                   <div className="gutter-box">
-                    <Form.Item key={`condition${key}`} name={`condition${key}`} initialValue={conditionValue}>
-                      <Select options={conditionOption} placeholder={placeholderCondition} />
+                    <Form.Item key={conditionKey} name={conditionKey} initialValue={conditionValue}>
+                      <Select
+                        options={conditionOption}
+                        placeholder={placeholderCondition}
+                        getPopupContainer={(trigger) => trigger.parentNode}
+                      />
                     </Form.Item>
                   </div>
                 </Col>
@@ -82,11 +131,10 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
                   <div className="gutter-box">
                     <Form.Item key={key} name={key}>
                       <Select
-                        style={{
-                          width: '100%',
-                        }}
                         options={option}
                         placeholder={placeholder}
+                        mode={mode}
+                        getPopupContainer={(trigger) => trigger.parentNode}
                       />
                     </Form.Item>
                   </div>
@@ -104,9 +152,6 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
                     <Form.Item name={key} key={key}>
                       <RangePicker
                         size="small"
-                        style={{
-                          width: '100%',
-                        }}
                         format="DD/MM/yyyy HH:mm"
                         ranges={rangePresets}
                         showTime={{ format: 'HH:mm' }}
@@ -184,6 +229,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal }) {
 FilterAdvance.propTypes = {
   showOrHideModalFilter: propTypes.bool.isRequired,
   hideModal: propTypes.func.isRequired,
+  formDataFilterAdvance: propTypes.func.isRequired,
 };
 
 export default FilterAdvance;

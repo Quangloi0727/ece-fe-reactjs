@@ -22,13 +22,14 @@ function DataListEmail({ tableData, columns, totalData }) {
   const [page, setPage] = useState(DEFAULT_PAGE);
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
   const [searchMulti, setSearchMulti] = useState('');
+  const [filterAdvance, setFilterAdvance] = useState({});
   const { showOrHideModalFilter, showOrHideModalCustomizeTable } = state;
 
   useEffect(() => {
     if (dispatch) {
-      dispatch(tableReadData(page, pageSize, searchMulti));
+      dispatch(tableReadData(page, pageSize, searchMulti, filterAdvance));
     }
-  }, [page, pageSize, searchMulti]);
+  }, [page, pageSize, searchMulti, filterAdvance]);
 
   const handleSearch = (e) => {
     const { value } = e.currentTarget;
@@ -64,6 +65,10 @@ function DataListEmail({ tableData, columns, totalData }) {
     setPageSize(pageSizeChange);
   };
 
+  const formDataFilterAdvance = (values) => {
+    setFilterAdvance(values);
+  };
+
   const prefix = <UilSearch className="w-4 h-4 ltr:mr-2 rtl:ml-2 text-light dark:text-white60" />;
   return (
     <>
@@ -73,7 +78,11 @@ function DataListEmail({ tableData, columns, totalData }) {
             <FilterOutlined />
             {t('filter')}
           </Button>
-          <FilterAdvance showOrHideModalFilter={showOrHideModalFilter} hideModal={hideModal} />
+          <FilterAdvance
+            showOrHideModalFilter={showOrHideModalFilter}
+            hideModal={hideModal}
+            formDataFilterAdvance={formDataFilterAdvance}
+          />
         </div>
         <div className="min-w-[100px]">
           <Button onClick={showModalCustomizeTable} size="default" type="light" outlined>
@@ -89,7 +98,7 @@ function DataListEmail({ tableData, columns, totalData }) {
           <Input
             onChange={handleSearch}
             className="h-10 text-body dark:text-white60 bg-white dark:bg-white10 border-normal dark:border-white10 rounded-[6px]"
-            placeholder="Tìm kiếm theo activity id,case id,from to,subject,..."
+            placeholder="Tìm kiếm theo activity id, case id, from to, subject,..."
             prefix={prefix}
           />
         </div>
