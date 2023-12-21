@@ -10,7 +10,7 @@ function InteractiveHistory({ dataHistory }) {
         <Row gutter={15} key={index}>
           <Col xs={24} style={{ marginLeft: '30px' }}>
             <div className="content-activity-detail">
-              <Row>
+              <Row className="text-[13px]">
                 <Col span={8}>{el.time}</Col>
                 <Col span={4}>{el.nameInfo}</Col>
                 <Col span={12}>{el.action}</Col>

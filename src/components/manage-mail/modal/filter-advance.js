@@ -103,7 +103,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
                 <Col className="gutter-row" span={14}>
                   <div className="gutter-box">
                     <Form.Item name={key} key={key}>
-                      <Input placeholder={placeholder} />
+                      <Input placeholder={placeholder} className="h-[36px]" />
                     </Form.Item>
                   </div>
                 </Col>

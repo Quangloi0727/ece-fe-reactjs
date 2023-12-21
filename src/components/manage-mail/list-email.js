@@ -97,7 +97,7 @@ function DataListEmail({ tableData, columns, totalData }) {
         <div className="min-w-[500px]">
           <Input
             onChange={handleSearch}
-            className="h-10 text-body dark:text-white60 bg-white dark:bg-white10 border-normal dark:border-white10 rounded-[6px]"
+            className="h-10 text-[13px] text-body dark:text-white60 bg-white dark:bg-white10 border-normal dark:border-white10 rounded-[6px]"
             placeholder="Tìm kiếm theo activity id, case id, from to, subject,..."
             prefix={prefix}
           />
@@ -115,6 +115,10 @@ function DataListEmail({ tableData, columns, totalData }) {
           dataSource={tableData}
           columns={columns}
           rowKey={(el) => el.activityId.key}
+          scroll={{
+            y: 500,
+            x: 1500,
+          }}
         />
       </div>
     </>

@@ -1,4 +1,10 @@
 {
+  "generalInformation": "General information",
+  "note": "Note",
+  "lookUpEmail": "Look Up Email",
+  "goBackPreviousScreen": "Go back to the previous screen",
+  "interactiveHistory": "Interactive history",
+  "activityContent": "Activity content",
   "filter": "Filter",
   "customizeTable": "Customize the table",
   "configTable": {
@@ -12,11 +18,11 @@
     "queueName": "Queue Name",
     "file": "Attached File",
     "priority": "Priority",
-     "from": "From",
+    "from": "From",
     "to": "To",
     "direction": "Direction"
   },
-  "filterAdvance":{
+  "filterAdvance": {
     "caseId": "Case Id",
     "activityId": "Activity Id",
     "subject": "Subject",

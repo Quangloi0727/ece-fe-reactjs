@@ -27,7 +27,15 @@ function ListEmail() {
   const [configColumn, setConfigColumn] = useState(customizeTableData);
 
   useEffect(() => {
-    const newConfigs = [{ title: 'Activity ID', dataIndex: 'activityId', key: 'activityID', align: 'left' }];
+    const newConfigs = [
+      {
+        title: 'Activity ID',
+        dataIndex: 'activityId',
+        key: 'activityID',
+        align: 'left',
+        fixed: 'left',
+      },
+    ];
     customizeTableData.forEach((item) => {
       if (item.isChecked === true) {
         return newConfigs.push({
@@ -41,7 +49,6 @@ function ListEmail() {
     setConfigColumn(newConfigs);
   }, [customizeTableData]);
   const tableDataSource = [];
-
   if (tableData.length > 0) {
     tableData.map((item) => {
       const {
@@ -60,22 +67,26 @@ function ListEmail() {
       } = item;
       return tableDataSource.push({
         activityId: (
-          <Link to={`/manage-email/activity/${activityId}`} key={activityId} style={{ textDecoration: 'underline' }}>
+          <Link
+            to={`/manage-email/activity/${activityId}`}
+            key={activityId}
+            style={{ textDecoration: 'underline', fontSize: '13px' }}
+          >
             {activityId}
           </Link>
         ),
         subject: (
-          <span className="text-body dark:text-white60 text-[15px] font-medium" title={subject} key={subject}>
+          <span className="text-body dark:text-white60 text-[13px] " title={subject} key={subject}>
             {subject}
           </span>
         ),
         assignedTo: (
-          <span className="text-body dark:text-white60 text-[15px] font-medium" key={user?.userName}>
+          <span className="text-body dark:text-white60 text-[13px] font-medium" key={user?.userName}>
             {user?.userName}
           </span>
         ),
         createdOn: (
-          <span className="text-body dark:text-white60 text-[15px] font-medium" key={createdOn}>
+          <span className="text-body dark:text-white60 text-[13px] " key={createdOn}>
             {moment(createdOn).format('DD/MM/YYYY HH:mm A')}
           </span>
         ),
@@ -84,8 +95,8 @@ function ListEmail() {
             size="default"
             className={
               ACTIVITY_SUB_STATUS.DONE.includes(activitySubStatus)
-                ? 'bg-success border-solid border-1 border-success text-white dark:text-white87 text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[40px] px-[20px] h-[44px] shadow-btn gap-[8px]'
-                : 'bg-danger border-solid border-1 border-danger text-white dark:text-white87 text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[40px] px-[20px] h-[44px] shadow-btn gap-[8px]'
+                ? 'bg-success border-solid border-1 border-success text-white dark:text-white87 text-[13px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[40px] px-[20px] h-[44px] shadow-btn gap-[8px]'
+                : 'bg-danger border-solid border-1 border-danger text-white dark:text-white87 text-[13px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[40px] px-[20px] h-[44px] shadow-btn gap-[8px]'
             }
             key={activitySubStatus}
           >
@@ -93,37 +104,42 @@ function ListEmail() {
           </Button>
         ),
         caseId: (
-          <Link to={`/manage-email/case/${caseId}`} style={{ textDecoration: 'underline' }} key={caseId}>
+          <Link
+            to={`/manage-email/case/${caseId}`}
+            style={{ textDecoration: 'underline', fontSize: '13px' }}
+            key={caseId}
+          >
             {caseId}
           </Link>
         ),
         queueName: (
-          <span className="text-body font-medium" key={queue?.queueName}>
+          <span className="text-body text-[13px]" key={queue?.queueName}>
             {queue?.queueName}
           </span>
         ),
         file: (
-          <span className="text-body font-medium" key={numAttachments}>
+          <span className="text-body text-[13px]" key={numAttachments}>
             {numAttachments > 0 ? 'Có' : 'Không'}
           </span>
         ),
         priority: (
-          <span className="text-body font-medium" key={activityPriority}>
+          <span className="text-body text-[13px]" key={activityPriority}>
             {activityPriority}
           </span>
         ),
         from: (
-          <span className="text-body  font-medium" key={email?.fromEmailAddress}>
+          <span className="text-body  text-[13px]" key={email?.fromEmailAddress}>
             {email?.fromEmailAddress}
           </span>
         ),
+
         to: (
           <span className="text-body  font-medium" key={to}>
             {to}
           </span>
         ),
         direction: (
-          <span className="text-body font-medium" key={activityMode}>
+          <span className="text-body text-[13px]" key={activityMode}>
             {activityMode === ACTIVITY_MODE.INBOUND
               ? 'Mail nhận'
               : activityMode === ACTIVITY_MODE.OUTBOUND
@@ -149,7 +165,7 @@ function ListEmail() {
                 <div className="bg-white dark:bg-white10 m-0 p-0 mb-[25px] rounded-10 relative">
                   <div className="py-[16px] px-[25px] text-dark dark:text-white87 font-medium text-[17px] border-regular dark:border-white10 border-b ">
                     <Heading as="h4" className="text-lg font-medium mb-0">
-                      Tra cứu Email
+                      {t('lookUpEmail')}
                     </Heading>
                   </div>
                   <div className="p-[25px]">

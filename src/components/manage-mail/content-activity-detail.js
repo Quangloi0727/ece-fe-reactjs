@@ -15,7 +15,7 @@ const ContentActivity = forwardRef(({ value, handlePrint }, ref) => {
 
   return (
     <GlobalUtilityStyle ref={ref}>
-      <Row gutter={15}>
+      <Row gutter={15} className="text-[13px]">
         <Col xs={24} style={{ marginLeft: '30px' }}>
           <div className="content-activity-detail">
             <Row>
