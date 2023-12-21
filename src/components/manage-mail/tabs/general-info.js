@@ -8,19 +8,23 @@ function GeneralInfo({ dataInfo }) {
   return (
     <GlobalUtilityStyle>
       {dataInfo?.map((el, index) => (
-        <Row gutter={15} key={index}>
+        <Row gutter={10} key={index}>
           <Col xs={24} style={{ marginLeft: '30px' }}>
             <div className="content-activity-detail">
               <Row>
-                <Col span={6}>{el.name}</Col>
-                <Col span={18}>
-                  {el.key === 'caseId' ? (
-                    <Link to={`/list-email/caseid/${el.content}`} style={{ textDecoration: 'underline' }}>
-                      {el.content}
-                    </Link>
-                  ) : (
-                    el.content
-                  )}
+                <Col span={6} className="text-[13px]">
+                  <p> {el.name} </p>
+                </Col>
+                <Col span={18} className="text-[13px] ">
+                  <p>
+                    {el.key === 'caseId' ? (
+                      <Link to={`/list-email/caseid/${el.content}`} style={{ textDecoration: 'underline' }}>
+                        {el.content}
+                      </Link>
+                    ) : (
+                      el.content
+                    )}
+                  </p>
                 </Col>
               </Row>
             </div>
@@ -30,6 +34,7 @@ function GeneralInfo({ dataInfo }) {
     </GlobalUtilityStyle>
   );
 }
+
 GeneralInfo.propTypes = {
   dataInfo: PropTypes.any,
 };

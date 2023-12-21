@@ -160,6 +160,7 @@ const GlobalUtilityStyle = Styled.div`
       background-color: ${({ theme }) => theme[theme.mainContent]['light-background']};
       border-color: ${({ theme }) => theme[theme.mainContent]['light-border']};
       background:transparent;
+      font-weight:bold;
     }
     .ant-table-tbody > tr:hover > td {
       background-color: transparent !important;

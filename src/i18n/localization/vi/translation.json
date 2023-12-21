@@ -1,4 +1,10 @@
 {
+  "generalInformation": "Thông tin chung",
+  "interactiveHistory": "Lịch sử tương tác",
+  "note": "Ghi chú",
+  "goBackPreviousScreen": "Quay lại màn hình trước",
+  "lookUpEmail": "Tra cứu Email",
+  "activityContent": "Nội dung activity",
   "filter": "Bộ lọc",
   "customizeTable": "Tùy chỉnh bảng",
   "configTable": {
@@ -16,7 +22,7 @@
     "to": "To",
     "direction": "Direction"
   },
-  "filterAdvance":{
+  "filterAdvance": {
     "caseId": "Case Id",
     "activityId": "Activity Id",
     "subject": "Subject",

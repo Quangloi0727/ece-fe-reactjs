@@ -12,14 +12,14 @@ function Note({ dataNote }) {
           <Row>
             <Col md={24} style={{ marginLeft: '30px' }}>
               <nav>
-                <ul className="mb-[30px] border-b border-regular dark:border-white10">
+                <ul className="mb-[30px] border-b border-regular dark:border-white10" style={{ fontSize: '13px' }}>
                   <li className="mb-8">
-                    <Heading className="mb-2 text-base font-medium text-dark dark:text-white87" as="h6">
-                      <span className="font-semibold text-primary">{el.time}</span>
+                    <Heading className="mb-2 text-[13px]  text-dark dark:text-white87" as="h6">
+                      <span className="font-semibold text-[13px]">{el.time}</span>
                       <span> by</span>
                       <span> {el.email}</span>
                     </Heading>
-                    <p className="mb-0 text-body dark:text-white60">{el.content}</p>
+                    <p>{el.content}</p>
                   </li>
                 </ul>
               </nav>
@@ -30,6 +30,7 @@ function Note({ dataNote }) {
     </GlobalUtilityStyle>
   );
 }
+
 Note.propTypes = {
   dataNote: PropTypes.any,
 };

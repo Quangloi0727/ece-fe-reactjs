@@ -6,6 +6,7 @@ import TabPane from 'antd/es/tabs/TabPane';
 import { useDispatch, useSelector } from 'react-redux';
 import { Resize, ResizeHorizon } from 'react-resize-layout';
 import { useReactToPrint } from 'react-to-print';
+import { useTranslation } from 'react-i18next';
 import Heading from '../../components/heading/heading';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { PaginationStyle, GlobalUtilityStyle } from '../styled';
@@ -22,6 +23,7 @@ function ActivityDetail() {
   const componentRef = useRef(null);
   const [activeTab, setActiveTab] = useState(ACTIVITY_DETAIL_TAB.GENERAL_INFO);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(activityDetailData(activityId));
@@ -38,17 +40,17 @@ function ActivityDetail() {
   const items = [
     {
       key: ACTIVITY_DETAIL_TAB.GENERAL_INFO,
-      label: 'Thông tin chung',
+      label: `${t('generalInformation')}`,
       children: <GeneralInfo dataInfo={activityInfo} />,
     },
     {
       key: ACTIVITY_DETAIL_TAB.NOTE,
-      label: 'Ghi chú',
+      label: `${t('note')}`,
       children: <Note dataNote={activityNote} />,
     },
     {
       key: ACTIVITY_DETAIL_TAB.ACTIVITY_HISTORY,
-      label: 'Lịch sử tương tác',
+      label: `${t('interactiveHistory')}`,
       children: <HistoryActivity dataHistory={interactionHistory} />,
     },
   ];
@@ -76,17 +78,17 @@ function ActivityDetail() {
                   <div className="py-[16px] px-[25px] text-dark dark:text-white87 font-medium text-[17px] border-regular dark:border-white10 border-b ">
                     <Heading as="h4" className="text-lg font-medium mb-0">
                       <Link to="/list-email" className="bg-white">
-                        <LeftOutlined /> Quay về màn hình trước
+                        <LeftOutlined style={{ verticalAlign: 'baseline' }} /> {t('goBackPreviousScreen')}
                       </Link>
                     </Heading>
                   </div>
                   <div className="p-[25px]" style={{ minHeight: '600px' }}>
                     <div className="flex items-center w-full mt-5 mb-[25px] md:flex-col gap-[15px]">
                       <Resize handleWidth="3px">
-                        <ResizeHorizon width="60%">
+                        <ResizeHorizon width="65%" className="resize-activity-left">
                           <ContentActivity value={data} handlePrint={printContentToPdf} ref={componentRef} />
                         </ResizeHorizon>
-                        <ResizeHorizon>
+                        <ResizeHorizon className="resize-activity-right">
                           <Tabs
                             defaultActiveKey={ACTIVITY_DETAIL_TAB.GENERAL_INFO}
                             activeKey={activeTab}
