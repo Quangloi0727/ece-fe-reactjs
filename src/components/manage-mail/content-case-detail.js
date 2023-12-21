@@ -22,15 +22,24 @@ function ContentCase({ value, changeContentCase }) {
                   <div className="p-[25px]">
                     <Row className="text-[13px]">
                       <Col span={2}>
-                        <MailOutlined style={{ fontSize: '25px' }} />
-                        <FontAwesome
-                          name="mail-reply"
-                          style={{
-                            position: 'relative',
-                            bottom: '15px',
-                            right: '6px',
-                          }}
-                        />
+                        {!key ? (
+                          <>
+                            <MailOutlined style={{ fontSize: '25px' }} />
+                            <FontAwesome
+                              name="mail-reply"
+                              style={{
+                                position: 'relative',
+                                top: '11px',
+                                right: '31px',
+                              }}
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <MailOutlined style={{ fontSize: '25px' }} />
+                            <FontAwesome name="download" style={{ position: 'relative', top: '10px' }} />
+                          </>
+                        )}
                       </Col>
                       <Col span={22} onClick={() => handleChangeContentCaseKey(key)}>
                         <p>
