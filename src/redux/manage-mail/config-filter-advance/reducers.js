@@ -1,14 +1,9 @@
 import actions from './actions';
-import staticConfig from '../../../config/manage-mail/filter-advance.json';
-import { getItem } from '../../../utility/localStorageControl';
-import { LOCAL_STORAGE_VARIABLE } from '../../../constants';
+import staticConfig from '../../../config/manage-mail/filter-advance';
 
 const { CONFIG_FILTER_ADVANCE_SUCCESS } = actions;
 const initState = {
-  config:
-    getItem(LOCAL_STORAGE_VARIABLE.FILTER_ADVANCE) !== null
-      ? getItem(LOCAL_STORAGE_VARIABLE.FILTER_ADVANCE)
-      : [...staticConfig],
+  config: staticConfig,
 };
 const configFilterAdvance = (state = initState, action) => {
   const { type, config } = action;

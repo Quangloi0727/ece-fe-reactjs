@@ -10,7 +10,7 @@ import Heading from '../../components/heading/heading';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { PaginationStyle, GlobalUtilityStyle } from '../styled';
 import withAdminLayout from '../../layout/withAdminLayout';
-import { PREFIX_CUSTOMIZE_TABLE } from '../../constants';
+import { PREFIX_CUSTOMIZE_TABLE, ACTIVITY_SUB_STATUS, ACTIVITY_MODE } from '../../constants';
 import { Button } from '../../components/buttons/buttons';
 
 function ListEmail() {
@@ -47,16 +47,16 @@ function ListEmail() {
       const {
         activityId,
         subject,
-        assignedTo,
+        user,
         createdOn,
-        subStatus,
+        activitySubStatus,
         caseId,
-        queueName,
-        file,
-        priority,
-        from,
+        queue,
+        numAttachments,
+        activityPriority,
+        email,
         to,
-        direction,
+        activityMode,
       } = item;
       return tableDataSource.push({
         activityId: (
@@ -70,8 +70,8 @@ function ListEmail() {
           </span>
         ),
         assignedTo: (
-          <span className="text-body dark:text-white60 text-[15px] font-medium" key={assignedTo}>
-            {assignedTo}
+          <span className="text-body dark:text-white60 text-[15px] font-medium" key={user?.userName}>
+            {user?.userName}
           </span>
         ),
         createdOn: (
@@ -82,10 +82,14 @@ function ListEmail() {
         subStatus: (
           <Button
             size="default"
-            className="bg-danger border-solid border-1 border-danger text-white dark:text-white87 text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[40px] px-[20px] h-[44px] shadow-btn gap-[8px]"
-            key={subStatus}
+            className={
+              ACTIVITY_SUB_STATUS.DONE.includes(activitySubStatus)
+                ? 'bg-success border-solid border-1 border-success text-white dark:text-white87 text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[40px] px-[20px] h-[44px] shadow-btn gap-[8px]'
+                : 'bg-danger border-solid border-1 border-danger text-white dark:text-white87 text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[40px] px-[20px] h-[44px] shadow-btn gap-[8px]'
+            }
+            key={activitySubStatus}
           >
-            {subStatus}
+            {ACTIVITY_SUB_STATUS.DONE.includes(activitySubStatus) ? 'Completed - Done' : 'Assigned - In Process'}
           </Button>
         ),
         caseId: (
@@ -94,23 +98,23 @@ function ListEmail() {
           </Link>
         ),
         queueName: (
-          <span className="text-body font-medium" key={queueName}>
-            {queueName}
+          <span className="text-body font-medium" key={queue?.queueName}>
+            {queue?.queueName}
           </span>
         ),
         file: (
-          <span className="text-body font-medium" key={file}>
-            {file}
+          <span className="text-body font-medium" key={numAttachments}>
+            {numAttachments > 0 ? 'Có' : 'Không'}
           </span>
         ),
         priority: (
-          <span className="text-body font-medium" key={priority}>
-            {priority}
+          <span className="text-body font-medium" key={activityPriority}>
+            {activityPriority}
           </span>
         ),
         from: (
-          <span className="text-body  font-medium" key={from}>
-            {from}
+          <span className="text-body  font-medium" key={email?.fromEmailAddress}>
+            {email?.fromEmailAddress}
           </span>
         ),
         to: (
@@ -119,8 +123,12 @@ function ListEmail() {
           </span>
         ),
         direction: (
-          <span className="text-body font-medium" key={direction}>
-            {direction}
+          <span className="text-body font-medium" key={activityMode}>
+            {activityMode === ACTIVITY_MODE.INBOUND
+              ? 'Mail nhận'
+              : activityMode === ACTIVITY_MODE.OUTBOUND
+              ? 'Mail gửi'
+              : ''}
           </span>
         ),
       });
