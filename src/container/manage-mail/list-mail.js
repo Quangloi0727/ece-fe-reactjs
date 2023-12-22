@@ -81,7 +81,7 @@ function ListEmail() {
           </span>
         ),
         assignedTo: (
-          <span className="text-body dark:text-white60 text-[13px] font-medium" key={user?.userName}>
+          <span className="text-body dark:text-white60 text-[13px]" key={user?.userName}>
             {user?.userName}
           </span>
         ),
@@ -164,7 +164,7 @@ function ListEmail() {
               <PaginationStyle>
                 <div className="bg-white dark:bg-white10 m-0 p-0 mb-[25px] rounded-10 relative">
                   <div className="py-[16px] px-[25px] text-dark dark:text-white87 font-medium text-[17px] border-regular dark:border-white10 border-b ">
-                    <Heading as="h4" className="text-lg font-medium mb-0">
+                    <Heading as="h4" className="text-[25px] font-medium mb-0">
                       {t('lookUpEmail')}
                     </Heading>
                   </div>

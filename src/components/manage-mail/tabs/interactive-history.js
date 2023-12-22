@@ -5,7 +5,7 @@ import { GlobalUtilityStyle } from '../../../container/styled';
 
 function InteractiveHistory({ dataHistory }) {
   return (
-    <GlobalUtilityStyle>
+    <GlobalUtilityStyle className="mr-[30px]">
       {dataHistory?.map((el, index) => (
         <Row gutter={15} key={index}>
           <Col xs={24} style={{ marginLeft: '30px' }}>

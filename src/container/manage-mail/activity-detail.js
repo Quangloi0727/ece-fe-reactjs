@@ -13,7 +13,7 @@ import { PaginationStyle, GlobalUtilityStyle } from '../styled';
 import { activityDetailData } from '../../redux/manage-mail/activity-detail/actionCreator';
 import withAdminLayout from '../../layout/withAdminLayout';
 import ContentActivity from '../../components/manage-mail/content-activity-detail';
-import GeneralInfo from '../../components/manage-mail/tabs/general-info';
+import GeneralInfoActivity from '../../components/manage-mail/tabs/general-info-activity';
 import Note from '../../components/manage-mail/tabs/note';
 import HistoryActivity from '../../components/manage-mail/tabs/interactive-history';
 import { ACTIVITY_DETAIL_TAB } from '../../constants';
@@ -34,14 +34,13 @@ function ActivityDetail() {
       data: states.dataActivityDetail.data,
     };
   });
-
-  const { activityInfo, activityNote, interactionHistory } = data;
+  const { activityNote, interactionHistory } = data;
 
   const items = [
     {
       key: ACTIVITY_DETAIL_TAB.GENERAL_INFO,
       label: `${t('generalInformation')}`,
-      children: <GeneralInfo dataInfo={activityInfo} />,
+      children: <GeneralInfoActivity dataInfo={data} />,
     },
     {
       key: ACTIVITY_DETAIL_TAB.NOTE,
@@ -90,6 +89,11 @@ function ActivityDetail() {
                         </ResizeHorizon>
                         <ResizeHorizon className="resize-activity-right">
                           <Tabs
+                            style={{
+                              overflowY: 'scroll',
+                              overflowX: 'hidden',
+                              height: '600px',
+                            }}
                             defaultActiveKey={ACTIVITY_DETAIL_TAB.GENERAL_INFO}
                             activeKey={activeTab}
                             items={items}
