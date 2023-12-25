@@ -26,7 +26,6 @@ export const CASE_DETAIL_TAB = {
   GENERAL_INFO: 'generalInfo',
   CONTENT_ACTIVITY: 'contentActivity',
   NOTE: 'note',
-  CONTENT_CASE_DEFAULT_KEY: '0',
 };
 export const DEFAULT_PAGE = 1;
 export const DEFAULT_PAGE_SIZE = 10;
@@ -37,3 +36,4 @@ export const ACTIVITY_MODE = {
   INBOUND: 100,
   OUTBOUND: 200,
 };
+export const CONDITION_LIST_EMAIL_TO = 1;

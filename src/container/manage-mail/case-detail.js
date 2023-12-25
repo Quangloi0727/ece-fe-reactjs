@@ -23,7 +23,6 @@ function CaseDetail() {
   const { caseId } = useParams();
   const componentRef = useRef(null);
   const [activeTab, setActiveTab] = useState(CASE_DETAIL_TAB.GENERAL_INFO);
-  // const [contentCase, setContentCase] = useState(CASE_DETAIL_TAB.CONTENT_CASE_DEFAULT_KEY);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 

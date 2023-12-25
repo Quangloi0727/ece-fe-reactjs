@@ -14544,7 +14544,7 @@ td {
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 300px !important;
-    width: 210px !important;
+    width: 250px !important;
 }
 .resize{
     margin-top: 60px;
