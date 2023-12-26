@@ -5,21 +5,23 @@ import { Button } from '../buttons/buttons';
 import { DataService } from '../../config/dataService/dataService';
 
 function DownLoadFile({ value }) {
-  const { emailAttachmentId, attachment } = value;
-  const { fileName, attachmentSize } = attachment;
   const downloadFile = async (idFile) => {
     await DataService.downloadFile(`/email-attachment/${idFile}`).then((response) => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', `${fileName}`);
+      link.setAttribute('download', `${value?.attachment?.fileName}`);
       document.body.appendChild(link);
       link.click();
     });
   };
   return (
-    <Button className="ant-button-filename truncate" type="primary" onClick={() => downloadFile(emailAttachmentId)}>
-      <LinkOutlined /> {fileName}({attachmentSize} KB)
+    <Button
+      className="ant-button-filename truncate"
+      type="primary"
+      onClick={() => downloadFile(value?.emailAttachmentId)}
+    >
+      <LinkOutlined /> {value?.attachment?.fileName}({value?.attachment?.attachmentSize} KB)
     </Button>
   );
 }

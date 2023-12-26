@@ -1,18 +1,18 @@
 import React, { forwardRef } from 'react';
 import { PrinterOutlined } from '@ant-design/icons';
-import { Col, Row } from 'antd';
+import { Col, Empty, Row } from 'antd';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import DownLoadFile from './download-file';
 import { Button } from '../buttons/buttons';
 import { GlobalUtilityStyle } from '../../container/styled';
 
-const ContentActivity = forwardRef(({ value, handlePrint }, ref) => {
+const ContentActivity = forwardRef(({ value, handlePrint, checkNullTab }, ref) => {
   const printContentToPdf = () => {
     handlePrint();
   };
-  const { subject, content, createdOn, email } = value;
-  return (
+  const { subject, emailData, createdOn, email } = value;
+  return !checkNullTab ? (
     <GlobalUtilityStyle ref={ref}>
       <Row gutter={15} className="text-[13px]">
         <Col xs={24} style={{ marginLeft: '30px' }}>
@@ -57,16 +57,19 @@ const ContentActivity = forwardRef(({ value, handlePrint }, ref) => {
             </Row>
           </div>
           <div style={{ paddingTop: '20px' }}>
-            <GlobalUtilityStyle dangerouslySetInnerHTML={{ __html: content }} />
+            <GlobalUtilityStyle dangerouslySetInnerHTML={{ __html: emailData?.content }} />
           </div>
         </Col>
       </Row>
     </GlobalUtilityStyle>
+  ) : (
+    <Empty />
   );
 });
 
 ContentActivity.propTypes = {
   value: PropTypes.any,
   handlePrint: PropTypes.func,
+  checkNullTab: PropTypes.bool,
 };
 export default ContentActivity;

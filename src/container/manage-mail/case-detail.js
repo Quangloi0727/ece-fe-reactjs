@@ -23,6 +23,7 @@ function CaseDetail() {
   const { caseId } = useParams();
   const componentRef = useRef(null);
   const [activeTab, setActiveTab] = useState(CASE_DETAIL_TAB.GENERAL_INFO);
+  const [checkNullTab, setCheckNullTab] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -43,8 +44,8 @@ function CaseDetail() {
   const handleChangeContentCase = (activityId) => {
     setActiveTab(CASE_DETAIL_TAB.CONTENT_ACTIVITY);
     dispatch(activityDetailData(activityId));
+    setCheckNullTab(false);
   };
-
   const { caseNote } = data;
 
   const items = [
@@ -56,7 +57,14 @@ function CaseDetail() {
     {
       key: CASE_DETAIL_TAB.CONTENT_ACTIVITY,
       label: `${t('activityContent')}`,
-      children: <ContentActivity value={dataActivity} handlePrint={printContentToPdf} ref={componentRef} />,
+      children: (
+        <ContentActivity
+          value={dataActivity}
+          checkNullTab={checkNullTab}
+          handlePrint={printContentToPdf}
+          ref={componentRef}
+        />
+      ),
     },
     {
       key: CASE_DETAIL_TAB.NOTE,
@@ -67,6 +75,7 @@ function CaseDetail() {
 
   const handleTabChange = (atk) => {
     setActiveTab(atk);
+    setCheckNullTab(true);
   };
 
   return (
