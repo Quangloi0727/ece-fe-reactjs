@@ -87,7 +87,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
               }}
             />
           </Col>
-          <Col span={21}>
+          <Col span={21} className="text-[13px]">
             <div>{t(`${PREFIX_CUSTOMIZE_TABLE}${key}`)}</div>
           </Col>
           <Col span={1}>
@@ -109,8 +109,10 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
       setState({ ...state, customizeTableDragDrop: newCustomizeTaleData });
     }
   }
+
   return (
     <Modal
+      style={{ fontSize: '13px !important' }}
       closable={false}
       title="Tùy chỉnh bảng Tra cứu Email"
       open={showOrHideModalCustomizeTable}
@@ -127,7 +129,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
             type="info"
             outlined
             key="setDefault"
-            className="px-5 text-sm font-semibold button-reset h-10"
+            className="px-5 text-[13px] font-semibold button-reset h-10"
             onClick={() => handleSubmit(false)}
           >
             Phục hồi mặc định
@@ -137,7 +139,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
               outlined
               type="danger"
               key="cancelFilter"
-              className="px-5 text-sm font-semibold button-reset h-10"
+              className="px-5 text-[13px] font-semibold button-reset h-10"
               onClick={hideModal}
             >
               Hủy
@@ -146,7 +148,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
               type="info"
               htmlType="submit"
               key="submitFilter"
-              className="px-5 text-sm font-semibold button-reset h-10"
+              className="px-5 text-[13px] font-semibold button-reset h-10"
               onClick={() => handleSubmit(true)}
             >
               Lưu
@@ -171,13 +173,17 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
                       checked={stateCheckBoxAll}
                     />
                   </Col>
-                  <Col span={22}>{t(`${PREFIX_CUSTOMIZE_TABLE}selectAll`)}</Col>
+                  <Col span={22} className="text-[13px]">
+                    {t(`${PREFIX_CUSTOMIZE_TABLE}selectAll`)}
+                  </Col>
                 </Row>
               </Form.Item>
               <Form.Item key="checkBox">
                 <Row>
                   <Col span={2} />
-                  <Col span={22}>{t(`${PREFIX_CUSTOMIZE_TABLE}activityId`)}</Col>
+                  <Col span={22} className="text-[13px]">
+                    {t(`${PREFIX_CUSTOMIZE_TABLE}activityId`)}
+                  </Col>
                 </Row>
               </Form.Item>
               <SortableContext items={customizeTableDragDrop} strategy={rectSortingStrategy}>

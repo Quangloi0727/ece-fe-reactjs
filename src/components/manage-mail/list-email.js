@@ -74,7 +74,7 @@ function DataListEmail({ tableData, columns, totalData }) {
     <>
       <div className="flex items-center w-full md:flex-col">
         <div className="min-w-[120px]">
-          <Button onClick={showModalFilter} size="default" type="light" outlined>
+          <Button onClick={showModalFilter} style={{ fontWeight: 'normal' }} size="default" type="light" outlined>
             <FilterOutlined />
             {t('filter')}
           </Button>
@@ -85,7 +85,13 @@ function DataListEmail({ tableData, columns, totalData }) {
           />
         </div>
         <div className="min-w-[100px]">
-          <Button onClick={showModalCustomizeTable} size="default" type="light" outlined>
+          <Button
+            onClick={showModalCustomizeTable}
+            style={{ fontWeight: 'normal' }}
+            size="default"
+            type="light"
+            outlined
+          >
             <SettingOutlined />
             {t('customizeTable')}
           </Button>

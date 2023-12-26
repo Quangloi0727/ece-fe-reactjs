@@ -5,13 +5,16 @@ import { Row, Col } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { DownOutlined } from '@ant-design/icons';
+import { Dropdown } from '../../components/dropdown/dropdown';
 import DataListEmail from '../../components/manage-mail/list-email';
 import Heading from '../../components/heading/heading';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { PaginationStyle, GlobalUtilityStyle } from '../styled';
 import withAdminLayout from '../../layout/withAdminLayout';
-import { PREFIX_CUSTOMIZE_TABLE, ACTIVITY_SUB_STATUS, ACTIVITY_MODE } from '../../constants';
+import { PREFIX_CUSTOMIZE_TABLE, ACTIVITY_SUB_STATUS, ACTIVITY_MODE, CONDITION_LIST_EMAIL_TO } from '../../constants';
 import { Button } from '../../components/buttons/buttons';
+import { NavAuth } from '../../components/utilities/auth-info/auth-info-style';
 
 function ListEmail() {
   const { t } = useTranslation();
@@ -62,9 +65,20 @@ function ListEmail() {
         numAttachments,
         activityPriority,
         email,
-        to,
         activityMode,
       } = item;
+      const to = (
+        <NavAuth>
+          {email?.emailAddressTo.length > CONDITION_LIST_EMAIL_TO &&
+            email?.emailAddressTo.map((rowData, index) => {
+              return (
+                <Link to="#" key={index}>
+                  <span className="text-[13px]">{rowData?.emailAddress}</span>
+                </Link>
+              );
+            })}
+        </NavAuth>
+      );
       return tableDataSource.push({
         activityId: (
           <Link
@@ -81,7 +95,7 @@ function ListEmail() {
           </span>
         ),
         assignedTo: (
-          <span className="text-body dark:text-white60 text-[13px] font-medium" key={user?.userName}>
+          <span className="text-body dark:text-white60 text-[13px]" key={user?.userName}>
             {user?.userName}
           </span>
         ),
@@ -133,11 +147,29 @@ function ListEmail() {
           </span>
         ),
 
-        to: (
-          <span className="text-body  font-medium" key={to}>
-            {to}
-          </span>
-        ),
+        to:
+          email?.emailAddressTo.length > CONDITION_LIST_EMAIL_TO ? (
+            <Dropdown
+              content={to}
+              trigger="click"
+              placement="bottom"
+              className="text-[13px]"
+              getPopupContainer={(trigger) => trigger.parentNode}
+            >
+              <span className="text-[13px]">
+                <Row>
+                  <Col span={23}>{email?.emailAddressTo.length} email</Col>
+                  <Col span={1}>
+                    <DownOutlined />
+                  </Col>
+                </Row>
+              </span>
+            </Dropdown>
+          ) : (
+            <span className="text-[13px]" key={email?.emailAddressTo[0].emailAddress}>
+              {email?.emailAddressTo[0].emailAddress}
+            </span>
+          ),
         direction: (
           <span className="text-body text-[13px]" key={activityMode}>
             {activityMode === ACTIVITY_MODE.INBOUND
@@ -164,7 +196,7 @@ function ListEmail() {
               <PaginationStyle>
                 <div className="bg-white dark:bg-white10 m-0 p-0 mb-[25px] rounded-10 relative">
                   <div className="py-[16px] px-[25px] text-dark dark:text-white87 font-medium text-[17px] border-regular dark:border-white10 border-b ">
-                    <Heading as="h4" className="text-lg font-medium mb-0">
+                    <Heading as="h4" className="text-[25px] font-medium mb-0">
                       {t('lookUpEmail')}
                     </Heading>
                   </div>

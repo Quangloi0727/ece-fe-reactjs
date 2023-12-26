@@ -63,6 +63,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
       formData.createOn = formattedDateRange;
     }
     formDataFilterAdvance(formData);
+    hideModal();
   };
 
   const handleResetForm = () => {
@@ -98,12 +99,15 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
         case FIELD_TYPE.TEXT:
           return (
             <div>
-              <Form.Item label={t(`${PREFIX_FILTER_ADVANCE}${key}`)} key={`label${key}`} />
-              <Row className="mt-[-20px]">
+              <Form.Item
+                label={<span style={{ fontSize: '13px' }}>{t(`${PREFIX_FILTER_ADVANCE}${key}`)}</span>}
+                key={`label${key}`}
+              />
+              <Row className="mt-[-20px] text-[13px]">
                 <Col className="gutter-row" span={14}>
                   <div className="gutter-box">
                     <Form.Item name={key} key={key}>
-                      <Input placeholder={placeholder} className="h-[36px]" />
+                      <Input placeholder={placeholder} className="h-[36px] text-[13px]" />
                     </Form.Item>
                   </div>
                 </Col>
@@ -112,9 +116,11 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
                   <div className="gutter-box">
                     <Form.Item key={conditionKey} name={conditionKey} initialValue={conditionValue}>
                       <Select
+                        className="text-[13px]"
                         options={conditionOption}
                         placeholder={placeholderCondition}
                         getPopupContainer={(trigger) => trigger.parentNode}
+                        style={{ fontSize: '13px' }}
                       />
                     </Form.Item>
                   </div>
@@ -125,12 +131,16 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
         case FIELD_TYPE.SELECT:
           return (
             <div>
-              <Form.Item label={t(`${PREFIX_FILTER_ADVANCE}${key}`)} key={`label${key}`} />
+              <Form.Item
+                label={<span style={{ fontSize: '13px' }}>{t(`${PREFIX_FILTER_ADVANCE}${key}`)}</span>}
+                key={`label${key}`}
+              />
               <Row className="mt-[-20px]">
                 <Col className="gutter-row" span={24}>
                   <div className="gutter-box">
                     <Form.Item key={key} name={key}>
                       <Select
+                        className="text-[13px]"
                         options={option}
                         placeholder={placeholder}
                         mode={mode}
@@ -145,16 +155,21 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
         case FIELD_TYPE.DATE:
           return (
             <div>
-              <Form.Item label={t(`${PREFIX_FILTER_ADVANCE}${key}`)} key={`label${key}`} />
+              <Form.Item
+                label={<span style={{ fontSize: '13px' }}>{t(`${PREFIX_FILTER_ADVANCE}${key}`)}</span>}
+                key={`label${key}`}
+              />
               <Row className="mt-[-20px]">
                 <Col className="gutter-row" span={24}>
                   <div className="gutter-box">
-                    <Form.Item name={key} key={key}>
+                    <Form.Item name={key} key={key} className="text-[13px]">
                       <RangePicker
                         size="small"
                         format="DD/MM/yyyy HH:mm"
                         ranges={rangePresets}
                         showTime={{ format: 'HH:mm' }}
+                        mode={mode}
+                        getPopupContainer={(trigger) => trigger.parentNode}
                       />
                     </Form.Item>
                   </div>
@@ -168,6 +183,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
     };
     return <div> {renderCurrentSelection()}</div>;
   }
+
   return (
     <Modal
       closable={false}
@@ -184,7 +200,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
           <Button
             type="danger"
             key="resetFilter"
-            className="px-5 text-sm font-semibold button-reset h-10"
+            className="px-5 text-[13px] font-semibold button-reset h-10"
             onClick={handleResetForm}
           >
             <DeleteOutlined /> Xóa bộ lọc
@@ -193,7 +209,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
             <Button
               type="extra-light"
               key="cancelFilter"
-              className="px-5 text-sm font-semibold button-filter-cancel h-10"
+              className="px-5 text-[13px] font-semibold button-filter-cancel h-10"
               onClick={hideModal}
             >
               <CloseOutlined /> Hủy
@@ -201,7 +217,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
             <Button
               type="info"
               key="submitFilter"
-              className="px-5 text-sm font-semibold h-10 button-filter-search"
+              className="px-5 text-[13px] font-semibold h-10 button-filter-search"
               onClick={handleFilterAdvance}
             >
               <SearchOutlined /> Tìm kiếm

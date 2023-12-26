@@ -13,16 +13,16 @@ import { PaginationStyle, GlobalUtilityStyle } from '../styled';
 import { caseDetailData } from '../../redux/manage-mail/case-detail/actionCreator';
 import withAdminLayout from '../../layout/withAdminLayout';
 import ContentCase from '../../components/manage-mail/content-case-detail';
-import GeneralInfo from '../../components/manage-mail/tabs/general-info';
 import Note from '../../components/manage-mail/tabs/note';
 import ContentActivity from '../../components/manage-mail/content-activity-detail';
 import { CASE_DETAIL_TAB } from '../../constants';
+import GeneralInfoCase from '../../components/manage-mail/tabs/general-info-case';
+import { activityDetailData } from '../../redux/manage-mail/activity-detail/actionCreator';
 
 function CaseDetail() {
   const { caseId } = useParams();
   const componentRef = useRef(null);
   const [activeTab, setActiveTab] = useState(CASE_DETAIL_TAB.GENERAL_INFO);
-  const [contentCase, setContentCase] = useState(CASE_DETAIL_TAB.CONTENT_CASE_DEFAULT_KEY);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -30,34 +30,33 @@ function CaseDetail() {
     dispatch(caseDetailData(caseId));
   }, [caseId]);
 
-  const { data } = useSelector((states) => {
+  const { data, dataActivity } = useSelector((states) => {
     return {
       data: states.dataCaseDetail.data,
+      dataActivity: states.dataActivityDetail.data,
     };
   });
   const printContentToPdf = useReactToPrint({
     content: () => componentRef.current,
   });
 
-  const handleChangeContentCase = (key) => {
+  const handleChangeContentCase = (activityId) => {
     setActiveTab(CASE_DETAIL_TAB.CONTENT_ACTIVITY);
-    setContentCase(key);
+    dispatch(activityDetailData(activityId));
   };
 
-  const { caseInfo, caseActivity, caseNote } = data;
+  const { caseNote } = data;
 
   const items = [
     {
       key: CASE_DETAIL_TAB.GENERAL_INFO,
       label: `${t('generalInformation')}`,
-      children: <GeneralInfo dataInfo={caseInfo} />,
+      children: <GeneralInfoCase dataInfo={data} />,
     },
     {
       key: CASE_DETAIL_TAB.CONTENT_ACTIVITY,
       label: `${t('activityContent')}`,
-      children: (
-        <ContentActivity value={caseActivity?.[contentCase]} handlePrint={printContentToPdf} ref={componentRef} />
-      ),
+      children: <ContentActivity value={dataActivity} handlePrint={printContentToPdf} ref={componentRef} />,
     },
     {
       key: CASE_DETAIL_TAB.NOTE,
@@ -93,12 +92,19 @@ function CaseDetail() {
                     <div className="flex items-center w-full mt-5 mb-[25px] md:flex-col gap-[15px]">
                       <Resize handleWidth="3px">
                         <ResizeHorizon width="45%" className="resize-left">
-                          {caseActivity?.map((value, index) => (
-                            <ContentCase value={value} key={index} changeContentCase={handleChangeContentCase} />
-                          ))}
+                          {data && data.length
+                            ? data?.map((value, index) => (
+                                <ContentCase value={value} key={index} changeContentCase={handleChangeContentCase} />
+                              ))
+                            : ''}
                         </ResizeHorizon>
                         <ResizeHorizon className="resize-right">
                           <Tabs
+                            style={{
+                              overflowY: 'scroll',
+                              overflowX: 'hidden',
+                              height: '600px',
+                            }}
                             defaultActiveKey={CASE_DETAIL_TAB.GENERAL_INFO}
                             activeKey={activeTab}
                             items={items}

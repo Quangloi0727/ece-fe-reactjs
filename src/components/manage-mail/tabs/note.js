@@ -6,7 +6,7 @@ import { GlobalUtilityStyle } from '../../../container/styled';
 
 function Note({ dataNote }) {
   return (
-    <GlobalUtilityStyle>
+    <GlobalUtilityStyle className="mr-[30px]">
       {dataNote?.map((el, index) => (
         <div className="result-list-content" key={index}>
           <Row>

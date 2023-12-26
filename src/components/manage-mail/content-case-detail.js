@@ -1,13 +1,16 @@
 import React from 'react';
 import { Col, Row } from 'antd';
 import PropTypes from 'prop-types';
-import { MailOutlined } from '@ant-design/icons';
+import { LinkOutlined, MailOutlined } from '@ant-design/icons';
 import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router-dom';
+import moment from 'moment/moment';
 import { GlobalUtilityStyle } from '../../container/styled';
+import { ACTIVITY_MODE } from '../../constants';
 
 function ContentCase({ value, changeContentCase }) {
-  const { key } = value;
+  const { activityId, user, email, activityMode, queue, createdOn, subject } = value;
+  const { emailAddressTo, fromEmailAddress, emailAttachmentLink } = email;
   const handleChangeContentCaseKey = (keyCase) => {
     changeContentCase(keyCase);
   };
@@ -22,7 +25,7 @@ function ContentCase({ value, changeContentCase }) {
                   <div className="p-[25px]">
                     <Row className="text-[13px]">
                       <Col span={2}>
-                        {!key ? (
+                        {activityMode === ACTIVITY_MODE.OUTBOUND ? (
                           <>
                             <MailOutlined style={{ fontSize: '25px' }} />
                             <FontAwesome
@@ -41,16 +44,32 @@ function ContentCase({ value, changeContentCase }) {
                           </>
                         )}
                       </Col>
-                      <Col span={22} onClick={() => handleChangeContentCaseKey(key)}>
-                        <p>
-                          <Link to="/manage-email/case/990" style={{ textDecoration: 'underline' }}>
-                            999
-                          </Link>{' '}
-                          Hải yến (chamsockhachhang@vpbank.comv.n)
+                      <Col span={22} onClick={() => handleChangeContentCaseKey(activityId)}>
+                        <Row>
+                          <Col span={23}>
+                            <p>
+                              <Link to={`/manage-email/case/${activityId}`} style={{ textDecoration: 'underline' }}>
+                                {activityId}
+                              </Link>{' '}
+                              {user?.userName}({fromEmailAddress})
+                            </p>
+                          </Col>
+                          <Col span={1}>
+                            {emailAttachmentLink && emailAttachmentLink.length ? <LinkOutlined /> : ''}
+                          </Col>
+                        </Row>
+                        <p style={{ display: 'flex', flexWrap: 'wrap' }}>
+                          To:
+                          {emailAddressTo.map((el, index) => {
+                            return <span key={index}>{el.emailAddress},</span>;
+                          })}
                         </p>
-                        <p>To : chamsockhachhang@vpbank.com</p>
-                        <p>RE : v/v: Hỗ trợ app</p>
-                        <p>queueName</p>
+                        <p>RE : {subject}</p>
+                        <Row>
+                          <Col span={14}>{queue?.queueName}</Col>
+                          <Col span={3}>Create On:</Col>
+                          <Col span={7}>{moment(createdOn).format('DD-MM-YYYY HH:mm A')}</Col>
+                        </Row>
                       </Col>
                     </Row>
                   </div>
