@@ -46,8 +46,6 @@ function CaseDetail() {
     dispatch(activityDetailData(activityId));
     setCheckNullTab(false);
   };
-  const { caseNote } = data;
-
   const items = [
     {
       key: CASE_DETAIL_TAB.GENERAL_INFO,
@@ -69,7 +67,7 @@ function CaseDetail() {
     {
       key: CASE_DETAIL_TAB.NOTE,
       label: `${t('note')}`,
-      children: <Note dataNote={caseNote} />,
+      children: <Note dataNote={data[0]?.notes} />,
     },
   ];
 
