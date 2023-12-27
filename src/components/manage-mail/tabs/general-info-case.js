@@ -60,7 +60,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p> Due on</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{moment(dataInfo?.[0]?.case?.dueDate).format('DD-MM-YYYY HH:mm A')}</p>
+                <p>{moment(dataInfo?.[0]?.case?.dueDate).format('DD-MM-YYYY')}</p>
               </Col>
             </Row>
 
@@ -69,7 +69,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p> Due at</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.[0]?.case?.caseId}</p>
+                <p>{moment(dataInfo?.[0]?.case?.dueDate).format('HH:mm A')}</p>
               </Col>
             </Row>
 
