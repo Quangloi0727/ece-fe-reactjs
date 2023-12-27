@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'antd';
+import moment from 'moment';
 import Heading from '../../heading/heading';
 import { GlobalUtilityStyle } from '../../../container/styled';
 
@@ -15,11 +16,13 @@ function Note({ dataNote }) {
                 <ul className="mb-[30px] border-b border-regular dark:border-white10" style={{ fontSize: '13px' }}>
                   <li className="mb-8">
                     <Heading className="mb-2 text-[13px]  text-dark dark:text-white87" as="h6">
-                      <span className="font-semibold text-[13px]">{el.time}</span>
-                      <span> by</span>
-                      <span> {el.email}</span>
+                      <span className="font-semibold text-[13px]">
+                        {moment(el.whenCreated).format('DD/MM/YYYY HH:mm A')}
+                      </span>
+                      <span> by </span>
+                      <span>{el?.user?.emailAddressPrimary || el?.user?.emailAddressSecondary}</span>
                     </Heading>
-                    <p>{el.content}</p>
+                    <p>{el.noteName}</p>
                   </li>
                 </ul>
               </nav>
