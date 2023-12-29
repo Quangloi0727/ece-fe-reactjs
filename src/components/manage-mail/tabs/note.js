@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'antd';
+import { Row, Col, Empty } from 'antd';
 import moment from 'moment';
-import Heading from '../../heading/heading';
 import { GlobalUtilityStyle } from '../../../container/styled';
 
 function Note({ dataNote }) {
-  return (
+  return dataNote && dataNote.length ? (
     <GlobalUtilityStyle className="mr-[30px]">
       {dataNote?.map((el, index) => (
         <div className="result-list-content" key={index}>
@@ -15,14 +14,15 @@ function Note({ dataNote }) {
               <nav>
                 <ul className="mb-[30px] border-b border-regular dark:border-white10" style={{ fontSize: '13px' }}>
                   <li className="mb-8">
-                    <Heading className="mb-2 text-[13px]  text-dark dark:text-white87" as="h6">
-                      <span className="font-semibold text-[13px]">
-                        {moment(el.whenCreated).format('DD/MM/YYYY HH:mm A')}
+                    <p className="mb-2 text-[13px]  text-dark dark:text-white87">
+                      <span className="text-[13px]">{moment(el.whenCreated).format('DD/MM/YYYY HH:mm A')}</span>
+                      <span className="text-[13px]"> by </span>
+                      <span className="text-[13px]">
+                        <span>{el?.user?.firstName} </span>
+                        {el?.user?.lastName}
                       </span>
-                      <span> by </span>
-                      <span>{el?.user?.emailAddressPrimary || el?.user?.emailAddressSecondary}</span>
-                    </Heading>
-                    <p>{el.noteName}</p>
+                    </p>
+                    <p className="font-semibold text-[13px]">{el.noteData}</p>
                   </li>
                 </ul>
               </nav>
@@ -31,6 +31,8 @@ function Note({ dataNote }) {
         </div>
       ))}
     </GlobalUtilityStyle>
+  ) : (
+    <Empty />
   );
 }
 

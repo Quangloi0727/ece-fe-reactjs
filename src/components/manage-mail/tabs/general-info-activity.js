@@ -45,8 +45,8 @@ function GeneralInfoActivity({ dataInfo }) {
               </Col>
               <Col span={16} className="text-[13px] ">
                 <p>
-                  {user?.emailAddressPrimary ? user?.emailAddressPrimary : user?.emailAddressSecondary}({user?.userName}
-                  )
+                  <span>{user?.firstName} </span>
+                  {user?.lastName}
                 </p>
               </Col>
             </Row>
@@ -74,7 +74,7 @@ function GeneralInfoActivity({ dataInfo }) {
                 <p> Due on</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{moment(dueDate).format('DD-MM-YYYY')}</p>
+                <p>{moment(dueDate).format('MM-DD-YYYY')}</p>
               </Col>
             </Row>
 

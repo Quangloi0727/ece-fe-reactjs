@@ -34,8 +34,9 @@ function ActivityDetail() {
       data: states.dataActivityDetail.data,
     };
   });
-  const { notes, interactionHistory } = data;
+  const { noteActivity, historyActivity } = data;
 
+  console.log('data', historyActivity);
   const items = [
     {
       key: ACTIVITY_DETAIL_TAB.GENERAL_INFO,
@@ -45,12 +46,12 @@ function ActivityDetail() {
     {
       key: ACTIVITY_DETAIL_TAB.NOTE,
       label: `${t('note')}`,
-      children: <Note dataNote={notes} />,
+      children: <Note dataNote={noteActivity} />,
     },
     {
       key: ACTIVITY_DETAIL_TAB.ACTIVITY_HISTORY,
       label: `${t('interactiveHistory')}`,
-      children: <HistoryActivity dataHistory={interactionHistory} />,
+      children: <HistoryActivity dataHistory={historyActivity} />,
     },
   ];
 
@@ -75,7 +76,7 @@ function ActivityDetail() {
               <PaginationStyle>
                 <div className="bg-white dark:bg-white10 m-0 p-0 mb-[25px] rounded-10 relative">
                   <div className="py-[16px] px-[25px] text-dark dark:text-white87 font-medium text-[17px] border-regular dark:border-white10 border-b ">
-                    <Heading as="h4" className="text-lg font-medium mb-0">
+                    <Heading className="text-lg font-medium mb-0">
                       <Link to="/list-email" className="bg-white">
                         <LeftOutlined style={{ verticalAlign: 'baseline' }} /> {t('goBackPreviousScreen')}
                       </Link>
