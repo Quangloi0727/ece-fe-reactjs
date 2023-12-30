@@ -2,9 +2,44 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row } from 'antd';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 import { GlobalUtilityStyle } from '../../../container/styled';
+import { CASE_STATUS_TYPE, CASE_SEVERITY_TYPE } from '../../../constants/index';
 
 function GeneralInfoCase({ dataInfo }) {
+  function HandleCaseStatus(data) {
+    const handleCaseStatus = () => {
+      switch (data?.data) {
+        case CASE_STATUS_TYPE.OPEN:
+          return <p>Open</p>;
+        case CASE_STATUS_TYPE.CLOSED:
+          return <p>Closed</p>;
+        case CASE_STATUS_TYPE.ReadyToBeClosed:
+          return <p>Ready to be closed</p>;
+        default:
+          return null;
+      }
+    };
+    return <div>{handleCaseStatus()}</div>;
+  }
+
+  function HandleCaseSeverity(data) {
+    const handleCaseSeverity = () => {
+      switch (data?.data) {
+        case CASE_SEVERITY_TYPE.URGENT:
+          return <p>Urgent</p>;
+        case CASE_SEVERITY_TYPE.HIGH:
+          return <p>High</p>;
+        case CASE_SEVERITY_TYPE.MEDIUM:
+          return <p>Medium</p>;
+        case CASE_SEVERITY_TYPE.LOW:
+          return <p>Low</p>;
+        default:
+          return null;
+      }
+    };
+    return <div>{handleCaseSeverity()}</div>;
+  }
   return (
     <GlobalUtilityStyle className="mr-[30px]">
       <Row gutter={5}>
@@ -15,7 +50,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p> Case ID </p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.[0]?.caseId}</p>
+                <p>{dataInfo?.caseId}</p>
               </Col>
             </Row>
 
@@ -24,7 +59,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p> Case Status </p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.[0]?.case?.caseStatus}</p>
+                <HandleCaseStatus data={dataInfo?.case?.caseStatus} />
               </Col>
             </Row>
 
@@ -33,7 +68,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p> Original Source</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.[0]?.case?.originalSource}</p>
+                <p>{dataInfo?.case?.originalSource}</p>
               </Col>
             </Row>
 
@@ -42,7 +77,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p>Owner</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.[0]?.case?.owner}</p>
+                <p>{dataInfo?.case?.owner}</p>
               </Col>
             </Row>
 
@@ -51,7 +86,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p>Severity</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.[0]?.case?.severity}</p>
+                <HandleCaseSeverity data={dataInfo?.case?.severity} />
               </Col>
             </Row>
 
@@ -60,7 +95,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p> Due on</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{moment(dataInfo?.[0]?.case?.dueDate).format('DD-MM-YYYY')}</p>
+                <p>{moment(dataInfo?.case?.dueDate).format('MM-DD-YYYY')}</p>
               </Col>
             </Row>
 
@@ -69,7 +104,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p> Due at</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{moment(dataInfo?.[0]?.case?.dueDate).format('HH:mm A')}</p>
+                <p>{moment(dataInfo?.case?.dueDate).format('HH:mm A')}</p>
               </Col>
             </Row>
 
@@ -78,7 +113,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p>Description</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.[0]?.case?.description}</p>
+                <p>{dataInfo?.case?.description}</p>
               </Col>
             </Row>
 
@@ -87,7 +122,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p>Description Of Solution</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.[0]?.case?.solutionDescription}</p>
+                <p>{dataInfo?.case?.solutionDescription}</p>
               </Col>
             </Row>
 
@@ -95,8 +130,16 @@ function GeneralInfoCase({ dataInfo }) {
               <Col span={8} className="text-[13px]">
                 <p>Related Cases</p>
               </Col>
-              <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.[0]?.case?.caseId}</p>
+              <Col span={16} className="text-[13px]" style={{ display: 'flex' }}>
+                {dataInfo?.case?.caseAss.map((caseAss, index) => {
+                  return (
+                    <GlobalUtilityStyle key={index}>
+                      <Link to="#" key={index} style={{ paddingRight: '10px' }}>
+                        {caseAss.caseGroupId}
+                      </Link>
+                    </GlobalUtilityStyle>
+                  );
+                })}
               </Col>
             </Row>
 
@@ -105,7 +148,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p>Classifications</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.[0]?.case?.caseId}</p>
+                <p>{dataInfo?.case?.caseId}</p>
               </Col>
             </Row>
           </div>
