@@ -52,7 +52,7 @@ function ListEmail() {
     setConfigColumn(newConfigs);
   }, [customizeTableData]);
   const tableDataSource = [];
-  if (tableData?.length > 0) {
+  if (tableData.length > 0) {
     tableData.map((item) => {
       const {
         activityId,
@@ -148,7 +148,7 @@ function ListEmail() {
         ),
 
         to:
-          email?.emailAddressTo.length > CONDITION_LIST_EMAIL_TO ? (
+          email?.emailAddressTo && email.emailAddressTo.length > CONDITION_LIST_EMAIL_TO ? (
             <Dropdown
               content={to}
               trigger="click"

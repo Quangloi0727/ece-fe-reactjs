@@ -34,9 +34,8 @@ function ActivityDetail() {
       data: states.dataActivityDetail.data,
     };
   });
-  const { noteActivity, historyActivity } = data;
+  const { notes, historyActivity } = data;
 
-  console.log('data', historyActivity);
   const items = [
     {
       key: ACTIVITY_DETAIL_TAB.GENERAL_INFO,
@@ -46,7 +45,7 @@ function ActivityDetail() {
     {
       key: ACTIVITY_DETAIL_TAB.NOTE,
       label: `${t('note')}`,
-      children: <Note dataNote={noteActivity} />,
+      children: <Note data={notes} />,
     },
     {
       key: ACTIVITY_DETAIL_TAB.ACTIVITY_HISTORY,

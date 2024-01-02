@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { GlobalUtilityStyle } from '../../../container/styled';
 
 function InteractiveHistory({ dataHistory }) {
-  console.log(dataHistory);
   return (
     <GlobalUtilityStyle className="mr-[30px]">
       {dataHistory?.map((el, index) => (
@@ -13,13 +12,13 @@ function InteractiveHistory({ dataHistory }) {
           <Col xs={24} style={{ marginLeft: '30px' }}>
             <div className="content-activity-detail">
               <Row className="text-[13px]">
-                <Col span={6}>{moment(el.eventDate).format('MM/DD/YYYY HH:mm:ss A')}</Col>
+                <Col span={8}>{moment(el.eventDate).format('DD-MM-YYYY HH:mm A')}</Col>
                 <Col span={6}>
                   {' '}
                   <span>{el?.user?.firstName} </span>
                   {el?.user?.lastName}
                 </Col>
-                <Col span={12}>{el.objectOperation}</Col>
+                <Col span={10}>{el?.objectOperation}</Col>
               </Row>
             </div>
           </Col>

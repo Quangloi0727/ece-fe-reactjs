@@ -4,41 +4,49 @@ import { Col, Row } from 'antd';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { GlobalUtilityStyle } from '../../../container/styled';
-import { CASE_STATUS_TYPE, CASE_SEVERITY_TYPE } from '../../../constants/index';
+import { CASE_STATUS_TYPE, CASE_SEVERITY_TYPE, CASE_STATUS_NAME, CASE_SEVERITY_NAME } from '../../../constants/index';
 
 function GeneralInfoCase({ dataInfo }) {
+  const {
+    caseId,
+    caseStatus,
+    originalSource,
+    owner,
+    severity,
+    dueDate,
+    description,
+    solutionDescription,
+    caseAss,
+    customer,
+  } = dataInfo;
   function HandleCaseStatus(data) {
-    const handleCaseStatus = () => {
-      switch (data?.data) {
-        case CASE_STATUS_TYPE.OPEN:
-          return <p>Open</p>;
-        case CASE_STATUS_TYPE.CLOSED:
-          return <p>Closed</p>;
-        case CASE_STATUS_TYPE.ReadyToBeClosed:
-          return <p>Ready to be closed</p>;
-        default:
-          return null;
-      }
-    };
-    return <div>{handleCaseStatus()}</div>;
+    const statusCase = data?.data;
+    switch (statusCase) {
+      case CASE_STATUS_TYPE.OPEN:
+        return <p>{CASE_STATUS_NAME.OPEN}</p>;
+      case CASE_STATUS_TYPE.CLOSED:
+        return <p>{CASE_STATUS_NAME.CLOSED}</p>;
+      case CASE_STATUS_TYPE.READYTOBECLOSED:
+        return <p>{CASE_STATUS_NAME.READYTOBECLOSED}</p>;
+      default:
+        return null;
+    }
   }
 
   function HandleCaseSeverity(data) {
-    const handleCaseSeverity = () => {
-      switch (data?.data) {
-        case CASE_SEVERITY_TYPE.URGENT:
-          return <p>Urgent</p>;
-        case CASE_SEVERITY_TYPE.HIGH:
-          return <p>High</p>;
-        case CASE_SEVERITY_TYPE.MEDIUM:
-          return <p>Medium</p>;
-        case CASE_SEVERITY_TYPE.LOW:
-          return <p>Low</p>;
-        default:
-          return null;
-      }
-    };
-    return <div>{handleCaseSeverity()}</div>;
+    const caseSeverity = data?.data;
+    switch (caseSeverity) {
+      case CASE_SEVERITY_TYPE.URGENT:
+        return <p>{CASE_SEVERITY_NAME.URGENT}</p>;
+      case CASE_SEVERITY_TYPE.HIGH:
+        return <p>{CASE_SEVERITY_NAME.HIGH}</p>;
+      case CASE_SEVERITY_TYPE.MEDIUM:
+        return <p>{CASE_SEVERITY_NAME.MEDIUM}</p>;
+      case CASE_SEVERITY_TYPE.LOW:
+        return <p>{CASE_SEVERITY_NAME.LOW}</p>;
+      default:
+        return null;
+    }
   }
   return (
     <GlobalUtilityStyle className="mr-[30px]">
@@ -50,7 +58,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p> Case ID </p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.caseId}</p>
+                <p>{caseId}</p>
               </Col>
             </Row>
 
@@ -59,7 +67,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p> Case Status </p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <HandleCaseStatus data={dataInfo?.case?.caseStatus} />
+                <HandleCaseStatus data={caseStatus} />
               </Col>
             </Row>
 
@@ -68,7 +76,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p> Original Source</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.case?.originalSource}</p>
+                <p>{originalSource}</p>
               </Col>
             </Row>
 
@@ -77,7 +85,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p>Owner</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.case?.owner}</p>
+                <p>{owner}</p>
               </Col>
             </Row>
 
@@ -86,7 +94,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p>Severity</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <HandleCaseSeverity data={dataInfo?.case?.severity} />
+                <HandleCaseSeverity data={severity} />
               </Col>
             </Row>
 
@@ -95,7 +103,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p> Due on</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{moment(dataInfo?.case?.dueDate).format('MM-DD-YYYY')}</p>
+                <p>{moment(dueDate).format('DD-MM-YYYY')}</p>
               </Col>
             </Row>
 
@@ -104,7 +112,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p> Due at</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{moment(dataInfo?.case?.dueDate).format('HH:mm A')}</p>
+                <p>{moment(dueDate).format('HH:mm A')}</p>
               </Col>
             </Row>
 
@@ -113,7 +121,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p>Description</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.case?.description}</p>
+                <p>{description}</p>
               </Col>
             </Row>
 
@@ -122,7 +130,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p>Description Of Solution</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.case?.solutionDescription}</p>
+                <p>{solutionDescription}</p>
               </Col>
             </Row>
 
@@ -131,15 +139,17 @@ function GeneralInfoCase({ dataInfo }) {
                 <p>Related Cases</p>
               </Col>
               <Col span={16} className="text-[13px]" style={{ display: 'flex' }}>
-                {dataInfo?.case?.caseAss.map((caseAss, index) => {
-                  return (
-                    <GlobalUtilityStyle key={index}>
-                      <Link to="#" key={index} style={{ paddingRight: '10px' }}>
-                        {caseAss.caseGroupId}
-                      </Link>
-                    </GlobalUtilityStyle>
-                  );
-                })}
+                {caseAss && caseAss.length
+                  ? caseAss.map((ca, index) => {
+                      return (
+                        <GlobalUtilityStyle key={index}>
+                          <Link to="#" key={index} style={{ paddingRight: '10px' }}>
+                            {ca.caseGroupId}
+                          </Link>
+                        </GlobalUtilityStyle>
+                      );
+                    })
+                  : ''}
               </Col>
             </Row>
 
@@ -148,7 +158,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p>Classifications</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{dataInfo?.case?.caseId}</p>
+                <p>{customer?.classification}</p>
               </Col>
             </Row>
           </div>

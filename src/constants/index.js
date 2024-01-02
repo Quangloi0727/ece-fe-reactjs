@@ -41,7 +41,12 @@ export const CONDITION_LIST_EMAIL_TO = 1;
 export const CASE_STATUS_TYPE = {
   OPEN: 0,
   CLOSED: 1,
-  ReadyToBeClosed: 2,
+  READYTOBECLOSED: 2,
+};
+export const CASE_STATUS_NAME = {
+  OPEN: 'Open',
+  CLOSED: 'Closed',
+  READYTOBECLOSED: 'ReadyToBeClosed',
 };
 export const CASE_SEVERITY_TYPE = {
   URGENT: 1,
@@ -49,6 +54,13 @@ export const CASE_SEVERITY_TYPE = {
   MEDIUM: 3,
   LOW: 4,
 };
+export const CASE_SEVERITY_NAME = {
+  URGENT: 'Urgent',
+  HIGH: 'High',
+  MEDIUM: 'Medium',
+  LOW: 'Low',
+};
+
 // export const ACTIVITY_HISTORY = [
 //   {
 //     key: 1,
