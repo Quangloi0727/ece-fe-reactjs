@@ -50,7 +50,7 @@ function CaseDetail() {
     {
       key: CASE_DETAIL_TAB.GENERAL_INFO,
       label: `${t('generalInformation')}`,
-      children: <GeneralInfoCase dataInfo={data && data.length ? data[0]?.case : []} />,
+      children: <GeneralInfoCase dataInfo={data && data.length ? data[0].case : []} />,
     },
     {
       key: CASE_DETAIL_TAB.CONTENT_ACTIVITY,
@@ -67,7 +67,7 @@ function CaseDetail() {
     {
       key: CASE_DETAIL_TAB.NOTE,
       label: `${t('note')}`,
-      children: <Note data={data[0]?.case?.notes} />,
+      children: <Note data={data && data.length ? data[0].case?.notes : []} />,
     },
   ];
 
@@ -100,7 +100,7 @@ function CaseDetail() {
                       <Resize handleWidth="3px">
                         <ResizeHorizon width="45%" className="resize-left">
                           {data && data.length
-                            ? data?.map((value, index) => (
+                            ? data.map((value, index) => (
                                 <ContentCase value={value} key={index} changeContentCase={handleChangeContentCase} />
                               ))
                             : ''}

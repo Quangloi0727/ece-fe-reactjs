@@ -6,6 +6,33 @@ import { Link } from 'react-router-dom';
 import { GlobalUtilityStyle } from '../../../container/styled';
 import { CASE_STATUS_TYPE, CASE_SEVERITY_TYPE, CASE_STATUS_NAME, CASE_SEVERITY_NAME } from '../../../constants/index';
 
+function HandleCaseStatus(status) {
+  switch (status) {
+    case CASE_STATUS_TYPE.OPEN:
+      return <p>{CASE_STATUS_NAME.OPEN}</p>;
+    case CASE_STATUS_TYPE.CLOSED:
+      return <p>{CASE_STATUS_NAME.CLOSED}</p>;
+    case CASE_STATUS_TYPE.READY_TO_BE_CLOSED:
+      return <p>{CASE_STATUS_NAME.READY_TO_BE_CLOSED}</p>;
+    default:
+      return '';
+  }
+}
+
+function HandleCaseSeverity(severity) {
+  switch (severity) {
+    case CASE_SEVERITY_TYPE.URGENT:
+      return <p>{CASE_SEVERITY_NAME.URGENT}</p>;
+    case CASE_SEVERITY_TYPE.HIGH:
+      return <p>{CASE_SEVERITY_NAME.HIGH}</p>;
+    case CASE_SEVERITY_TYPE.MEDIUM:
+      return <p>{CASE_SEVERITY_NAME.MEDIUM}</p>;
+    case CASE_SEVERITY_TYPE.LOW:
+      return <p>{CASE_SEVERITY_NAME.LOW}</p>;
+    default:
+      return '';
+  }
+}
 function GeneralInfoCase({ dataInfo }) {
   const {
     caseId,
@@ -19,35 +46,7 @@ function GeneralInfoCase({ dataInfo }) {
     caseAss,
     customer,
   } = dataInfo;
-  function HandleCaseStatus(data) {
-    const statusCase = data?.data;
-    switch (statusCase) {
-      case CASE_STATUS_TYPE.OPEN:
-        return <p>{CASE_STATUS_NAME.OPEN}</p>;
-      case CASE_STATUS_TYPE.CLOSED:
-        return <p>{CASE_STATUS_NAME.CLOSED}</p>;
-      case CASE_STATUS_TYPE.READYTOBECLOSED:
-        return <p>{CASE_STATUS_NAME.READYTOBECLOSED}</p>;
-      default:
-        return null;
-    }
-  }
 
-  function HandleCaseSeverity(data) {
-    const caseSeverity = data?.data;
-    switch (caseSeverity) {
-      case CASE_SEVERITY_TYPE.URGENT:
-        return <p>{CASE_SEVERITY_NAME.URGENT}</p>;
-      case CASE_SEVERITY_TYPE.HIGH:
-        return <p>{CASE_SEVERITY_NAME.HIGH}</p>;
-      case CASE_SEVERITY_TYPE.MEDIUM:
-        return <p>{CASE_SEVERITY_NAME.MEDIUM}</p>;
-      case CASE_SEVERITY_TYPE.LOW:
-        return <p>{CASE_SEVERITY_NAME.LOW}</p>;
-      default:
-        return null;
-    }
-  }
   return (
     <GlobalUtilityStyle className="mr-[30px]">
       <Row gutter={5}>
@@ -67,7 +66,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p> Case Status </p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <HandleCaseStatus data={caseStatus} />
+                {HandleCaseStatus(caseStatus)}
               </Col>
             </Row>
 
@@ -94,7 +93,7 @@ function GeneralInfoCase({ dataInfo }) {
                 <p>Severity</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <HandleCaseSeverity data={severity} />
+                {HandleCaseSeverity(severity)}
               </Col>
             </Row>
 

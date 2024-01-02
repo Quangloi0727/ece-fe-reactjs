@@ -41,12 +41,12 @@ export const CONDITION_LIST_EMAIL_TO = 1;
 export const CASE_STATUS_TYPE = {
   OPEN: 0,
   CLOSED: 1,
-  READYTOBECLOSED: 2,
+  READY_TO_BE_CLOSED: 2,
 };
 export const CASE_STATUS_NAME = {
   OPEN: 'Open',
   CLOSED: 'Closed',
-  READYTOBECLOSED: 'ReadyToBeClosed',
+  READY_TO_BE_CLOSED: 'ReadyToBeClosed',
 };
 export const CASE_SEVERITY_TYPE = {
   URGENT: 1,

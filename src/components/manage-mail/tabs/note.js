@@ -7,7 +7,7 @@ import { GlobalUtilityStyle } from '../../../container/styled';
 function Note({ data }) {
   return data && data.length ? (
     <GlobalUtilityStyle className="mr-[30px]">
-      {data?.map((el, index) => (
+      {data.map((el, index) => (
         <div className="result-list-content" key={index}>
           <Row>
             <Col md={24} style={{ marginLeft: '30px' }}>
