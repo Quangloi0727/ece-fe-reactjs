@@ -52,7 +52,7 @@ function ListEmail() {
     setConfigColumn(newConfigs);
   }, [customizeTableData]);
   const tableDataSource = [];
-  if (tableData.length > 0) {
+  if (tableData.length) {
     tableData.map((item) => {
       const {
         activityId,

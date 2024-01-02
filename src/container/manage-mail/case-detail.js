@@ -50,7 +50,7 @@ function CaseDetail() {
     {
       key: CASE_DETAIL_TAB.GENERAL_INFO,
       label: `${t('generalInformation')}`,
-      children: <GeneralInfoCase dataInfo={data && data.length ? data[0].case : []} />,
+      children: <GeneralInfoCase dataInfo={data && data[0] && data[0].case ? data[0].case : []} />,
     },
     {
       key: CASE_DETAIL_TAB.CONTENT_ACTIVITY,
@@ -67,7 +67,7 @@ function CaseDetail() {
     {
       key: CASE_DETAIL_TAB.NOTE,
       label: `${t('note')}`,
-      children: <Note data={data && data.length ? data[0].case?.notes : []} />,
+      children: <Note data={data && data[0] && data[0].case && data[0].case.notes ? data[0].case?.notes : []} />,
     },
   ];
 
