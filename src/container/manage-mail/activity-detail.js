@@ -34,9 +34,8 @@ function ActivityDetail() {
       data: states.dataActivityDetail.data,
     };
   });
-  const { noteActivity, historyActivity } = data;
+  const { notes, historyActivity } = data;
 
-  console.log('data', historyActivity);
   const items = [
     {
       key: ACTIVITY_DETAIL_TAB.GENERAL_INFO,
@@ -46,7 +45,7 @@ function ActivityDetail() {
     {
       key: ACTIVITY_DETAIL_TAB.NOTE,
       label: `${t('note')}`,
-      children: <Note dataNote={noteActivity} />,
+      children: <Note data={notes} />,
     },
     {
       key: ACTIVITY_DETAIL_TAB.ACTIVITY_HISTORY,
@@ -85,10 +84,10 @@ function ActivityDetail() {
                   <div className="p-[25px]" style={{ minHeight: '600px' }}>
                     <div className="flex items-center w-full mt-5 mb-[25px] md:flex-col gap-[15px]">
                       <Resize handleWidth="3px">
-                        <ResizeHorizon width="65%" className="resize-activity-left">
+                        <ResizeHorizon width="60%" className="resize-activity-left">
                           <ContentActivity value={data} handlePrint={printContentToPdf} ref={componentRef} />
                         </ResizeHorizon>
-                        <ResizeHorizon className="resize-activity-right">
+                        <ResizeHorizon width="40%" className="resize-activity-right">
                           <Tabs
                             style={{
                               overflowY: 'scroll',

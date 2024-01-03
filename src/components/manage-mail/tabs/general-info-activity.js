@@ -6,7 +6,7 @@ import moment from 'moment/moment';
 import { GlobalUtilityStyle } from '../../../container/styled';
 
 function GeneralInfoActivity({ dataInfo }) {
-  const { activityId, caseId, activityPriority, contactPoint, department, user, dueDate } = dataInfo;
+  const { activityId, caseId, activityPriority, contactPoint, department, user, dueDate, customer } = dataInfo;
   return (
     <GlobalUtilityStyle className="mr-[30px]">
       <Row gutter={10}>
@@ -74,7 +74,7 @@ function GeneralInfoActivity({ dataInfo }) {
                 <p> Due on</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{moment(dueDate).format('MM-DD-YYYY')}</p>
+                <p>{moment(dueDate).format('DD-MM-YYYY')}</p>
               </Col>
             </Row>
 
@@ -92,7 +92,7 @@ function GeneralInfoActivity({ dataInfo }) {
                 <p> Classification</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{caseId}</p>
+                <p>{customer?.classification}</p>
               </Col>
             </Row>
           </div>

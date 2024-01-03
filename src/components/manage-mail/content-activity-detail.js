@@ -44,7 +44,7 @@ const ContentActivity = forwardRef(({ value, handlePrint, checkNullTab }, ref) =
               <Col span={2}>Subject:</Col>
               <Col span={12}>{subject}</Col>
               <Col span={3}>Create On:</Col>
-              <Col span={7}>{moment(createdOn).format('MM-DD-YYYY HH:mm A')}</Col>
+              <Col span={7}>{moment(createdOn).format('DD-MM-YYYY HH:mm A')}</Col>
             </Row>
             <Row gutter={[16, 16]} className="row-general-info buttonFile">
               {email?.emailAttachmentLink && email?.emailAttachmentLink.length
