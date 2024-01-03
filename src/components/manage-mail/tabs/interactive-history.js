@@ -3,6 +3,8 @@ import { Col, Row } from 'antd';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { GlobalUtilityStyle } from '../../../container/styled';
+import { ACTIVITY_HISTORY } from '../../../constants/index';
+import { HandleDataDisPlay } from '../../../libs/common';
 
 function InteractiveHistory({ dataHistory }) {
   return (
@@ -18,7 +20,7 @@ function InteractiveHistory({ dataHistory }) {
                   <span>{el?.user?.firstName} </span>
                   {el?.user?.lastName}
                 </Col>
-                <Col span={10}>{el?.objectOperation}</Col>
+                <Col span={10}>{HandleDataDisPlay(el?.objectOperation, ACTIVITY_HISTORY)}</Col>
               </Row>
             </div>
           </Col>

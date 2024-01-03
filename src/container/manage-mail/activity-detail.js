@@ -84,10 +84,10 @@ function ActivityDetail() {
                   <div className="p-[25px]" style={{ minHeight: '600px' }}>
                     <div className="flex items-center w-full mt-5 mb-[25px] md:flex-col gap-[15px]">
                       <Resize handleWidth="3px">
-                        <ResizeHorizon width="65%" className="resize-activity-left">
+                        <ResizeHorizon width="60%" className="resize-activity-left">
                           <ContentActivity value={data} handlePrint={printContentToPdf} ref={componentRef} />
                         </ResizeHorizon>
-                        <ResizeHorizon className="resize-activity-right">
+                        <ResizeHorizon width="40%" className="resize-activity-right">
                           <Tabs
                             style={{
                               overflowY: 'scroll',
