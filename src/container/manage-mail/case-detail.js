@@ -67,7 +67,7 @@ function CaseDetail() {
     {
       key: CASE_DETAIL_TAB.NOTE,
       label: `${t('note')}`,
-      children: <Note data={data && data[0] && data[0].case && data[0].case.notes ? data[0].case?.notes : []} />,
+      children: <Note data={data && data[0] && data[0].case && data[0].case.notes ? data[0].case.notes : []} />,
     },
   ];
 
