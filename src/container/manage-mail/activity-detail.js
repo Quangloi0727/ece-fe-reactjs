@@ -34,7 +34,7 @@ function ActivityDetail() {
       data: states.dataActivityDetail.data,
     };
   });
-  const { notes, historyActivity } = data;
+  const { notes, historyActivity, caseId, queue } = data;
 
   const items = [
     {
@@ -50,7 +50,7 @@ function ActivityDetail() {
     {
       key: ACTIVITY_DETAIL_TAB.ACTIVITY_HISTORY,
       label: `${t('interactiveHistory')}`,
-      children: <HistoryActivity dataHistory={historyActivity} />,
+      children: <HistoryActivity dataHistory={historyActivity} caseId={caseId} queue={queue} />,
     },
   ];
 

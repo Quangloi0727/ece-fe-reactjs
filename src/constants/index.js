@@ -54,7 +54,7 @@ export const ACTIVITY_HISTORY = [
   {
     key: 1,
     name: 'NEW_IMCOMING_NEW_EVENT',
-    message: 'New imcoming new event',
+    message: 'New imcoming mail',
   },
   //   {
   //     key: 2,
@@ -84,7 +84,7 @@ export const ACTIVITY_HISTORY = [
   {
     key: 205,
     name: 'PUSH_TO_AGENT_EVENT',
-    message: 'Push to agent event',
+    message: 'Assigned to {firstName} {lastName}',
   },
   //   {
   //     key: 214,
@@ -104,7 +104,7 @@ export const ACTIVITY_HISTORY = [
   {
     key: 101,
     name: 'AUTO_ACKNOWLEDGED_EVENT',
-    message: 'Auto acknowledged event',
+    message: 'Auto acknowledged ',
   },
   //   {
   //     key: 29,
@@ -424,7 +424,7 @@ export const ACTIVITY_HISTORY = [
   {
     key: 549,
     name: 'READ_INPROGRESS_ACTIVITY_EVENT',
-    message: 'Read inprogress activity event',
+    message: 'Read in progress',
   },
   //   {
   //     key: 550,
@@ -554,7 +554,7 @@ export const ACTIVITY_HISTORY = [
   {
     key: 210,
     name: 'PUSH_NEW_CASE_ACTIVITY_TO_QUEUE_EVENT',
-    message: 'Push new case activity to queue event',
+    message: 'Assigned to queue {queue}',
   },
   //   {
   //     key: 211,
@@ -594,12 +594,12 @@ export const ACTIVITY_HISTORY = [
   {
     key: 601,
     name: 'NEW_CASE_CREATE_EVENT',
-    message: 'New case create event',
+    message: 'New case created',
   },
   {
     key: 602,
     name: 'NEW_ACTIVITY_TO_NEW_CASE_ASSGIN_EVENT',
-    message: 'New activity to new case assgin event',
+    message: 'Activity assigned to new case {caseId} by {firstName} {lastName}',
   },
   //   {
   //     key: 603,
@@ -634,11 +634,11 @@ export const ACTIVITY_HISTORY = [
   {
     key: 2210,
     name: 'ACTIVITY_SEND_TO_UnifiedCCE_FOR_ROUTING',
-    message: 'Activity send to UnifiedCCE for routing',
+    message: 'Sent to Unified CCE for routing',
   },
   {
     key: 2212,
     name: 'ROUTING_RESPONSE_RETURNED_FROM_UnifiedCCE',
-    message: 'Routing response returned from UnifiedCCE',
+    message: 'Unified CCE identified {userName} for assignment',
   },
 ];
