@@ -12,6 +12,10 @@ const ContentActivity = forwardRef(({ value, handlePrint, checkNullTab }, ref) =
     handlePrint();
   };
   const { subject, emailData, createdOn, email } = value;
+  const contentNew =
+    emailData && emailData.content
+      ? emailData.content.replace(/@page WordSection1.*?div\.WordSection1\s*{.*?}/gs, '')
+      : '';
   return !checkNullTab ? (
     <GlobalUtilityStyle ref={ref}>
       <Row gutter={15} className="text-[13px]">
@@ -56,7 +60,7 @@ const ContentActivity = forwardRef(({ value, handlePrint, checkNullTab }, ref) =
                 : ''}
             </Row>
             <div style={{ paddingTop: '20px' }}>
-              <GlobalUtilityStyle dangerouslySetInnerHTML={{ __html: emailData?.content }} />
+              <GlobalUtilityStyle dangerouslySetInnerHTML={{ __html: contentNew }} />
             </div>
           </div>
         </Col>
