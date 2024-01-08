@@ -43,15 +43,6 @@ class DataService {
     });
   }
 
-  static downloadFile(path = '') {
-    return client({
-      method: 'GET',
-      url: path,
-      responseType: 'blob',
-      headers: { ...authHeader() },
-    });
-  }
-
   static patch(path = '', data = {}) {
     return client({
       method: 'PATCH',
