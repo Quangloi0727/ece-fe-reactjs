@@ -3,24 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Row, Col } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Auth0Lock } from 'auth0-lock';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { AuthFormWrap } from './style';
-import { auth0options } from '../../../../config/auth0';
 import { login } from '../../../../redux/authentication/actionCreator';
 import { openNotificationWithIcon } from '../../../../components/notifications/notification';
-
-const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 function SignIn() {
   const history = useNavigate();
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.auth.loading);
   const [form] = Form.useForm();
-
-  const lock = new Auth0Lock(clientId, domain, auth0options);
 
   const handleSubmit = useCallback(
     (values) => {
@@ -34,16 +27,6 @@ function SignIn() {
     },
     [history, dispatch],
   );
-  lock.on('authenticated', (authResult) => {
-    lock.getUserInfo(authResult.accessToken, (error) => {
-      if (error) {
-        return;
-      }
-
-      handleSubmit();
-      lock.hide();
-    });
-  });
 
   return (
     <Row justify="center">
