@@ -74,7 +74,7 @@ const AuthInfo = React.memo(() => {
       <div className="ninjadash-nav-actions__item ninjadash-nav-actions__author">
         <Popover placement="bottomRight" content={userContent} action="click">
           <Link to="#" className="ninjadash-nav-action-link">
-            <Avatar src="https://media.istockphoto.com/id/1300845620/fr/vectoriel/appartement-dic%C3%B4ne-dutilisateur-isol%C3%A9-sur-le-fond-blanc-symbole-utilisateur.jpg?s=612x612&w=0&k=20&c=BVOfS7mmvy2lnfBPghkN__k8OMsg7Nlykpgjn0YOHj0=" />
+            <Avatar src={require(`../../../static/img/avatar/profileImage1.jpeg`)} />
             <span className="ninjadash-nav-actions__author--name">
               {getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).displayName}
             </span>

@@ -48,7 +48,7 @@ function ContentCase({ value, changeContentCase }) {
                         <Row>
                           <Col span={23}>
                             <p>
-                              <Link to={`/manage-email/case/${activityId}`} style={{ textDecoration: 'underline' }}>
+                              <Link to={`/manage-email/activity/${activityId}`} style={{ textDecoration: 'underline' }}>
                                 {activityId}
                               </Link>{' '}
                               {user?.userName}({fromEmailAddress})
