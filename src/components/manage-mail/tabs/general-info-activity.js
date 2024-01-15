@@ -35,7 +35,7 @@ function GeneralInfoActivity({ dataInfo }) {
                 <p> Case ID </p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <Link to={`/manage-email/caseid/${caseId}`}>{caseId}</Link>
+                <Link to={`/manage-email/case/${caseId}`}>{caseId}</Link>
               </Col>
             </Row>
 
