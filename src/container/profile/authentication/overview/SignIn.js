@@ -40,7 +40,6 @@ function SignIn() {
             <Form name="login" form={form} onFinish={handleSubmit} layout="vertical">
               <Form.Item
                 name="username"
-                initialValue="loitest"
                 rules={[{ message: 'Vui lòng nhập username !', required: true }]}
                 label=""
                 className="customizeInputLogin"
@@ -49,7 +48,6 @@ function SignIn() {
               </Form.Item>
               <Form.Item
                 name="password"
-                initialValue="Hanoi@2023"
                 rules={[{ message: 'Vui lòng nhập password !', required: true }]}
                 label=""
                 className="customizeInputLogin"
