@@ -90,7 +90,7 @@ client.interceptors.response.use(
         localStorage.clear();
         window.location.href = '/login';
       }
-      if (response.status === 401) {
+      if (response.status === 401 && response.config.url !== '/login') {
         const refreshToken = getItem(LOCAL_STORAGE_VARIABLE.USER_DATA)?.refreshToken;
         const responseRefreshToken = await DataService.post('/auth/refresh-token', { refreshToken });
         setItem(LOCAL_STORAGE_VARIABLE.USER_DATA, {
