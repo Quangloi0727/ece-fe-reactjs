@@ -1,6 +1,6 @@
 import { Col, Row, Tabs } from 'antd';
 import React, { useEffect, useState, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { LeftOutlined } from '@ant-design/icons';
 import TabPane from 'antd/es/tabs/TabPane';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,6 +26,7 @@ function CaseDetail() {
   const [checkNullTab, setCheckNullTab] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const history = useNavigate();
 
   useEffect(() => {
     dispatch(caseDetailData(caseId));
@@ -76,6 +77,10 @@ function CaseDetail() {
     setCheckNullTab(true);
   };
 
+  const backToPreviousPage = () => {
+    history(-1);
+  };
+
   return (
     <>
       <PageHeader
@@ -90,7 +95,7 @@ function CaseDetail() {
                 <div className="bg-white dark:bg-white10 m-0 p-0 mb-[25px] rounded-10 relative">
                   <div className="py-[16px] px-[25px] text-dark dark:text-white87 font-medium text-[17px] border-regular dark:border-white10 border-b ">
                     <Heading as="h4" className="text-lg font-medium mb-0">
-                      <Link to="/list-email" className="bg-white">
+                      <Link className="bg-white" onClick={backToPreviousPage}>
                         <LeftOutlined style={{ verticalAlign: 'baseline' }} /> {t('goBackPreviousScreen')}
                       </Link>
                     </Heading>
