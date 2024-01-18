@@ -11,15 +11,16 @@ import { Dropdown } from '../../dropdown/dropdown';
 import { logOut } from '../../../redux/authentication/actionCreator';
 import { openNotificationWithIcon } from '../../notifications/notification';
 import { setItem, getItem } from '../../../utility/localStorageControl';
-import { LOCAL_STORAGE_VARIABLE } from '../../../constants/index';
+import { LOCAL_STORAGE_VARIABLE, SEARCH_ON_SYSTEM } from '../../../constants/index';
 
 const AuthInfo = React.memo(() => {
   const dispatch = useDispatch();
   const [state, setState] = useState({
     flag: getItem(LOCAL_STORAGE_VARIABLE.LANGUAGE) || 'vi',
+    searchOnSystem: getItem(LOCAL_STORAGE_VARIABLE.SEARCH_ON_SYSTEM) || 'old',
   });
-  const { i18n } = useTranslation();
-  const { flag } = state;
+  const { i18n, t } = useTranslation();
+  const { flag, searchOnSystem } = state;
   const history = useNavigate();
 
   const SignOut = useCallback(() => {
@@ -34,7 +35,7 @@ const AuthInfo = React.memo(() => {
   const userContent = (
     <UserDropDwon>
       <Link className="user-dropdwon__bottomAction" onClick={SignOut} to="#">
-        <UilSignout /> Đăng xuất
+        <UilSignout /> {t('logout')}
       </Link>
     </UserDropDwon>
   );
@@ -47,6 +48,17 @@ const AuthInfo = React.memo(() => {
       flag: value,
     });
     i18n.changeLanguage(value);
+  };
+
+  const onSearchOnSystemChangeHandle = (value, e) => {
+    e.preventDefault();
+    setItem(LOCAL_STORAGE_VARIABLE.SEARCH_ON_SYSTEM, value);
+    setState({
+      ...state,
+      searchOnSystem: value,
+    });
+    history('/list-email');
+    window.location.reload(true);
   };
 
   const country = (
@@ -62,8 +74,28 @@ const AuthInfo = React.memo(() => {
     </NavAuth>
   );
 
+  const systems = (
+    <NavAuth>
+      <Link onClick={(e) => onSearchOnSystemChangeHandle(SEARCH_ON_SYSTEM.OLD, e)} to="#">
+        <span>{t('searchOnOldSystem')}</span>
+      </Link>
+      <Link onClick={(e) => onSearchOnSystemChangeHandle(SEARCH_ON_SYSTEM.NEW, e)} to="#">
+        <span>{t('searchOnNewSystem')}</span>
+      </Link>
+    </NavAuth>
+  );
+
   return (
     <InfoWraper>
+      <div className="ninjadash-nav-actions__item ninjadash-nav-actions__language">
+        <Dropdown placement="bottomRight" content={systems} trigger="click">
+          <Link to="#" className="ninjadash-nav-action-link">
+            <span className="ninjadash-nav-actions__author--name">
+              {searchOnSystem === SEARCH_ON_SYSTEM.NEW ? t('searchOnNewSystem') : t('searchOnOldSystem')}
+            </span>
+          </Link>
+        </Dropdown>
+      </div>
       <div className="ninjadash-nav-actions__item ninjadash-nav-actions__language">
         <Dropdown placement="bottomRight" content={country} trigger="click">
           <Link to="#" className="ninjadash-nav-action-link">

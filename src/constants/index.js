@@ -15,6 +15,7 @@ export const LOCAL_STORAGE_VARIABLE = {
   LANGUAGE: 'lang',
   CUSTOMIZE_TABLE: 'customizeTable',
   FILTER_ADVANCE: 'filterAdvance',
+  SEARCH_ON_SYSTEM: 'searchOnSystem',
 };
 export const STATUS_CODE_SUCCESS = [200, 201];
 export const ACTIVITY_DETAIL_TAB = {
@@ -122,3 +123,8 @@ export const ACTIVITY_HISTORY = [
     message: 'Unified CCE identified {userName} for assignment',
   },
 ];
+
+export const SEARCH_ON_SYSTEM = {
+  OLD: 'old',
+  NEW: 'new',
+};
