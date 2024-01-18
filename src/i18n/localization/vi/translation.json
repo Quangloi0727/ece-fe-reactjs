@@ -35,5 +35,8 @@
     "priority": "Priority",
     "file": "Attached File",
     "direction": "Hướng"
-  }
+  },
+  "logout":"Đăng xuất",
+  "searchOnNewSystem":"Tra cứu trên hệ thống mới",
+  "searchOnOldSystem":"Tra cứu trên hệ thống cũ"
 }

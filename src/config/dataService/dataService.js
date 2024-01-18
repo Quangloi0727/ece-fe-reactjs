@@ -18,6 +18,7 @@ const client = axios.create({
 
 class DataService {
   static get(path = '', params = {}) {
+    params.system = getItem(LOCAL_STORAGE_VARIABLE.SEARCH_ON_SYSTEM) || 'old';
     return client({
       method: 'GET',
       url: path,

@@ -35,5 +35,8 @@
     "priority": "Priority",
     "file": "Attached File",
     "direction": "Direction"
-  }
+  },
+  "logout":"Log Out",
+  "searchOnNewSystem":"Search on new system",
+  "searchOnOldSystem":"Search on old system"
 }

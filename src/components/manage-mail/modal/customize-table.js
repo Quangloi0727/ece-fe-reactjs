@@ -56,7 +56,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
         () => {
           hideModal();
           openNotificationWithIcon('success', 'Lưu thành công !');
-          window.location.href = '/list-email';
+          window.location.reload(true);
         },
         (err) => {
           openNotificationWithIcon('error', 'Lưu thất bại !', err.message);

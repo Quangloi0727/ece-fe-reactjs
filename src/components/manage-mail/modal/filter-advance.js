@@ -46,10 +46,10 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
     });
   };
 
-  if (listUser.length) {
+  if (listUser && listUser.length) {
     addOptionToSelect(listUser, 'assignedTo', 'userName', 'userId', { label: 'System', value: 'system' });
   }
-  if (listQueue.length) {
+  if (listQueue && listQueue.length) {
     addOptionToSelect(listQueue, 'queueName', 'queueName', 'queueId');
   }
 
