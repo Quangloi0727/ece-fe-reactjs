@@ -34,7 +34,7 @@ const AuthInfo = React.memo(() => {
 
   const userContent = (
     <UserDropDwon>
-      <Link className="user-dropdwon__bottomAction" onClick={SignOut} to="#">
+      <Link className="user-dropdwon__bottomAction" onClick={SignOut}>
         <UilSignout /> {t('logout')}
       </Link>
     </UserDropDwon>
@@ -63,11 +63,11 @@ const AuthInfo = React.memo(() => {
 
   const country = (
     <NavAuth>
-      <Link onClick={(e) => onFlagChangeHandle('vi', e)} to="#">
+      <Link onClick={(e) => onFlagChangeHandle('vi', e)}>
         <img src={require('../../../static/img/flag/vi.png')} alt="" />
         <span>Vietnamese</span>
       </Link>
-      <Link onClick={(e) => onFlagChangeHandle('en', e)} to="#">
+      <Link onClick={(e) => onFlagChangeHandle('en', e)}>
         <img src={require('../../../static/img/flag/en.png')} alt="" />
         <span>English</span>
       </Link>
@@ -76,10 +76,10 @@ const AuthInfo = React.memo(() => {
 
   const systems = (
     <NavAuth>
-      <Link onClick={(e) => onSearchOnSystemChangeHandle(SEARCH_ON_SYSTEM.OLD, e)} to="#">
+      <Link onClick={(e) => onSearchOnSystemChangeHandle(SEARCH_ON_SYSTEM.OLD, e)}>
         <span>{t('searchOnOldSystem')}</span>
       </Link>
-      <Link onClick={(e) => onSearchOnSystemChangeHandle(SEARCH_ON_SYSTEM.NEW, e)} to="#">
+      <Link onClick={(e) => onSearchOnSystemChangeHandle(SEARCH_ON_SYSTEM.NEW, e)}>
         <span>{t('searchOnNewSystem')}</span>
       </Link>
     </NavAuth>
@@ -89,7 +89,7 @@ const AuthInfo = React.memo(() => {
     <InfoWraper>
       <div className="ninjadash-nav-actions__item ninjadash-nav-actions__language">
         <Dropdown placement="bottomRight" content={systems} trigger="click">
-          <Link to="#" className="ninjadash-nav-action-link">
+          <Link className="ninjadash-nav-action-link">
             <span className="ninjadash-nav-actions__author--name">
               {searchOnSystem === SEARCH_ON_SYSTEM.NEW ? t('searchOnNewSystem') : t('searchOnOldSystem')}
             </span>
@@ -98,14 +98,14 @@ const AuthInfo = React.memo(() => {
       </div>
       <div className="ninjadash-nav-actions__item ninjadash-nav-actions__language">
         <Dropdown placement="bottomRight" content={country} trigger="click">
-          <Link to="#" className="ninjadash-nav-action-link">
+          <Link className="ninjadash-nav-action-link">
             <img src={require(`../../../static/img/flag/${flag}.png`)} alt="" height="20px" width="20px" />
           </Link>
         </Dropdown>
       </div>
       <div className="ninjadash-nav-actions__item ninjadash-nav-actions__author">
         <Popover placement="bottomRight" content={userContent} action="click">
-          <Link to="#" className="ninjadash-nav-action-link">
+          <Link className="ninjadash-nav-action-link">
             <Avatar src={require(`../../../static/img/avatar/profileImage1.jpeg`)} />
             <span className="ninjadash-nav-actions__author--name">
               {getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).displayName}
