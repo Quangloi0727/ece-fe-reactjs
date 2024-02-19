@@ -3,7 +3,7 @@ import { DndContext } from '@dnd-kit/core';
 import { arrayMove, rectSortingStrategy, SortableContext, useSortable } from '@dnd-kit/sortable';
 import { MenuOutlined } from '@ant-design/icons';
 import { CSS } from '@dnd-kit/utilities';
-import { Col, Form, Modal, Row, Space } from 'antd';
+import { Col, Form, Modal, Row, Space, Tooltip } from 'antd';
 import propTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -25,7 +25,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
 
   const [state, setState] = useState({
     showOrHideModalCustomizeTable,
-    customizeTableDragDrop: customizeTableData,
+    customizeTableDragDrop: JSON.parse(JSON.stringify(customizeTableData)),
   });
 
   const [stateCheckBoxAll, setStateCheckBoxAll] = useState(false);
@@ -37,6 +37,11 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
     if (index === -1) return;
     customizeTableDragDrop[index].isChecked = !customizeTableDragDrop[index].isChecked;
     setState({ ...state, customizeTableDragDrop: [...customizeTableDragDrop] });
+  };
+
+  const handleCancelPopup = () => {
+    hideModal();
+    setState({ ...state, customizeTableDragDrop: JSON.parse(JSON.stringify(customizeTableData)) });
   };
 
   const handleChangeAllCheckBox = (isChecked) => {
@@ -91,9 +96,12 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
             <div>{t(`${PREFIX_CUSTOMIZE_TABLE}${key}`)}</div>
           </Col>
           <Col span={1}>
-            <div className="ant-table-cell drag-visible">
+            <Tooltip
+              title={<span className="text-[13px]">Ấn và kéo để sắp xếp</span>}
+              className="ant-table-cell drag-visible"
+            >
               <MenuOutlined ref={setActivatorNodeRef} {...listeners} />
-            </div>
+            </Tooltip>
           </Col>
         </Row>
       </Form.Item>
@@ -112,10 +120,11 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
 
   return (
     <Modal
-      style={{ fontSize: '13px !important' }}
-      closable={false}
-      title="Tùy chỉnh bảng Tra cứu Email"
+      style={{ fontSize: '13px !important', position: 'relative' }}
+      title={<strong style={{ fontWeight: '1000' }}>Tùy chỉnh bảng Tra cứu Email</strong>}
       open={showOrHideModalCustomizeTable}
+      onCancel={hideModal}
+      maskClosable={false}
       footer={[
         <div
           style={{
@@ -140,7 +149,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
               type="danger"
               key="cancelFilter"
               className="px-5 text-[13px] font-semibold button-reset h-10"
-              onClick={hideModal}
+              onClick={() => handleCancelPopup()}
             >
               Hủy
             </Button>
@@ -159,7 +168,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
       width={600}
     >
       <DndContext onDragEnd={handleDragEnd}>
-        <div className="bg-white dark:bg-white10 m-0 p-0 rounded-10 relative" key="kfgk">
+        <div className="bg-white dark:bg-white10 m-0 p-0 rounded-10 relative modal-customize" key="kfgk">
           <div className="px-1.5">
             <Form name="contact">
               <Form.Item key="checkboxAll">

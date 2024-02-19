@@ -39,6 +39,7 @@ function DownLoadFile({ value }) {
       className="ant-button-filename truncate"
       type="primary"
       onClick={() => downloadFile(value?.emailAttachmentId)}
+      style={{ fontSize: 13, fontWeight: 400 }}
     >
       <LinkOutlined /> {value?.attachment?.fileName}({value?.attachment?.attachmentSize} KB)
     </Button>

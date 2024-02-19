@@ -9,7 +9,8 @@ import FilterAdvance from './modal/filter-advance';
 import CustomizeTable from './modal/customize-table';
 import { tableReadData } from '../../redux/manage-mail/list-mail/actionCreator';
 import { Button } from '../buttons/buttons';
-import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '../../constants';
+import { getItem } from '../../utility/localStorageControl';
+import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE, LOCAL_STORAGE_VARIABLE } from '../../constants';
 
 function DataListEmail({ tableData, columns, totalData }) {
   const dispatch = useDispatch();
@@ -22,14 +23,17 @@ function DataListEmail({ tableData, columns, totalData }) {
   const [page, setPage] = useState(DEFAULT_PAGE);
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
   const [searchMulti, setSearchMulti] = useState('');
-  const [filterAdvance, setFilterAdvance] = useState({});
+  const [filterAdvance, setFilterAdvance] = useState(getItem(LOCAL_STORAGE_VARIABLE.DATA_FILTER_ADVENCE) || {});
   const { showOrHideModalFilter, showOrHideModalCustomizeTable } = state;
 
   useEffect(() => {
-    if (dispatch) {
-      dispatch(tableReadData(page, pageSize, searchMulti, filterAdvance));
-    }
-  }, [page, pageSize, searchMulti, filterAdvance]);
+    const delayedDispatch = setTimeout(() => {
+      if (dispatch) {
+        dispatch(tableReadData(page, pageSize, searchMulti, filterAdvance));
+      }
+    }, 500);
+    return () => clearTimeout(delayedDispatch);
+  }, [page, pageSize, searchMulti, filterAdvance, dispatch]);
 
   const handleSearch = (e) => {
     const { value } = e.currentTarget;
@@ -103,19 +107,20 @@ function DataListEmail({ tableData, columns, totalData }) {
         <div className="min-w-[500px]">
           <Input
             onChange={handleSearch}
-            className="h-10 text-[13px] text-body dark:text-white60 bg-white dark:bg-white10 border-normal dark:border-white10 rounded-[6px]"
-            placeholder="Tìm kiếm theo activity id, case id, from to, subject"
+            className="h-10 text-[13px] text-body dark:text-white60  dark:bg-white10 border-normal dark:border-white10 rounded-[6px]"
+            placeholder="Tìm kiếm theo activity id, case id, from, to, subject"
             prefix={prefix}
           />
         </div>
       </div>
 
-      <div className="table-responsive hover-tr-none table-th-shape-none table-last-th-text-right table-th-border-none table-head-rounded table-td-border-none ant-pagination-custom-style ltr:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:first-child]:rounded-l-4 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:first-child]:rounded-r-4 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:first-child]:rounded-none ltr:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:last-child]:rounded-r-4 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:last-child]:rounded-l-4 rtl:[&>div>div>div>div>div>.ant-table-content>table>thead>tr>th:last-child]:rounded-none dark-border-row">
+      <div className="">
         <Table
           pagination={{
             showSizeChanger: true,
             total: totalData,
             onChange: handleChangePage,
+            style: { fontSize: 13, justifyContent: 'center' },
             showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
           }}
           dataSource={tableData}

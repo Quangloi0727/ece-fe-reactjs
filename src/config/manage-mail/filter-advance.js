@@ -4,6 +4,7 @@ const configFilterAdvance = [
   {
     key: 'caseId',
     placeholder: 'Nhập case id',
+    isShow: true,
     fieldType: FIELD_TYPE.TEXT,
     conditionValue: CONDITION_VALUE.MATCH,
     conditionKey: 'caseIdCondition',
@@ -20,6 +21,7 @@ const configFilterAdvance = [
   },
   {
     key: 'activityId',
+    isShow: true,
     placeholder: 'Nhập activity id',
     fieldType: FIELD_TYPE.TEXT,
     conditionValue: CONDITION_VALUE.MATCH,
@@ -37,6 +39,7 @@ const configFilterAdvance = [
   },
   {
     key: 'subject',
+    isShow: true,
     placeholder: 'Nhập subject',
     fieldType: FIELD_TYPE.TEXT,
     conditionValue: CONDITION_VALUE.MATCH,
@@ -54,7 +57,8 @@ const configFilterAdvance = [
   },
   {
     key: 'from',
-    placeholder: 'Nhập email from',
+    isShow: true,
+    placeholder: 'Nhập email',
     fieldType: FIELD_TYPE.TEXT,
     conditionKey: 'fromCondition',
     conditionValue: CONDITION_VALUE.MATCH,
@@ -71,7 +75,8 @@ const configFilterAdvance = [
   },
   {
     key: 'to',
-    placeholder: 'Nhập email to',
+    isShow: true,
+    placeholder: 'Nhập email',
     fieldType: FIELD_TYPE.TEXT,
     conditionValue: CONDITION_VALUE.MATCH,
     conditionKey: 'toCondition',
@@ -88,6 +93,7 @@ const configFilterAdvance = [
   },
   {
     key: 'assignedTo',
+    isShow: true,
     fieldType: FIELD_TYPE.SELECT,
     mode: 'multiple',
     placeholder: 'Chọn assigned to',
@@ -100,10 +106,12 @@ const configFilterAdvance = [
   },
   {
     key: 'createOn',
+    isShow: true,
     fieldType: FIELD_TYPE.DATE,
   },
   {
     key: 'subStatus',
+    isShow: true,
     fieldType: FIELD_TYPE.SELECT,
     placeholder: 'Chọn SubStatus',
     option: [
@@ -119,6 +127,7 @@ const configFilterAdvance = [
   },
   {
     key: 'queueName',
+    isShow: true,
     fieldType: 'SELECT',
     mode: 'multiple',
     placeholder: 'Chọn Queue Name',
@@ -126,6 +135,7 @@ const configFilterAdvance = [
   },
   {
     key: 'priority',
+    isShow: true,
     fieldType: 'SELECT',
     placeholder: 'Chọn priority',
     mode: 'multiple',
@@ -162,11 +172,12 @@ const configFilterAdvance = [
   },
   {
     key: 'file',
+    isShow: true,
     fieldType: 'SELECT',
     placeholder: 'Chọn có / không',
     option: [
       {
-        value: 'true',
+        value: true,
         label: 'Có',
       },
       {
@@ -177,6 +188,7 @@ const configFilterAdvance = [
   },
   {
     key: 'direction',
+    isShow: true,
     fieldType: 'SELECT',
     placeholder: 'Chọn hướng email',
     option: [
