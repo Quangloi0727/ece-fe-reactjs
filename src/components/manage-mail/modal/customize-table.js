@@ -53,21 +53,23 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
   };
 
   const handleSubmit = (flag) => {
-    const dataSet = flag === true ? [...customizeTableDragDrop] : [...customizeTableOrigin];
+    const dataSet = flag === true ? [...customizeTableDragDrop] : JSON.parse(JSON.stringify(customizeTableOrigin));
     setStateCheckBoxAll(false);
-    dispatch(
-      submitCustomizeTable(
-        dataSet,
-        () => {
-          hideModal();
-          openNotificationWithIcon('success', 'Lưu thành công !');
-          window.location.reload(true);
-        },
-        (err) => {
-          openNotificationWithIcon('error', 'Lưu thất bại !', err.message);
-        },
-      ),
-    );
+    if (flag) {
+      dispatch(
+        submitCustomizeTable(
+          dataSet,
+          () => {
+            hideModal();
+            openNotificationWithIcon('success', 'Lưu thành công !');
+            window.location.reload(true);
+          },
+          (err) => {
+            openNotificationWithIcon('error', 'Lưu thất bại !', err.message);
+          },
+        ),
+      );
+    }
     setState({ ...state, customizeTableDragDrop: dataSet });
   };
 

@@ -74,7 +74,7 @@ function GeneralInfoActivity({ dataInfo }) {
                 <p> Due on</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{moment(dueDate).format('DD-MM-YYYY')}</p>
+                <p>{dueDate !== null ? moment(dueDate).format('DD-MM-YYYY') : ''}</p>
               </Col>
             </Row>
 
@@ -83,7 +83,7 @@ function GeneralInfoActivity({ dataInfo }) {
                 <p> Due at</p>
               </Col>
               <Col span={16} className="text-[13px] ">
-                <p>{moment(dueDate).format('HH:mm A')}</p>
+                <p>{dueDate !== null ? moment(dueDate).format('HH:mm A') : ''}</p>
               </Col>
             </Row>
 

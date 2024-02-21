@@ -109,8 +109,8 @@ function ListEmail() {
             size="default"
             className={
               ACTIVITY_SUB_STATUS.DONE.includes(activitySubStatus)
-                ? 'success border-solid border-1 border-success text-white dark:text-white87 text-[13px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[40px] px-[20px] h-[44px] shadow-btn gap-[8px]'
-                : 'danger border-solid border-1 border-danger text-white dark:text-white87 text-[13px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[40px] px-[20px] h-[44px] shadow-btn gap-[8px]'
+                ? 'success border-solid border-1 border-success text-white dark:text-white87 text-[13px]  leading-[22px] inline-flex items-center justify-center rounded-[40px] px-[20px] h-[44px] shadow-btn gap-[8px]'
+                : 'danger border-solid border-1 border-danger text-white dark:text-white87 text-[13px]  leading-[22px] inline-flex items-center justify-center rounded-[40px] px-[20px] h-[44px] shadow-btn gap-[8px]'
             }
             key={activitySubStatus}
           >
