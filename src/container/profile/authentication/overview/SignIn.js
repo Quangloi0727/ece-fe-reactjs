@@ -40,7 +40,7 @@ function SignIn() {
             <Form name="login" form={form} onFinish={handleSubmit} layout="vertical">
               <Form.Item
                 name="username"
-                rules={[{ message: 'Vui lòng nhập username !', required: true }]}
+                rules={[{ message: 'Đây là trường bắt buộc !', required: true }]}
                 label=""
                 className="customizeInputLogin"
               >
@@ -48,7 +48,7 @@ function SignIn() {
               </Form.Item>
               <Form.Item
                 name="password"
-                rules={[{ message: 'Vui lòng nhập password !', required: true }]}
+                rules={[{ message: 'Đây là trường bắt buộc !', required: true }]}
                 label=""
                 className="customizeInputLogin"
               >

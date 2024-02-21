@@ -81,7 +81,7 @@ function ActivityDetail() {
                 <div className="bg-white dark:bg-white10 m-0 p-0 mb-[25px] rounded-10 relative">
                   <div className="py-[16px] px-[25px] text-dark dark:text-white87 font-medium text-[17px] border-regular dark:border-white10 border-b ">
                     <Heading className="text-lg font-medium mb-0">
-                      <Link className="bg-white" onClick={backToPreviousPage}>
+                      <Link className="go-back" onClick={backToPreviousPage}>
                         <LeftOutlined style={{ verticalAlign: 'baseline' }} /> {t('goBackPreviousScreen')}
                       </Link>
                     </Heading>

@@ -13,30 +13,30 @@
     "subject": "Subject",
     "assignedTo": "Assigned To",
     "createdOn": "Created On",
-    "subStatus": "Sub Status",
+    "subStatus": "SubStatus",
     "caseId": "Case Id",
     "queueName": "Queue Name",
-    "file": "Attached file",
+    "file": "File đính kèm",
     "priority": "Priority",
     "from": "From",
     "to": "To",
-    "direction": "Direction"
+    "direction": "Hướng Email"
   },
   "filterAdvance": {
     "caseId": "Case Id",
     "activityId": "Activity Id",
     "subject": "Subject",
-    "from": "Từ",
-    "to": "Đến",
+    "from": "From",
+    "to": "To",
     "assignedTo": "Assigned To",
     "createOn": "Create On",
-    "subStatus": "Sub Status",
+    "subStatus": "SubStatus",
     "queueName": "Queue Name",
     "priority": "Priority",
-    "file": "Attached File",
-    "direction": "Hướng"
+    "file": "File đính kèm",
+    "direction": "Hướng Email"
   },
-  "logout":"Đăng xuất",
-  "searchOnNewSystem":"Tra cứu trên hệ thống mới",
-  "searchOnOldSystem":"Tra cứu trên hệ thống cũ"
+  "logout": "Đăng xuất",
+  "searchOnNewSystem": "Tra cứu trên hệ thống mới",
+  "searchOnOldSystem": "Tra cứu trên hệ thống cũ"
 }
