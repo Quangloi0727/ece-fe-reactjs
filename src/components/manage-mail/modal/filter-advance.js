@@ -77,7 +77,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
     hideModal();
   };
 
-  const formFields = getItem(LOCAL_STORAGE_VARIABLE.DATA_FILTER_ADVENCE)
+  const dataFormLocalStorage = getItem(LOCAL_STORAGE_VARIABLE.DATA_FILTER_ADVENCE)
     ? Object.keys(getItem(LOCAL_STORAGE_VARIABLE.DATA_FILTER_ADVENCE)).map((key) => ({
         name: key,
         value: getItem(LOCAL_STORAGE_VARIABLE.DATA_FILTER_ADVENCE)[key],
@@ -85,15 +85,23 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
     : undefined;
 
   const handleFromFields = (key) => {
-    const field = formFields.find((f) => f.name === key);
+    const field = dataFormLocalStorage.find((f) => f.name === key);
     if (field && key === 'createOn') {
       return field.value.map((date) => moment(date, 'DD/MM/yyyy HH:mm'));
     }
     if (field && key !== 'createOn') {
       return field.value;
     }
-
     return undefined;
+  };
+  const handleCancelPopup = () => {
+    visibleFields.forEach((field) => {
+      const element = dataFormLocalStorage ? dataFormLocalStorage.find((f) => f.name === field.key) : undefined;
+      if (element) {
+        formRef.current.setFieldValue(field.key, element.value);
+      }
+    });
+    hideModal();
   };
   const handleResetForm = () => {
     removeItem(LOCAL_STORAGE_VARIABLE.DATA_FILTER_ADVENCE);
@@ -275,7 +283,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
               ghost
               key="cancelFilter"
               className="px-5 text-[13px] font-semibold button-filter-cancel h-10"
-              onClick={hideModal}
+              onClick={handleCancelPopup}
             >
               <span className="flex items-center">
                 <CloseOutlined style={{ marginRight: '8px' }} /> Hủy
