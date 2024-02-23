@@ -105,7 +105,7 @@ const configFilterAdvance = [
     ],
   },
   {
-    key: 'createOn',
+    key: 'createdOn',
     isShow: true,
     fieldType: FIELD_TYPE.DATE,
   },

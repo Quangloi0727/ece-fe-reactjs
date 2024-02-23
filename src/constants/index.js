@@ -17,6 +17,7 @@ export const LOCAL_STORAGE_VARIABLE = {
   FILTER_ADVANCE: 'filterAdvance',
   SEARCH_ON_SYSTEM: 'searchOnSystem',
   DATA_FILTER_ADVENCE: 'dataFilterAdvance',
+  CREATED_ON_KEY: 'createdOn',
 };
 export const STATUS_CODE_SUCCESS = [200, 201];
 export const ACTIVITY_DETAIL_TAB = {

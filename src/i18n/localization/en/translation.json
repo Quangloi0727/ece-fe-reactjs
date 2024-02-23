@@ -29,14 +29,14 @@
     "from": "From",
     "to": "To",
     "assignedTo": "Assigned To",
-    "createOn": "Create On",
+    "createdOn": "Created On",
     "subStatus": "Sub Status",
     "queueName": "Queue Name",
     "priority": "Priority",
     "file": "Attached File",
     "direction": "Direction"
   },
-  "logout":"Log Out",
-  "searchOnNewSystem":"Search on new system",
-  "searchOnOldSystem":"Search on old system"
+  "logout": "Log Out",
+  "searchOnNewSystem": "Search on new system",
+  "searchOnOldSystem": "Search on old system"
 }

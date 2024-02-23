@@ -29,7 +29,7 @@
     "from": "From",
     "to": "To",
     "assignedTo": "Assigned To",
-    "createOn": "Create On",
+    "createdOn": "Created On",
     "subStatus": "SubStatus",
     "queueName": "Queue Name",
     "priority": "Priority",
