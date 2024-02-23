@@ -67,10 +67,10 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
 
   const handleFilterAdvance = () => {
     const formData = formRef.current.getFieldsValue();
-    const { createOn } = formData;
-    if (createOn) {
-      const formattedDateRange = createOn.map((date) => moment(date).format('DD/MM/YYYY HH:mm'));
-      formData.createOn = formattedDateRange;
+    const { createdOn } = formData;
+    if (createdOn) {
+      const formattedDateRange = createdOn.map((date) => moment(date, 'DD/MM/yyyy HH:mm'));
+      formData.createdOn = formattedDateRange;
     }
     setItem(LOCAL_STORAGE_VARIABLE.DATA_FILTER_ADVENCE, formData);
     formDataFilterAdvance(getItem(LOCAL_STORAGE_VARIABLE.DATA_FILTER_ADVENCE) || formData);
@@ -86,10 +86,10 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
 
   const handleFromFields = (key) => {
     const field = dataFormLocalStorage.find((f) => f.name === key);
-    if (field && key === 'createOn') {
-      return field.value.map((date) => moment(date, 'DD/MM/yyyy HH:mm'));
+    if (field && key === LOCAL_STORAGE_VARIABLE.CREATED_ON_KEY) {
+      return field.value.map((date) => moment(date));
     }
-    if (field && key !== 'createOn') {
+    if (field && key !== LOCAL_STORAGE_VARIABLE.CREATED_ON_KEY) {
       return field.value;
     }
     return undefined;
@@ -97,8 +97,15 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
   const handleCancelPopup = () => {
     visibleFields.forEach((field) => {
       const element = dataFormLocalStorage ? dataFormLocalStorage.find((f) => f.name === field.key) : undefined;
-      if (element) {
+
+      if (element && field.key !== LOCAL_STORAGE_VARIABLE.CREATED_ON_KEY) {
         formRef.current.setFieldValue(field.key, element.value);
+      }
+      if (element && field.key === LOCAL_STORAGE_VARIABLE.CREATED_ON_KEY) {
+        formRef.current.setFieldValue(
+          field.key,
+          element.value.map((date) => moment(date)),
+        );
       }
     });
     hideModal();

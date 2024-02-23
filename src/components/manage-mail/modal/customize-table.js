@@ -8,11 +8,12 @@ import propTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../../buttons/buttons';
-import { PREFIX_CUSTOMIZE_TABLE } from '../../../constants/index';
+import { PREFIX_CUSTOMIZE_TABLE, LOCAL_STORAGE_VARIABLE } from '../../../constants/index';
 import { Checkbox } from '../../checkbox/checkbox';
 import { openNotificationWithIcon } from '../../notifications/notification';
 import { submitCustomizeTable } from '../../../redux/manage-mail/customize-table/actionCreator';
 import customizeTableOrigin from '../../../config/manage-mail/customize-table.json';
+import { removeItem } from '../../../utility/localStorageControl';
 
 function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
   const { t } = useTranslation();
@@ -70,6 +71,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
         ),
       );
     }
+    removeItem(LOCAL_STORAGE_VARIABLE.DATA_FILTER_ADVENCE);
     setState({ ...state, customizeTableDragDrop: dataSet });
   };
 
