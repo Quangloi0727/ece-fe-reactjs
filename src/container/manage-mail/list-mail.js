@@ -109,8 +109,8 @@ function ListEmail() {
             size="default"
             className={
               ACTIVITY_SUB_STATUS.DONE.includes(activitySubStatus)
-                ? 'success border-solid border-1 border-success text-white dark:text-white87 text-[13px]  leading-[22px] inline-flex items-center justify-center rounded-[40px] px-[20px] h-[44px] shadow-btn gap-[8px]'
-                : 'danger border-solid border-1 border-danger text-white dark:text-white87 text-[13px]  leading-[22px] inline-flex items-center justify-center rounded-[40px] px-[20px] h-[44px] shadow-btn gap-[8px]'
+                ? 'success border-solid border-1 border-success text-white dark:text-white87 text-[13px]  leading-[22px] inline-flex items-center justify-center rounded-[10px] px-[20px] h-[44px] shadow-btn gap-[8px]'
+                : 'danger border-solid border-1 border-danger text-white dark:text-white87 text-[13px]  leading-[22px] inline-flex items-center justify-center rounded-[10px] px-[20px] h-[44px] shadow-btn gap-[8px]'
             }
             key={activitySubStatus}
           >
@@ -189,7 +189,7 @@ function ListEmail() {
         title="Dashboard"
         className="flex items-center justify-between px-8 xl:px-[15px] pt-2 pb-6 sm:pb-[30px] bg-transparent sm:flex-col"
       />
-      <div className="min-h-[715px] lg:min-h-[580px] flex-1 h-auto px-8 xl:px-[15px] pb-[30px] bg-transparent">
+      <div className="min-h-[715px] lg:min-h-[580px] flex-1 h-auto  xl:px-[15px] pb-[30px] bg-transparent">
         <GlobalUtilityStyle>
           <Row gutter={15}>
             <Col xs={24} className="mb-[25px]">

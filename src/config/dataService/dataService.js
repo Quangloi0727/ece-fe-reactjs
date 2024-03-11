@@ -27,10 +27,19 @@ class DataService {
     });
   }
 
-  static delete(path = '') {
+  static getUser(path = '') {
+    return client({
+      method: 'GET',
+      url: path,
+      headers: { ...authHeader() },
+    });
+  }
+
+  static delete(path = '', data = {}) {
     return client({
       method: 'DELETE',
       url: path,
+      data,
       headers: { ...authHeader() },
     });
   }

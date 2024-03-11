@@ -27,7 +27,10 @@ function TopMenu() {
       <div className="ninjadash-top-menu">
         <ul>
           <li>
-            <Link to="/pages/dataTable">Data Table</Link>
+            <Link to="/">Email</Link>
+          </li>
+          <li>
+            <Link to="/user">User</Link>
           </li>
         </ul>
       </div>

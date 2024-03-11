@@ -1,17 +1,12 @@
-import { UilCircle } from '@iconscout/react-unicons';
-
-import { Menu } from 'antd';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { Menu } from 'antd';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-
 import UilEllipsisV from '@iconscout/react-unicons/icons/uil-ellipsis-v';
 import propTypes from 'prop-types';
+import FontAwesome from 'react-fontawesome';
 
 function MenuItems({ toggleCollapsed }) {
-  const { t } = useTranslation();
-
   function getItem(label, key, icon, children, type) {
     return {
       key,
@@ -48,15 +43,26 @@ function MenuItems({ toggleCollapsed }) {
 
   const items = [
     getItem(
-      <NavLink onClick={toggleCollapsed} to={`${path}/pages/dataTable`}>
-        {t('Table')}
+      <NavLink onClick={toggleCollapsed} to={`${path}`}>
+        <FontAwesome
+          className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
+          name="envelope"
+          size="2x"
+          style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+        />
       </NavLink>,
       'starter',
-      !topMenu && (
-        <NavLink className="menuItem-iocn" to={`${path}/pages/dataTable`}>
-          <UilCircle />
-        </NavLink>
-      ),
+    ),
+    getItem(
+      <NavLink onClick={toggleCollapsed} to={`${path}/user`}>
+        <FontAwesome
+          className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
+          name="user"
+          size="2x"
+          style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+        />
+      </NavLink>,
+      'user',
     ),
   ];
 

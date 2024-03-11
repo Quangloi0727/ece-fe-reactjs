@@ -19,6 +19,19 @@ export const LOCAL_STORAGE_VARIABLE = {
   DATA_FILTER_ADVENCE: 'dataFilterAdvance',
   CREATED_ON_KEY: 'createdOn',
 };
+export const USER = {
+  KEY_TYPE_LOCAL: 'local',
+  KEY_TYPE_SSO: 'sso',
+  KEY_ROLE_ADMIN: 'admin',
+  KEY_ROLE_USER: 'user',
+};
+export const ERR_INPUT = {
+  NAME: ['isCheckNullName', 'nameExists'],
+  PASSWORD: ['isCheckNullPassword', 'invalidPassword'],
+  TYPE: 'isCheckNullType',
+  ROLE: 'isCheckNullRole',
+};
+
 export const STATUS_CODE_SUCCESS = [200, 201];
 export const ACTIVITY_DETAIL_TAB = {
   GENERAL_INFO: 'generalInfo',
@@ -39,7 +52,14 @@ export const ACTIVITY_MODE = {
   INBOUND: 100,
   OUTBOUND: 200,
 };
+export const CONDITION_UPLOAD_FILE = [
+  'application/vnd.ms-excel',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'text/csv',
+];
 export const CONDITION_LIST_EMAIL_TO = 1;
+
+export const STATUS_REMOVE_FILE_EXCEL = 'removed';
 
 export const CASE_STATUS = [
   { key: 0, message: 'Open' },
