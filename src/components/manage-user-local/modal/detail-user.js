@@ -16,15 +16,18 @@ function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
 
   const [form] = Form.useForm();
   useEffect(() => {
-    form.setFieldsValue({
-      nameDetail: dataUser?.username,
-      typeDetail: dataUser?.type === USER.KEY_TYPE_LOCAL ? USER.LOCAL : USER.SSO,
-      roleDetail: dataUser?.role === USER.KEY_ROLE_ADMIN ? USER.ADMIN : USER.USER,
-      ownerDetail: dataUser?.owner,
-      passwordDetail: dataUser?.password,
-      dateDetail: moment(dataUser?.dateCreated).format('DD/MM/YYYY HH:mm:ss'),
-    });
-    setShowPassword(form.getFieldValue('typeDetail') === USER.LOCAL);
+    if (dataUser) {
+      const { username, password, owner, role, type, updatedAt } = dataUser;
+      form.setFieldsValue({
+        nameDetail: username,
+        typeDetail: type === USER.KEY_TYPE_LOCAL ? USER.LOCAL : USER.SSO,
+        roleDetail: role === USER.KEY_ROLE_ADMIN ? USER.ADMIN : role === USER.KEY_ROLE_USER ? USER.USER : USER.ALL,
+        ownerDetail: owner,
+        passwordDetail: password,
+        dateDetail: moment(updatedAt).format('DD/MM/YYYY HH:mm:ss'),
+      });
+      setShowPassword(form.getFieldValue('typeDetail') === USER.LOCAL);
+    }
   }, [dataUser, form]);
   return (
     <Modal
@@ -71,7 +74,7 @@ function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
             </Form.Item>
             {showPassword && (
               <Form.Item key="passwordDetail" name="passwordDetail" label="Mật khẩu">
-                <Input />
+                <Input.Password />
               </Form.Item>
             )}
             <Form.Item key="roleDetail" name="roleDetail" label="Quyền">

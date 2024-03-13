@@ -19,6 +19,9 @@ function AddUserForm({ showOrHideModal, hideModal }) {
   };
   const handleSendDataForm = () => {
     const formData = formRef.current.getFieldsValue();
+    if (formData.role.includes(USER.KEY_ROLE_USER) && formData.role.includes(USER.KEY_ROLE_ADMIN)) {
+      formData.role = USER.KEY_ROLE_ALL;
+    }
     dispatch(
       handleSendDataUser(
         formData,
@@ -124,6 +127,7 @@ function AddUserForm({ showOrHideModal, hideModal }) {
               <Select
                 className="[&>div]:border-normal dark:[&>div]:border-white10 [&>div]:rounded-6 [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white60 [&>div>div>div>span]:bg-transparent [&>div]:h-[38px] [&>div>div>div>span]:items-center [&>div>.ant-select-selection-item]:flex [&>div>.ant-select-selection-item]:items-center dark:[&>div>.ant-select-selection-item]:text-white60"
                 placeholder="Chọn loại tài khoản"
+                mode="multiple"
               >
                 <Option value={USER.KEY_ROLE_ADMIN}>Admin</Option>
                 <Option value={USER.KEY_ROLE_USER}>User</Option>

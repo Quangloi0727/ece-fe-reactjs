@@ -12,7 +12,7 @@ import dataListUser from './manage-user/list-user/reducers';
 import dataListQueue from './manage-queue/list-queue/reducers';
 import listDataUser from './manage-user-local/reducers';
 import getUser from './manage-user-local/user/reducers';
-import dataListFile from './import-file/reducers';
+import dataListFile from './manage-user-local/import-file/reducers';
 
 const rootReducers = combineReducers({
   message: readMessageReducer,
