@@ -16,6 +16,7 @@ import DetailUserForm from '../../components/manage-user-local/modal/detail-user
 import EditUserForm from '../../components/manage-user-local/modal/edit-user';
 import DeleteUserForm from '../../components/manage-user-local/modal/delete-user';
 import { getUser } from '../../redux/manage-user-local/user/actionCreator';
+import { USER } from '../../constants/index';
 
 function ListUser() {
   const dispatch = useDispatch();
@@ -134,12 +135,12 @@ function ListUser() {
         ),
         type: (
           <span className="text-start dark:text-white60 text-[13px] " key={`${type}-${index}`}>
-            {type}
+            {type === USER.KEY_TYPE_SSO ? USER.SSO : USER.LOCAL}
           </span>
         ),
         role: (
           <span className=" text-start dark:text-white60 text-[13px]" key={`${role}-${index}`}>
-            {role}
+            {role === USER.KEY_ROLE_ADMIN ? USER.ADMIN : role === USER.KEY_ROLE_USER ? USER.USER : USER.ALL}
           </span>
         ),
         owner: (

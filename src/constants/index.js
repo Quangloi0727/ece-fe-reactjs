@@ -24,10 +24,12 @@ export const USER = {
   KEY_TYPE_SSO: 1,
   KEY_ROLE_ADMIN: 2,
   KEY_ROLE_USER: 1,
+  KEY_ROLE_ALL: 3,
   LOCAL: 'Local',
-  SSO: 'Sso',
+  SSO: 'SSO',
   ADMIN: 'Admin',
   USER: 'User',
+  ALL: 'Admin,User',
 };
 
 export const STATUS_CODE_SUCCESS = [200, 201];
