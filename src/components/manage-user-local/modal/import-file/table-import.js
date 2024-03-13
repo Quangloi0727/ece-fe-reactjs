@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { Table } from 'antd';
 import { useDispatch } from 'react-redux';
-import { getListFile } from '../../../../redux/import-file/actionCreator';
+import { getListFile } from '../../../../redux/manage-user-local/import-file/actionCreator';
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '../../../../constants';
 
 function TableImport({ tableData, columns, totalData }) {
@@ -34,7 +34,7 @@ function TableImport({ tableData, columns, totalData }) {
           style: { fontSize: 13, justifyContent: 'center' },
         }}
         scroll={{
-          x: 300,
+          y: 300,
         }}
         rowKey={(el) => el.id.key}
         columns={columns}

@@ -17,14 +17,14 @@ function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
   const [form] = Form.useForm();
   useEffect(() => {
     form.setFieldsValue({
-      nameDetail: dataUser?.name,
-      typeDetail: dataUser?.type,
-      roleDetail: dataUser?.role,
+      nameDetail: dataUser?.username,
+      typeDetail: dataUser?.type === USER.KEY_TYPE_LOCAL ? USER.LOCAL : USER.SSO,
+      roleDetail: dataUser?.role === USER.KEY_ROLE_ADMIN ? USER.ADMIN : USER.USER,
       ownerDetail: dataUser?.owner,
       passwordDetail: dataUser?.password,
       dateDetail: moment(dataUser?.dateCreated).format('DD/MM/YYYY HH:mm:ss'),
     });
-    setShowPassword(form.getFieldValue('typeDetail') === USER.KEY_TYPE_LOCAL);
+    setShowPassword(form.getFieldValue('typeDetail') === USER.LOCAL);
   }, [dataUser, form]);
   return (
     <Modal

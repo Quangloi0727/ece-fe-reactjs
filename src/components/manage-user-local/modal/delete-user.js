@@ -3,7 +3,7 @@ import { Button, Modal, Space } from 'antd';
 import propTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { CloseOutlined, DeleteOutlined } from '@ant-design/icons';
-import { handleDeleteUser } from '../../../redux/user/actionCreator';
+import { handleDeleteUser } from '../../../redux/manage-user-local/user/actionCreator';
 import { openNotificationWithIcon } from '../../notifications/notification';
 
 function DeleteUserForm({ showOrHideModalDeleteUser, hideModal, typeRemove, idUser, nameDelete, selectedIds }) {

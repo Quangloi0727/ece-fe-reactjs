@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { Form, Button, Modal, Space, Upload, Row, Col, message } from 'antd';
+import { Form, Button, Modal, Space, Upload, Row, Col } from 'antd';
 import propTypes from 'prop-types';
-import ExcelJS from 'exceljs';
 import {
   CloseOutlined,
   CloudUploadOutlined,
@@ -14,22 +13,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import TableImport from './table-import';
 import { PaginationStyle, GlobalUtilityStyle } from '../../../../container/styled';
-import { handleSendDataUser } from '../../../../redux/user/actionCreator';
 import { openNotificationWithIcon } from '../../../notifications/notification';
-import { CONDITION_UPLOAD_FILE, STATUS_REMOVE_FILE_EXCEL } from '../../../../constants';
-import { addFile } from '../../../../redux/import-file/actionCreator';
-import { downloadExcelFile } from '../../../../libs/common';
+import { downloadTemplateExcel, importExcel } from '../../../../redux/manage-user-local/import-file/actionCreator';
 
-function ImportFileCsv({ showOrHideModalImportFile, hideModal }) {
+function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
   const dispatch = useDispatch();
   const formRef = useRef(null);
-  const [state, setState] = useState({
-    users: [],
-  });
+
   const [checkExistFile, setCheckExistFile] = useState(false);
-  const [fileUpload, setFileUpload] = useState(null);
-  const [fileList, setFileList] = useState([]);
-  const { users } = state;
+  const [fileLists, setFileLists] = useState([]);
+
   const { dataFile, totalData, dataFileColumn } = useSelector((states) => {
     return {
       dataFile: states.dataListFile.dataFile,
@@ -37,65 +30,14 @@ function ImportFileCsv({ showOrHideModalImportFile, hideModal }) {
       dataFileColumn: states.dataListFile.dataFileColumn,
     };
   });
-  const beforeUpload = (file) => {
-    if (!CONDITION_UPLOAD_FILE.includes(file.type)) {
-      message.error('Only Excel files (.xlsx , .xls or .csv) are allowed.');
-      return Upload.LIST_IGNORE;
-    }
-    return Upload.LIST_IGNORE;
-  };
 
-  const handleReadExcel = async (excelFile) => {
-    if (excelFile.status === STATUS_REMOVE_FILE_EXCEL) {
-      setCheckExistFile(false);
-      return;
-    }
-    const reader = new FileReader();
-
-    reader.onload = async (event) => {
-      const fileArrayBuffer = event.target.result;
-      const workbook = new ExcelJS.Workbook();
-
-      try {
-        await workbook.xlsx.load(fileArrayBuffer);
-
-        const worksheet = workbook.getWorksheet(1);
-
-        const listUserFormExcel = [];
-        worksheet.eachRow((row, rowNumber) => {
-          if (rowNumber !== 1) {
-            const rowData = row.values.map((cell) => (cell ? cell.toString() : null));
-            const dataUser = {
-              name: rowData[1],
-              type: rowData[2],
-              role: rowData[3],
-              password: rowData[4],
-              owner: rowData[5],
-            };
-            listUserFormExcel.push(dataUser);
-          }
-        });
-        setState({
-          ...state,
-          users: listUserFormExcel,
-        });
-      } catch (error) {
-        message.error('Error reading Excel file:', error);
-      }
-    };
-    reader.readAsArrayBuffer(excelFile);
-  };
-
-  const handleChangeUpload = (info) => {
-    setFileUpload(info.file.name);
-    handleReadExcel(info.file);
-    setCheckExistFile(true);
-    setFileList([...info.fileList]);
-  };
-  const handleSendData = (data) => {
+  const handleImportExcel = (fileList) => {
+    const file = fileList[0];
+    const formData = new FormData();
+    formData.append('file', file.originFileObj);
     dispatch(
-      handleSendDataUser(
-        data,
+      importExcel(
+        formData,
         () => {
           hideModal();
           openNotificationWithIcon('success', 'Lưu thành công !');
@@ -106,43 +48,34 @@ function ImportFileCsv({ showOrHideModalImportFile, hideModal }) {
         },
       ),
     );
-    hideModal();
   };
-  const handleSendFile = () => {
-    const files = {
-      nameFile: fileUpload,
-      quantityRecord: users.length,
-      date: moment().format('YYYY-MM-DD HH:mm:ss'),
-    };
-    dispatch(addFile(files));
-  };
-  const validtateBeforeSend = () => {
-    if (users.length > 0) {
-      handleSendData(users);
-      handleSendFile();
-    } else {
-      message.error('No upload file null or file not in (.xlsx , .xls or .csv) !');
-    }
+
+  const handleChangeUpload = (info) => {
+    setCheckExistFile(true);
+    setFileLists([...info.fileList]);
   };
   const removeFile = () => {
-    setFileList([]);
+    setFileLists([]);
     setCheckExistFile(false);
     return Upload.LIST_IGNORE;
+  };
+  const downloadExcelFile = () => {
+    dispatch(downloadTemplateExcel());
   };
 
   const tableFileData = [];
   if (dataFile && dataFile.length) {
     dataFile.map((item) => {
-      const { id, nameFile, quantityRecord, date } = item;
+      const { id, fileName, quantityRecord, date } = item;
       return tableFileData.push({
         id: (
           <span className="text-start dark:text-white60 text-[13px] " title={id} key={id}>
             {id}
           </span>
         ),
-        nameFile: (
-          <span className="text-start dark:text-white60 text-[13px] " title={nameFile} key={nameFile}>
-            {nameFile}
+        fileName: (
+          <span className="text-start dark:text-white60 text-[13px] " title={fileName} key={fileName}>
+            {fileName}
           </span>
         ),
         quantityRecord: (
@@ -166,7 +99,7 @@ function ImportFileCsv({ showOrHideModalImportFile, hideModal }) {
       onCancel={hideModal}
       maskClosable={false}
       zIndex="1000"
-      width={600}
+      width={700}
       footer={[
         <div
           style={{
@@ -205,7 +138,10 @@ function ImportFileCsv({ showOrHideModalImportFile, hideModal }) {
             {checkExistFile ? (
               <div className="button-formadd">
                 {' '}
-                <CheckOutlined style={{ margin: '0px 4px 0px 4px' }} onClick={() => validtateBeforeSend()} />{' '}
+                <CheckOutlined
+                  style={{ margin: '0px 4px 0px 4px' }}
+                  onClick={() => handleImportExcel(fileLists)}
+                />{' '}
                 <CloseOutlined onClick={() => removeFile()} />{' '}
               </div>
             ) : (
@@ -217,12 +153,11 @@ function ImportFileCsv({ showOrHideModalImportFile, hideModal }) {
           <Form layout="vertical" ref={formRef} colon={false} className="form-add">
             <Form.Item>
               <Upload
-                fileList={fileList}
+                fileList={fileLists}
                 className="text-left"
                 maxCount={1}
                 onChange={handleChangeUpload}
-                beforeUpload={(e) => {
-                  beforeUpload(e);
+                beforeUpload={() => {
                   return false;
                 }}
               >
@@ -249,10 +184,10 @@ function ImportFileCsv({ showOrHideModalImportFile, hideModal }) {
         </div>
         <GlobalUtilityStyle>
           <Row gutter={15}>
-            <Col xs={24} className="mb-[25px]">
+            <Col xs={24} className="">
               <PaginationStyle>
                 <div className="bg-white dark:bg-white10 m-0 p-0 mb-[25px] rounded-10 relative">
-                  <div className="p-[25px] text-left">
+                  <div className=" text-left">
                     <TableImport tableData={tableFileData} columns={dataFileColumn} totalData={totalData} />
                   </div>
                 </div>
@@ -264,8 +199,8 @@ function ImportFileCsv({ showOrHideModalImportFile, hideModal }) {
     </Modal>
   );
 }
-ImportFileCsv.propTypes = {
+ImportFileExcel.propTypes = {
   showOrHideModalImportFile: propTypes.bool.isRequired,
   hideModal: propTypes.func.isRequired,
 };
-export default ImportFileCsv;
+export default ImportFileExcel;

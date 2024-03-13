@@ -27,11 +27,12 @@ class DataService {
     });
   }
 
-  static getUser(path = '') {
+  static downloadTemplate(path = '') {
     return client({
       method: 'GET',
       url: path,
       headers: { ...authHeader() },
+      responseType: 'blob',
     });
   }
 

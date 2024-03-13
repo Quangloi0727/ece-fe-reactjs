@@ -1,7 +1,7 @@
 [
   {
     "title": "Tên đăng nhập",
-    "dataIndex": "name",
+    "dataIndex": "username",
     "key": "1"
   },
   {

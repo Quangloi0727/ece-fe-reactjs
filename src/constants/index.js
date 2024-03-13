@@ -20,16 +20,14 @@ export const LOCAL_STORAGE_VARIABLE = {
   CREATED_ON_KEY: 'createdOn',
 };
 export const USER = {
-  KEY_TYPE_LOCAL: 'local',
-  KEY_TYPE_SSO: 'sso',
-  KEY_ROLE_ADMIN: 'admin',
-  KEY_ROLE_USER: 'user',
-};
-export const ERR_INPUT = {
-  NAME: ['isCheckNullName', 'nameExists'],
-  PASSWORD: ['isCheckNullPassword', 'invalidPassword'],
-  TYPE: 'isCheckNullType',
-  ROLE: 'isCheckNullRole',
+  KEY_TYPE_LOCAL: 2,
+  KEY_TYPE_SSO: 1,
+  KEY_ROLE_ADMIN: 2,
+  KEY_ROLE_USER: 1,
+  LOCAL: 'Local',
+  SSO: 'Sso',
+  ADMIN: 'Admin',
+  USER: 'User',
 };
 
 export const STATUS_CODE_SUCCESS = [200, 201];

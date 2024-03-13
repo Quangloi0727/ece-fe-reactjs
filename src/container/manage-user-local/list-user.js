@@ -3,20 +3,19 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Row, Col, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
-// import { Link } from 'react-router-dom';
 import UilEye from '@iconscout/react-unicons/icons/uil-eye';
 import UilEdit from '@iconscout/react-unicons/icons/uil-edit';
 import UilTrash from '@iconscout/react-unicons/icons/uil-trash-alt';
 import moment from 'moment';
-import DataListUser from '../../components/manage-mail/list-user';
+import DataListUser from '../../components/manage-user-local/list-user';
 import Heading from '../../components/heading/heading';
 import { PageHeader } from '../../components/page-headers/page-headers';
 import { PaginationStyle, GlobalUtilityStyle } from '../styled';
 import withAdminLayout from '../../layout/withAdminLayout';
-import DetailUserForm from '../../components/manage-mail/modal/detail-user';
-import EditUserForm from '../../components/manage-mail/modal/edit-user';
-import DeleteUserForm from '../../components/manage-mail/modal/delete-user';
-import { getUserKey } from '../../redux/user/actionCreator';
+import DetailUserForm from '../../components/manage-user-local/modal/detail-user';
+import EditUserForm from '../../components/manage-user-local/modal/edit-user';
+import DeleteUserForm from '../../components/manage-user-local/modal/delete-user';
+import { getUser } from '../../redux/manage-user-local/user/actionCreator';
 
 function ListUser() {
   const dispatch = useDispatch();
@@ -41,14 +40,14 @@ function ListUser() {
       showOrHideModalEditForm: true,
       idEdit: id,
     });
-    dispatch(getUserKey(id));
+    dispatch(getUser(id));
   };
   const showModalDetailUser = (id) => {
     setState({
       ...state,
       showOrHideModalDetailUser: true,
     });
-    dispatch(getUserKey(id));
+    dispatch(getUser(id));
   };
 
   const hideModal = () => {
@@ -79,16 +78,16 @@ function ListUser() {
   const tableUserSource = [];
   if (dataUser && dataUser.length) {
     dataUser.map((item, index) => {
-      const { id, name, type, role, owner, updatedAt } = item;
+      const { id, username, type, role, owner, updatedAt } = item;
       return tableUserSource.push({
         id: (
           <span className="text-start dark:text-white60 text-[13px] " title={id} key={`${id}-${index}`}>
             {id}
           </span>
         ),
-        name: (
-          <span className="text-start dark:text-white60 text-[13px] " title={name} key={`${id}-${index}`}>
-            {name}
+        username: (
+          <span className="text-start dark:text-white60 text-[13px] " title={username} key={`${username}-${index}`}>
+            {username}
           </span>
         ),
         action: (
@@ -117,7 +116,7 @@ function ListUser() {
 
             <Button
               className="border-none bg-none"
-              onClick={() => showModalDeleteUser(id, name)}
+              onClick={() => showModalDeleteUser(id, username)}
               style={{ fontWeight: 'normal' }}
               size="default"
               type="light"

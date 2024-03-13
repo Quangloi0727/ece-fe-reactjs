@@ -9,11 +9,11 @@ import { UilFileImport } from '@iconscout/react-unicons';
 import UilTrashAlt from '@iconscout/react-unicons/icons/uil-trash-alt';
 import AddUserForm from './modal/add-user';
 import DeleteUserForm from './modal/delete-user';
-import ImportFileCsv from './modal/import-file/import-file-csv';
+import ImportFileExcel from './modal/import-file/import-file-csv';
 import { Button } from '../buttons/buttons';
-import { getListUser } from '../../redux/manage-account-user/actionCreator';
+import { getListUser } from '../../redux/manage-user-local/actionCreator';
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '../../constants';
-import { getListFile } from '../../redux/import-file/actionCreator';
+import { getListFile } from '../../redux/manage-user-local/import-file/actionCreator';
 
 function DataListUser({ tableData, columns, totalData }) {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ function DataListUser({ tableData, columns, totalData }) {
   };
   const [page, setPage] = useState(DEFAULT_PAGE);
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
-  const [searchMulti, setSearchMulti] = useState('');
+  const [search, setSearch] = useState('');
 
   const showModalImportFile = () => {
     setState({
@@ -48,15 +48,15 @@ function DataListUser({ tableData, columns, totalData }) {
   useEffect(() => {
     const delayedDispatch = setTimeout(() => {
       if (dispatch) {
-        dispatch(getListUser(page, pageSize, searchMulti));
+        dispatch(getListUser(page, pageSize, search));
       }
     }, 500);
     return () => clearTimeout(delayedDispatch);
-  }, [page, pageSize, searchMulti, dispatch]);
+  }, [page, pageSize, search, dispatch]);
 
   const handleSearch = (e) => {
     const { value } = e.currentTarget;
-    setSearchMulti(value);
+    setSearch(value);
     setPage(DEFAULT_PAGE);
     setPageSize(DEFAULT_PAGE_SIZE);
   };
@@ -80,7 +80,6 @@ function DataListUser({ tableData, columns, totalData }) {
       showOrHideModalDeleteUser: false,
       showOrHideModalImportFile: false,
     });
-    dispatch(getListFile(page, pageSize));
   };
 
   const [selectionType] = useState('checkbox');
@@ -113,7 +112,7 @@ function DataListUser({ tableData, columns, totalData }) {
             <UilFileImport />
             {t('Import')}
           </Button>
-          <ImportFileCsv showOrHideModalImportFile={showOrHideModalImportFile} hideModal={hideModal} />
+          <ImportFileExcel showOrHideModalImportFile={showOrHideModalImportFile} hideModal={hideModal} />
         </div>
         <div className="min-w-[100px]">
           <Button onClick={showModalDeleteUser} style={{ fontWeight: 'normal' }} size="default" type="light" outlined>
@@ -150,7 +149,7 @@ function DataListUser({ tableData, columns, totalData }) {
           type: selectionType,
           ...rowSelection,
         }}
-        rowKey={(el) => el.name.key}
+        rowKey={(el) => el.username.key}
         columns={columns}
         dataSource={tableData}
       />

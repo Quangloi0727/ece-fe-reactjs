@@ -10,8 +10,8 @@ import dataActivityDetail from './manage-mail/activity-detail/reducers';
 import dataCaseDetail from './manage-mail/case-detail/reducers';
 import dataListUser from './manage-user/list-user/reducers';
 import dataListQueue from './manage-queue/list-queue/reducers';
-import listDataUser from './manage-account-user/reducers';
-import getUser from './user/reducers';
+import listDataUser from './manage-user-local/reducers';
+import getUser from './manage-user-local/user/reducers';
 import dataListFile from './import-file/reducers';
 
 const rootReducers = combineReducers({
