@@ -11,6 +11,7 @@ const tableReadData = (page, pageSize, searchMulti, filterAdvance) => {
         `/manage-email/get-list?page=${page}&pageSize=${pageSize}&searchMulti=${searchMulti}`,
         filterAdvance,
       );
+
       dispatch(dataTableReadSuccess(listEmail?.data?.data, listEmail?.data?.totalData || 0));
     } catch (err) {
       dispatch(dataTableReadErr(err));

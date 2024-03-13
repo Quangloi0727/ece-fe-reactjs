@@ -16,10 +16,10 @@ function ContentCase({ value, changeContentCase }) {
   };
   return (
     <GlobalUtilityStyle>
-      <Row gutter={15}>
+      <Row gutter={15} className="pt-[10px]">
         <Col xs={24} style={{ marginLeft: '30px' }}>
-          <div className="">
-            <Row gutter={16}>
+          <div>
+            <Row gutter={16} className="row-case">
               <Col sm={22} xs={24}>
                 <div className="bg-white dark:bg-white10 m-0 p-0 text-theme-gray dark:text-white60 text-[15px] mb-[25px] dark:border-white10 border-1 rounded-6 relative">
                   <div className="p-[25px]">
@@ -66,8 +66,8 @@ function ContentCase({ value, changeContentCase }) {
                         </p>
                         <p>RE : {subject}</p>
                         <Row>
-                          <Col span={14}>{queue?.queueName}</Col>
-                          <Col span={3}>Create On:</Col>
+                          <Col span={13}>{queue?.queueName}</Col>
+                          <Col span={4}>Create On:</Col>
                           <Col span={7}>{moment(createdOn).format('DD-MM-YYYY HH:mm A')}</Col>
                         </Row>
                       </Col>

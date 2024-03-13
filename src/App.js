@@ -14,6 +14,7 @@ const NotFound = lazy(() => import('./container/pages/404'));
 const ListEmail = lazy(() => import('./container/manage-mail/list-mail'));
 const ActivityDetail = lazy(() => import('./container/manage-mail/activity-detail'));
 const CaseDetail = lazy(() => import('./container/manage-mail/case-detail'));
+const ListAccountUser = lazy(() => import('./container/manage-user-local/list-user'));
 
 const { themeColor } = config;
 
@@ -59,6 +60,7 @@ function ProviderConfig() {
                 <Route path="/list-email" element={<ListEmail />} />
                 <Route path="/manage-email/activity/:activityId" element={<ActivityDetail />} />
                 <Route path="/manage-email/case/:caseId" element={<CaseDetail />} />
+                <Route path="/list-email/user" element={<ListAccountUser />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             )}

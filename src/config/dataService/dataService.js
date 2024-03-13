@@ -27,10 +27,20 @@ class DataService {
     });
   }
 
-  static delete(path = '') {
+  static downloadTemplate(path = '') {
+    return client({
+      method: 'GET',
+      url: path,
+      headers: { ...authHeader() },
+      responseType: 'blob',
+    });
+  }
+
+  static delete(path = '', data = {}) {
     return client({
       method: 'DELETE',
       url: path,
+      data,
       headers: { ...authHeader() },
     });
   }

@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Tên đăng nhập",
+    "dataIndex": "username",
+    "key": "1"
+  },
+  {
+    "title": "Thao tác",
+    "dataIndex": "action",
+    "key": "4"
+  },
+  {
+    "title": "Loại tài khoản",
+    "dataIndex": "type",
+    "key": "2"
+  },
+  {
+    "title": "Quyền",
+    "dataIndex": "role",
+    "key": "3"
+  },
+  {
+    "title": "Người tạo",
+    "dataIndex": "owner",
+    "key": "5"
+  },
+  {
+    "title": "Ngày tạo",
+    "dataIndex": "dateCreate",
+    "key": "6"
+  }
+]

@@ -6,14 +6,17 @@ import UilEllipsisV from '@iconscout/react-unicons/icons/uil-ellipsis-v';
 import { Col, Layout, Row } from 'antd';
 import propTypes from 'prop-types';
 import { Component } from 'react';
+import { Scrollbars } from '@pezhmanparsaee/react-custom-scrollbars';
 import { connect } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import MenueItems from './MenueItems';
 import { LayoutContainer, SmallScreenAuthInfo, TopMenuSearch } from './Style';
 import TopMenu from './TopMenu';
 import AuthInfo from '../components/utilities/auth-info/info';
 
-const { Header, Content } = Layout;
+const { Header, Content, Sider } = Layout;
+const { theme } = require('../config/theme/themeVariables');
 
 const ThemeLayout = (WrappedComponent) => {
   class LayoutComponent extends Component {
@@ -48,10 +51,19 @@ const ThemeLayout = (WrappedComponent) => {
       const { collapsed, hide } = this.state;
       const { rtl, topMenu } = this.props;
 
+      const left = !rtl ? 'left' : 'right';
       const toggleCollapsed = () => {
         this.setState({
           collapsed: !collapsed,
         });
+      };
+
+      const toggleCollapsedMobile = () => {
+        if (window.innerWidth <= 990) {
+          this.setState({
+            collapsed: !collapsed,
+          });
+        }
       };
 
       const onShowHide = () => {
@@ -59,6 +71,45 @@ const ThemeLayout = (WrappedComponent) => {
           hide: !hide,
           searchHide: true,
         });
+      };
+      const SideBarStyle = {
+        margin: '150px 0 0 0',
+        padding: `${!rtl ? '0px 0px 0px 0' : '0px 0 0px 0px'}`,
+        overflowY: 'auto',
+        height: '100vh',
+        position: 'fixed',
+        [left]: 0,
+        zIndex: 988,
+      };
+
+      function renderThumb({ style }) {
+        const thumbStyle = {
+          borderRadius: 6,
+          backgroundColor: '#4865d9',
+        };
+        return <div style={{ ...style, ...thumbStyle }} />;
+      }
+
+      function renderView({ style }) {
+        const customStyle = {
+          marginRight: rtl && 'auto',
+          [rtl ? 'marginLeft' : 'marginRight']: '-17px',
+        };
+        return <div style={{ ...style, ...customStyle }} />;
+      }
+
+      const renderTrackVertical = () => {
+        const thumbStyle = {
+          position: 'absolute',
+          width: '6px',
+          transition: 'opacity 200ms ease 0s',
+          opacity: 0,
+          [rtl ? 'left' : 'right']: '0px',
+          bottom: '2px',
+          top: '2px',
+          borderRadius: '3px',
+        };
+        return <div className="[&>div]:bg-regular dark:[&>div]:bg-[#32333f]" style={thumbStyle} />;
       };
 
       return (
@@ -103,20 +154,39 @@ const ThemeLayout = (WrappedComponent) => {
                 </div>
               </div>
             </Header>
-            <div className="ninjadash-header-more">
-              <Row>
-                <Col md={0} sm={24} xs={24}>
-                  <div className="ninjadash-header-more-inner">
-                    <SmallScreenAuthInfo hide={hide}>
-                      <AuthInfo rtl={rtl} />
-                    </SmallScreenAuthInfo>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-            <Content>
-              <WrappedComponent {...this.props} />
-            </Content>
+            <Row>
+              <Col md={0} sm={24} xs={24}>
+                <div className="ninjadash-header-more-inner">
+                  <SmallScreenAuthInfo hide={hide}>
+                    <AuthInfo rtl={rtl} />
+                  </SmallScreenAuthInfo>
+                </div>
+              </Col>
+            </Row>
+            <Layout>
+              {!topMenu || window.innerWidth <= 991 ? (
+                <ThemeProvider theme={theme}>
+                  <Sider width={130} style={SideBarStyle} collapsed={collapsed}>
+                    <Scrollbars
+                      className="custom-scrollbar"
+                      autoHide
+                      autoHideTimeout={500}
+                      autoHideDuration={200}
+                      renderThumbVertical={renderThumb}
+                      renderView={renderView}
+                      renderTrackVertical={renderTrackVertical}
+                    >
+                      <MenueItems topMenu={topMenu} toggleCollapsed={toggleCollapsedMobile} />
+                    </Scrollbars>
+                  </Sider>
+                </ThemeProvider>
+              ) : null}
+              <Layout className="atbd-main-layout">
+                <Content>
+                  <WrappedComponent {...this.props} />
+                </Content>
+              </Layout>
+            </Layout>
           </Layout>
           {window.innerWidth <= 991 ? (
             <span className={collapsed ? 'ninjadash-shade' : 'ninjadash-shade show'} onClick={toggleCollapsed} />

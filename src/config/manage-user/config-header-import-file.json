@@ -1,0 +1,17 @@
+[
+  {
+    "title": "File đã tải lên",
+    "dataIndex": "fileName",
+    "key": "1"
+  },
+  {
+    "title": "Số lượng bản ghi",
+    "dataIndex": "quantityRecord",
+    "key": "4"
+  },
+  {
+    "title": "Ngày tải lên",
+    "dataIndex": "updatedAt",
+    "key": "3"
+  }
+]

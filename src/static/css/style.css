@@ -513,6 +513,7 @@ ul {
 
 .ant-form-item-label > label {
   font-weight: 500;
+  font-size: 13px !important;
 }
 
 .ant-picker-input > input::placeholder {
@@ -522,6 +523,7 @@ ul {
 .ant-input-affix-wrapper,
 .ant-input {
   border-radius: 6px;
+  font-size: 13px !important;
 }
 
 .ant-input-affix-wrapper .ant-input-prefix {
@@ -650,6 +652,7 @@ ul {
 .ant-table table tr th.ant-table-selection-column,
 .ant-table table tr td.ant-table-selection-column {
   padding: 0 16px;
+  width: unset;
 }
 
 /* Wizard Modal */
@@ -787,6 +790,7 @@ ul {
 .ant-select-single .ant-select-selector .ant-select-selection-item,
 .ant-select-single .ant-select-selector .ant-select-selection-placeholder {
   line-height: 35px !important;
+  font-size: 13px !important;
 }
 
 .ant-select-multiple .ant-select-selector {

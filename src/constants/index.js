@@ -19,6 +19,17 @@ export const LOCAL_STORAGE_VARIABLE = {
   DATA_FILTER_ADVENCE: 'dataFilterAdvance',
   CREATED_ON_KEY: 'createdOn',
 };
+export const USER = {
+  KEY_TYPE_LOCAL: 2,
+  KEY_TYPE_SSO: 1,
+  KEY_ROLE_ADMIN: 2,
+  KEY_ROLE_USER: 1,
+  LOCAL: 'Local',
+  SSO: 'Sso',
+  ADMIN: 'Admin',
+  USER: 'User',
+};
+
 export const STATUS_CODE_SUCCESS = [200, 201];
 export const ACTIVITY_DETAIL_TAB = {
   GENERAL_INFO: 'generalInfo',
@@ -39,7 +50,14 @@ export const ACTIVITY_MODE = {
   INBOUND: 100,
   OUTBOUND: 200,
 };
+export const CONDITION_UPLOAD_FILE = [
+  'application/vnd.ms-excel',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'text/csv',
+];
 export const CONDITION_LIST_EMAIL_TO = 1;
+
+export const STATUS_REMOVE_FILE_EXCEL = 'removed';
 
 export const CASE_STATUS = [
   { key: 0, message: 'Open' },
