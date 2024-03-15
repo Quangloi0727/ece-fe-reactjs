@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import { PageHeader } from '../../components/page-headers/page-headers';
-import { Main } from '../styled';
+import { GlobalUtilityStyle } from '../styled';
 import { Cards } from '../../components/cards/frame/cards-frame';
 
 function BlankPage() {
@@ -18,7 +18,7 @@ function BlankPage() {
   return (
     <>
       <PageHeader className="ninjadash-page-header-main" title="Blank Page" routes={PageRoutes} />
-      <Main>
+      <GlobalUtilityStyle>
         <Row gutter={25}>
           <Col sm={24} xs={24}>
             <Cards headless>
@@ -26,7 +26,7 @@ function BlankPage() {
             </Cards>
           </Col>
         </Row>
-      </Main>
+      </GlobalUtilityStyle>
     </>
   );
 }
