@@ -4,9 +4,17 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import propTypes from 'prop-types';
 import { CheckOutlined } from '@ant-design/icons';
-import { USER } from '../../../constants';
+import { useTranslation } from 'react-i18next';
+import {
+  USER,
+  PREFIX_FORM_MANAGE_USER,
+  LABEL_FORM_MANAGE_USER,
+  TITLE_FORM_MANAGE_USER,
+  NAME_FORM_MANAGE_USER,
+} from '../../../constants';
 
 function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const { dataUser } = useSelector((states) => {
     return {
@@ -17,16 +25,16 @@ function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
   const [form] = Form.useForm();
   useEffect(() => {
     if (dataUser) {
-      const { username, password, owner, role, type, updatedAt } = dataUser;
+      const { username, password, role, type, updatedAt, createdByInfo } = dataUser;
       form.setFieldsValue({
-        nameDetail: username,
-        typeDetail: type === USER.KEY_TYPE_LOCAL ? USER.LOCAL : USER.SSO,
-        roleDetail: role === USER.KEY_ROLE_ADMIN ? USER.ADMIN : role === USER.KEY_ROLE_USER ? USER.USER : USER.ALL,
-        ownerDetail: owner,
-        passwordDetail: password,
-        dateDetail: moment(updatedAt).format('DD/MM/YYYY HH:mm:ss'),
+        username,
+        type: type === USER.KEY_TYPE_LOCAL ? USER.LOCAL : USER.SSO,
+        role: role === USER.KEY_ROLE_ADMIN ? USER.ADMIN : role === USER.KEY_ROLE_USER ? USER.USER : USER.ALL,
+        creator: createdByInfo?.username,
+        password,
+        date: moment(updatedAt).format('DD/MM/YYYY HH:mm:ss'),
       });
-      setShowPassword(form.getFieldValue('typeDetail') === USER.LOCAL);
+      setShowPassword(form.getFieldValue(NAME_FORM_MANAGE_USER.TYPE) === USER.LOCAL);
     }
   }, [dataUser, form]);
   return (
@@ -34,7 +42,11 @@ function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
       forceRender
       bodyStyle={{ overflowY: 'auto', maxHeight: '450px' }}
       style={{ fontSize: '13px !important', position: 'relative' }}
-      title={<strong style={{ fontWeight: '1000' }}>Chi tiết người truy cập</strong>}
+      title={
+        <strong style={{ fontWeight: '700' }}>
+          {t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.DETAILUSER}`)}
+        </strong>
+      }
       open={showOrHideModalDetailUser}
       onCancel={hideModal}
       maskClosable={false}
@@ -66,25 +78,45 @@ function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
       <div className="">
         <div className="px-1.5 text-[13px]">
           <Form form={form} layout="vertical">
-            <Form.Item key="nameDetail" name="nameDetail" label="Tên đăng nhập">
-              <Input />
+            <Form.Item
+              key="username"
+              name="username"
+              label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.USERNAME}`)}
+            >
+              <Input readOnly />
             </Form.Item>
-            <Form.Item key="typeDetail" name="typeDetail" label="Loại tài khoản">
-              <Input />
+            <Form.Item
+              key="type"
+              name="type"
+              label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.TYPEACCOUNT}`)}
+            >
+              <Input readOnly />
             </Form.Item>
             {showPassword && (
-              <Form.Item key="passwordDetail" name="passwordDetail" label="Mật khẩu">
-                <Input.Password />
+              <Form.Item
+                key="password"
+                name="password"
+                label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.PASSWORD}`)}
+              >
+                <Input.Password readOnly />
               </Form.Item>
             )}
-            <Form.Item key="roleDetail" name="roleDetail" label="Quyền">
-              <Input />
+            <Form.Item key="role" name="role" label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.ROLE}`)}>
+              <Input readOnly />
             </Form.Item>
-            <Form.Item key="ownerDetail" name="ownerDetail" label="Người tạo">
-              <Input />
+            <Form.Item
+              key="creator"
+              name="creator"
+              label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.CREATOR}`)}
+            >
+              <Input readOnly />
             </Form.Item>
-            <Form.Item key="dateDetail" name="dateDetail" label="Ngày tạo">
-              <Input />
+            <Form.Item
+              key="date"
+              name="date"
+              label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.DATECREATED}`)}
+            >
+              <Input readOnly />
             </Form.Item>
           </Form>
         </div>

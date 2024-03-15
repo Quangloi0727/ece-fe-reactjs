@@ -1,26 +1,55 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Form, Input, Button, Modal, Space, Select } from 'antd';
 import propTypes from 'prop-types';
 import { CloseOutlined, SearchOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { handleSendDataUser } from '../../../redux/manage-user-local/user/actionCreator';
 import { openNotificationWithIcon } from '../../notifications/notification';
-import { USER } from '../../../constants';
+import {
+  USER,
+  PREFIX_FORM_MANAGE_USER,
+  LABEL_FORM_MANAGE_USER,
+  TITLE_FORM_MANAGE_USER,
+  PLACEHOLDER_FORM_MANAGE_USER,
+  NAME_FORM_MANAGE_USER,
+} from '../../../constants';
 
 const { Option } = Select;
 
 function AddUserForm({ showOrHideModal, hideModal }) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const formRef = useRef(null);
   const [selectedType, setSelectedType] = useState(null);
+  const [form] = Form.useForm();
+  const [clientReady, setClientReady] = useState(false);
 
   const handleTypeChange = (value) => {
     setSelectedType(value);
   };
+  useEffect(() => {
+    setClientReady(true);
+  }, []);
+  const handleHideModal = () => {
+    hideModal();
+    form.resetFields();
+    setSelectedType(form.getFieldValue(NAME_FORM_MANAGE_USER.TYPE));
+  };
+
+  useEffect(() => {
+    if (form.getFieldValue(NAME_FORM_MANAGE_USER.TYPE) === USER.KEY_TYPE_SSO) {
+      form.setFieldValue(NAME_FORM_MANAGE_USER.PASSWORD, null);
+    }
+  }, [selectedType, form]);
+
   const handleSendDataForm = () => {
     const formData = formRef.current.getFieldsValue();
     if (formData.role.includes(USER.KEY_ROLE_USER) && formData.role.includes(USER.KEY_ROLE_ADMIN)) {
       formData.role = USER.KEY_ROLE_ALL;
+    } else {
+      const role = formData.role[0];
+      formData.role = role;
     }
     dispatch(
       handleSendDataUser(
@@ -38,69 +67,53 @@ function AddUserForm({ showOrHideModal, hideModal }) {
   };
   return (
     <Modal
-      title={<strong style={{ fontWeight: '700' }}>Thêm mới người truy cập</strong>}
+      title={
+        <strong style={{ fontWeight: '700' }}>
+          {t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.ADDNEWUSER}`)}
+        </strong>
+      }
+      forceRender
       open={showOrHideModal}
       onCancel={hideModal}
       maskClosable={false}
       zIndex="1000"
-      footer={[
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'end',
-          }}
-          key="footerModalAddVistor"
-        >
-          <Space size="small">
-            <Button
-              type="primary"
-              danger
-              ghost
-              key="cancelAddVistor"
-              className="px-5 text-[13px] font-semibold button-filter-cancel h-10"
-              onClick={hideModal}
-            >
-              <span className="button-formadd items-center">
-                <CloseOutlined style={{ marginRight: '4px' }} /> Hủy
-              </span>
-            </Button>
-            <Button
-              type="primary"
-              key="submitAddVistor"
-              className="px-5 text-[13px] font-semibold h-10 button-filter-search"
-              onClick={() => {
-                handleSendDataForm();
-              }}
-            >
-              <span className="button-formadd items-center">
-                <SearchOutlined style={{ marginRight: '4px' }} />
-                Lưu
-              </span>
-            </Button>
-          </Space>
-        </div>,
-      ]}
+      footer={false}
     >
       <div className="bg-white dark:bg-white10 m-0 p-0 text-theme-gray :text-white60 text-[13px] rounded-10 relative h-full">
         <div className="text-[13px]">
-          <Form layout="vertical" ref={formRef} colon={false} className="form-add">
-            <Form.Item key="username" name="username" label="Tên đăng nhập">
-              <Input placeholder="Nhập tên đăng nhập" />
+          <Form layout="vertical" form={form} ref={formRef} className="form-add">
+            <Form.Item
+              key="username"
+              name="username"
+              label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.USERNAME}`)}
+              colon={false}
+              rules={[
+                {
+                  required: true,
+                  message: 'Đây là trường bắt buộc.',
+                },
+              ]}
+            >
+              <Input
+                placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.USERNAME}`)}
+                maxLength={50}
+              />
             </Form.Item>
 
             <Form.Item
               key="type"
               name="type"
-              label="Loại tài khoản"
+              label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.TYPEACCOUNT}`)}
               rules={[
                 {
                   required: true,
+                  message: 'Đây là trường bắt buộc',
                 },
               ]}
             >
               <Select
                 className="[&>div]:border-normal dark:[&>div]:border-white10 [&>div]:rounded-6 [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white60 [&>div>div>div>span]:bg-transparent [&>div]:h-[38px] [&>div>div>div>span]:items-center [&>div>.ant-select-selection-item]:flex [&>div>.ant-select-selection-item]:items-center dark:[&>div>.ant-select-selection-item]:text-white60"
-                placeholder="Chọn loại tài khoản"
+                placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.TYPEACCOUNT}`)}
                 onChange={handleTypeChange}
               >
                 <Option value={USER.KEY_TYPE_LOCAL}>Local</Option>
@@ -109,30 +122,79 @@ function AddUserForm({ showOrHideModal, hideModal }) {
             </Form.Item>
 
             {selectedType === USER.KEY_TYPE_LOCAL && (
-              <Form.Item key="password" name="password" label="Mật khẩu">
-                <Input.Password placeholder="Nhập mật khẩu" />
+              <Form.Item
+                key="password"
+                name="password"
+                label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.PASSWORD}`)}
+                rules={[
+                  {
+                    required: true,
+                    message: 'Đây là trường bắt buộc',
+                  },
+                ]}
+              >
+                <Input.Password placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.PASSWORD}`)} />
               </Form.Item>
             )}
 
             <Form.Item
               key="role"
               name="role"
-              label="Quyền"
+              label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.ROLE}`)}
               rules={[
                 {
                   required: true,
+                  message: 'Đây là trường bắt buộc',
                 },
               ]}
             >
               <Select
                 className="[&>div]:border-normal dark:[&>div]:border-white10 [&>div]:rounded-6 [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white60 [&>div>div>div>span]:bg-transparent [&>div]:h-[38px] [&>div>div>div>span]:items-center [&>div>.ant-select-selection-item]:flex [&>div>.ant-select-selection-item]:items-center dark:[&>div>.ant-select-selection-item]:text-white60"
-                placeholder="Chọn loại tài khoản"
+                placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.ROLE}`)}
                 mode="multiple"
               >
                 <Option value={USER.KEY_ROLE_ADMIN}>Admin</Option>
                 <Option value={USER.KEY_ROLE_USER}>User</Option>
               </Select>
             </Form.Item>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'end',
+              }}
+              key="footerModalAddVistor"
+            >
+              <Space size="small">
+                <Form.Item>
+                  <Button type="primary" danger ghost onClick={handleHideModal}>
+                    <span className="button-formadd items-center">
+                      <CloseOutlined style={{ marginRight: '4px' }} /> Hủy
+                    </span>
+                  </Button>
+                </Form.Item>
+                <Form.Item shouldUpdate>
+                  {() => (
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      onClick={() => {
+                        handleSendDataForm();
+                      }}
+                      disabled={
+                        !clientReady ||
+                        !form.isFieldsTouched(true) ||
+                        !!form.getFieldsError().filter(({ errors }) => errors.length).length
+                      }
+                    >
+                      <span className="button-formadd items-center">
+                        <SearchOutlined style={{ marginRight: '4px' }} />
+                        Lưu
+                      </span>
+                    </Button>
+                  )}
+                </Form.Item>
+              </Space>
+            </div>
           </Form>
         </div>
       </div>

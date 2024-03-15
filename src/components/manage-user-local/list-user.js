@@ -12,7 +12,13 @@ import DeleteUserForm from './modal/delete-user';
 import ImportFileExcel from './modal/import-file/import-file-csv';
 import { Button } from '../buttons/buttons';
 import { getListUser } from '../../redux/manage-user-local/actionCreator';
-import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '../../constants';
+import {
+  DEFAULT_PAGE,
+  DEFAULT_PAGE_SIZE,
+  PREFIX_FORM_MANAGE_USER,
+  TITLE_FORM_MANAGE_USER,
+  SEARCH_MANAGE_USER,
+} from '../../constants';
 import { getListFile } from '../../redux/manage-user-local/import-file/actionCreator';
 
 function DataListUser({ tableData, columns, totalData }) {
@@ -59,6 +65,7 @@ function DataListUser({ tableData, columns, totalData }) {
     setSearch(value);
     setPage(DEFAULT_PAGE);
     setPageSize(DEFAULT_PAGE_SIZE);
+    dispatch(getListUser(page, pageSize, search));
   };
 
   const handleChangePage = (current, pageSizeChange) => {
@@ -103,7 +110,7 @@ function DataListUser({ tableData, columns, totalData }) {
         <div className="min-w-[120px]">
           <Button onClick={showModalAddUser} size="default" type="light" style={{ fontWeight: 'normal' }} outlined>
             <PlusOutlined />
-            {t('Thêm người truy cập')}
+            {t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.ADDNEWUSER}`)}
           </Button>
           <AddUserForm showOrHideModal={showOrHideModal} hideModal={hideModal} />
         </div>
@@ -115,9 +122,16 @@ function DataListUser({ tableData, columns, totalData }) {
           <ImportFileExcel showOrHideModalImportFile={showOrHideModalImportFile} hideModal={hideModal} />
         </div>
         <div className="min-w-[100px]">
-          <Button onClick={showModalDeleteUser} style={{ fontWeight: 'normal' }} size="default" type="light" outlined>
+          <Button
+            disabled={selectedIds.length === 0}
+            onClick={showModalDeleteUser}
+            style={{ fontWeight: 'normal' }}
+            size="default"
+            type="light"
+            outlined
+          >
             <UilTrashAlt />
-            {t('Xóa hàng loạt')}
+            {t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.DELETEMANYUSER}`)}
           </Button>
           <DeleteUserForm
             showOrHideModalDeleteUser={showOrHideModalDeleteUser}
@@ -131,9 +145,9 @@ function DataListUser({ tableData, columns, totalData }) {
       <div className="flex items-center  w-full mt-5 mb-[25px] md:flex-col gap-[15px]">
         <div className="min-w-[500px]">
           <Input
-            onChange={handleSearch}
+            onPressEnter={handleSearch}
             className="h-10 text-[13px] text-body dark:text-white60  dark:bg-white10 border-normal dark:border-white10 rounded-[6px]"
-            placeholder="Tìm kiếm theo tên đăng nhập"
+            placeholder={t(`${PREFIX_FORM_MANAGE_USER}${SEARCH_MANAGE_USER}`)}
             prefix={prefix}
           />
         </div>
@@ -152,6 +166,9 @@ function DataListUser({ tableData, columns, totalData }) {
         rowKey={(el) => el.username.key}
         columns={columns}
         dataSource={tableData}
+        scroll={{
+          y: 500,
+        }}
       />
     </div>
   );

@@ -2,11 +2,14 @@ import React from 'react';
 import { Button, Modal, Space } from 'antd';
 import propTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { CloseOutlined, DeleteOutlined } from '@ant-design/icons';
 import { handleDeleteUser } from '../../../redux/manage-user-local/user/actionCreator';
 import { openNotificationWithIcon } from '../../notifications/notification';
+import { PREFIX_FORM_MANAGE_USER, TITLE_FORM_MANAGE_USER } from '../../../constants';
 
 function DeleteUserForm({ showOrHideModalDeleteUser, hideModal, typeRemove, idUser, nameDelete, selectedIds }) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const handleDelete = (id) => {
     dispatch(
@@ -29,9 +32,13 @@ function DeleteUserForm({ showOrHideModalDeleteUser, hideModal, typeRemove, idUs
       style={{ fontSize: '13px !important', position: 'relative' }}
       title={
         typeRemove ? (
-          <strong style={{ fontWeight: '1000' }}>Xóa tài khoản</strong>
+          <strong style={{ fontWeight: '1000' }}>
+            {t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.DELETEUSER}`)}
+          </strong>
         ) : (
-          <strong style={{ fontWeight: '1000' }}>Xóa tài khoản hàng loạt</strong>
+          <strong style={{ fontWeight: '1000' }}>
+            {t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.DELETEMANYUSER}`)}
+          </strong>
         )
       }
       open={showOrHideModalDeleteUser}

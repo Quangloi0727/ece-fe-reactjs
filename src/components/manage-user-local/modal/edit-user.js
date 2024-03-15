@@ -3,6 +3,7 @@ import { Form, Input, Button, Modal, Space, Select } from 'antd';
 import propTypes from 'prop-types';
 import { CloseOutlined, SearchOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { handleEditDataUser } from '../../../redux/manage-user-local/user/actionCreator';
 import { openNotificationWithIcon } from '../../notifications/notification';
 import { USER } from '../../../constants';
@@ -10,9 +11,11 @@ import { USER } from '../../../constants';
 const { Option } = Select;
 
 function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const formRef = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [passwordVisible, setPasswordVisible] = React.useState(false);
 
   const handleTypeChange = (value) => {
     if (value === USER.KEY_TYPE_LOCAL) {
@@ -29,27 +32,48 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
   });
 
   const [form] = Form.useForm();
+
+  const handleHideModel = () => {
+    const { username, type, role, password } = dataUser;
+    form.setFieldsValue({
+      username,
+      type,
+      role:
+        role === USER.KEY_ROLE_ADMIN
+          ? [USER.KEY_ROLE_ADMIN]
+          : role === USER.KEY_ROLE_USER
+          ? [USER.KEY_ROLE_USER]
+          : [USER.KEY_ROLE_ADMIN, USER.KEY_ROLE_USER],
+      password,
+    });
+    hideModal();
+    setPasswordVisible(false);
+  };
   useEffect(() => {
     if (dataUser) {
       const { username, type, role, password } = dataUser;
-      let roleDetail = role;
-      if (role === USER.KEY_ROLE_ALL) {
-        roleDetail = [USER.KEY_ROLE_ADMIN, USER.KEY_ROLE_USER];
-      }
       form.setFieldsValue({
         username,
         type,
-        role: roleDetail,
+        role:
+          role === USER.KEY_ROLE_ADMIN
+            ? [USER.KEY_ROLE_ADMIN]
+            : role === USER.KEY_ROLE_USER
+            ? [USER.KEY_ROLE_USER]
+            : [USER.KEY_ROLE_ADMIN, USER.KEY_ROLE_USER],
         password,
       });
       setShowPassword(form.getFieldValue('type') === USER.KEY_TYPE_LOCAL);
     }
-  }, [dataUser]);
+  }, [dataUser, form]);
 
   const handleSendDataForm = () => {
     const formData = form.getFieldsValue();
     if (formData.role.includes(USER.KEY_ROLE_USER) && formData.role.includes(USER.KEY_ROLE_ADMIN)) {
       formData.role = USER.KEY_ROLE_ALL;
+    } else {
+      const role = formData.role[0];
+      formData.role = role;
     }
     dispatch(
       handleEditDataUser(
@@ -70,57 +94,41 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
   return (
     <Modal
       forceRender
-      title={<strong style={{ fontWeight: '700' }}>Sửa người truy cập</strong>}
+      title={<strong style={{ fontWeight: '700' }}>{t('Sửa người truy cập')}</strong>}
       open={showOrHideModalEditForm}
       onCancel={hideModal}
       maskClosable={false}
-      zIndex="1000"
-      footer={[
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'end',
-          }}
-          key="footerModalAddVistor"
-        >
-          <Space size="small">
-            <Button
-              type="primary"
-              danger
-              ghost
-              key="cancelAddVistor"
-              className="px-5 text-[13px] font-semibold button-filter-cancel h-10"
-              onClick={hideModal}
-            >
-              <span className="button-formadd items-center">
-                <CloseOutlined style={{ marginRight: '4px' }} /> Hủy
-              </span>
-            </Button>
-            <Button
-              type="primary"
-              key="submitAddVistor"
-              className="px-5 text-[13px] font-semibold h-10 button-filter-search"
-              onClick={() => {
-                handleSendDataForm();
-              }}
-            >
-              <span className="button-formadd items-center">
-                <SearchOutlined style={{ marginRight: '4px' }} />
-                Lưu
-              </span>
-            </Button>
-          </Space>
-        </div>,
-      ]}
+      footer={false}
+      // bodyStyle={{ height: 450 }}
     >
       <div className="bg-white dark:bg-white10 m-0 p-0 text-theme-gray :text-white60 text-[13px] rounded-10 relative h-full">
         <div className="text-[13px]">
           <Form layout="vertical" form={form} ref={formRef} colon={false} className="form-add">
-            <Form.Item key="username" name="username" label="Tên đăng nhập">
-              <Input placeholder="Nhập tên đăng nhập" />
+            <Form.Item
+              key="username"
+              name="username"
+              label={t('Tên đăng nhập')}
+              rules={[
+                {
+                  required: true,
+                  message: 'Đây là trường bắt buộc',
+                },
+              ]}
+            >
+              <Input placeholder="Nhập tên đăng nhập" maxLength={50} />
             </Form.Item>
 
-            <Form.Item key="type" name="type" label="Loại tài khoản">
+            <Form.Item
+              key="type"
+              name="type"
+              label={t('Loại tài khoản')}
+              rules={[
+                {
+                  required: true,
+                  message: 'Đây là trường bắt buộc',
+                },
+              ]}
+            >
               <Select
                 className="[&>div]:border-normal dark:[&>div]:border-white10 [&>div]:rounded-6 [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white60 [&>div>div>div>span]:bg-transparent [&>div]:h-[38px] [&>div>div>div>span]:items-center [&>div>.ant-select-selection-item]:flex [&>div>.ant-select-selection-item]:items-center dark:[&>div>.ant-select-selection-item]:text-white60"
                 placeholder="Chọn loại tài khoản"
@@ -132,12 +140,38 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
             </Form.Item>
 
             {showPassword && (
-              <Form.Item key="password" name="password" label="Mật khẩu">
-                <Input.Password placeholder="Nhập mật khẩu" />
+              <Form.Item
+                key="password"
+                name="password"
+                label={t('Mật khẩu')}
+                rules={[
+                  {
+                    required: true,
+                    message: 'Đây là trường bắt buộc',
+                  },
+                ]}
+              >
+                <Input.Password
+                  placeholder="Nhập mật khẩu"
+                  visibilityToggle={{
+                    visible: passwordVisible,
+                    onVisibleChange: setPasswordVisible,
+                  }}
+                />
               </Form.Item>
             )}
 
-            <Form.Item key="role" name="role" label="Quyền">
+            <Form.Item
+              key="role"
+              name="role"
+              label={t('type')}
+              rules={[
+                {
+                  required: true,
+                  message: 'Đây là trường bắt buộc',
+                },
+              ]}
+            >
               <Select
                 className="[&>div]:border-normal dark:[&>div]:border-white10 [&>div]:rounded-6 [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white60 [&>div>div>div>span]:bg-transparent [&>div]:h-[38px] [&>div>div>div>span]:items-center [&>div>.ant-select-selection-item]:flex [&>div>.ant-select-selection-item]:items-center dark:[&>div>.ant-select-selection-item]:text-white60"
                 placeholder="Chọn loại tài khoản"
@@ -147,6 +181,40 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
                 <Option value={USER.KEY_ROLE_USER}>User</Option>
               </Select>
             </Form.Item>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'end',
+              }}
+              key="footerModalAddVistor"
+            >
+              <Space size="small">
+                <Form.Item>
+                  <Button type="primary" danger ghost onClick={handleHideModel}>
+                    <span className="button-formadd items-center">
+                      <CloseOutlined style={{ marginRight: '4px' }} /> Hủy
+                    </span>
+                  </Button>
+                </Form.Item>
+                <Form.Item shouldUpdate>
+                  {() => (
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      onClick={() => {
+                        handleSendDataForm();
+                      }}
+                      disabled={!!form.getFieldsError().filter(({ errors }) => errors.length).length}
+                    >
+                      <span className="button-formadd items-center">
+                        <SearchOutlined style={{ marginRight: '4px' }} />
+                        Lưu
+                      </span>
+                    </Button>
+                  )}
+                </Form.Item>
+              </Space>
+            </div>
           </Form>
         </div>
       </div>
