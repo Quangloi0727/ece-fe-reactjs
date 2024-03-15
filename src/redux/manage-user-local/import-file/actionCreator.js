@@ -26,7 +26,7 @@ const downloadTemplateExcel = () => {
 
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', 'teamplate.xlsx');
+      link.setAttribute('download', 'File_Mau_Import_Account.xlsx');
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
