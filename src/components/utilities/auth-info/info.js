@@ -24,10 +24,10 @@ const AuthInfo = React.memo(() => {
   const history = useNavigate();
 
   const SignOut = useCallback(() => {
-    const logOutADFS = window.open(process.env.REACT_APP_URL_ADFS_LOGOUT, '_blank');
     dispatch(
       logOut(
         () => {
+          const logOutADFS = window.open(process.env.REACT_APP_URL_ADFS_LOGOUT, '_blank');
           setTimeout(() => {
             logOutADFS.close();
             history('/login');
