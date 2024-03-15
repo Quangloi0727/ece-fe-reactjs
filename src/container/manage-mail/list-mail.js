@@ -200,7 +200,7 @@ function ListEmail() {
                       {t('lookUpEmail')}
                     </Heading>
                   </div>
-                  <div className="p-[25px]">
+                  <div className="p-[30px]">
                     <DataListEmail tableData={tableDataSource} totalData={totalData} columns={configColumn} />
                   </div>
                 </div>

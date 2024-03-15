@@ -5,9 +5,12 @@ import { CloseOutlined, SearchOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { handleEditDataUser } from '../../../redux/manage-user-local/user/actionCreator';
+import { getListUser } from '../../../redux/manage-user-local/actionCreator';
 import { openNotificationWithIcon } from '../../notifications/notification';
 import {
   USER,
+  DEFAULT_PAGE,
+  DEFAULT_PAGE_SIZE,
   PREFIX_FORM_MANAGE_USER,
   TITLE_FORM_MANAGE_USER,
   LABEL_FORM_MANAGE_USER,
@@ -88,9 +91,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
         () => {
           hideModal();
           openNotificationWithIcon('success', 'Update thành công !');
-          setTimeout(() => {
-            window.location.reload(true);
-          }, 1000);
+          dispatch(getListUser(DEFAULT_PAGE, DEFAULT_PAGE_SIZE, ''));
         },
         (err) => {
           openNotificationWithIcon('error', 'Lưu thất bại !', err.message);

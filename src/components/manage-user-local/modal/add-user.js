@@ -5,9 +5,12 @@ import { CloseOutlined, SearchOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { handleSendDataUser } from '../../../redux/manage-user-local/user/actionCreator';
+import { getListUser } from '../../../redux/manage-user-local/actionCreator';
 import { openNotificationWithIcon } from '../../notifications/notification';
 import {
   USER,
+  DEFAULT_PAGE,
+  DEFAULT_PAGE_SIZE,
   PREFIX_FORM_MANAGE_USER,
   LABEL_FORM_MANAGE_USER,
   TITLE_FORM_MANAGE_USER,
@@ -57,9 +60,8 @@ function AddUserForm({ showOrHideModal, hideModal }) {
         () => {
           hideModal();
           openNotificationWithIcon('success', 'Thêm thành công !');
-          setTimeout(() => {
-            window.location.reload(true);
-          }, 1000);
+          form.resetFields();
+          dispatch(getListUser(DEFAULT_PAGE, DEFAULT_PAGE_SIZE, ''));
         },
         (err) => {
           openNotificationWithIcon('error', 'Thêm thất bại !', err.message);
