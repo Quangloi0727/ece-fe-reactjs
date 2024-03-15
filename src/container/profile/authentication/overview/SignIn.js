@@ -28,6 +28,10 @@ function SignIn() {
     [history, dispatch],
   );
 
+  const redirectPageLogin = () => {
+    window.open(process.env.REACT_APP_URL_ADFS, '_blank');
+  };
+
   return (
     <Row justify="center">
       <Col xxl={6} xl={8} md={12} sm={18} xs={24}>
@@ -57,6 +61,14 @@ function SignIn() {
               <Form.Item>
                 <Button className="btn-signin" htmlType="submit" type="primary" size="large">
                   {isLoading ? 'Loading...' : 'Đăng nhập'}
+                </Button>
+              </Form.Item>
+              <p className="relative text-body dark:text-white60 -mt-2.5 mb-6 text-center text-13 font-medium before:absolute before:w-full before:h-px ltr:before:left-0 rtl:before:right-0 before:top-1/2 before:-translate-y-1/2 before:z-10 before:bg-gray-200 dark:before:bg-white10">
+                <span className="relative z-20 px-4 bg-white dark:bg-[#1b1d2a]">Or</span>
+              </p>
+              <Form.Item>
+                <Button className="btn-signin-adfs" type="primary" size="large" onClick={redirectPageLogin}>
+                  Đăng nhập bằng ADFS
                 </Button>
               </Form.Item>
             </Form>

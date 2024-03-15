@@ -113,10 +113,17 @@ const AuthFormWrap = Styled.div`
     .btn-create{
       font-size: 14px;
       font-weight: 500;
-      border-radius: 6px;
+      border-radius: 30px;
       width: 100%;
       min-height: 48px;
       margin-top: 25px;
+    }
+    .btn-signin-adfs{
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 30px;
+      width: 100%;
+      min-height: 48px;
     }
     .btn-reset{
       margin-top: 0;

@@ -15,6 +15,7 @@ const ListEmail = lazy(() => import('./container/manage-mail/list-mail'));
 const ActivityDetail = lazy(() => import('./container/manage-mail/activity-detail'));
 const CaseDetail = lazy(() => import('./container/manage-mail/case-detail'));
 const ListAccountUser = lazy(() => import('./container/manage-user-local/list-user'));
+const Callback = lazy(() => import('./container/profile/authentication/overview/Callback'));
 
 const { themeColor } = config;
 
@@ -52,6 +53,7 @@ function ProviderConfig() {
             {!isLoggedIn ? (
               <Routes>
                 <Route path="*" element={<Navigate to="/login" />} />
+                <Route path="/callback" element={<Callback />} />
                 <Route path="/login/*" element={<Auth />} />
               </Routes>
             ) : (

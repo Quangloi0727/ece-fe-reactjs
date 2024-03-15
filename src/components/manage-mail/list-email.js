@@ -2,7 +2,7 @@ import UilSearch from '@iconscout/react-unicons/icons/uil-search';
 import { Input, Table } from 'antd';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { FilterOutlined, SettingOutlined } from '@ant-design/icons';
 import FilterAdvance from './modal/filter-advance';
@@ -11,6 +11,7 @@ import { tableReadData } from '../../redux/manage-mail/list-mail/actionCreator';
 import { Button } from '../buttons/buttons';
 import { getItem } from '../../utility/localStorageControl';
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE, LOCAL_STORAGE_VARIABLE } from '../../constants';
+import { Loading } from '../../container/profile/authentication/overview/Loading';
 
 function DataListEmail({ tableData, columns, totalData }) {
   const dispatch = useDispatch();
@@ -73,9 +74,16 @@ function DataListEmail({ tableData, columns, totalData }) {
     setFilterAdvance(values);
   };
 
+  const { isLoading } = useSelector((getState) => {
+    return {
+      isLoading: getState.dataTableEmail.loading,
+    };
+  });
+
   const prefix = <UilSearch className="w-4 h-4 ltr:mr-2 rtl:ml-2 text-light dark:text-white60" />;
   return (
     <>
+      <Loading show={isLoading} />
       <div className="flex items-center w-full md:flex-col">
         <div className="min-w-[120px]">
           <Button onClick={showModalFilter} style={{ fontWeight: 'normal' }} size="default" type="light" outlined>

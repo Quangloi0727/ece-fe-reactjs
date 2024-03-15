@@ -7,10 +7,13 @@
     "@dnd-kit/core": "^6.0.8",
     "@dnd-kit/sortable": "^7.0.2",
     "@dnd-kit/utilities": "^3.2.1",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
     "@fortawesome/fontawesome-free": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@iconscout/react-unicons": "^1.1.6",
+    "@mui/material": "^5.15.13",
     "@pezhmanparsaee/react-custom-scrollbars": "4.3.1",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^14.0.0",
@@ -51,7 +54,7 @@
     "autoprefixer": "10.4.5"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "PORT=3006 craco start",
     "build": "set \"GENERATE_SOURCEMAP=false\" && craco --max-old-space-size=4096 build",
     "test": "craco test",
     "eject": "craco eject"
