@@ -69,6 +69,8 @@ export const CASE_SEVERITY = [
   { key: 4, message: 'Low' },
 ];
 
+export const NOTE_IMPORT_EXCEL =
+  'Hệ thống bỏ qua nhưng bản ghi trùng tên đăng nhập \nHệ thống bỏ qua những bản ghi thiếu tên đăng nhập/Loại tài khoản/Quyền \nHệ thống bỏ qua bản ghi sai quyền(Chỉ nhận giá trị User hoặc Admin hoặc All) \nHệ thống bỏ qua những bản ghi tài khoản loại Local thiếu/sai định dạng mật khẩu(điền validate của mật khẩu)';
 export const ACTIVITY_HISTORY = [
   {
     key: 1,

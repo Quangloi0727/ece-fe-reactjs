@@ -6,7 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { handleEditDataUser } from '../../../redux/manage-user-local/user/actionCreator';
 import { openNotificationWithIcon } from '../../notifications/notification';
-import { USER } from '../../../constants';
+import {
+  USER,
+  PREFIX_FORM_MANAGE_USER,
+  TITLE_FORM_MANAGE_USER,
+  LABEL_FORM_MANAGE_USER,
+  PLACEHOLDER_FORM_MANAGE_USER,
+} from '../../../constants';
 
 const { Option } = Select;
 
@@ -15,7 +21,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
   const dispatch = useDispatch();
   const formRef = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [passwordVisible, setPasswordVisible] = React.useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleTypeChange = (value) => {
     if (value === USER.KEY_TYPE_LOCAL) {
@@ -82,7 +88,9 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
         () => {
           hideModal();
           openNotificationWithIcon('success', 'Update thành công !');
-          window.location.reload(true);
+          setTimeout(() => {
+            window.location.reload(true);
+          }, 1000);
         },
         (err) => {
           openNotificationWithIcon('error', 'Lưu thất bại !', err.message);
@@ -94,12 +102,15 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
   return (
     <Modal
       forceRender
-      title={<strong style={{ fontWeight: '700' }}>{t('Sửa người truy cập')}</strong>}
+      title={
+        <strong style={{ fontWeight: '700' }}>
+          {t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.ADDNEWUSER}`)}
+        </strong>
+      }
       open={showOrHideModalEditForm}
       onCancel={hideModal}
       maskClosable={false}
       footer={false}
-      // bodyStyle={{ height: 450 }}
     >
       <div className="bg-white dark:bg-white10 m-0 p-0 text-theme-gray :text-white60 text-[13px] rounded-10 relative h-full">
         <div className="text-[13px]">
@@ -107,7 +118,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
             <Form.Item
               key="username"
               name="username"
-              label={t('Tên đăng nhập')}
+              label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.USERNAME}`)}
               rules={[
                 {
                   required: true,
@@ -115,13 +126,16 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
                 },
               ]}
             >
-              <Input placeholder="Nhập tên đăng nhập" maxLength={50} />
+              <Input
+                placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.USERNAME}`)}
+                maxLength={50}
+              />
             </Form.Item>
 
             <Form.Item
               key="type"
               name="type"
-              label={t('Loại tài khoản')}
+              label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.TYPEACCOUNT}`)}
               rules={[
                 {
                   required: true,
@@ -131,7 +145,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
             >
               <Select
                 className="[&>div]:border-normal dark:[&>div]:border-white10 [&>div]:rounded-6 [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white60 [&>div>div>div>span]:bg-transparent [&>div]:h-[38px] [&>div>div>div>span]:items-center [&>div>.ant-select-selection-item]:flex [&>div>.ant-select-selection-item]:items-center dark:[&>div>.ant-select-selection-item]:text-white60"
-                placeholder="Chọn loại tài khoản"
+                placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.TYPEACCOUNT}`)}
                 onChange={handleTypeChange}
               >
                 <Option value={USER.KEY_TYPE_LOCAL}>Local</Option>
@@ -143,7 +157,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
               <Form.Item
                 key="password"
                 name="password"
-                label={t('Mật khẩu')}
+                label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.PASSWORD}`)}
                 rules={[
                   {
                     required: true,
@@ -152,7 +166,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
                 ]}
               >
                 <Input.Password
-                  placeholder="Nhập mật khẩu"
+                  placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.PASSWORD}`)}
                   visibilityToggle={{
                     visible: passwordVisible,
                     onVisibleChange: setPasswordVisible,
@@ -164,7 +178,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
             <Form.Item
               key="role"
               name="role"
-              label={t('type')}
+              label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.ROLE}`)}
               rules={[
                 {
                   required: true,
@@ -174,7 +188,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
             >
               <Select
                 className="[&>div]:border-normal dark:[&>div]:border-white10 [&>div]:rounded-6 [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white60 [&>div>div>div>span]:bg-transparent [&>div]:h-[38px] [&>div>div>div>span]:items-center [&>div>.ant-select-selection-item]:flex [&>div>.ant-select-selection-item]:items-center dark:[&>div>.ant-select-selection-item]:text-white60"
-                placeholder="Chọn loại tài khoản"
+                placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.ROLE}`)}
                 mode="multiple"
               >
                 <Option value={USER.KEY_ROLE_ADMIN}>Admin</Option>

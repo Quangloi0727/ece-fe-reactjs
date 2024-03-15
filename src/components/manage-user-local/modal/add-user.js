@@ -57,7 +57,9 @@ function AddUserForm({ showOrHideModal, hideModal }) {
         () => {
           hideModal();
           openNotificationWithIcon('success', 'Thêm thành công !');
-          window.location.reload(true);
+          setTimeout(() => {
+            window.location.reload(true);
+          }, 1000);
         },
         (err) => {
           openNotificationWithIcon('error', 'Thêm thất bại !', err.message);

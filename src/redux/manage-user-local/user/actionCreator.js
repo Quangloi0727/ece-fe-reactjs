@@ -36,7 +36,6 @@ const handleDeleteUser = (typeRemove, id, successCallback, errorCallback) => {
         ? await DataService.delete(`/manage-user-local/deleteMany`, { ids: id })
         : await DataService.delete(`/manage-user-local/deleteOne/${id}`);
       if (STATUS_CODE_SUCCESS.includes(response.status)) {
-        dispatch(getUserSuccess(id));
         successCallback();
       } else {
         dispatch(getUserError(response.data.errors[0]));
