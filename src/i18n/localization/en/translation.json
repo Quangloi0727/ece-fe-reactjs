@@ -36,6 +36,31 @@
     "file": "Attached File",
     "direction": "Direction"
   },
+  "formManagerUser":  {
+    "manageUser" : "Manger User",
+    "addNewUser" : "Add User",
+    "editUser" : "Edit User",
+    "detailUser": "User Detail",
+    "deleteUser": "Delete the account",
+    "deleteManyUser": "Delete multiple accounts",
+    "username" : "Username",
+    "typeAccount": "Type Account",
+    "password": "Password",
+    "role": "Role",
+    "placeholderUsername": "Please input username",
+    "placeholderTypeAccount": "Please select type account",
+    "placeholderPassword": "Please input password",
+    "placeholderRole": "Please select role",
+    "creator": "Creator",
+    "date": "Date Created",
+    "tooltipDetail": "View Detail",
+    "tooltipDelete" : "Delete",
+    "tooltipEdit": "Edit",
+    "sum": "Total: ",
+    "search" : "Search by username",
+    "import": "Import"
+  },
+
   "logout": "Log Out",
   "searchOnNewSystem": "Search on new system",
   "searchOnOldSystem": "Search on old system"

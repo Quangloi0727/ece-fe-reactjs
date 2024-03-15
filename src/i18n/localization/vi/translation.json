@@ -36,6 +36,33 @@
     "file": "File đính kèm",
     "direction": "Hướng Email"
   },
+  "formManagerUser":  {
+      "manageUser" : "Danh sách người truy cập",
+      "addNewUser" : "Thêm người truy cập",
+      "editUser" : "Sửa người truy cập",
+      "deleteUser": "Xóa hàng loạt",
+      "deleteManyUser": "Xóa hàng loạt tài khoản",
+      "username" : "Tên đăng nhập",
+      "typeAccount": "Loại tài khoản",
+      "password": " Mật khẩu",
+      "role": "Quyền",
+      "placeholderUsername": "Nhập tên đăng nhập",
+      "placeholderTypeAccount": "Nhập loại tài khoản",
+      "placeholderPassword": "Nhập mật khẩu",
+      "placeholderRole": "Chọn quyền",
+      "detailUser": "Chi tiết người truy cập",
+      "creator": "Người tạo",
+      "date": "Ngày tạo",
+      "tooltipDetail": "Xem chi tiết",
+      "tooltipDelete" : "Xóa",
+      "tooltipEdit": "Sửa",
+      "sum": "Tổng: ",
+      "search" : "Tìm theo tên đăng nhập",
+      "import": "Import"
+  },
+  "errorFormManageUser" : {
+    "Username existed !" : "Tên đăng nhập đã tồn tại."
+  },
   "logout": "Đăng xuất",
   "searchOnNewSystem": "Tra cứu trên hệ thống mới",
   "searchOnOldSystem": "Tra cứu trên hệ thống cũ"

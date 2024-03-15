@@ -15,6 +15,7 @@ import TableImport from './table-import';
 import { PaginationStyle, GlobalUtilityStyle } from '../../../../container/styled';
 import { openNotificationWithIcon } from '../../../notifications/notification';
 import { downloadTemplateExcel, importExcel } from '../../../../redux/manage-user-local/import-file/actionCreator';
+import { NOTE_IMPORT_EXCEL } from '../../../../constants';
 
 function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
   const dispatch = useDispatch();
@@ -41,7 +42,9 @@ function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
         () => {
           hideModal();
           openNotificationWithIcon('success', 'Lưu thành công !');
-          window.location.reload(true);
+          setTimeout(() => {
+            window.location.reload(true);
+          }, 1000);
         },
         (err) => {
           openNotificationWithIcon('error', 'Lưu thất bại !', err.message);
@@ -62,11 +65,11 @@ function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
   const downloadExcelFile = () => {
     dispatch(downloadTemplateExcel());
   };
-
+  console.log(fileLists);
   const tableFileData = [];
   if (dataFile && dataFile.length) {
     dataFile.map((item) => {
-      const { id, fileName, quantityRecord, date } = item;
+      const { id, fileName, quantityRecord, updatedAt } = item;
       return tableFileData.push({
         id: (
           <span className="text-start dark:text-white60 text-[13px] " title={id} key={id}>
@@ -84,8 +87,8 @@ function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
           </span>
         ),
         updatedAt: (
-          <span className=" text-start dark:text-white60 text-[13px]" key={date}>
-            {moment(date).format('DD-MM-YYYY HH:mm:ss ')}
+          <span className=" text-start dark:text-white60 text-[13px]" key={updatedAt}>
+            {moment(updatedAt).format('DD/MM/YYYY HH:mm:ss ')}
           </span>
         ),
       });
@@ -182,6 +185,7 @@ function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
             </Form.Item>
           </Form>
         </div>
+        <div className="display-linebreak">{NOTE_IMPORT_EXCEL}</div>
         <GlobalUtilityStyle>
           <Row gutter={15}>
             <Col xs={24} className="">

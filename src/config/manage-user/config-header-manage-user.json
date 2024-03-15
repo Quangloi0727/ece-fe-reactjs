@@ -4,7 +4,7 @@
     "dataIndex": "username",
     "key": "1"
   },
-  {
+{
     "title": "Thao tác",
     "dataIndex": "action",
     "key": "4"
@@ -21,7 +21,7 @@
   },
   {
     "title": "Người tạo",
-    "dataIndex": "owner",
+    "dataIndex": "creator",
     "key": "5"
   },
   {

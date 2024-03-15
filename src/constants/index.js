@@ -52,14 +52,10 @@ export const ACTIVITY_MODE = {
   INBOUND: 100,
   OUTBOUND: 200,
 };
-export const CONDITION_UPLOAD_FILE = [
-  'application/vnd.ms-excel',
-  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-  'text/csv',
-];
-export const CONDITION_LIST_EMAIL_TO = 1;
 
-export const STATUS_REMOVE_FILE_EXCEL = 'removed';
+export const CONDITION_LIST_EMAIL_TO = 1;
+export const PREFIX_FORM_MANAGE_USER = 'formManagerUser.';
+export const ERROR_FORM_MANAGE_USER = 'errorFormManagerUser.';
 
 export const CASE_STATUS = [
   { key: 0, message: 'Open' },
@@ -73,6 +69,8 @@ export const CASE_SEVERITY = [
   { key: 4, message: 'Low' },
 ];
 
+export const NOTE_IMPORT_EXCEL =
+  'Hệ thống bỏ qua nhưng bản ghi trùng tên đăng nhập \nHệ thống bỏ qua những bản ghi thiếu tên đăng nhập/Loại tài khoản/Quyền \nHệ thống bỏ qua bản ghi sai quyền(Chỉ nhận giá trị User hoặc Admin hoặc All) \nHệ thống bỏ qua những bản ghi tài khoản loại Local thiếu/sai định dạng mật khẩu(điền validate của mật khẩu)';
 export const ACTIVITY_HISTORY = [
   {
     key: 1,
@@ -150,3 +148,38 @@ export const SEARCH_ON_SYSTEM = {
   OLD: 'old',
   NEW: 'new',
 };
+
+export const LABEL_FORM_MANAGE_USER = {
+  USERNAME: 'username',
+  PASSWORD: 'password',
+  ROLE: 'role',
+  TYPEACCOUNT: 'typeAccount',
+  DATECREATED: 'date',
+  CREATOR: 'creator',
+};
+export const TITLE_FORM_MANAGE_USER = {
+  MANAGEUSER: 'manageUser',
+  ADDNEWUSER: 'addNewUser',
+  EDITUSER: 'editUser',
+  DELETEUSER: 'deleteUser',
+  DELETEMANYUSER: 'deleteManyUser',
+  DETAILUSER: 'detailUser',
+};
+
+export const PLACEHOLDER_FORM_MANAGE_USER = {
+  USERNAME: 'placeholderUsername',
+  PASSWORD: 'placeholderPassword',
+  ROLE: 'placeholderRole',
+  TYPEACCOUNT: 'placeholderTypeAccount',
+};
+export const NAME_FORM_MANAGE_USER = {
+  TYPE: 'type',
+  PASSWORD: 'password',
+};
+export const TOOLTIP_FORM_MANAGE_USER = {
+  DETAIL: 'tooltipDetail',
+  DELETE: 'tooltipDelete',
+  EDIT: 'tooltipEdit',
+};
+export const TOTALDATA = 'sum';
+export const SEARCH_MANAGE_USER = 'search';

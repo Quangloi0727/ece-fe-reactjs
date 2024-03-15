@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import UilEye from '@iconscout/react-unicons/icons/uil-eye';
 import UilEdit from '@iconscout/react-unicons/icons/uil-edit';
@@ -16,7 +16,13 @@ import DetailUserForm from '../../components/manage-user-local/modal/detail-user
 import EditUserForm from '../../components/manage-user-local/modal/edit-user';
 import DeleteUserForm from '../../components/manage-user-local/modal/delete-user';
 import { getUser } from '../../redux/manage-user-local/user/actionCreator';
-import { USER } from '../../constants/index';
+import {
+  PREFIX_FORM_MANAGE_USER,
+  TITLE_FORM_MANAGE_USER,
+  TOOLTIP_FORM_MANAGE_USER,
+  USER,
+  TOTALDATA,
+} from '../../constants/index';
 
 function ListUser() {
   const dispatch = useDispatch();
@@ -79,7 +85,7 @@ function ListUser() {
   const tableUserSource = [];
   if (dataUser && dataUser.length) {
     dataUser.map((item, index) => {
-      const { id, username, type, role, owner, updatedAt } = item;
+      const { id, username, type, role, updatedAt, createdByInfo } = item;
       return tableUserSource.push({
         id: (
           <span className="text-start dark:text-white60 text-[13px] " title={id} key={`${id}-${index}`}>
@@ -93,44 +99,41 @@ function ListUser() {
         ),
         action: (
           <div className="items-center w-full md:flex-col">
-            <Button
-              className="border-none bg-none"
-              onClick={() => showModalDetailUser(id)}
-              style={{ fontWeight: 'normal' }}
-              size="default"
-              type="light"
-            >
-              <UilEye className="w-4 text-light-extra dark:text-white60" />
-            </Button>
-            <DetailUserForm showOrHideModalDetailUser={showOrHideModalDetailUser} hideModal={hideModal} />
+            <Tooltip title={t(`${PREFIX_FORM_MANAGE_USER}${TOOLTIP_FORM_MANAGE_USER.DETAIL}`)}>
+              <Button
+                className="border-none bg-none"
+                onClick={() => showModalDetailUser(id)}
+                style={{ fontWeight: 'normal' }}
+                size="default"
+                type="light"
+              >
+                <UilEye className="w-4 text-light-extra dark:text-white60" />
+              </Button>
+            </Tooltip>
 
-            <Button
-              className="border-none bg-none"
-              onClick={() => showModalEditUser(id)}
-              style={{ fontWeight: 'normal' }}
-              size="default"
-              type="light"
-            >
-              <UilEdit className="w-4 text-light-extra dark:text-white60" />
-            </Button>
-            <EditUserForm showOrHideModalEditForm={showOrHideModalEditForm} hideModal={hideModal} idEdit={idEdit} />
+            <Tooltip title={t(`${PREFIX_FORM_MANAGE_USER}${TOOLTIP_FORM_MANAGE_USER.EDIT}`)}>
+              <Button
+                className="border-none bg-none"
+                onClick={() => showModalEditUser(id)}
+                style={{ fontWeight: 'normal' }}
+                size="default"
+                type="light"
+              >
+                <UilEdit className="w-4 text-light-extra dark:text-white60" />
+              </Button>
+            </Tooltip>
 
-            <Button
-              className="border-none bg-none"
-              onClick={() => showModalDeleteUser(id, username)}
-              style={{ fontWeight: 'normal' }}
-              size="default"
-              type="light"
-            >
-              <UilTrash className="w-4 text-light-extra dark:text-white60" />
-            </Button>
-            <DeleteUserForm
-              showOrHideModalDeleteUser={showOrHideModalDeleteUser}
-              hideModal={hideModal}
-              typeRemove
-              idUser={idUser}
-              nameDelete={nameDelete}
-            />
+            <Tooltip title={t(`${PREFIX_FORM_MANAGE_USER}${TOOLTIP_FORM_MANAGE_USER.DELETE}`)}>
+              <Button
+                className="border-none bg-none"
+                onClick={() => showModalDeleteUser(id, username)}
+                style={{ fontWeight: 'normal' }}
+                size="default"
+                type="light"
+              >
+                <UilTrash className="w-4 text-light-extra dark:text-white60" />
+              </Button>
+            </Tooltip>
           </div>
         ),
         type: (
@@ -143,14 +146,14 @@ function ListUser() {
             {role === USER.KEY_ROLE_ADMIN ? USER.ADMIN : role === USER.KEY_ROLE_USER ? USER.USER : USER.ALL}
           </span>
         ),
-        owner: (
-          <span className=" text-start dark:text-white60 text-[13px]" key={`${owner}-${index}`}>
-            {owner}
+        creator: (
+          <span className=" text-start dark:text-white60 text-[13px]" key={`${createdByInfo?.id}-${index}`}>
+            {createdByInfo?.username}
           </span>
         ),
         dateCreate: (
           <span className=" text-start dark:text-white60 text-[13px]" key={`${updatedAt}-${index}`}>
-            {moment(updatedAt).format('DD-MM-YYYY HH:mm:ss ')}
+            {moment(updatedAt).format('DD/MM/YYYY HH:mm:ss ')}
           </span>
         ),
       });
@@ -171,11 +174,28 @@ function ListUser() {
                 <div className="bg-white dark:bg-white10 m-0 p-0 mb-[25px] rounded-10 relative">
                   <div className="py-[16px] px-[25px] text-dark dark:text-white87 font-medium text-[17px] border-regular dark:border-white10 border-b ">
                     <Heading as="h4" className="text-[25px] font-medium mb-0">
-                      {t('MangageUser')}
+                      {t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.MANAGEUSER}`)}
                     </Heading>
                   </div>
                   <div className="p-[25px] text-left">
                     <DataListUser tableData={tableUserSource} columns={dataUserColumn} totalData={totalData} />
+                  </div>
+                  <DetailUserForm showOrHideModalDetailUser={showOrHideModalDetailUser} hideModal={hideModal} />
+                  <EditUserForm
+                    showOrHideModalEditForm={showOrHideModalEditForm}
+                    hideModal={hideModal}
+                    idEdit={idEdit}
+                  />
+                  <DeleteUserForm
+                    showOrHideModalDeleteUser={showOrHideModalDeleteUser}
+                    hideModal={hideModal}
+                    typeRemove
+                    idUser={idUser}
+                    nameDelete={nameDelete}
+                  />
+                  <div className="text-left pb-[25px] pl-[1000px] ">
+                    {t(`${PREFIX_FORM_MANAGE_USER}${TOTALDATA}`)}
+                    {totalData}
                   </div>
                 </div>
               </PaginationStyle>
