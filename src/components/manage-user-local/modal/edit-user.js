@@ -105,7 +105,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
       forceRender
       title={
         <strong style={{ fontWeight: '700' }}>
-          {t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.ADDNEWUSER}`)}
+          {t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.EDITUSER}`)}
         </strong>
       }
       open={showOrHideModalEditForm}
