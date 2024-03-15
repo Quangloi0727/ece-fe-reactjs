@@ -177,8 +177,12 @@ function ListUser() {
                       {t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.MANAGEUSER}`)}
                     </Heading>
                   </div>
-                  <div className="p-[25px] text-left">
+                  <div className="p-[30px] text-left">
                     <DataListUser tableData={tableUserSource} columns={dataUserColumn} totalData={totalData} />
+                    <div className="text-left pb-[25px]" style={{ paddingLeft: 20 }}>
+                      {t(`${PREFIX_FORM_MANAGE_USER}${TOTALDATA}`)}
+                      {totalData}
+                    </div>
                   </div>
                   <DetailUserForm showOrHideModalDetailUser={showOrHideModalDetailUser} hideModal={hideModal} />
                   <EditUserForm
@@ -193,10 +197,6 @@ function ListUser() {
                     idUser={idUser}
                     nameDelete={nameDelete}
                   />
-                  <div className="text-left pb-[25px] pl-[1000px] ">
-                    {t(`${PREFIX_FORM_MANAGE_USER}${TOTALDATA}`)}
-                    {totalData}
-                  </div>
                 </div>
               </PaginationStyle>
             </Col>

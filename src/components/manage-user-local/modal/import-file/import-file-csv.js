@@ -11,13 +11,15 @@ import {
 } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 import TableImport from './table-import';
 import { PaginationStyle, GlobalUtilityStyle } from '../../../../container/styled';
 import { openNotificationWithIcon } from '../../../notifications/notification';
 import { downloadTemplateExcel, importExcel } from '../../../../redux/manage-user-local/import-file/actionCreator';
-import { NOTE_IMPORT_EXCEL } from '../../../../constants';
+import { NOTE_IMPORT_EXCEL, PREFIX_FORM_MANAGE_USER, TOTALDATA } from '../../../../constants';
 
 function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const formRef = useRef(null);
 
@@ -65,7 +67,6 @@ function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
   const downloadExcelFile = () => {
     dispatch(downloadTemplateExcel());
   };
-  console.log(fileLists);
   const tableFileData = [];
   if (dataFile && dataFile.length) {
     dataFile.map((item) => {
@@ -78,7 +79,7 @@ function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
         ),
         fileName: (
           <span className="text-start dark:text-white60 text-[13px] " title={fileName} key={fileName}>
-            {fileName}
+            {fileName.split('.')[0]}
           </span>
         ),
         quantityRecord: (
@@ -193,6 +194,10 @@ function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
                 <div className="bg-white dark:bg-white10 m-0 p-0 mb-[25px] rounded-10 relative">
                   <div className=" text-left">
                     <TableImport tableData={tableFileData} columns={dataFileColumn} totalData={totalData} />
+                  </div>
+                  <div className="text-left pb-[25px]" style={{ paddingLeft: 20 }}>
+                    {t(`${PREFIX_FORM_MANAGE_USER}${TOTALDATA}`)}
+                    {totalData}
                   </div>
                 </div>
               </PaginationStyle>

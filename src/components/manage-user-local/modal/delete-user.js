@@ -6,7 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { CloseOutlined, DeleteOutlined } from '@ant-design/icons';
 import { handleDeleteUser } from '../../../redux/manage-user-local/user/actionCreator';
 import { openNotificationWithIcon } from '../../notifications/notification';
-import { PREFIX_FORM_MANAGE_USER, TITLE_FORM_MANAGE_USER } from '../../../constants';
+import { getListUser } from '../../../redux/manage-user-local/actionCreator';
+import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE, PREFIX_FORM_MANAGE_USER, TITLE_FORM_MANAGE_USER } from '../../../constants';
 
 function DeleteUserForm({ showOrHideModalDeleteUser, hideModal, typeRemove, idUser, nameDelete, selectedIds }) {
   const { t } = useTranslation();
@@ -19,9 +20,7 @@ function DeleteUserForm({ showOrHideModalDeleteUser, hideModal, typeRemove, idUs
         () => {
           hideModal();
           openNotificationWithIcon('success', 'Xóa thành công !');
-          setTimeout(() => {
-            window.location.reload(true);
-          }, 1000);
+          dispatch(getListUser(DEFAULT_PAGE, DEFAULT_PAGE_SIZE, ''));
         },
         (err) => {
           openNotificationWithIcon('error', 'Xóa thất bại !', err.message);
