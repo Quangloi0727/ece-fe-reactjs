@@ -11,6 +11,7 @@ import {
   LABEL_FORM_MANAGE_USER,
   TITLE_FORM_MANAGE_USER,
   NAME_FORM_MANAGE_USER,
+  BUTTON_MODAL,
 } from '../../../constants';
 
 function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
@@ -67,7 +68,8 @@ function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
               className="px-5 text-[13px] font-semibold button-reset h-10"
             >
               <span className="button-formadd items-center">
-                <CheckOutlined style={{ marginRight: '4px' }} /> Đóng
+                <CheckOutlined style={{ marginRight: '4px' }} />
+                {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL.CLOSE}`)}
               </span>
             </Button>
           </Space>
@@ -98,7 +100,7 @@ function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
                 name="password"
                 label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.PASSWORD}`)}
               >
-                <Input.Password readOnly />
+                <Input.Password readOnly visibilityToggle={false} />
               </Form.Item>
             )}
             <Form.Item key="role" name="role" label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.ROLE}`)}>

@@ -1,10 +1,12 @@
 import React from 'react';
-import { Menu } from 'antd';
+import { Menu, Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import UilEllipsisV from '@iconscout/react-unicons/icons/uil-ellipsis-v';
 import propTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
+import { useTranslation } from 'react-i18next';
+import { PREFIX_FORM_MANAGE_USER, TITLE_FORM_MANAGE_USER, TITLE_LOOK_UP_EMAIL } from '../constants';
 
 function MenuItems({ toggleCollapsed }) {
   function getItem(label, key, icon, children, type) {
@@ -23,6 +25,7 @@ function MenuItems({ toggleCollapsed }) {
     };
   });
 
+  const { t } = useTranslation();
   const path = '/list-email';
   const pathName = window.location.pathname;
   const pathArray = pathName && pathName !== '/' ? pathName.split(path) : [];
@@ -43,25 +46,29 @@ function MenuItems({ toggleCollapsed }) {
 
   const items = [
     getItem(
-      <NavLink onClick={toggleCollapsed} to={`${path}`}>
-        <FontAwesome
-          className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
-          name="envelope"
-          size="2x"
-          style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-        />
-      </NavLink>,
+      <Tooltip title={t(`${TITLE_LOOK_UP_EMAIL}`)}>
+        <NavLink onClick={toggleCollapsed} to={`${path}`}>
+          <FontAwesome
+            className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
+            name="envelope"
+            size="2x"
+            style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+          />
+        </NavLink>
+      </Tooltip>,
       'starter',
     ),
     getItem(
-      <NavLink onClick={toggleCollapsed} to={`${path}/user`}>
-        <FontAwesome
-          className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
-          name="user"
-          size="2x"
-          style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-        />
-      </NavLink>,
+      <Tooltip title={t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.MANAGEUSER}`)}>
+        <NavLink onClick={toggleCollapsed} to={`${path}/user`}>
+          <FontAwesome
+            className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
+            name="user"
+            size="2x"
+            style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+          />
+        </NavLink>
+      </Tooltip>,
       'user',
     ),
   ];

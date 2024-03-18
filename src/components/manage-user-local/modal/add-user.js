@@ -16,6 +16,8 @@ import {
   TITLE_FORM_MANAGE_USER,
   PLACEHOLDER_FORM_MANAGE_USER,
   NAME_FORM_MANAGE_USER,
+  BUTTON_MODAL,
+  MESSAGE_RULE_INPUT,
 } from '../../../constants';
 
 const { Option } = Select;
@@ -94,7 +96,7 @@ function AddUserForm({ showOrHideModal, hideModal }) {
               rules={[
                 {
                   required: true,
-                  message: 'Đây là trường bắt buộc.',
+                  message: t(`${PREFIX_FORM_MANAGE_USER}${MESSAGE_RULE_INPUT}`),
                 },
               ]}
             >
@@ -111,7 +113,7 @@ function AddUserForm({ showOrHideModal, hideModal }) {
               rules={[
                 {
                   required: true,
-                  message: 'Đây là trường bắt buộc',
+                  message: t(`${PREFIX_FORM_MANAGE_USER}${MESSAGE_RULE_INPUT}`),
                 },
               ]}
             >
@@ -133,7 +135,7 @@ function AddUserForm({ showOrHideModal, hideModal }) {
                 rules={[
                   {
                     required: true,
-                    message: 'Đây là trường bắt buộc',
+                    message: t(`${PREFIX_FORM_MANAGE_USER}${MESSAGE_RULE_INPUT}`),
                   },
                 ]}
               >
@@ -148,7 +150,7 @@ function AddUserForm({ showOrHideModal, hideModal }) {
               rules={[
                 {
                   required: true,
-                  message: 'Đây là trường bắt buộc',
+                  message: t(`${PREFIX_FORM_MANAGE_USER}${MESSAGE_RULE_INPUT}`),
                 },
               ]}
             >
@@ -172,7 +174,8 @@ function AddUserForm({ showOrHideModal, hideModal }) {
                 <Form.Item>
                   <Button type="primary" danger ghost onClick={handleHideModal}>
                     <span className="button-formadd items-center">
-                      <CloseOutlined style={{ marginRight: '4px' }} /> Hủy
+                      <CloseOutlined style={{ marginRight: '4px' }} />
+                      {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL.CANCEL}`)}
                     </span>
                   </Button>
                 </Form.Item>
@@ -192,7 +195,7 @@ function AddUserForm({ showOrHideModal, hideModal }) {
                     >
                       <span className="button-formadd items-center">
                         <SearchOutlined style={{ marginRight: '4px' }} />
-                        Lưu
+                        {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL.SAVE}`)}
                       </span>
                     </Button>
                   )}

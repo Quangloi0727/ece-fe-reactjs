@@ -116,7 +116,7 @@ function DataListEmail({ tableData, columns, totalData }) {
           <Input
             onChange={handleSearch}
             className="h-10 text-[13px] text-body dark:text-white60  dark:bg-white10 border-normal dark:border-white10 rounded-[6px]"
-            placeholder="Tìm kiếm theo activity id, case id, from, to, subject"
+            placeholder={t('placeholderSearch')}
             prefix={prefix}
           />
         </div>
