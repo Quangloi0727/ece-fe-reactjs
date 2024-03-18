@@ -7,7 +7,14 @@ import { CloseOutlined, DeleteOutlined } from '@ant-design/icons';
 import { handleDeleteUser } from '../../../redux/manage-user-local/user/actionCreator';
 import { openNotificationWithIcon } from '../../notifications/notification';
 import { getListUser } from '../../../redux/manage-user-local/actionCreator';
-import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE, PREFIX_FORM_MANAGE_USER, TITLE_FORM_MANAGE_USER } from '../../../constants';
+import {
+  DEFAULT_PAGE,
+  DEFAULT_PAGE_SIZE,
+  PREFIX_FORM_MANAGE_USER,
+  TITLE_FORM_MANAGE_USER,
+  BUTTON_MODAL,
+  DELETE_MODAL,
+} from '../../../constants';
 
 function DeleteUserForm({ showOrHideModalDeleteUser, hideModal, typeRemove, idUser, nameDelete, selectedIds }) {
   const { t } = useTranslation();
@@ -58,7 +65,8 @@ function DeleteUserForm({ showOrHideModalDeleteUser, hideModal, typeRemove, idUs
           <Space size="small">
             <Button onClick={hideModal} className="px-5 text-[13px] font-semibold button-reset h-10">
               <span className="button-formadd items-center">
-                <CloseOutlined style={{ marginRight: '8px' }} /> Hủy
+                <CloseOutlined style={{ marginRight: '8px' }} />
+                {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL.CANCEL}`)}
               </span>
             </Button>
             <Button
@@ -70,7 +78,7 @@ function DeleteUserForm({ showOrHideModalDeleteUser, hideModal, typeRemove, idUs
             >
               <span className="button-formadd items-center">
                 <DeleteOutlined style={{ marginRight: '8px' }} />
-                Xóa
+                {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL.DELETE}`)}
               </span>
             </Button>
           </Space>
@@ -80,11 +88,15 @@ function DeleteUserForm({ showOrHideModalDeleteUser, hideModal, typeRemove, idUs
     >
       {typeRemove ? (
         <p className="p-[13px]">
-          Tên đăng nhập <strong>{nameDelete}</strong> sẽ bị xóa
+          {t(`${PREFIX_FORM_MANAGE_USER}${DELETE_MODAL.USER}`)}
+          <strong>{nameDelete}</strong>
+          {t(`${PREFIX_FORM_MANAGE_USER}${DELETE_MODAL.MESSAGEDELETEUSER}`)}
         </p>
       ) : (
         <p className="p-[13px]">
-          Xóa <strong>{selectedIds.length}</strong> tài khoản đã chọn
+          {t(`${PREFIX_FORM_MANAGE_USER}${DELETE_MODAL.DELETE}`)}
+          <strong>{selectedIds.length}</strong>
+          {t(`${PREFIX_FORM_MANAGE_USER}${DELETE_MODAL.MESSAGEDELETEUSERS}`)}
         </p>
       )}
     </Modal>

@@ -16,7 +16,13 @@ import TableImport from './table-import';
 import { PaginationStyle, GlobalUtilityStyle } from '../../../../container/styled';
 import { openNotificationWithIcon } from '../../../notifications/notification';
 import { downloadTemplateExcel, importExcel } from '../../../../redux/manage-user-local/import-file/actionCreator';
-import { NOTE_IMPORT_EXCEL, PREFIX_FORM_MANAGE_USER, TOTALDATA } from '../../../../constants';
+import {
+  PREFIX_FORM_MANAGE_USER,
+  TOTALDATA,
+  TITLE_FORM_MANAGE_USER,
+  IMPORT_FILE_MODAL,
+  BUTTON_MODAL,
+} from '../../../../constants/index';
 
 function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
   const { t } = useTranslation();
@@ -98,7 +104,11 @@ function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
 
   return (
     <Modal
-      title={<strong style={{ fontWeight: '700' }}>Import người truy cập</strong>}
+      title={
+        <strong style={{ fontWeight: '700' }}>
+          {t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.IMPORTUSERS}`)}
+        </strong>
+      }
       open={showOrHideModalImportFile}
       onCancel={hideModal}
       maskClosable={false}
@@ -120,7 +130,8 @@ function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
               onClick={hideModal}
             >
               <span className="button-formadd items-center">
-                <CloseOutlined style={{ marginRight: '4px' }} /> Đóng
+                <CloseOutlined style={{ marginRight: '4px' }} />
+                {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL.CANCEL}`)}
               </span>
             </Button>
           </Space>
@@ -131,14 +142,15 @@ function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
         <Button onClick={() => downloadExcelFile()} type="primary" size="middle">
           <span className="button-formadd items-center text-[13px]">
             <DownloadOutlined style={{ marginRight: '4px' }} />
-            Tải file mẫu
+            {t(`${PREFIX_FORM_MANAGE_USER}${IMPORT_FILE_MODAL.DOWNLOAD_FILE}`)}
           </span>
         </Button>
         <GlobalUtilityStyle>
           <div className="pt-[10px] button-formadd items-center text-[13px]">
             {' '}
             <PaperClipOutlined style={{ marginRight: '4px' }} />
-            Tệp người truy cập <InfoCircleFilled style={{ marginLeft: '4px' }} />
+            {t(`${PREFIX_FORM_MANAGE_USER}${IMPORT_FILE_MODAL.USER_FILE}`)}
+            <InfoCircleFilled style={{ marginLeft: '4px' }} />
             {checkExistFile ? (
               <div className="button-formadd">
                 {' '}
@@ -179,14 +191,15 @@ function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
                       color: 'blue',
                     }}
                   >
-                    <CloudUploadOutlined style={{ marginRight: '5px' }} /> Duyệt từ máy tính
+                    <CloudUploadOutlined style={{ marginRight: '5px' }} />
+                    {t(`${PREFIX_FORM_MANAGE_USER}${IMPORT_FILE_MODAL.UPLOAD_FILE}`)}
                   </div>
                 </button>
               </Upload>
             </Form.Item>
           </Form>
         </div>
-        <div className="display-linebreak">{NOTE_IMPORT_EXCEL}</div>
+        <div className="display-linebreak">{t(`${PREFIX_FORM_MANAGE_USER}${IMPORT_FILE_MODAL.NOTE_IMPORT_EXCEL}`)}</div>
         <GlobalUtilityStyle>
           <Row gutter={15}>
             <Col xs={24} className="">

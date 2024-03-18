@@ -7,6 +7,7 @@
   "activityContent": "Nội dung activity",
   "filter": "Bộ lọc",
   "customizeTable": "Tùy chỉnh bảng",
+  "placeholderSearch": "Tìm kiếm theo activity id, case id, from, to, subject",
   "configTable": {
     "selectAll": "Chọn tất cả",
     "activityId": "Activity Id",
@@ -40,7 +41,7 @@
       "manageUser" : "Danh sách người truy cập",
       "addNewUser" : "Thêm người truy cập",
       "editUser" : "Sửa người truy cập",
-      "deleteUser": "Xóa hàng loạt",
+      "deleteUser": "Xóa tài khoản",
       "deleteManyUser": "Xóa hàng loạt tài khoản",
       "username" : "Tên đăng nhập",
       "typeAccount": "Loại tài khoản",
@@ -58,10 +59,25 @@
       "tooltipEdit": "Sửa",
       "sum": "Tổng: ",
       "search" : "Tìm theo tên đăng nhập",
-      "import": "Import"
-  },
-  "errorFormManageUser" : {
-    "Username existed !" : "Tên đăng nhập đã tồn tại."
+      "buttonCancel": "Hủy",
+      "buttonSave" : "Lưu",
+      "buttonDelete": "Xóa",
+      "buttonClose": "Đóng",
+      "importModal":  {
+        "import": "Import",
+        "importUsers": "Import người truy cập",
+        "downloadExcel": "Tải file mẫu",
+        "userFile" : "Tệp người truy cập",
+        "uploadFile": "Duyệt từ máy tính",
+        "noteImportExcel": "Hệ thống bỏ qua nhưng bản ghi trùng tên đăng nhập \nHệ thống bỏ qua những bản ghi thiếu tên đăng nhập/Loại tài khoản/Quyền \nHệ thống bỏ qua bản ghi sai quyền(Chỉ nhận giá trị User hoặc Admin hoặc All) \nHệ thống bỏ qua những bản ghi tài khoản loại Local thiếu/sai định dạng mật khẩu(điền validate của mật khẩu)"
+      },
+      "deleteModal": {
+        "user" : "Tài khoản ",
+        "messageDeleteUser": " sẽ bị xóa",
+        "delete": "Xóa ",
+        "messageDeleteUsers": " tài khoản đã chọn"
+      },
+      "messageRulesInput": "Đây là trường bắt buộc"
   },
   "logout": "Đăng xuất",
   "searchOnNewSystem": "Tra cứu trên hệ thống mới",

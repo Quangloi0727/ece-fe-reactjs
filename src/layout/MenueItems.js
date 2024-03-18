@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu } from 'antd';
+import { Menu, Tooltip } from 'antd';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import UilEllipsisV from '@iconscout/react-unicons/icons/uil-ellipsis-v';
@@ -7,6 +7,8 @@ import propTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 import { getItem } from '../utility/localStorageControl';
 import { USER, LOCAL_STORAGE_VARIABLE } from '../constants';
+import { useTranslation } from 'react-i18next';
+import { PREFIX_FORM_MANAGE_USER, TITLE_FORM_MANAGE_USER, TITLE_LOOK_UP_EMAIL } from '../constants';
 
 function MenuItems({ toggleCollapsed }) {
   function getItemMenu(label, key, icon, children, type) {
@@ -26,6 +28,7 @@ function MenuItems({ toggleCollapsed }) {
   });
 
   const path = '';
+  const { t } = useTranslation();
   const pathName = window.location.pathname;
   const pathArray = pathName && pathName !== '/' ? pathName.split(path) : [];
   const mainPath = pathArray.length > 1 ? pathArray[1] : '';
