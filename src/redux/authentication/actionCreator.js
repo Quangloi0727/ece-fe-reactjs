@@ -1,7 +1,7 @@
 import actions from './actions';
 import actionsCustomizeTable from '../manage-mail/customize-table/actions';
 import { DataService } from '../../config/dataService/dataService';
-import { setItem, removeItem } from '../../utility/localStorageControl';
+import { setItem, removeItem, getItem } from '../../utility/localStorageControl';
 import { LOCAL_STORAGE_VARIABLE } from '../../constants';
 
 const { loginBegin, loginSuccess, loginErr, logoutBegin, logoutSuccess, logoutErr } = actions;
@@ -12,14 +12,21 @@ const login = (values, successCallback, errorCallback) => {
     try {
       const response = await DataService.post('/login', values);
       if (response.data.code === 200 && response.data.data) {
-        const { token, refreshToken, displayName, configColumn } = response.data.data;
+        const { token, refreshToken, displayName, configColumn, role } = response.data.data;
         if (configColumn) {
           setItem(LOCAL_STORAGE_VARIABLE.CUSTOMIZE_TABLE, JSON.parse(configColumn));
           dispatch(customizeTableSuccess(JSON.parse(configColumn)));
         }
-        setItem(LOCAL_STORAGE_VARIABLE.USER_DATA, { token, refreshToken, displayName, isLogin: true, adfs: false });
+        setItem(LOCAL_STORAGE_VARIABLE.USER_DATA, {
+          token,
+          refreshToken,
+          displayName,
+          isLogin: true,
+          adfs: false,
+          role,
+        });
         dispatch(loginSuccess(true));
-        successCallback();
+        successCallback(role);
       } else {
         dispatch(loginErr(response.data.errors));
         errorCallback();
@@ -56,9 +63,10 @@ const logOut = (successCallback, errorCallback) => {
         dispatch(logoutErr(response.data.errors));
         errorCallback(response.data.errors);
       } else {
+        const isLoginAdfs = getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).adfs;
         removeItem(LOCAL_STORAGE_VARIABLE.USER_DATA);
         dispatch(logoutSuccess(false));
-        successCallback();
+        successCallback(isLoginAdfs);
       }
     } catch (err) {
       dispatch(loginErr(err));
@@ -72,14 +80,21 @@ const verifyCallback = (code, successCallback, errorCallback) => {
     try {
       const response = await DataService.get(`/login/verifyCallback?code=${code}`);
       if (response.data.code === 200 && response.data.data) {
-        const { token, refreshToken, displayName, configColumn } = response.data.data;
+        const { token, refreshToken, displayName, configColumn, role } = response.data.data;
         if (configColumn) {
           setItem(LOCAL_STORAGE_VARIABLE.CUSTOMIZE_TABLE, JSON.parse(configColumn));
           dispatch(customizeTableSuccess(JSON.parse(configColumn)));
         }
-        setItem(LOCAL_STORAGE_VARIABLE.USER_DATA, { token, refreshToken, displayName, isLogin: true, adfs: true });
+        setItem(LOCAL_STORAGE_VARIABLE.USER_DATA, {
+          token,
+          refreshToken,
+          displayName,
+          isLogin: true,
+          adfs: true,
+          role,
+        });
         dispatch(loginSuccess(true));
-        successCallback();
+        successCallback(role);
       } else {
         dispatch(loginErr(response.data.errors));
         errorCallback();

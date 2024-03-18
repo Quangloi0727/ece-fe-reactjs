@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getItem, setItem } from '../../utility/localStorageControl';
-import { MESSAGE_GET_TOKEN_FAIL, LOCAL_STORAGE_VARIABLE } from '../../constants/index';
+import { LOCAL_STORAGE_VARIABLE, MESSAGE_GET_TOKEN_FAIL, MESSAGE_PERMISSION_DENIED } from '../../constants/index';
 
 const API_ENDPOINT = `${process.env.REACT_APP_BE_API_ENDPOINT}/api`;
 
@@ -101,7 +101,14 @@ client.interceptors.response.use(
         localStorage.clear();
         window.location.href = '/login';
       }
-      if (response.status === 401 && response.config.url !== '/login') {
+      if (response.status === 401 && response.data.errors[0].message === MESSAGE_PERMISSION_DENIED) {
+        window.location.href = '/permission-denied';
+      }
+      if (
+        response.status === 401 &&
+        response.config.url !== '/login' &&
+        response.data.errors[0].message !== MESSAGE_PERMISSION_DENIED
+      ) {
         const refreshToken = getItem(LOCAL_STORAGE_VARIABLE.USER_DATA)?.refreshToken;
         const responseRefreshToken = await DataService.post('/auth/refresh-token', { refreshToken });
         setItem(LOCAL_STORAGE_VARIABLE.USER_DATA, {

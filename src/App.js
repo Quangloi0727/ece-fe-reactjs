@@ -11,6 +11,7 @@ import config from './config/config';
 import 'antd/dist/antd.less';
 
 const NotFound = lazy(() => import('./container/pages/404'));
+const PermissionDenied = lazy(() => import('./container/pages/permission-denied'));
 const ListEmail = lazy(() => import('./container/manage-mail/list-mail'));
 const ActivityDetail = lazy(() => import('./container/manage-mail/activity-detail'));
 const CaseDetail = lazy(() => import('./container/manage-mail/case-detail'));
@@ -62,7 +63,8 @@ function ProviderConfig() {
                 <Route path="/list-email" element={<ListEmail />} />
                 <Route path="/manage-email/activity/:activityId" element={<ActivityDetail />} />
                 <Route path="/manage-email/case/:caseId" element={<CaseDetail />} />
-                <Route path="/list-email/user" element={<ListAccountUser />} />
+                <Route path="/manage-user-local" element={<ListAccountUser />} />
+                <Route path="/permission-denied" element={<PermissionDenied />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             )}

@@ -30,7 +30,7 @@ function TopMenu() {
             <Link to="/">Email</Link>
           </li>
           <li>
-            <Link to="/user">User</Link>
+            <Link to="/manage-user-local">User</Link>
           </li>
         </ul>
       </div>
