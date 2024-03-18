@@ -69,8 +69,6 @@ export const CASE_SEVERITY = [
   { key: 4, message: 'Low' },
 ];
 
-export const NOTE_IMPORT_EXCEL =
-  'Hệ thống bỏ qua nhưng bản ghi trùng tên đăng nhập \nHệ thống bỏ qua những bản ghi thiếu tên đăng nhập/Loại tài khoản/Quyền \nHệ thống bỏ qua bản ghi sai quyền(Chỉ nhận giá trị User hoặc Admin hoặc All) \nHệ thống bỏ qua những bản ghi tài khoản loại Local thiếu/sai định dạng mật khẩu(điền validate của mật khẩu)';
 export const ACTIVITY_HISTORY = [
   {
     key: 1,
@@ -164,7 +162,9 @@ export const TITLE_FORM_MANAGE_USER = {
   DELETEUSER: 'deleteUser',
   DELETEMANYUSER: 'deleteManyUser',
   DETAILUSER: 'detailUser',
+  IMPORTUSERS: 'importModal.importUsers',
 };
+export const TITLE_LOOK_UP_EMAIL = 'lookUpEmail';
 
 export const PLACEHOLDER_FORM_MANAGE_USER = {
   USERNAME: 'placeholderUsername',
@@ -183,3 +183,23 @@ export const TOOLTIP_FORM_MANAGE_USER = {
 };
 export const TOTALDATA = 'sum';
 export const SEARCH_MANAGE_USER = 'search';
+
+export const IMPORT_FILE_MODAL = {
+  DOWNLOAD_FILE: 'importModal.downloadExcel',
+  USER_FILE: 'importModal.userFile',
+  UPLOAD_FILE: 'importModal.uploadFile',
+  NOTE_IMPORT_EXCEL: 'importModal.noteImportExcel',
+};
+export const BUTTON_MODAL = {
+  CANCEL: 'buttonCancel',
+  SAVE: 'buttonSave',
+  DELETE: 'buttonDelete',
+  CLOSE: 'buttonClose',
+};
+export const DELETE_MODAL = {
+  USER: 'deleteModal.user',
+  MESSAGEDELETEUSER: 'deleteModal.messageDeleteUser',
+  MESSAGEDELETEUSERS: 'deleteModal.messageDeleteUsers',
+  DELETE: 'deleteModal.delete',
+};
+export const MESSAGE_RULE_INPUT = 'messageRulesInput';

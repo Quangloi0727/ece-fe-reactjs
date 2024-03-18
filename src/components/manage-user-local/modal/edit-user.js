@@ -15,6 +15,8 @@ import {
   TITLE_FORM_MANAGE_USER,
   LABEL_FORM_MANAGE_USER,
   PLACEHOLDER_FORM_MANAGE_USER,
+  BUTTON_MODAL,
+  MESSAGE_RULE_INPUT,
 } from '../../../constants';
 
 const { Option } = Select;
@@ -42,7 +44,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
 
   const [form] = Form.useForm();
 
-  const handleHideModel = () => {
+  const handleHideModal = () => {
     const { username, type, role, password } = dataUser;
     form.setFieldsValue({
       username,
@@ -100,6 +102,11 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
     );
   };
 
+  const handleResetPassword = () => {
+    form.setFieldValue('password', '');
+    form.validateFields(['password']);
+  };
+
   return (
     <Modal
       forceRender
@@ -123,7 +130,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
               rules={[
                 {
                   required: true,
-                  message: 'Đây là trường bắt buộc',
+                  message: t(`${PREFIX_FORM_MANAGE_USER}${MESSAGE_RULE_INPUT}`),
                 },
               ]}
             >
@@ -140,7 +147,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
               rules={[
                 {
                   required: true,
-                  message: 'Đây là trường bắt buộc',
+                  message: t(`${PREFIX_FORM_MANAGE_USER}${MESSAGE_RULE_INPUT}`),
                 },
               ]}
             >
@@ -162,12 +169,13 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
                 rules={[
                   {
                     required: true,
-                    message: 'Đây là trường bắt buộc',
+                    message: t(`${PREFIX_FORM_MANAGE_USER}${MESSAGE_RULE_INPUT}`),
                   },
                 ]}
               >
                 <Input.Password
                   placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.PASSWORD}`)}
+                  onClick={handleResetPassword}
                   visibilityToggle={{
                     visible: passwordVisible,
                     onVisibleChange: setPasswordVisible,
@@ -183,7 +191,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
               rules={[
                 {
                   required: true,
-                  message: 'Đây là trường bắt buộc',
+                  message: t(`${PREFIX_FORM_MANAGE_USER}${MESSAGE_RULE_INPUT}`),
                 },
               ]}
             >
@@ -205,9 +213,10 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
             >
               <Space size="small">
                 <Form.Item>
-                  <Button type="primary" danger ghost onClick={handleHideModel}>
+                  <Button type="primary" danger ghost onClick={handleHideModal}>
                     <span className="button-formadd items-center">
-                      <CloseOutlined style={{ marginRight: '4px' }} /> Hủy
+                      <CloseOutlined style={{ marginRight: '4px' }} />
+                      {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL.CANCEL}`)}
                     </span>
                   </Button>
                 </Form.Item>
@@ -223,7 +232,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
                     >
                       <span className="button-formadd items-center">
                         <SearchOutlined style={{ marginRight: '4px' }} />
-                        Lưu
+                        {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL.SAVE}`)}
                       </span>
                     </Button>
                   )}

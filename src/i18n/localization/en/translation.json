@@ -7,6 +7,7 @@
   "activityContent": "Activity content",
   "filter": "Filter",
   "customizeTable": "Customize the table",
+  "placeholderSearch": "Search by activity id, case id, from, to, subject",
   "configTable": {
     "selectAll": "Select All",
     "activityId": "Activity Id",
@@ -58,7 +59,25 @@
     "tooltipEdit": "Edit",
     "sum": "Total: ",
     "search" : "Search by username",
-    "import": "Import"
+    "buttonCancel": "Cancel",
+    "buttonSave" : "Save",
+    "buttonDelete": "Delete",
+    "buttonClose": "Close",
+    "importModal":  {
+    "import": "Import",
+    "importUsers": "Import Users",
+    "downloadExcel": "Download sample file",
+    "userFile" : "User File",
+    "uploadFile": "Upload from the device",
+    "noteImportExcel": "The system ignores records with the same login name \nThe system ignores records that lack login name/Account type/Permissions \nThe system ignores records with the wrong permissions (Only accepts User or Admin or All values) \nThe system ignores Local type account records with missing/incorrect password format (fill in password validation)"
+    },
+    "deleteModal": {
+      "user" : "User ",
+      "messageDeleteUser": " will be deleted",
+      "delete": "Delete ",
+      "messageDeleteUsers": " selected users"
+    },
+    "messageRulesInput": "This is a required field"
   },
 
   "logout": "Log Out",

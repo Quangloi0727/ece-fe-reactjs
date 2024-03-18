@@ -82,6 +82,7 @@ function ListUser() {
       dataUserColumn: states.listDataUser.dataUserColumn,
     };
   });
+
   const tableUserSource = [];
   if (dataUser && dataUser.length) {
     dataUser.map((item, index) => {
@@ -137,7 +138,7 @@ function ListUser() {
           </div>
         ),
         type: (
-          <span className="text-start dark:text-white60 text-[13px] " key={`${type}-${index}`}>
+          <span className="text-start dark:text-white60 text-[13px]" key={`${type}-${index}`}>
             {type === USER.KEY_TYPE_SSO ? USER.SSO : USER.LOCAL}
           </span>
         ),
