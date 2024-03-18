@@ -26,12 +26,16 @@ const AuthInfo = React.memo(() => {
   const SignOut = useCallback(() => {
     dispatch(
       logOut(
-        () => {
-          const logOutADFS = window.open(process.env.REACT_APP_URL_ADFS_LOGOUT, '_blank');
-          setTimeout(() => {
-            logOutADFS.close();
+        (isLoginAdfs) => {
+          if (isLoginAdfs) {
+            const logOutADFS = window.open(process.env.REACT_APP_URL_ADFS_LOGOUT, '_blank');
+            setTimeout(() => {
+              logOutADFS.close();
+              history('/login');
+            }, 200);
+          } else {
             history('/login');
-          }, 200);
+          }
         },
         (message) => openNotificationWithIcon('error', 'Đăng xuất thất bại !', message),
       ),

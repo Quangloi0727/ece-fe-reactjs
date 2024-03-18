@@ -5,6 +5,7 @@ import { Form, Row, Col } from 'antd';
 import { AuthFormWrap } from './style';
 import { verifyCallback } from '../../../../redux/authentication/actionCreator';
 import { openNotificationWithIcon } from '../../../../components/notifications/notification';
+import { USER } from '../../../../constants';
 
 function Callback() {
   const [params] = useSearchParams();
@@ -15,7 +16,14 @@ function Callback() {
     dispatch(
       verifyCallback(
         code,
-        () => history('/list-email'),
+        (role) => {
+          if (role === USER.KEY_ROLE_USER || role === USER.KEY_ROLE_ALL) {
+            history('/list-email');
+          }
+          if (role === USER.KEY_ROLE_ADMIN) {
+            history('/manage-user-local');
+          }
+        },
         (message) => {
           const logOutADFS = window.open(process.env.REACT_APP_URL_ADFS_LOGOUT, '_blank');
           openNotificationWithIcon('error', 'Tài khoản không có quyền truy cập !', message);

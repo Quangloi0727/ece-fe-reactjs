@@ -6,10 +6,17 @@ import UilEllipsisV from '@iconscout/react-unicons/icons/uil-ellipsis-v';
 import propTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 import { useTranslation } from 'react-i18next';
-import { PREFIX_FORM_MANAGE_USER, TITLE_FORM_MANAGE_USER, TITLE_LOOK_UP_EMAIL } from '../constants';
+import { getItem } from '../utility/localStorageControl';
+import {
+  PREFIX_FORM_MANAGE_USER,
+  TITLE_FORM_MANAGE_USER,
+  TITLE_LOOK_UP_EMAIL,
+  USER,
+  LOCAL_STORAGE_VARIABLE,
+} from '../constants';
 
 function MenuItems({ toggleCollapsed }) {
-  function getItem(label, key, icon, children, type) {
+  function getItemMenu(label, key, icon, children, type) {
     return {
       key,
       icon,
@@ -25,8 +32,8 @@ function MenuItems({ toggleCollapsed }) {
     };
   });
 
+  const path = '';
   const { t } = useTranslation();
-  const path = '/list-email';
   const pathName = window.location.pathname;
   const pathArray = pathName && pathName !== '/' ? pathName.split(path) : [];
   const mainPath = pathArray.length > 1 ? pathArray[1] : '';
@@ -43,36 +50,71 @@ function MenuItems({ toggleCollapsed }) {
   const onClick = (item) => {
     if (item.keyPath.length === 1) setOpenKeys([]);
   };
-
-  const items = [
-    getItem(
-      <Tooltip title={t(`${TITLE_LOOK_UP_EMAIL}`)}>
-        <NavLink onClick={toggleCollapsed} to={`${path}`}>
-          <FontAwesome
-            className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
-            name="envelope"
-            size="2x"
-            style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-          />
-        </NavLink>
-      </Tooltip>,
-      'starter',
-    ),
-    getItem(
-      <Tooltip title={t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.MANAGEUSER}`)}>
-        <NavLink onClick={toggleCollapsed} to={`${path}/user`}>
-          <FontAwesome
-            className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
-            name="user"
-            size="2x"
-            style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-          />
-        </NavLink>
-      </Tooltip>,
-      'user',
-    ),
-  ];
-
+  const items = [];
+  if (getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).role === USER.KEY_ROLE_ALL) {
+    items.push(
+      getItemMenu(
+        <Tooltip title={t(`${TITLE_LOOK_UP_EMAIL}`)}>
+          <NavLink onClick={toggleCollapsed} to={`${path}/list-email`}>
+            <FontAwesome
+              className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
+              name="envelope"
+              size="2x"
+              style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+            />
+          </NavLink>
+        </Tooltip>,
+        'starter',
+      ),
+      getItemMenu(
+        <Tooltip title={t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.MANAGEUSER}`)}>
+          <NavLink onClick={toggleCollapsed} to={`${path}/manage-user-local`}>
+            <FontAwesome
+              className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
+              name="user"
+              size="2x"
+              style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+            />
+          </NavLink>
+        </Tooltip>,
+        'manage-user-local',
+      ),
+    );
+  }
+  if (getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).role === USER.KEY_ROLE_USER) {
+    items.push(
+      getItemMenu(
+        <Tooltip title={t(`${TITLE_LOOK_UP_EMAIL}`)}>
+          <NavLink onClick={toggleCollapsed} to={`${path}/list-email`}>
+            <FontAwesome
+              className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
+              name="envelope"
+              size="2x"
+              style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+            />
+          </NavLink>
+        </Tooltip>,
+        'starter',
+      ),
+    );
+  }
+  if (getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).role === USER.KEY_ROLE_ADMIN) {
+    items.push(
+      getItemMenu(
+        <Tooltip title={t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.MANAGEUSER}`)}>
+          <NavLink onClick={toggleCollapsed} to={`${path}/manage-user-local`}>
+            <FontAwesome
+              className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
+              name="user"
+              size="2x"
+              style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+            />
+          </NavLink>
+        </Tooltip>,
+        'manage-user-local',
+      ),
+    );
+  }
   return (
     <Menu
       onOpenChange={onOpenChange}

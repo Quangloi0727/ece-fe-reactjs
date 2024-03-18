@@ -8,6 +8,7 @@ import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { AuthFormWrap } from './style';
 import { login } from '../../../../redux/authentication/actionCreator';
 import { openNotificationWithIcon } from '../../../../components/notifications/notification';
+import { USER } from '../../../../constants';
 
 function SignIn() {
   const history = useNavigate();
@@ -20,7 +21,14 @@ function SignIn() {
       dispatch(
         login(
           values,
-          () => history('/list-email'),
+          (role) => {
+            if (role === USER.KEY_ROLE_USER || role === USER.KEY_ROLE_ALL) {
+              history('/list-email');
+            }
+            if (role === USER.KEY_ROLE_ADMIN) {
+              history('/manage-user-local');
+            }
+          },
           () => openNotificationWithIcon('error', 'Đăng nhập thất bại !', 'Sai thông tin tài khoản.'),
         ),
       );

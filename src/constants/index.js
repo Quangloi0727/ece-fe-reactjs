@@ -10,6 +10,7 @@ export const CONDITION_VALUE = {
 export const PREFIX_FILTER_ADVANCE = 'filterAdvance.';
 export const PREFIX_CUSTOMIZE_TABLE = 'configTable.';
 export const MESSAGE_GET_TOKEN_FAIL = 'Get new token fail !';
+export const MESSAGE_PERMISSION_DENIED = 'Permission denied !';
 export const LOCAL_STORAGE_VARIABLE = {
   USER_DATA: 'userData',
   LANGUAGE: 'lang',
