@@ -15,13 +15,16 @@ import { useTranslation } from 'react-i18next';
 import TableImport from './table-import';
 import { PaginationStyle, GlobalUtilityStyle } from '../../../../container/styled';
 import { openNotificationWithIcon } from '../../../notifications/notification';
+import { getListUser } from '../../../../redux/manage-user-local/actionCreator';
 import { downloadTemplateExcel, importExcel } from '../../../../redux/manage-user-local/import-file/actionCreator';
 import {
+  DEFAULT_PAGE,
+  DEFAULT_PAGE_SIZE,
   PREFIX_FORM_MANAGE_USER,
   TOTALDATA,
   TITLE_FORM_MANAGE_USER,
   IMPORT_FILE_MODAL,
-  BUTTON_MODAL,
+  BUTTON_MODAL_MANAGE_USER,
 } from '../../../../constants/index';
 
 function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
@@ -50,9 +53,7 @@ function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
         () => {
           hideModal();
           openNotificationWithIcon('success', 'Lưu thành công !');
-          setTimeout(() => {
-            window.location.reload(true);
-          }, 1000);
+          dispatch(getListUser(DEFAULT_PAGE, DEFAULT_PAGE_SIZE, ''));
         },
         (err) => {
           openNotificationWithIcon('error', 'Lưu thất bại !', err.message);
@@ -114,6 +115,7 @@ function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
       maskClosable={false}
       zIndex="1000"
       width={700}
+      bodyStyle={{ height: 700 }}
       footer={[
         <div
           style={{
@@ -131,7 +133,7 @@ function ImportFileExcel({ showOrHideModalImportFile, hideModal }) {
             >
               <span className="button-formadd items-center">
                 <CloseOutlined style={{ marginRight: '4px' }} />
-                {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL.CANCEL}`)}
+                {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL_MANAGE_USER.CANCEL}`)}
               </span>
             </Button>
           </Space>

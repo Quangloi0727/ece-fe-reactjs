@@ -191,11 +191,18 @@ export const IMPORT_FILE_MODAL = {
   UPLOAD_FILE: 'importModal.uploadFile',
   NOTE_IMPORT_EXCEL: 'importModal.noteImportExcel',
 };
-export const BUTTON_MODAL = {
+export const BUTTON_MODAL_MANAGE_USER = {
   CANCEL: 'buttonCancel',
   SAVE: 'buttonSave',
   DELETE: 'buttonDelete',
   CLOSE: 'buttonClose',
+};
+export const BUTTON_MODAL_LIST_EMAIL = {
+  CANCEL: 'buttonCancelEmail',
+  SAVE: 'buttonSaveEmail',
+  DELETE: 'buttonDeleteEmail',
+  SEARCH: 'buttonSearchEmail',
+  RESET: 'buttonResetEmail',
 };
 export const DELETE_MODAL = {
   USER: 'deleteModal.user',
@@ -204,3 +211,11 @@ export const DELETE_MODAL = {
   DELETE: 'deleteModal.delete',
 };
 export const MESSAGE_RULE_INPUT = 'messageRulesInput';
+
+export const TITLE_MODAL_LIST_USER = {
+  FILTER_ADVANCE: 'filterAdvance.title',
+  CUSTOMIZE_TABLE: 'customizeTable',
+};
+export const TOOLTIP_MODAL_LIST_USER = {
+  DRAG_AND_DROP: 'dragAndDrop',
+};

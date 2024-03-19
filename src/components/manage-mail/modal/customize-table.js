@@ -8,7 +8,13 @@ import propTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../../buttons/buttons';
-import { PREFIX_CUSTOMIZE_TABLE, LOCAL_STORAGE_VARIABLE } from '../../../constants/index';
+import {
+  PREFIX_CUSTOMIZE_TABLE,
+  LOCAL_STORAGE_VARIABLE,
+  TITLE_MODAL_LIST_USER,
+  BUTTON_MODAL_LIST_EMAIL,
+  TOOLTIP_MODAL_LIST_USER,
+} from '../../../constants/index';
 import { Checkbox } from '../../checkbox/checkbox';
 import { openNotificationWithIcon } from '../../notifications/notification';
 import { submitCustomizeTable } from '../../../redux/manage-mail/customize-table/actionCreator';
@@ -101,7 +107,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
           </Col>
           <Col span={1}>
             <Tooltip
-              title={<span className="text-[13px]">Ấn và kéo để sắp xếp</span>}
+              title={<span className="text-[13px]">{t(`${TOOLTIP_MODAL_LIST_USER.DRAG_AND_DROP}`)}</span>}
               className="ant-table-cell drag-visible"
             >
               <MenuOutlined ref={setActivatorNodeRef} {...listeners} />
@@ -125,7 +131,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
   return (
     <Modal
       style={{ fontSize: '13px !important', position: 'relative' }}
-      title={<strong style={{ fontWeight: '1000' }}>Tùy chỉnh bảng Tra cứu Email</strong>}
+      title={<strong style={{ fontWeight: '1000' }}>{t(`${TITLE_MODAL_LIST_USER.CUSTOMIZE_TABLE}`)}</strong>}
       open={showOrHideModalCustomizeTable}
       onCancel={hideModal}
       maskClosable={false}
@@ -145,7 +151,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
             className="px-5 text-[13px] font-semibold button-reset h-10"
             onClick={() => handleSubmit(false)}
           >
-            Phục hồi mặc định
+            {t(`${BUTTON_MODAL_LIST_EMAIL.RESET}`)}
           </Button>
           <Space size="small">
             <Button
@@ -155,7 +161,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
               className="px-5 text-[13px] font-semibold button-reset h-10"
               onClick={() => handleCancelPopup()}
             >
-              Hủy
+              {t(`${BUTTON_MODAL_LIST_EMAIL.CANCEL}`)}
             </Button>
             <Button
               type="info"
@@ -164,7 +170,7 @@ function CustomizeTable({ showOrHideModalCustomizeTable, hideModal }) {
               className="px-5 text-[13px] font-semibold button-reset h-10"
               onClick={() => handleSubmit(true)}
             >
-              Lưu
+              {t(`${BUTTON_MODAL_LIST_EMAIL.SAVE}`)}
             </Button>
           </Space>
         </div>,

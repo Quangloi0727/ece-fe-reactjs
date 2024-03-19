@@ -15,7 +15,7 @@ import {
   TITLE_FORM_MANAGE_USER,
   LABEL_FORM_MANAGE_USER,
   PLACEHOLDER_FORM_MANAGE_USER,
-  BUTTON_MODAL,
+  BUTTON_MODAL_MANAGE_USER,
   MESSAGE_RULE_INPUT,
 } from '../../../constants';
 
@@ -26,7 +26,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
   const dispatch = useDispatch();
   const formRef = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [visibilityToggle, setVisibilityToggle] = useState(false);
 
   const handleTypeChange = (value) => {
     if (value === USER.KEY_TYPE_LOCAL) {
@@ -45,20 +45,9 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
   const [form] = Form.useForm();
 
   const handleHideModal = () => {
-    const { username, type, role, password } = dataUser;
-    form.setFieldsValue({
-      username,
-      type,
-      role:
-        role === USER.KEY_ROLE_ADMIN
-          ? [USER.KEY_ROLE_ADMIN]
-          : role === USER.KEY_ROLE_USER
-          ? [USER.KEY_ROLE_USER]
-          : [USER.KEY_ROLE_ADMIN, USER.KEY_ROLE_USER],
-      password,
-    });
+    form.resetFields();
     hideModal();
-    setPasswordVisible(false);
+    setVisibilityToggle(false);
   };
   useEffect(() => {
     if (dataUser) {
@@ -80,12 +69,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
 
   const handleSendDataForm = () => {
     const formData = form.getFieldsValue();
-    if (formData.role.includes(USER.KEY_ROLE_USER) && formData.role.includes(USER.KEY_ROLE_ADMIN)) {
-      formData.role = USER.KEY_ROLE_ALL;
-    } else {
-      const role = formData.role[0];
-      formData.role = role;
-    }
+    formData.role = formData.role.length === 2 ? USER.KEY_ROLE_ALL : formData.role[0];
     dispatch(
       handleEditDataUser(
         idEdit,
@@ -105,6 +89,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
   const handleResetPassword = () => {
     form.setFieldValue('password', '');
     form.validateFields(['password']);
+    setVisibilityToggle(true);
   };
 
   return (
@@ -176,10 +161,8 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
                 <Input.Password
                   placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.PASSWORD}`)}
                   onClick={handleResetPassword}
-                  visibilityToggle={{
-                    visible: passwordVisible,
-                    onVisibleChange: setPasswordVisible,
-                  }}
+                  visibilityToggle={visibilityToggle}
+                  autoFocus
                 />
               </Form.Item>
             )}
@@ -216,7 +199,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
                   <Button type="primary" danger ghost onClick={handleHideModal}>
                     <span className="button-formadd items-center">
                       <CloseOutlined style={{ marginRight: '4px' }} />
-                      {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL.CANCEL}`)}
+                      {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL_MANAGE_USER.CANCEL}`)}
                     </span>
                   </Button>
                 </Form.Item>
@@ -232,7 +215,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
                     >
                       <span className="button-formadd items-center">
                         <SearchOutlined style={{ marginRight: '4px' }} />
-                        {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL.SAVE}`)}
+                        {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL_MANAGE_USER.SAVE}`)}
                       </span>
                     </Button>
                   )}

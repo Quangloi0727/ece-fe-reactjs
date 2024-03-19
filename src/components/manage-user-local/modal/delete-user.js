@@ -12,7 +12,7 @@ import {
   DEFAULT_PAGE_SIZE,
   PREFIX_FORM_MANAGE_USER,
   TITLE_FORM_MANAGE_USER,
-  BUTTON_MODAL,
+  BUTTON_MODAL_MANAGE_USER,
   DELETE_MODAL,
 } from '../../../constants';
 
@@ -66,7 +66,7 @@ function DeleteUserForm({ showOrHideModalDeleteUser, hideModal, typeRemove, idUs
             <Button onClick={hideModal} className="px-5 text-[13px] font-semibold button-reset h-10">
               <span className="button-formadd items-center">
                 <CloseOutlined style={{ marginRight: '8px' }} />
-                {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL.CANCEL}`)}
+                {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL_MANAGE_USER.CANCEL}`)}
               </span>
             </Button>
             <Button
@@ -78,7 +78,7 @@ function DeleteUserForm({ showOrHideModalDeleteUser, hideModal, typeRemove, idUs
             >
               <span className="button-formadd items-center">
                 <DeleteOutlined style={{ marginRight: '8px' }} />
-                {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL.DELETE}`)}
+                {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL_MANAGE_USER.DELETE}`)}
               </span>
             </Button>
           </Space>
