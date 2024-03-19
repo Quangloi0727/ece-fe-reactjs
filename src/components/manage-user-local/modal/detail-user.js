@@ -11,7 +11,7 @@ import {
   LABEL_FORM_MANAGE_USER,
   TITLE_FORM_MANAGE_USER,
   NAME_FORM_MANAGE_USER,
-  BUTTON_MODAL,
+  BUTTON_MODAL_MANAGE_USER,
 } from '../../../constants';
 
 function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
@@ -69,7 +69,7 @@ function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
             >
               <span className="button-formadd items-center">
                 <CheckOutlined style={{ marginRight: '4px' }} />
-                {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL.CLOSE}`)}
+                {t(`${PREFIX_FORM_MANAGE_USER}${BUTTON_MODAL_MANAGE_USER.CLOSE}`)}
               </span>
             </Button>
           </Space>

@@ -8,6 +8,10 @@
   "filter": "Bộ lọc",
   "customizeTable": "Tùy chỉnh bảng",
   "placeholderSearch": "Tìm kiếm theo activity id, case id, from, to, subject",
+  "buttonCancelEmail": "Hủy",
+  "buttonSaveEmail": "Lưu",
+  "buttonSearchEmail": "Tìm kiếm",
+  "buttonResetEmail": "Phục hồi mặc định",
   "configTable": {
     "selectAll": "Chọn tất cả",
     "activityId": "Activity Id",
@@ -24,6 +28,7 @@
     "direction": "Hướng Email"
   },
   "filterAdvance": {
+    "title": "Bộ lọc email",
     "caseId": "Case Id",
     "activityId": "Activity Id",
     "subject": "Subject",

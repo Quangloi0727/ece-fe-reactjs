@@ -8,6 +8,11 @@
   "filter": "Filter",
   "customizeTable": "Customize the table",
   "placeholderSearch": "Search by activity id, case id, from, to, subject",
+  "buttonCancelEmail": "Cancel",
+  "buttonSaveEmail": "Save",
+  "buttonSearchEmail": "Search",
+  "buttonResetEmail": "Reset",
+  "dragAndDrop": "Click to drag, drop and arrange",
   "configTable": {
     "selectAll": "Select All",
     "activityId": "Activity Id",
@@ -24,6 +29,7 @@
     "direction": "Direction"
   },
   "filterAdvance": {
+    "title": "Email filter",
     "caseId": "Case Id",
     "activityId": "Activity Id",
     "subject": "Subject",

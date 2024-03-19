@@ -5,7 +5,13 @@ import moment from 'moment';
 import propTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { FIELD_TYPE, LOCAL_STORAGE_VARIABLE, PREFIX_FILTER_ADVANCE } from '../../../constants/index';
+import {
+  BUTTON_MODAL_LIST_EMAIL,
+  FIELD_TYPE,
+  LOCAL_STORAGE_VARIABLE,
+  PREFIX_FILTER_ADVANCE,
+  TITLE_MODAL_LIST_USER,
+} from '../../../constants/index';
 import { getListUser } from '../../../redux/manage-user/list-user/actionCreator';
 import { openNotificationWithIcon } from '../../notifications/notification';
 import { setItem, getItem, removeItem } from '../../../utility/localStorageControl';
@@ -260,7 +266,7 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
 
   return (
     <Modal
-      title={<strong style={{ fontWeight: '1000' }}>Bộ lọc Email</strong>}
+      title={<strong style={{ fontWeight: '1000' }}>{t(`${TITLE_MODAL_LIST_USER.FILTER_ADVANCE}`)}</strong>}
       open={showOrHideModalFilter}
       onCancel={hideModal}
       maskClosable={false}
@@ -280,7 +286,8 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
             onClick={handleResetForm}
           >
             <span className="flex items-center">
-              <DeleteOutlined style={{ marginRight: '8px' }} /> Xóa bộ lọc
+              <DeleteOutlined style={{ marginRight: '4px' }} />
+              {t(`${BUTTON_MODAL_LIST_EMAIL.RESET}`)}
             </span>
           </Button>
           <Space size="small">
@@ -293,7 +300,8 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
               onClick={handleCancelPopup}
             >
               <span className="flex items-center">
-                <CloseOutlined style={{ marginRight: '8px' }} /> Hủy
+                <CloseOutlined style={{ marginRight: '4px' }} />
+                {t(`${BUTTON_MODAL_LIST_EMAIL.CANCEL}`)}
               </span>
             </Button>
             <Button
@@ -303,7 +311,8 @@ function FilterAdvance({ showOrHideModalFilter, hideModal, formDataFilterAdvance
               onClick={handleFilterAdvance}
             >
               <span className="flex items-center">
-                <SearchOutlined style={{ marginRight: '8px' }} /> Tìm kiếm
+                <SearchOutlined style={{ marginRight: '4px' }} />
+                {t(`${BUTTON_MODAL_LIST_EMAIL.SEARCH}`)}
               </span>
             </Button>
           </Space>
