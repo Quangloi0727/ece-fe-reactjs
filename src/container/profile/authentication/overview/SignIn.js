@@ -29,7 +29,7 @@ function SignIn() {
               history('/manage-user-local');
             }
           },
-          () => openNotificationWithIcon('error', 'Đăng nhập thất bại !', 'Sai thông tin tài khoản.'),
+          (err) => openNotificationWithIcon('error', 'Đăng nhập thất bại !', err.message),
         ),
       );
     },

@@ -196,7 +196,7 @@ function ListEmail() {
               <PaginationStyle>
                 <div className="bg-white dark:bg-white10 m-0 p-0 mb-[25px] rounded-10 relative">
                   <div className="py-[16px] px-[25px] text-dark dark:text-white87 font-medium text-[17px] border-regular dark:border-white10 border-b ">
-                    <Heading as="h4" className="text-[25px] font-medium mb-0">
+                    <Heading as="h4" className="text-[25px] font-medium mb-0 title-manage">
                       {t('lookUpEmail')}
                     </Heading>
                   </div>

@@ -14,6 +14,7 @@ import {
   TITLE_FORM_MANAGE_USER,
   BUTTON_MODAL_MANAGE_USER,
   DELETE_MODAL,
+  MESSAGE_NOTIFICATION,
 } from '../../../constants';
 
 function DeleteUserForm({ showOrHideModalDeleteUser, hideModal, typeRemove, idUser, nameDelete, selectedIds }) {
@@ -26,11 +27,11 @@ function DeleteUserForm({ showOrHideModalDeleteUser, hideModal, typeRemove, idUs
         id,
         () => {
           hideModal();
-          openNotificationWithIcon('success', 'Xóa thành công !');
+          openNotificationWithIcon('success', t(`${MESSAGE_NOTIFICATION.DELETE_SUCCESS}`));
           dispatch(getListUser(DEFAULT_PAGE, DEFAULT_PAGE_SIZE, ''));
         },
         (err) => {
-          openNotificationWithIcon('error', 'Xóa thất bại !', err.message);
+          openNotificationWithIcon('error', t(`${MESSAGE_NOTIFICATION.DELETE_FAIL}`), err.message);
         },
       ),
     );

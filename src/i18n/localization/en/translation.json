@@ -88,5 +88,17 @@
 
   "logout": "Log Out",
   "searchOnNewSystem": "Search on new system",
-  "searchOnOldSystem": "Search on old system"
+  "searchOnOldSystem": "Search on old system",
+  "errorFormModal": {
+    "usernameExisted": "Username already exists.",
+    "passwordInvalid": "Password contains at least 8 characters including lowercase and uppercase letters, numbers and special characters." 
+ },
+ "messageNotification": {
+  "addSuccess": "Add success!",
+  "updateSuccess": "Update success!",
+  "deleteSuccess": "Delete success!",
+  "addFail": "Add failed!",
+  "updateFail": "Update failed!",
+  "deleteFail": "Delete failed!"
+}
 }

@@ -18,6 +18,8 @@ import {
   NAME_FORM_MANAGE_USER,
   BUTTON_MODAL_MANAGE_USER,
   MESSAGE_RULE_INPUT,
+  ERROR_LOGIN,
+  MESSAGE_NOTIFICATION,
 } from '../../../constants';
 
 const { Option } = Select;
@@ -56,12 +58,12 @@ function AddUserForm({ showOrHideModal, hideModal }) {
         formData,
         () => {
           hideModal();
-          openNotificationWithIcon('success', 'Thêm thành công !');
+          openNotificationWithIcon('success', t(`${MESSAGE_NOTIFICATION.ADD_SUCCESS}`));
           form.resetFields();
           dispatch(getListUser(DEFAULT_PAGE, DEFAULT_PAGE_SIZE, ''));
         },
         (err) => {
-          openNotificationWithIcon('error', 'Thêm thất bại !', err.message);
+          openNotificationWithIcon('error', t(`${MESSAGE_NOTIFICATION.ADD_FAIL}`), t(`${ERROR_LOGIN}${err.message}`));
         },
       ),
     );
@@ -82,7 +84,7 @@ function AddUserForm({ showOrHideModal, hideModal }) {
     >
       <div className="bg-white dark:bg-white10 m-0 p-0 text-theme-gray :text-white60 text-[13px] rounded-10 relative h-full">
         <div className="text-[13px]">
-          <Form layout="vertical" form={form} ref={formRef} className="form-add">
+          <Form layout="vertical" form={form} ref={formRef} className="form-add" requiredMark={false}>
             <Form.Item
               key="username"
               name="username"

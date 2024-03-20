@@ -86,7 +86,7 @@ function ListUser() {
   const tableUserSource = [];
   if (dataUser && dataUser.length) {
     dataUser.map((item, index) => {
-      const { id, username, type, role, updatedAt, createdByInfo } = item;
+      const { id, username, type, role, createdAt, createdByInfo } = item;
       return tableUserSource.push({
         id: (
           <span className="text-start dark:text-white60 text-[13px] " title={id} key={`${id}-${index}`}>
@@ -105,7 +105,7 @@ function ListUser() {
                 className="border-none bg-none"
                 onClick={() => showModalDetailUser(id)}
                 style={{ fontWeight: 'normal' }}
-                size="default"
+                size="small"
                 type="light"
               >
                 <UilEye className="w-4 text-light-extra dark:text-white60" />
@@ -117,10 +117,10 @@ function ListUser() {
                 className="border-none bg-none"
                 onClick={() => showModalEditUser(id)}
                 style={{ fontWeight: 'normal' }}
-                size="default"
+                size="small"
                 type="light"
               >
-                <UilEdit className="w-4 text-light-extra dark:text-white60" />
+                <UilEdit className="w-4 text-light-extra dark:text-white60" fill="#1890FF" />
               </Button>
             </Tooltip>
 
@@ -129,10 +129,10 @@ function ListUser() {
                 className="border-none bg-none"
                 onClick={() => showModalDeleteUser(id, username)}
                 style={{ fontWeight: 'normal' }}
-                size="default"
+                size="small"
                 type="light"
               >
-                <UilTrash className="w-4 text-light-extra dark:text-white60" />
+                <UilTrash className="w-4 text-light-extra dark:text-white60" fill="#FF0000" />
               </Button>
             </Tooltip>
           </div>
@@ -153,8 +153,8 @@ function ListUser() {
           </span>
         ),
         dateCreate: (
-          <span className=" text-start dark:text-white60 text-[13px]" key={`${updatedAt}-${index}`}>
-            {moment(updatedAt).format('DD/MM/YYYY HH:mm:ss ')}
+          <span className=" text-start dark:text-white60 text-[13px]" key={`${createdAt}-${index}`}>
+            {moment(createdAt).format('DD/MM/YYYY HH:mm:ss ')}
           </span>
         ),
       });
@@ -174,7 +174,7 @@ function ListUser() {
               <PaginationStyle>
                 <div className="bg-white dark:bg-white10 m-0 p-0 mb-[25px] rounded-10 relative">
                   <div className="py-[16px] px-[25px] text-dark dark:text-white87 font-medium text-[17px] border-regular dark:border-white10 border-b ">
-                    <Heading as="h4" className="text-[25px] font-medium mb-0">
+                    <Heading as="h4" className="text-[25px] font-medium mb-0 title-manage">
                       {t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.MANAGEUSER}`)}
                     </Heading>
                   </div>

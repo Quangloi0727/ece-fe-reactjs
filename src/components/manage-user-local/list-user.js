@@ -158,6 +158,7 @@ function DataListUser({ tableData, columns, totalData }) {
           showSizeChanger: true,
           onChange: handleChangePage,
           style: { fontSize: 13, justifyContent: 'center' },
+          pageSizeOptions: ['5', '10', '25', '50', '100'],
         }}
         rowSelection={{
           type: selectionType,
