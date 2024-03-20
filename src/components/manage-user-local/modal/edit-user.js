@@ -17,6 +17,8 @@ import {
   PLACEHOLDER_FORM_MANAGE_USER,
   BUTTON_MODAL_MANAGE_USER,
   MESSAGE_RULE_INPUT,
+  ERROR_LOGIN,
+  MESSAGE_NOTIFICATION,
 } from '../../../constants';
 
 const { Option } = Select;
@@ -28,14 +30,6 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
   const [showPassword, setShowPassword] = useState(false);
   const [visibilityToggle, setVisibilityToggle] = useState(false);
 
-  const handleTypeChange = (value) => {
-    if (value === USER.KEY_TYPE_LOCAL) {
-      setShowPassword(true);
-    } else {
-      setShowPassword(false);
-    }
-  };
-
   const { dataUser } = useSelector((states) => {
     return {
       dataUser: states.getUser.user,
@@ -43,6 +37,19 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
   });
 
   const [form] = Form.useForm();
+
+  const handleTypeChange = (value) => {
+    if (value === USER.KEY_TYPE_LOCAL) {
+      setShowPassword(true);
+      setTimeout(() => {
+        if (!form.getFieldValue('password')) {
+          form.validateFields(['password']);
+        }
+      }, 0);
+    } else {
+      setShowPassword(false);
+    }
+  };
 
   const handleHideModal = () => {
     form.resetFields();
@@ -61,7 +68,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
             : role === USER.KEY_ROLE_USER
             ? [USER.KEY_ROLE_USER]
             : [USER.KEY_ROLE_ADMIN, USER.KEY_ROLE_USER],
-        password,
+        password: type === USER.KEY_TYPE_LOCAL ? password : '',
       });
       setShowPassword(form.getFieldValue('type') === USER.KEY_TYPE_LOCAL);
     }
@@ -76,11 +83,15 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
         formData,
         () => {
           hideModal();
-          openNotificationWithIcon('success', 'Update thành công !');
+          openNotificationWithIcon('success', t(`${MESSAGE_NOTIFICATION.UPDATE_SUCCESS}`));
           dispatch(getListUser(DEFAULT_PAGE, DEFAULT_PAGE_SIZE, ''));
         },
         (err) => {
-          openNotificationWithIcon('error', 'Lưu thất bại !', err.message);
+          openNotificationWithIcon(
+            'error',
+            t(`${MESSAGE_NOTIFICATION.UPDATE_FAIL}`),
+            t(`${ERROR_LOGIN}${err.message}`),
+          );
         },
       ),
     );
@@ -107,7 +118,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
     >
       <div className="bg-white dark:bg-white10 m-0 p-0 text-theme-gray :text-white60 text-[13px] rounded-10 relative h-full">
         <div className="text-[13px]">
-          <Form layout="vertical" form={form} ref={formRef} colon={false} className="form-add">
+          <Form layout="vertical" form={form} ref={formRef} colon={false} className="form-add" requiredMark={false}>
             <Form.Item
               key="username"
               name="username"

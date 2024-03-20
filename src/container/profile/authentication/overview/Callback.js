@@ -26,7 +26,7 @@ function Callback() {
         },
         (message) => {
           const logOutADFS = window.open(process.env.REACT_APP_URL_ADFS_LOGOUT, '_blank');
-          openNotificationWithIcon('error', 'Tài khoản không có quyền truy cập !', message);
+          openNotificationWithIcon('error', 'Tài khoản không tồn tại !', message);
           setTimeout(() => {
             logOutADFS.close();
             history('/login');

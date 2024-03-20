@@ -477,11 +477,6 @@ ul {
   color: #404040 !important;
 }
 
-.ant-btn-primary[disabled]:hover {
-  color: #fff !important;
-  background: #8231d360 !important;
-}
-
 .btn-icon {
   padding: 0 13px;
 }

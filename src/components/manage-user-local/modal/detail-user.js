@@ -26,14 +26,14 @@ function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
   const [form] = Form.useForm();
   useEffect(() => {
     if (dataUser) {
-      const { username, password, role, type, updatedAt, createdByInfo } = dataUser;
+      const { username, password, role, type, createdAt, createdByInfo } = dataUser;
       form.setFieldsValue({
         username,
         type: type === USER.KEY_TYPE_LOCAL ? USER.LOCAL : USER.SSO,
         role: role === USER.KEY_ROLE_ADMIN ? USER.ADMIN : role === USER.KEY_ROLE_USER ? USER.USER : USER.ALL,
         creator: createdByInfo?.username,
         password,
-        date: moment(updatedAt).format('DD/MM/YYYY HH:mm:ss'),
+        date: moment(createdAt).format('DD/MM/YYYY HH:mm:ss'),
       });
       setShowPassword(form.getFieldValue(NAME_FORM_MANAGE_USER.TYPE) === USER.LOCAL);
     }

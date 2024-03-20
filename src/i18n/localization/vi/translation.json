@@ -43,7 +43,7 @@
     "direction": "Hướng Email"
   },
   "formManagerUser":  {
-      "manageUser" : "Danh sách người truy cập",
+      "manageUser" : "Quản lý người truy cập",
       "addNewUser" : "Thêm người truy cập",
       "editUser" : "Sửa người truy cập",
       "deleteUser": "Xóa tài khoản",
@@ -86,5 +86,18 @@
   },
   "logout": "Đăng xuất",
   "searchOnNewSystem": "Tra cứu trên hệ thống mới",
-  "searchOnOldSystem": "Tra cứu trên hệ thống cũ"
+  "searchOnOldSystem": "Tra cứu trên hệ thống cũ",
+  "errorFormModal": {
+     "usernameExisted": "Tên người dùng đã tồn tại.",
+     "passwordInvalid": "Mật khẩu chứa ít nhất 8 ký tự gồm chữ thường và chữ hoa, số và ký tự đặc biệt ." 
+  },
+  "messageNotification": {
+    "addSuccess": "Thêm thành công!",
+    "updateSuccess": "Cập nhật thành công!",
+    "deleteSuccess": "Xóa thành công!",
+    "addFail": "Thêm thất bại!",
+    "updateFail": "Cập nhật thất bại!",
+    "deleteFail": "Xóa thất bại!"
+ }
+
 }

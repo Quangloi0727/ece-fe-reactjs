@@ -219,3 +219,13 @@ export const TITLE_MODAL_LIST_USER = {
 export const TOOLTIP_MODAL_LIST_USER = {
   DRAG_AND_DROP: 'dragAndDrop',
 };
+export const ERROR_LOGIN = 'errorFormModal.';
+
+export const MESSAGE_NOTIFICATION = {
+  ADD_SUCCESS: 'messageNotification.addSuccess',
+  UPDATE_SUCCESS: 'messageNotification.updateSuccess',
+  DELETE_SUCCESS: 'messageNotification.deleteSuccess',
+  ADD_FAIL: 'messageNotification.addFail',
+  UPDATE_FAIL: 'messageNotification.updateSuccess',
+  DELETE_FAIL: 'messageNotification.deleteFail',
+};

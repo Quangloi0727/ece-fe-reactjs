@@ -28,12 +28,12 @@ const login = (values, successCallback, errorCallback) => {
         dispatch(loginSuccess(true));
         successCallback(role);
       } else {
-        dispatch(loginErr(response.data.errors));
-        errorCallback();
+        dispatch(loginErr(response.data.errors[0]));
+        errorCallback(response.data.errors[0]);
       }
     } catch (err) {
       dispatch(loginErr(err));
-      errorCallback();
+      errorCallback(err);
     }
   };
 };
