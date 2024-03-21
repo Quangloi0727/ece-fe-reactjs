@@ -91,7 +91,9 @@
   "searchOnOldSystem": "Search on old system",
   "errorFormModal": {
     "usernameExisted": "Username already exists.",
-    "passwordInvalid": "Password contains at least 8 characters including lowercase and uppercase letters, numbers and special characters." 
+    "passwordInvalid": "Password contains at least 8 characters including lowercase and uppercase letters, numbers and special characters.",
+    "errorDeleteAdmin": "Username cannot delete!",
+    "errorUpdateAdmin": "Username is only updated with password!"
  },
  "messageNotification": {
   "addSuccess": "Add success!",

@@ -88,8 +88,10 @@
   "searchOnNewSystem": "Tra cứu trên hệ thống mới",
   "searchOnOldSystem": "Tra cứu trên hệ thống cũ",
   "errorFormModal": {
-     "usernameExisted": "Tên người dùng đã tồn tại.",
-     "passwordInvalid": "Mật khẩu chứa ít nhất 8 ký tự gồm chữ thường và chữ hoa, số và ký tự đặc biệt ." 
+     "usernameExisted": "Tên đăng nhập đã tồn tại.",
+     "passwordInvalid": "Mật khẩu chứa ít nhất 8 ký tự gồm chữ thường và chữ hoa, số và ký tự đặc biệt ." ,
+     "errorDeleteAdmin": "Tài khoản này không được phép xóa",
+     "errorUpdateAdmin": "Tài khoản admin chỉ được cập nhật mật khẩu."
   },
   "messageNotification": {
     "addSuccess": "Thêm thành công!",
