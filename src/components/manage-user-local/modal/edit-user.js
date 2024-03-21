@@ -131,6 +131,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
               ]}
             >
               <Input
+                disabled={dataUser?.username === 'admin'}
                 placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.USERNAME}`)}
                 maxLength={50}
               />
@@ -148,6 +149,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
               ]}
             >
               <Select
+                disabled={dataUser?.username === 'admin'}
                 className="[&>div]:border-normal dark:[&>div]:border-white10 [&>div]:rounded-6 [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white60 [&>div>div>div>span]:bg-transparent [&>div]:h-[38px] [&>div>div>div>span]:items-center [&>div>.ant-select-selection-item]:flex [&>div>.ant-select-selection-item]:items-center dark:[&>div>.ant-select-selection-item]:text-white60"
                 placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.TYPEACCOUNT}`)}
                 onChange={handleTypeChange}
@@ -190,6 +192,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
               ]}
             >
               <Select
+                disabled={dataUser?.username === 'admin'}
                 className="[&>div]:border-normal dark:[&>div]:border-white10 [&>div]:rounded-6 [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white60 [&>div>div>div>span]:bg-transparent [&>div]:h-[38px] [&>div>div>div>span]:items-center [&>div>.ant-select-selection-item]:flex [&>div>.ant-select-selection-item]:items-center dark:[&>div>.ant-select-selection-item]:text-white60"
                 placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.ROLE}`)}
                 mode="multiple"

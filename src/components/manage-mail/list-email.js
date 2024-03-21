@@ -129,7 +129,7 @@ function DataListEmail({ tableData, columns, totalData }) {
             total: totalData,
             onChange: handleChangePage,
             style: { fontSize: 13, justifyContent: 'center' },
-            showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
+            pageSizeOptions: ['5', '10', '25', '50', '100'],
           }}
           dataSource={tableData}
           columns={columns}

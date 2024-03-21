@@ -226,6 +226,6 @@ export const MESSAGE_NOTIFICATION = {
   UPDATE_SUCCESS: 'messageNotification.updateSuccess',
   DELETE_SUCCESS: 'messageNotification.deleteSuccess',
   ADD_FAIL: 'messageNotification.addFail',
-  UPDATE_FAIL: 'messageNotification.updateSuccess',
+  UPDATE_FAIL: 'messageNotification.updateFail',
   DELETE_FAIL: 'messageNotification.deleteFail',
 };

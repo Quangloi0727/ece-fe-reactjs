@@ -85,16 +85,16 @@ function ListUser() {
 
   const tableUserSource = [];
   if (dataUser && dataUser.length) {
-    dataUser.map((item, index) => {
+    dataUser.map((item) => {
       const { id, username, type, role, createdAt, createdByInfo } = item;
       return tableUserSource.push({
         id: (
-          <span className="text-start dark:text-white60 text-[13px] " title={id} key={`${id}-${index}`}>
+          <span className="text-start dark:text-white60 text-[13px] " title={id} key={`${id}`}>
             {id}
           </span>
         ),
         username: (
-          <span className="text-start dark:text-white60 text-[13px] " title={username} key={`${username}-${index}`}>
+          <span className="text-start dark:text-white60 text-[13px] " title={username} key={`${username}`}>
             {username}
           </span>
         ),
@@ -126,6 +126,7 @@ function ListUser() {
 
             <Tooltip title={t(`${PREFIX_FORM_MANAGE_USER}${TOOLTIP_FORM_MANAGE_USER.DELETE}`)}>
               <Button
+                disabled={username === 'admin'}
                 className="border-none bg-none"
                 onClick={() => showModalDeleteUser(id, username)}
                 style={{ fontWeight: 'normal' }}
@@ -138,22 +139,22 @@ function ListUser() {
           </div>
         ),
         type: (
-          <span className="text-start dark:text-white60 text-[13px]" key={`${type}-${index}`}>
+          <span className="text-start dark:text-white60 text-[13px]" key={`${type}`}>
             {type === USER.KEY_TYPE_SSO ? USER.SSO : USER.LOCAL}
           </span>
         ),
         role: (
-          <span className=" text-start dark:text-white60 text-[13px]" key={`${role}-${index}`}>
+          <span className=" text-start dark:text-white60 text-[13px]" key={`${role}`}>
             {role === USER.KEY_ROLE_ADMIN ? USER.ADMIN : role === USER.KEY_ROLE_USER ? USER.USER : USER.ALL}
           </span>
         ),
         creator: (
-          <span className=" text-start dark:text-white60 text-[13px]" key={`${createdByInfo?.id}-${index}`}>
+          <span className=" text-start dark:text-white60 text-[13px]" key={`${createdByInfo?.id}`}>
             {createdByInfo?.username}
           </span>
         ),
         dateCreate: (
-          <span className=" text-start dark:text-white60 text-[13px]" key={`${createdAt}-${index}`}>
+          <span className=" text-start dark:text-white60 text-[13px]" key={`${createdAt}`}>
             {moment(createdAt).format('DD/MM/YYYY HH:mm:ss ')}
           </span>
         ),

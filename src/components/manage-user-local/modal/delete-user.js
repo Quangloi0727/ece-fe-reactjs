@@ -15,6 +15,7 @@ import {
   BUTTON_MODAL_MANAGE_USER,
   DELETE_MODAL,
   MESSAGE_NOTIFICATION,
+  ERROR_LOGIN,
 } from '../../../constants';
 
 function DeleteUserForm({ showOrHideModalDeleteUser, hideModal, typeRemove, idUser, nameDelete, selectedIds }) {
@@ -31,7 +32,11 @@ function DeleteUserForm({ showOrHideModalDeleteUser, hideModal, typeRemove, idUs
           dispatch(getListUser(DEFAULT_PAGE, DEFAULT_PAGE_SIZE, ''));
         },
         (err) => {
-          openNotificationWithIcon('error', t(`${MESSAGE_NOTIFICATION.DELETE_FAIL}`), err.message);
+          openNotificationWithIcon(
+            'error',
+            t(`${MESSAGE_NOTIFICATION.DELETE_FAIL}`),
+            t(`${ERROR_LOGIN}${err.message}`),
+          );
         },
       ),
     );
