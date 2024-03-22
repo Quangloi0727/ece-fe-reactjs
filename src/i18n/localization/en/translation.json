@@ -75,7 +75,7 @@
     "downloadExcel": "Download sample file",
     "userFile" : "User File",
     "uploadFile": "Upload from the device",
-    "noteImportExcel": "The system ignores records with the same login name \nThe system ignores records that lack login name/Account type/Permissions \nThe system ignores records with the wrong permissions (Only accepts User or Admin or All values) \nThe system ignores Local type account records with missing/incorrect password format (fill in password validation)"
+    "noteImportExcel": "The system ignores records with the same login name \nThe system ignores records with spaces in the login name/password \nThe system ignores records that lack login name/Account type/Permissions \nThe system ignores records with the wrong permissions (Only accepts User or Admin or All values) \nThe system ignores Local type account records with missing/incorrect password format (fill in password validation)"
     },
     "deleteModal": {
       "user" : "User ",
@@ -93,7 +93,9 @@
     "usernameExisted": "Username already exists.",
     "passwordInvalid": "Password contains at least 8 characters including lowercase and uppercase letters, numbers and special characters.",
     "errorDeleteAdmin": "Username cannot delete!",
-    "errorUpdateAdmin": "Username is only updated with password!"
+    "errorUpdateAdmin": "Username is only updated with password!",
+    "errorWhiteSpaceUsername":"Username cannot contain spaces.",
+    "errorWhiteSpacePassword": "Password must not contain spaces."
  },
  "messageNotification": {
   "addSuccess": "Add success!",
