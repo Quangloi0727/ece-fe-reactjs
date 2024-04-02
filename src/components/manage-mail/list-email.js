@@ -114,7 +114,7 @@ function DataListEmail({ tableData, columns, totalData }) {
       <div className="flex items-center  w-full mt-5 mb-[25px] md:flex-col gap-[15px]">
         <div className="min-w-[500px]">
           <Input
-            onChange={handleSearch}
+            onPressEnter={handleSearch}
             className="h-10 text-[13px] text-body dark:text-white60  dark:bg-white10 border-normal dark:border-white10 rounded-[6px]"
             placeholder={t('placeholderSearch')}
             prefix={prefix}
