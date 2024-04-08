@@ -61,7 +61,12 @@ function ContentCase({ value, changeContentCase }) {
                         <p style={{ display: 'flex', flexWrap: 'wrap' }}>
                           To:
                           {emailAddressTo.map((el, index) => {
-                            return <span key={index}>{el.emailAddress},</span>;
+                            return (
+                              <span key={index}>
+                                {el.emailAddress}
+                                {index !== emailAddressTo.length - 1 && ','}
+                              </span>
+                            );
                           })}
                         </p>
                         <p>RE : {subject}</p>

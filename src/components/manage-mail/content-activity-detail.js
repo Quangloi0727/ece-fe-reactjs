@@ -40,7 +40,12 @@ const ContentActivity = forwardRef(({ value, handlePrint, checkNullTab }, ref) =
               <Col span={2}>To:</Col>
               <Col span={20} style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {email?.emailAddressTo.map((el, index) => {
-                  return <span key={index}>{el.emailAddress},</span>;
+                  return (
+                    <span key={index}>
+                      {el.emailAddress}
+                      {index !== email.emailAddressTo.length - 1 && ','}
+                    </span>
+                  );
                 })}
               </Col>
             </Row>

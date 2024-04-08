@@ -166,7 +166,7 @@ const ThemeLayout = (WrappedComponent) => {
             <Layout>
               {!topMenu || window.innerWidth <= 991 ? (
                 <ThemeProvider theme={theme}>
-                  <Sider width={130} style={SideBarStyle} collapsed={collapsed}>
+                  <Sider width={100} style={SideBarStyle} collapsed={collapsed}>
                     <Scrollbars
                       className="custom-scrollbar"
                       autoHide

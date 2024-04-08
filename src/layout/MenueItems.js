@@ -54,7 +54,7 @@ function MenuItems({ toggleCollapsed }) {
   if (getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).role === USER.KEY_ROLE_ALL) {
     items.push(
       getItemMenu(
-        <Tooltip title={t(`${TITLE_LOOK_UP_EMAIL}`)}>
+        <Tooltip title={t(`${TITLE_LOOK_UP_EMAIL}`)} placement="topLeft">
           <NavLink onClick={toggleCollapsed} to={`${path}/list-email`}>
             <FontAwesome
               className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
@@ -67,7 +67,7 @@ function MenuItems({ toggleCollapsed }) {
         'starter',
       ),
       getItemMenu(
-        <Tooltip title={t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.MANAGEUSER}`)}>
+        <Tooltip title={t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.MANAGEUSER}`)} placement="topLeft">
           <NavLink onClick={toggleCollapsed} to={`${path}/manage-user-local`}>
             <FontAwesome
               className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
@@ -84,7 +84,7 @@ function MenuItems({ toggleCollapsed }) {
   if (getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).role === USER.KEY_ROLE_USER) {
     items.push(
       getItemMenu(
-        <Tooltip title={t(`${TITLE_LOOK_UP_EMAIL}`)}>
+        <Tooltip title={t(`${TITLE_LOOK_UP_EMAIL}`)} placement="topLeft">
           <NavLink onClick={toggleCollapsed} to={`${path}/list-email`}>
             <FontAwesome
               className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
@@ -101,7 +101,7 @@ function MenuItems({ toggleCollapsed }) {
   if (getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).role === USER.KEY_ROLE_ADMIN) {
     items.push(
       getItemMenu(
-        <Tooltip title={t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.MANAGEUSER}`)}>
+        <Tooltip title={t(`${PREFIX_FORM_MANAGE_USER}${TITLE_FORM_MANAGE_USER.MANAGEUSER}`)} placement="topLeft">
           <NavLink onClick={toggleCollapsed} to={`${path}/manage-user-local`}>
             <FontAwesome
               className="text-[18px] ltr:mr-[10px] rtl:ml-[10px] text-body dark:text-white60"
