@@ -15,7 +15,7 @@ function SignIn() {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.auth.loading);
   const [form] = Form.useForm();
-
+  const adfsUrl = process.env.REACT_APP_URL_ADFS;
   const handleSubmit = useCallback(
     (values) => {
       dispatch(
@@ -37,7 +37,7 @@ function SignIn() {
   );
 
   const redirectPageLogin = () => {
-    window.open(process.env.REACT_APP_URL_ADFS, '_blank');
+    window.open(adfsUrl, '_blank');
   };
 
   return (
