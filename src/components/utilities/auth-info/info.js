@@ -22,13 +22,13 @@ const AuthInfo = React.memo(() => {
   const { i18n, t } = useTranslation();
   const { flag, searchOnSystem } = state;
   const history = useNavigate();
-
+  const logoutURL = process.env.REACT_APP_URL_ADFS_LOGOUT;
   const SignOut = useCallback(() => {
     dispatch(
       logOut(
         (isLoginAdfs) => {
           if (isLoginAdfs) {
-            const logOutADFS = window.open(process.env.REACT_APP_URL_ADFS_LOGOUT, '_blank');
+            const logOutADFS = window.open(logoutURL, '_blank');
             setTimeout(() => {
               logOutADFS.close();
               history('/login');

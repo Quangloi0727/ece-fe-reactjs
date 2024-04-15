@@ -12,6 +12,7 @@ function Callback() {
   const code = params.get('code');
   const dispatch = useDispatch();
   const history = useNavigate();
+  const logoutURL = process.env.REACT_APP_URL_ADFS_LOGOUT;
   useEffect(() => {
     dispatch(
       verifyCallback(
@@ -25,7 +26,7 @@ function Callback() {
           }
         },
         (message) => {
-          const logOutADFS = window.open(process.env.REACT_APP_URL_ADFS_LOGOUT, '_blank');
+          const logOutADFS = window.open(logoutURL, '_blank');
           openNotificationWithIcon('error', 'Tài khoản không tồn tại !', message);
           setTimeout(() => {
             logOutADFS.close();
