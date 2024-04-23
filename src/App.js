@@ -9,6 +9,8 @@ import './static/css/style.css';
 import './static/css/styleCustomize.css';
 import config from './config/config';
 import 'antd/dist/antd.less';
+import { getItem } from './utility/localStorageControl';
+import { USER, LOCAL_STORAGE_VARIABLE } from './constants';
 
 const NotFound = lazy(() => import('./container/pages/404'));
 const PermissionDenied = lazy(() => import('./container/pages/permission-denied'));
@@ -40,6 +42,16 @@ function ProviderConfig() {
     // eslint-disable-next-line no-return-assign
     return () => (unmounted = true);
   }, [setPath]);
+  let defaultPath = '/list-email';
+  if (getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).role === USER.KEY_ROLE_ALL) {
+    defaultPath = '/list-email';
+  }
+  if (getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).role === USER.KEY_ROLE_USER) {
+    defaultPath = '/list-email';
+  }
+  if (getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).role === USER.KEY_ROLE_ADMIN) {
+    defaultPath = '/manage-user-local';
+  }
   return (
     <ConfigProvider direction={rtl ? 'rtl' : 'ltr'}>
       <ThemeProvider theme={{ ...themeColor, rtl, topMenu, mainContent }}>
@@ -59,7 +71,7 @@ function ProviderConfig() {
               </Routes>
             ) : (
               <Routes>
-                <Route path="/" element={<Navigate to="/list-email" />} />
+                <Route path="/" element={<Navigate to={defaultPath} />} />
                 <Route path="/list-email" element={<ListEmail />} />
                 <Route path="/manage-email/activity/:activityId" element={<ActivityDetail />} />
                 <Route path="/manage-email/case/:caseId" element={<CaseDetail />} />
