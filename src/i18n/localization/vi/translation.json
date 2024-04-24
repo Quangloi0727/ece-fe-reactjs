@@ -74,7 +74,7 @@
         "downloadExcel": "Tải file mẫu",
         "userFile" : "Tệp người truy cập",
         "uploadFile": "Duyệt từ máy tính",
-        "noteImportExcel": "Hệ thống bỏ qua nhưng bản ghi trùng tên đăng nhập \nHệ thống bỏ qua những bản ghi có khoảng trắng trong tên đăng nhập/mật khẩu \nHệ thống bỏ qua những bản ghi thiếu tên đăng nhập/Loại tài khoản/Quyền \nHệ thống bỏ qua bản ghi sai quyền(Chỉ nhận giá trị User hoặc Admin hoặc All) \nHệ thống bỏ qua những bản ghi tài khoản loại Local thiếu/sai định dạng mật khẩu(điền validate của mật khẩu)"
+        "noteImportExcel": "Hệ thống bỏ qua nhưng bản ghi trùng tên đăng nhập \nHệ thống bỏ qua những bản ghi có khoảng trắng trong tên đăng nhập/mật khẩu \nHệ thống bỏ qua những bản ghi thiếu tên đăng nhập/Loại tài khoản/Quyền \nHệ thống bỏ qua bản ghi sai quyền(Chỉ nhận giá trị User hoặc Admin) \nHệ thống bỏ qua những bản ghi tài khoản loại Local thiếu/sai định dạng mật khẩu(điền validate của mật khẩu)"
       },
       "deleteModal": {
         "user" : "Tài khoản ",

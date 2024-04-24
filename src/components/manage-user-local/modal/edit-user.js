@@ -76,7 +76,6 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
 
   const handleSendDataForm = () => {
     const formData = form.getFieldsValue();
-    formData.role = formData.role.length === 2 ? USER.KEY_ROLE_ALL : formData.role[0];
     dispatch(
       handleEditDataUser(
         idEdit,
@@ -195,7 +194,6 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
                 disabled={dataUser?.username === 'admin'}
                 className="[&>div]:border-normal dark:[&>div]:border-white10 [&>div]:rounded-6 [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white60 [&>div>div>div>span]:bg-transparent [&>div]:h-[38px] [&>div>div>div>span]:items-center [&>div>.ant-select-selection-item]:flex [&>div>.ant-select-selection-item]:items-center dark:[&>div>.ant-select-selection-item]:text-white60"
                 placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.ROLE}`)}
-                mode="multiple"
               >
                 <Option value={USER.KEY_ROLE_ADMIN}>Admin</Option>
                 <Option value={USER.KEY_ROLE_USER}>User</Option>

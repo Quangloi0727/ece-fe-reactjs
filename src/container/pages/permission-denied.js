@@ -18,13 +18,13 @@ function PermissionDenied() {
     }, 1500);
   }, []);
   let defaultPath = '/list-email';
-  if (getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).role === USER.KEY_ROLE_ALL) {
+  if (getItem(LOCAL_STORAGE_VARIABLE.USER_DATA)?.role === USER.KEY_ROLE_ALL) {
     defaultPath = '/list-email';
   }
-  if (getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).role === USER.KEY_ROLE_USER) {
+  if (getItem(LOCAL_STORAGE_VARIABLE.USER_DATA)?.role === USER.KEY_ROLE_USER) {
     defaultPath = '/list-email';
   }
-  if (getItem(LOCAL_STORAGE_VARIABLE.USER_DATA).role === USER.KEY_ROLE_ADMIN) {
+  if (getItem(LOCAL_STORAGE_VARIABLE.USER_DATA)?.role === USER.KEY_ROLE_ADMIN) {
     defaultPath = '/manage-user-local';
   }
   return (
