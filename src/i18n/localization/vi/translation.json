@@ -51,6 +51,8 @@
       "username" : "Tên đăng nhập",
       "typeAccount": "Loại tài khoản",
       "password": " Mật khẩu",
+      "passwordOld": " Mật khẩu cũ",
+      "passwordNew": " Mật khẩu mới",
       "role": "Quyền",
       "placeholderUsername": "Nhập tên đăng nhập",
       "placeholderTypeAccount": "Nhập loại tài khoản",
@@ -93,7 +95,8 @@
      "errorDeleteAdmin": "Tài khoản này không được phép xóa",
      "errorUpdateAdmin": "Tài khoản admin chỉ được cập nhật mật khẩu.",
      "errorWhiteSpaceUsername":"Tên đăng nhập không được có khoảng trắng.",
-     "errorWhiteSpacePassword": "Mật khẩu không được có khoảng trắng."
+     "errorWhiteSpacePassword": "Mật khẩu không được có khoảng trắng.",
+     "errorOldPasswordIncorrect": "Mật khẩu cũ không đúng."
   },
   "messageNotification": {
     "addSuccess": "Thêm thành công!",

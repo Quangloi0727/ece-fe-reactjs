@@ -8,7 +8,7 @@ const tableReadData = (page, pageSize, searchMulti, filterAdvance) => {
     try {
       dispatch(dataTableReadBegin());
       const listEmail = await DataService.get(
-        `/manage-email/get-list?page=${page}&pageSize=${pageSize}&searchMulti=${searchMulti}`,
+        `/manage-email/get-list?page=${page}&pageSize=${pageSize || 10}&searchMulti=${searchMulti}`,
         filterAdvance,
       );
 

@@ -28,16 +28,25 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
   const dispatch = useDispatch();
   const formRef = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [visibilityToggle, setVisibilityToggle] = useState(false);
-
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [submitButton, setSubmitButton] = useState(true);
   const { dataUser } = useSelector((states) => {
     return {
       dataUser: states.getUser.user,
     };
   });
-
   const [form] = Form.useForm();
-
+  const values = Form.useWatch([], form);
+  useEffect(() => {
+    form
+      .validateFields()
+      .then(() => {
+        setSubmitButton(false);
+      })
+      .catch(() => {
+        setSubmitButton(true);
+      });
+  }, [form, values]);
   const handleTypeChange = (value) => {
     if (value === USER.KEY_TYPE_LOCAL) {
       setShowPassword(true);
@@ -54,23 +63,17 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
   const handleHideModal = () => {
     form.resetFields();
     hideModal();
-    setVisibilityToggle(false);
   };
   useEffect(() => {
     if (dataUser) {
-      const { username, type, role, password } = dataUser;
+      const { username, type, role } = dataUser;
       form.setFieldsValue({
         username,
         type,
-        role:
-          role === USER.KEY_ROLE_ADMIN
-            ? [USER.KEY_ROLE_ADMIN]
-            : role === USER.KEY_ROLE_USER
-            ? [USER.KEY_ROLE_USER]
-            : [USER.KEY_ROLE_ADMIN, USER.KEY_ROLE_USER],
-        password: type === USER.KEY_TYPE_LOCAL ? password : '',
+        role: role === USER.KEY_ROLE_ADMIN ? USER.KEY_ROLE_ADMIN : USER.KEY_ROLE_USER,
       });
       setShowPassword(form.getFieldValue('type') === USER.KEY_TYPE_LOCAL);
+      setShowOldPassword(type === USER.KEY_TYPE_LOCAL);
     }
   }, [dataUser, form]);
 
@@ -94,12 +97,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
         },
       ),
     );
-  };
-
-  const handleResetPassword = () => {
-    form.setFieldValue('password', '');
-    form.validateFields(['password']);
-    setVisibilityToggle(true);
+    form.resetFields();
   };
 
   return (
@@ -117,7 +115,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
     >
       <div className="bg-white dark:bg-white10 m-0 p-0 text-theme-gray :text-white60 text-[13px] rounded-10 relative h-full">
         <div className="text-[13px]">
-          <Form layout="vertical" form={form} ref={formRef} colon={false} className="form-add" requiredMark={false}>
+          <Form layout="vertical" form={form} ref={formRef} className="form-edit" requiredMark={false}>
             <Form.Item
               key="username"
               name="username"
@@ -159,24 +157,40 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
             </Form.Item>
 
             {showPassword && (
-              <Form.Item
-                key="password"
-                name="password"
-                label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.PASSWORD}`)}
-                rules={[
-                  {
-                    required: true,
-                    message: t(`${PREFIX_FORM_MANAGE_USER}${MESSAGE_RULE_INPUT}`),
-                  },
-                ]}
-              >
-                <Input.Password
-                  placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.PASSWORD}`)}
-                  onClick={handleResetPassword}
-                  visibilityToggle={visibilityToggle}
-                  autoFocus
-                />
-              </Form.Item>
+              <div>
+                {showOldPassword && (
+                  <Form.Item
+                    key="password"
+                    name="password"
+                    label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.OLD_PASSWORD}`)}
+                    rules={[
+                      {
+                        required: true,
+                        message: t(`${PREFIX_FORM_MANAGE_USER}${MESSAGE_RULE_INPUT}`),
+                      },
+                    ]}
+                  >
+                    <Input.Password
+                      placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.PASSWORD}`)}
+                    />
+                  </Form.Item>
+                )}
+                <Form.Item
+                  key="new_password"
+                  name="new_password"
+                  label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.NEW_PASSWORD}`)}
+                  rules={[
+                    {
+                      required: true,
+                      message: t(`${PREFIX_FORM_MANAGE_USER}${MESSAGE_RULE_INPUT}`),
+                    },
+                  ]}
+                >
+                  <Input.Password
+                    placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.PASSWORD}`)}
+                  />
+                </Form.Item>
+              </div>
             )}
 
             <Form.Item
@@ -191,7 +205,6 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
               ]}
             >
               <Select
-                disabled={dataUser?.username === 'admin'}
                 className="[&>div]:border-normal dark:[&>div]:border-white10 [&>div]:rounded-6 [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white60 [&>div>div>div>span]:bg-transparent [&>div]:h-[38px] [&>div>div>div>span]:items-center [&>div>.ant-select-selection-item]:flex [&>div>.ant-select-selection-item]:items-center dark:[&>div>.ant-select-selection-item]:text-white60"
                 placeholder={t(`${PREFIX_FORM_MANAGE_USER}${PLACEHOLDER_FORM_MANAGE_USER.ROLE}`)}
               >
@@ -223,7 +236,7 @@ function EditUserForm({ showOrHideModalEditForm, hideModal, idEdit }) {
                       onClick={() => {
                         handleSendDataForm();
                       }}
-                      disabled={!!form.getFieldsError().filter(({ errors }) => errors.length).length}
+                      disabled={submitButton}
                     >
                       <span className="button-formadd items-center">
                         <SearchOutlined style={{ marginRight: '4px' }} />

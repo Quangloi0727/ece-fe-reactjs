@@ -52,7 +52,8 @@
     "deleteManyUser": "Delete multiple accounts",
     "username" : "Username",
     "typeAccount": "Type Account",
-    "password": "Password",
+    "passwordOld": "Old password",
+    "passwordNew": "New password",
     "role": "Role",
     "placeholderUsername": "Please input username",
     "placeholderTypeAccount": "Please select type account",
@@ -95,7 +96,8 @@
     "errorDeleteAdmin": "Username cannot delete!",
     "errorUpdateAdmin": "Username is only updated with password!",
     "errorWhiteSpaceUsername":"Username cannot contain spaces.",
-    "errorWhiteSpacePassword": "Password must not contain spaces."
+    "errorWhiteSpacePassword": "Password must not contain spaces.",
+    "errorOldPasswordIncorrect": "Old password incorrect."
  },
  "messageNotification": {
   "addSuccess": "Add success!",
