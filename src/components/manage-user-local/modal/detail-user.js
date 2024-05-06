@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Button, Modal, Space } from 'antd';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
@@ -10,13 +10,11 @@ import {
   PREFIX_FORM_MANAGE_USER,
   LABEL_FORM_MANAGE_USER,
   TITLE_FORM_MANAGE_USER,
-  NAME_FORM_MANAGE_USER,
   BUTTON_MODAL_MANAGE_USER,
 } from '../../../constants';
 
 function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
   const { t } = useTranslation();
-  const [showPassword, setShowPassword] = useState(false);
   const { dataUser } = useSelector((states) => {
     return {
       dataUser: states.getUser.user,
@@ -26,16 +24,14 @@ function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
   const [form] = Form.useForm();
   useEffect(() => {
     if (dataUser) {
-      const { username, password, role, type, createdAt, createdByInfo } = dataUser;
+      const { username, role, type, createdAt, createdByInfo } = dataUser;
       form.setFieldsValue({
         username,
         type: type === USER.KEY_TYPE_LOCAL ? USER.LOCAL : USER.SSO,
         role: role === USER.KEY_ROLE_ADMIN ? USER.ADMIN : role === USER.KEY_ROLE_USER ? USER.USER : USER.ALL,
         creator: createdByInfo?.username,
-        password,
         date: moment(createdAt).format('DD/MM/YYYY HH:mm:ss'),
       });
-      setShowPassword(form.getFieldValue(NAME_FORM_MANAGE_USER.TYPE) === USER.LOCAL);
     }
   }, [dataUser, form]);
   return (
@@ -94,15 +90,6 @@ function DetailUserForm({ showOrHideModalDetailUser, hideModal }) {
             >
               <Input readOnly />
             </Form.Item>
-            {showPassword && (
-              <Form.Item
-                key="password"
-                name="password"
-                label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.PASSWORD}`)}
-              >
-                <Input.Password readOnly visibilityToggle={false} />
-              </Form.Item>
-            )}
             <Form.Item key="role" name="role" label={t(`${PREFIX_FORM_MANAGE_USER}${LABEL_FORM_MANAGE_USER.ROLE}`)}>
               <Input readOnly />
             </Form.Item>

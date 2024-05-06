@@ -151,6 +151,8 @@ export const SEARCH_ON_SYSTEM = {
 export const LABEL_FORM_MANAGE_USER = {
   USERNAME: 'username',
   PASSWORD: 'password',
+  OLD_PASSWORD: 'passwordOld',
+  NEW_PASSWORD: 'passwordNew',
   ROLE: 'role',
   TYPEACCOUNT: 'typeAccount',
   DATECREATED: 'date',
