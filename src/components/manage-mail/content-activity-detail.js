@@ -6,16 +6,45 @@ import moment from 'moment';
 import DownLoadFile from './download-file';
 import { Button } from '../buttons/buttons';
 import { GlobalUtilityStyle } from '../../container/styled';
+import { getItem } from '../../utility/localStorageControl';
+import { LOCAL_STORAGE_VARIABLE, SEARCH_ON_SYSTEM } from '../../constants/index';
 
 const ContentActivity = forwardRef(({ value, handlePrint, checkNullTab }, ref) => {
   const printContentToPdf = () => {
     handlePrint();
   };
   const { subject, emailData, createdOn, email } = value;
-  const contentNew =
+  let contentNew =
     emailData && emailData.content
       ? emailData.content.replace(/@page WordSection1.*?div\.WordSection1\s*{.*?}/gs, '')
       : '';
+  if (contentNew !== '') {
+    // Tạo một DOMParser để phân tích chuỗi HTML thành một tài liệu DOM
+    let baseURL = '';
+    if (getItem(LOCAL_STORAGE_VARIABLE.SEARCH_ON_SYSTEM) === SEARCH_ON_SYSTEM.NEW) {
+      baseURL = process.env.REACT_APP_URL_CISCO_NEW;
+    } else {
+      baseURL = process.env.REACT_APP_URL_CISCO_OLD;
+    }
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(contentNew, 'text/html');
+
+    // Lấy tất cả các thẻ img trong nội dung
+    const imgs = doc.querySelectorAll('img');
+
+    // Duyệt qua tất cả các thẻ img và kiểm tra thuộc tính src
+    imgs.forEach(function (img) {
+      const src = img.getAttribute('src');
+      if (src && !src.startsWith('http://') && !src.startsWith('https://')) {
+        img.setAttribute('src', baseURL + src);
+      }
+    });
+
+    // Lấy lại nội dung HTML sau khi đã thay đổi
+    contentNew = doc.body.innerHTML;
+  }
+
   return !checkNullTab ? (
     <GlobalUtilityStyle ref={ref}>
       <Row gutter={15} className="text-[13px]">
@@ -56,13 +85,15 @@ const ContentActivity = forwardRef(({ value, handlePrint, checkNullTab }, ref) =
               <Col span={7}>{moment(createdOn).format('DD-MM-YYYY HH:mm A')}</Col>
             </Row>
             <Row gutter={[16, 16]} className="row-general-info buttonFile">
-              {email?.emailAttachmentLink && email?.emailAttachmentLink.length
-                ? email?.emailAttachmentLink.map((file, index) => (
-                    <Col key={index}>
-                      <DownLoadFile key={index} index={index} value={file} />
-                    </Col>
-                  ))
-                : ''}
+              {email?.emailAttachmentLink?.length > 0 &&
+                email.emailAttachmentLink.map(
+                  (file, index) =>
+                    file.linkType === 0 && (
+                      <Col key={index}>
+                        <DownLoadFile index={index} value={file} />
+                      </Col>
+                    ),
+                )}
             </Row>
             <div style={{ paddingTop: '20px' }}>
               <GlobalUtilityStyle dangerouslySetInnerHTML={{ __html: contentNew }} />
