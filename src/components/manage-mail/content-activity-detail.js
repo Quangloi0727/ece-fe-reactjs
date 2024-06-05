@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { PrinterOutlined } from '@ant-design/icons';
 import { Col, Empty, Row } from 'antd';
 import PropTypes from 'prop-types';
@@ -6,44 +6,71 @@ import moment from 'moment';
 import DownLoadFile from './download-file';
 import { Button } from '../buttons/buttons';
 import { GlobalUtilityStyle } from '../../container/styled';
-import { getItem } from '../../utility/localStorageControl';
-import { LOCAL_STORAGE_VARIABLE, SEARCH_ON_SYSTEM } from '../../constants/index';
+import { DataService } from '../../config/dataService/dataService';
 
 const ContentActivity = forwardRef(({ value, handlePrint, checkNullTab }, ref) => {
   const printContentToPdf = () => {
     handlePrint();
   };
+  const imgRef = useRef();
   const { subject, emailData, createdOn, email } = value;
   let contentNew =
     emailData && emailData.content
       ? emailData.content.replace(/@page WordSection1.*?div\.WordSection1\s*{.*?}/gs, '')
       : '';
-  if (contentNew !== '') {
-    // Tạo một DOMParser để phân tích chuỗi HTML thành một tài liệu DOM
-    let baseURL = '';
-    if (getItem(LOCAL_STORAGE_VARIABLE.SEARCH_ON_SYSTEM) === SEARCH_ON_SYSTEM.NEW) {
-      baseURL = process.env.REACT_APP_URL_CISCO_NEW;
-    } else {
-      baseURL = process.env.REACT_APP_URL_CISCO_OLD;
+  const [contentEmail, setContentEmail] = useState('');
+
+  const handleImageBodyEmail = async () => {
+    if (contentNew !== '') {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(contentNew, 'text/html');
+      const imgs = doc.querySelectorAll('img');
+      if (!imgs) return;
+      const imgArray = Array.from(imgs);
+      if (!imgArray) return;
+      const promises = imgArray.map(async (img) => {
+        const src = img.getAttribute('src');
+        const attachmemtId = src.match(/attachmentId=(\d+)/)?.[1];
+        if (!attachmemtId) return;
+        const attachment = await DataService.get(`/email-attachment/${attachmemtId}`);
+        if (!attachment && !attachment.data && !attachment.data.data) return;
+        const { contentBase64, contentType, fileName } = attachment.data.data;
+        img.setAttribute('src', `data:${contentType};base64, ${contentBase64}`);
+        img.setAttribute('id', fileName);
+      });
+      await Promise.all(promises);
+
+      contentNew = doc.body.innerHTML;
+      setContentEmail(doc.body.innerHTML);
     }
+  };
 
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(contentNew, 'text/html');
+  useEffect(() => {
+    handleImageBodyEmail();
+  }, [contentEmail]);
 
-    // Lấy tất cả các thẻ img trong nội dung
-    const imgs = doc.querySelectorAll('img');
+  useEffect(() => {
+    if (!imgRef.current) return;
+    const imgElements = imgRef.current.querySelectorAll('img');
+    const downloadImage = async (event) => {
+      const link = document.createElement('a');
+      link.href = event.target.src;
+      link.setAttribute('download', event.target.id);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
 
-    // Duyệt qua tất cả các thẻ img và kiểm tra thuộc tính src
-    imgs.forEach(function (img) {
-      const src = img.getAttribute('src');
-      if (src && !src.startsWith('http://') && !src.startsWith('https://')) {
-        img.setAttribute('src', baseURL + src);
-      }
+    imgElements.forEach((img) => {
+      img.addEventListener('click', downloadImage);
     });
 
-    // Lấy lại nội dung HTML sau khi đã thay đổi
-    contentNew = doc.body.innerHTML;
-  }
+    return () => {
+      imgElements.forEach((img) => {
+        img.removeEventListener('click', downloadImage);
+      });
+    };
+  }, [contentEmail]);
 
   return !checkNullTab ? (
     <GlobalUtilityStyle ref={ref}>
@@ -86,17 +113,14 @@ const ContentActivity = forwardRef(({ value, handlePrint, checkNullTab }, ref) =
             </Row>
             <Row gutter={[16, 16]} className="row-general-info buttonFile">
               {email?.emailAttachmentLink?.length > 0 &&
-                email.emailAttachmentLink.map(
-                  (file, index) =>
-                    file.linkType === 0 && (
-                      <Col key={index}>
-                        <DownLoadFile index={index} value={file} />
-                      </Col>
-                    ),
-                )}
+                email.emailAttachmentLink.map((file, index) => (
+                  <Col key={index}>
+                    <DownLoadFile index={index} value={file} />
+                  </Col>
+                ))}
             </Row>
             <div style={{ paddingTop: '20px' }}>
-              <GlobalUtilityStyle dangerouslySetInnerHTML={{ __html: contentNew }} />
+              <div ref={imgRef} dangerouslySetInnerHTML={{ __html: contentEmail }} />
             </div>
           </div>
         </Col>

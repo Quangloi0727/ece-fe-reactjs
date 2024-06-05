@@ -8,30 +8,16 @@ import { openNotificationWithIcon } from '../notifications/notification';
 function DownLoadFile({ value }) {
   const downloadFile = async (idFile) => {
     const response = await DataService.get(`/email-attachment/${idFile}`);
-    const urlResponse = response?.data?.data?.url;
-    const fileName = response?.data?.data?.fileName;
-    if (response.status !== 200 || !urlResponse) {
+    if (response.status !== 200 || (response.data && response.data.data === null)) {
       return openNotificationWithIcon('error', 'Thất bại !', 'Vui lòng kiểm tra lại !');
     }
-
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', urlResponse, true);
-    xhr.responseType = 'blob';
-
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        const url = window.URL.createObjectURL(new Blob([xhr.response]));
-
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', fileName);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
-    };
-
-    xhr.send();
+    const { contentBase64, fileName, contentType } = response.data.data;
+    const link = document.createElement('a');
+    link.href = `data:${contentType};base64, ${contentBase64}`;
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
