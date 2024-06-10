@@ -1,4 +1,4 @@
-import { Col, Row, Tabs } from 'antd';
+import { Col, Row, Tabs, Spin } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { LeftOutlined } from '@ant-design/icons';
@@ -25,9 +25,14 @@ function ActivityDetail() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const history = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(activityDetailData(activityId));
+    setTimeout(() => {
+      dispatch(activityDetailData(activityId)).finally(() => {
+        setLoading(false);
+      });
+    }, 500);
   }, [activityId]);
 
   const { data } = useSelector((states) => {
@@ -67,7 +72,11 @@ function ActivityDetail() {
     history(-1);
   };
 
-  return (
+  return loading ? (
+    <div className="spin">
+      <Spin />
+    </div>
+  ) : (
     <>
       <PageHeader
         title="Dashboard"

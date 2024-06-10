@@ -7,6 +7,7 @@ import DownLoadFile from './download-file';
 import { Button } from '../buttons/buttons';
 import { GlobalUtilityStyle } from '../../container/styled';
 import { DataService } from '../../config/dataService/dataService';
+import { openNotificationWithIcon } from '../notifications/notification';
 
 const ContentActivity = forwardRef(({ value, handlePrint, checkNullTab }, ref) => {
   const printContentToPdf = () => {
@@ -45,30 +46,64 @@ const ContentActivity = forwardRef(({ value, handlePrint, checkNullTab }, ref) =
     }
   };
 
+  const downloadImageWithBase64 = async (event) => {
+    const link = document.createElement('a');
+    link.href = event.target.src;
+    link.setAttribute('download', event.target.id);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  const replaceBaseUrl = (url, baseUrl) => {
+    return url.replace(baseUrl, 'http://localhost:8080');
+  };
+
+  const downloadImageFromUrl = async (event) => {
+    const fileName = event.target.src.split('/').pop();
+    const imageSrc = new URL(event.target.src);
+    const baseUrl = imageSrc.origin;
+    if (!baseUrl) return openNotificationWithIcon('error', 'Thất bại !', 'Vui lòng kiểm tra lại !');
+    const urlPath = replaceBaseUrl(event.target.src, baseUrl);
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', urlPath, true);
+    xhr.responseType = 'blob';
+
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const url = window.URL.createObjectURL(new Blob([xhr.response]));
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', fileName);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    };
+
+    xhr.send();
+  };
+
+  const toggleImageEvent = (img, addEvent) => {
+    const src = img.getAttribute('src');
+    const eventHandler =
+      src && !src.startsWith('http://') && !src.startsWith('https://') ? downloadImageWithBase64 : downloadImageFromUrl;
+    const action = addEvent ? 'addEventListener' : 'removeEventListener';
+    img[action]('click', eventHandler);
+  };
+
   useEffect(() => {
     handleImageBodyEmail();
-  }, [contentEmail]);
+  }, [contentEmail, value]);
 
   useEffect(() => {
     if (!imgRef.current) return;
     const imgElements = imgRef.current.querySelectorAll('img');
-    const downloadImage = async (event) => {
-      const link = document.createElement('a');
-      link.href = event.target.src;
-      link.setAttribute('download', event.target.id);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    };
 
-    imgElements.forEach((img) => {
-      img.addEventListener('click', downloadImage);
-    });
+    imgElements.forEach((img) => toggleImageEvent(img, true));
 
     return () => {
-      imgElements.forEach((img) => {
-        img.removeEventListener('click', downloadImage);
-      });
+      imgElements.forEach((img) => toggleImageEvent(img, false));
     };
   }, [contentEmail]);
 

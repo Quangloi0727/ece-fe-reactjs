@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row } from 'antd';
+import { Col, Row, Empty } from 'antd';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { GlobalUtilityStyle } from '../../../container/styled';
@@ -28,7 +28,7 @@ function InteractiveHistory({ dataHistory, caseId, queue }) {
       ))}
     </GlobalUtilityStyle>
   ) : (
-    []
+    <Empty />
   );
 }
 

@@ -1,4 +1,4 @@
-import { Col, Row, Tabs } from 'antd';
+import { Col, Row, Tabs, Spin } from 'antd';
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { LeftOutlined } from '@ant-design/icons';
@@ -23,13 +23,19 @@ function CaseDetail() {
   const { caseId } = useParams();
   const componentRef = useRef(null);
   const [activeTab, setActiveTab] = useState(CASE_DETAIL_TAB.GENERAL_INFO);
+  const [loadingTab, setLoadingTab] = useState(true);
   const [checkNullTab, setCheckNullTab] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const history = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(caseDetailData(caseId));
+    setTimeout(() => {
+      dispatch(caseDetailData(caseId)).finally(() => {
+        setLoading(false);
+      });
+    }, 300);
   }, [caseId]);
 
   const { data, dataActivity } = useSelector((states) => {
@@ -43,8 +49,13 @@ function CaseDetail() {
   });
 
   const handleChangeContentCase = (activityId) => {
+    setLoadingTab(true);
     setActiveTab(CASE_DETAIL_TAB.CONTENT_ACTIVITY);
-    dispatch(activityDetailData(activityId));
+    setTimeout(() => {
+      dispatch(activityDetailData(activityId)).finally(() => {
+        setLoadingTab(false);
+      });
+    }, 300);
     setCheckNullTab(false);
   };
   const items = [
@@ -56,7 +67,11 @@ function CaseDetail() {
     {
       key: CASE_DETAIL_TAB.CONTENT_ACTIVITY,
       label: `${t('activityContent')}`,
-      children: (
+      children: loadingTab ? (
+        <div className="spin-case-tab">
+          <Spin />
+        </div>
+      ) : (
         <ContentActivity
           value={dataActivity}
           checkNullTab={checkNullTab}
@@ -81,7 +96,11 @@ function CaseDetail() {
     history(-1);
   };
 
-  return (
+  return loading ? (
+    <div className="spin">
+      <Spin />
+    </div>
+  ) : (
     <>
       <PageHeader
         title="Dashboard"
