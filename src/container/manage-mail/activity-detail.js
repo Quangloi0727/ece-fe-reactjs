@@ -104,7 +104,7 @@ function ActivityDetail() {
                         <ResizeHorizon width="40%" className="resize-activity-right">
                           <Tabs
                             style={{
-                              overflowY: 'scroll',
+                              overflowY: 'auto',
                               overflowX: 'hidden',
                               height: '600px',
                             }}

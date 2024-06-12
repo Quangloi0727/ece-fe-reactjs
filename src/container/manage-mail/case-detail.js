@@ -132,7 +132,7 @@ function CaseDetail() {
                         <ResizeHorizon className="resize-right">
                           <Tabs
                             style={{
-                              overflowY: 'scroll',
+                              overflowY: 'auto',
                               overflowX: 'hidden',
                               height: '600px',
                             }}

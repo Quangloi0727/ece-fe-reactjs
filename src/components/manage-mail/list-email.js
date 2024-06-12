@@ -122,8 +122,9 @@ function DataListEmail({ tableData, columns, totalData }) {
         </div>
       </div>
 
-      <div className="">
+      <div>
         <Table
+          className="table-email"
           pagination={{
             showSizeChanger: true,
             total: totalData,
