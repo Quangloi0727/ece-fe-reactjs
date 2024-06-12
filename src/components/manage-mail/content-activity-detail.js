@@ -55,7 +55,8 @@ const ContentActivity = forwardRef(({ value, handlePrint, checkNullTab }, ref) =
     document.body.removeChild(link);
   };
   const replaceBaseUrl = (url, baseUrl) => {
-    return url.replace(baseUrl, 'http://localhost:8080');
+    const newBaseUrl = process.env.REACT_APP_URL_ECE;
+    return url.replace(baseUrl, newBaseUrl);
   };
 
   const downloadImageFromUrl = async (event) => {
