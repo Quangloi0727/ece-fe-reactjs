@@ -155,7 +155,7 @@ const ContentActivity = forwardRef(({ value, handlePrint, checkNullTab }, ref) =
                   </Col>
                 ))}
             </Row>
-            <div style={{ paddingTop: '20px', paddingRight: '40px' }}>
+            <div style={{ paddingTop: '20px', paddingRight: '3vw' }}>
               <div ref={imgRef} dangerouslySetInnerHTML={{ __html: contentEmail }} />
             </div>
           </div>
