@@ -15892,20 +15892,6 @@ tr.ant-table-row.ant-table-row-level-0:hover {
 .ant-modal-mask {
   background-color: rgb(0, 0, 0 , 10% ) !important;
 }
-/* .ant-form-item-control-input-content {
-  width: 100% !important;
-  height: 70px !important;
-  margin-right: 8px;
-  margin-bottom: 15px;
-  line-height: 70px;
-  text-align: center;
-  vertical-align: top;
-  background-color: #fafafa;
-  border: 1px dashed #d9d9d9;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: border-color 0.3s;
-} */
 .ant-upload-list-item-info {
   line-height: 100%;
 }
@@ -15948,7 +15934,4 @@ tr.ant-table-row.ant-table-row-level-0:hover {
 .spin-case-tab{
   text-align: center;
   justify-items: center;
-}
-.custom-html-container{
-
 }

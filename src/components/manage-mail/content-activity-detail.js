@@ -34,7 +34,7 @@ const ContentActivity = forwardRef(({ value, handlePrint, checkNullTab }, ref) =
         const attachmemtId = src.match(/attachmentId=(\d+)/)?.[1];
         if (!attachmemtId) return;
         const attachment = await DataService.get(`/email-attachment/${attachmemtId}`);
-        if (!attachment && !attachment.data && !attachment.data.data) return;
+        if (!attachment || !attachment.data || !attachment.data.data) return;
         const { contentBase64, contentType, fileName } = attachment.data.data;
         img.setAttribute('src', `data:${contentType};base64, ${contentBase64}`);
         img.setAttribute('id', fileName);
@@ -155,7 +155,7 @@ const ContentActivity = forwardRef(({ value, handlePrint, checkNullTab }, ref) =
                   </Col>
                 ))}
             </Row>
-            <div style={{ paddingTop: '20px' }}>
+            <div style={{ paddingTop: '20px', paddingRight: '40px' }}>
               <div ref={imgRef} dangerouslySetInnerHTML={{ __html: contentEmail }} />
             </div>
           </div>
